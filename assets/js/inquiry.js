@@ -214,7 +214,7 @@
     $$('[data-inq-count]').forEach(function (b) { b.textContent = n; b.setAttribute('data-count', n); });
   }
   function inquiryText() {
-    var lines = [T('Anfrage über nicrobotics.de', 'Inquiry via nicrobotics.de', '来自 nicrobotics.de 的询盘'), ''];
+    var lines = [T('Anfrage über nic-robotics.de', 'Inquiry via nic-robotics.de', '来自 nic-robotics.de 的询盘'), ''];
     inq.items.forEach(function (it) {
       var p = product(it.id); if (!p) return;
       lines.push('• ' + it.qty + ' × ' + nameOf(p) + ' (' + p.sku + ')');

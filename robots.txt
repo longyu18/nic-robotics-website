@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.nicrobotics.de/sitemap.xml
+Sitemap: https://www.nic-robotics.de/sitemap.xml
