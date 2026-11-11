@@ -581,6 +581,7 @@ ${header(CATS, PRODUCTS, 1)}
                 <label for="k-subject">${sw('Worum geht es?', 'What is it about?')}</label>
                 <select class="select" id="k-subject" name="anliegen">
                   <option value="beratung">${sw('Beratung — welches Gerät passt zu meiner Aufgabe?', 'Advice — which machine fits my task?')}</option>
+                  <option value="technik">${swx('Technische Frage zu einem Modell', 'Technical question about a model', '产品技术问题咨询')}</option>
                   <option value="angebot">${sw('Angebot und Preise', 'Quotation and pricing')}</option>
                   <option value="pilot">${swx('Pilotprojekt', 'Pilot project', '试点项目')}</option>
                   <option value="miete">${sw('Miete für eine Projektlaufzeit', 'Rental for a project duration')}</option>

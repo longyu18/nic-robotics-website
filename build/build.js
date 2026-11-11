@@ -278,19 +278,20 @@ ${header(CATS, PRODUCTS, 0)}
     <div class="wrap">
       <div class="hero__inner">
         <h1 class="t-hero">
-          <span data-i18n-de>Fortschrittliche Robotik.<br><em>Expertise vor Ort.</em></span>
-          <span data-i18n-en>Advanced Robotics.<br><em>Local Expertise.</em></span>
-          <span data-i18n-zh>先进机器人，<br><em>本地专业服务。</em></span>
+          <span data-i18n-de>Robotik für Forschung und Industrie.<br><em>Mit Support in Deutschland.</em></span>
+          <span data-i18n-en>Robots for research and industry.<br><em>Supported in Germany.</em></span>
+          <span data-i18n-zh>面向科研与工业的机器人，<br><em>德国本地支持。</em></span>
         </h1>
         <p class="t-lead">${swx(
-          'Entdecken Sie fortschrittliche Roboter für Industrie, Forschung und Alltag — mit Betreuung vor Ort in Deutschland.',
-          'Discover advanced robots for industry, research and everyday life — supported locally in Germany.',
-          '探索面向工业、科研和日常生活的先进机器人——由德国本地团队提供支持。'
+          'Vierbeiner, Rad-Bein-Roboter und Humanoide für Labore, Institute und Industrieanlagen — Beratung, Lieferung und Service aus Deutschland.',
+          'Quadrupeds, wheel-legged robots and humanoids for labs, institutes and industrial sites — advice, delivery and service from Germany.',
+          '四足、轮足与人形机器人，服务于实验室、科研院所与工业现场——选型、交付与售后均在德国。'
         )}</p>
         <div class="hero__cta">
-          <a class="btn btn--lg btn--arrow" href="#kategorien">${swx('Roboter entdecken', 'Explore Robots', '探索机器人')} ${ICON.arrow}</a>
-          <a class="btn btn--lg btn--ghost" href="service/kontakt.html">${swx('Kontakt aufnehmen', 'Contact Us', '联系我们')}</a>
+          <a class="btn btn--lg btn--arrow" href="forschung/index.html">${swx('Forschung & Lehre', 'Research & Teaching', '科研与教学')} ${ICON.arrow}</a>
+          <a class="btn btn--lg btn--ghost btn--arrow" href="einsatzbereiche/index.html">${swx('Industrielle Anwendungen', 'Industrial applications', '工业应用')} ${ICON.arrow}</a>
         </div>
+        <p class="hero__more"><a href="#kategorien">${swx('Alle Roboter ansehen', 'See all robots', '查看全部机器人')} ↓</a></p>
       </div>
     </div>
   </section>
@@ -304,6 +305,17 @@ ${header(CATS, PRODUCTS, 0)}
         <p class="t-lead">${swx('Finden Sie die passende Plattform für Ihre Anwendung.', 'Find the right platform for your application.', '为您的应用找到合适的平台。')}</p>
       </div>
       <div class="hcat-grid">${catCards}</div>
+    </div>
+  </section>
+
+  <!-- ================= v42 · FORSCHUNGSRICHTUNGEN ================= -->
+  <section class="section section--tight home-rs">
+    <div class="wrap">
+      <div class="home-rs__head reveal">
+        <p class="kicker">${swx('Forschung & Lehre', 'Research & Teaching', '科研与教学')}</p>
+        <h2>${swx('Woran forschen Sie?', 'What are you researching?', '您在研究什么？')}</h2>
+      </div>
+      <ul class="home-rs__list">${RS_NEEDS.map((n) => `<li><a class="reveal" href="forschung/index.html#${n.id}"><strong>${swx(...n.t)}</strong><span>${swx(...n.q)}</span><i>${n.models.map((id) => esc(prodOf(id).name)).join(' · ')} ${ICON.arrow}</i></a></li>`).join('')}</ul>
     </div>
   </section>
 
@@ -472,7 +484,7 @@ function catalogCard(p) {
   const title = p.title ? `${p.title.de} ${p.title.en} ${p.title.zh}` : p.name;
   const search = `${p.name} ${title} ${p.sku || ''} ${p.family.de} ${p.family.en} ${p.family.zh}`.toLowerCase();
   return `
-<article class="ccard reveal${p.photo ? ' ccard--photo' : ''}" data-cat="${p.category}" data-uses="${(p.useCases || []).join(' ')}" data-search="${attr(search)}" data-order="${p.order || 99}" data-name="${attr(p.name)}">
+<article class="ccard${p.photo ? ' ccard--photo' : ''}" data-cat="${p.category}" data-kind="${p.kind || 'platform'}" data-id="${esc(p.id)}" data-uses="${(p.useCases || []).join(' ')}" data-search="${attr(search)}" data-order="${p.order || 99}" data-name="${attr(p.name)}">
   <a class="ccard__media" href="${href}" tabindex="-1" aria-hidden="true">
     ${p.badge && CARD_BADGE.includes(p.badge.de) ? `<span class="ccard__badge">${t(p.badge)}</span>` : ''}
     ${img ? `<picture>
@@ -481,7 +493,7 @@ function catalogCard(p) {
     </picture>` : ''}
   </a>
   <div class="ccard__body">
-    <p class="ccard__type">${t(p.family)}</p>
+    <p class="ccard__type">${t(p.family)}${p.kind === 'config' ? ` <span class="kind-tag">${swx('Branchenkonfiguration', 'Industry configuration', '行业配置方案')}</span>` : ''}</p>
     <h3 class="ccard__name"><a href="${href}">${pTitle(p)}</a></h3>
     <p class="ccard__desc">${c ? swx(...c[0]) : t(p.tagline)}</p>
     ${c ? `<p class="ccard__specs">${c[1].map((s) => `<span data-de="${esc(s[0])}" data-en="${esc(s[1])}" data-zh="${esc(s[2])}">${esc(s[0])}</span>`).join('')}</p>` : ''}
@@ -489,9 +501,25 @@ function catalogCard(p) {
       <a class="btn btn--sm ccard__go" href="${href}">${swx('Details ansehen', 'View details', '查看详情')}</a>
       <button class="ccard__inq" type="button" data-inq-add="${esc(p.id)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>${swx('Zur Anfrageliste', 'Add to inquiry list', '加入询价清单')}</button>
     </div>
-    <p class="ccard__price">${swx('Preis auf Anfrage', 'Price on request', '价格请询价')}</p>
+    <div class="ccard__meta">
+      <p class="ccard__price">${swx('Preis auf Anfrage', 'Price on request', '价格请询价')}</p>
+      <label class="ccard__cmp"><input type="checkbox" data-cmp="${esc(p.id)}"> <span>${swx('Vergleichen', 'Compare', '加入比较')}</span></label>
+    </div>
   </div>
 </article>`;
+}
+
+/* v42 · Vergleichsleiste (max. 4 Modelle, Auswahl in localStorage) */
+function cmpBar(r = '../') {
+  return `
+<div class="cmpbar" data-cmpbar hidden>
+  <div class="wrap">
+    <p><b data-cmp-count>0</b> ${swx('von 4 Modellen zum Vergleich gewählt', 'of 4 models selected to compare', '/ 4 款机型已加入比较')}</p>
+    <div class="cmpbar__list" data-cmp-list></div>
+    <button class="btn btn--sm btn--ghost" type="button" data-cmp-reset>${swx('Leeren', 'Clear', '清空')}</button>
+    <a class="btn btn--sm" href="${r}produkte/vergleich.html" data-cmp-go>${swx('Vergleichen', 'Compare', '开始比较')} ${ICON.arrow}</a>
+  </div>
+</div>`;
 }
 
 function buildProductIndex() {
@@ -540,6 +568,11 @@ ${header(CATS, PRODUCTS, 1)}
               <option value="" data-de="Alle Einsatzbereiche" data-en="All applications" data-zh="全部应用">Alle Einsatzbereiche</option>
               ${usedUses.map((u) => `<option value="${u.id}" data-de="${attr(u.name.de)}" data-en="${attr(u.name.en)}" data-zh="${attr(u.name.zh)}">${esc(u.name.de)}</option>`).join('')}
             </select>
+            <select data-cf-kind aria-label="Typ">
+              <option value="" data-de="Plattform und Konfiguration" data-en="Platforms and configurations" data-zh="平台与配置方案">Plattform und Konfiguration</option>
+              <option value="platform" data-de="Nur Roboterplattformen" data-en="Robot platforms only" data-zh="仅机器人平台">Nur Roboterplattformen</option>
+              <option value="config" data-de="Nur Branchenkonfigurationen" data-en="Industry configurations only" data-zh="仅行业配置方案">Nur Branchenkonfigurationen</option>
+            </select>
             <select data-cf-sort aria-label="Sortierung">
               <option value="rec" data-de="Empfohlen" data-en="Recommended" data-zh="推荐排序">Empfohlen</option>
               <option value="az" data-de="Name A–Z" data-en="Name A–Z" data-zh="名称 A–Z">Name A–Z</option>
@@ -554,6 +587,8 @@ ${header(CATS, PRODUCTS, 1)}
         <button class="btn btn--sm btn--ghost" type="button" data-cf-clear>${swx('Filter zurücksetzen', 'Clear filters', '清除筛选')}</button>
       </div>
 
+      <p class="t-small t-dim mt">${swx('Branchenkonfiguration = fertig ausgestattete Lösung auf Basis einer unserer Roboterplattformen (z. B. Streife, Brandbekämpfung, Erkundung).', 'Industry configuration = a ready-equipped solution built on one of our robot platforms (e.g. patrol, firefighting, reconnaissance).', '行业配置方案 = 基于我们某一机器人平台整装的成套方案（如巡逻、灭火、侦察）。')}</p>
+
       <div class="cat-help reveal">
         <div>
           <h3>${swx('Nicht sicher, welcher Roboter passt?', 'Not sure which robot is right for you?', '不确定哪款机器人适合您？')}</h3>
@@ -565,6 +600,7 @@ ${header(CATS, PRODUCTS, 1)}
   </section>
 </main>
 
+${cmpBar()}
 ${footer(CATS, 1)}
 ${offerModal(1)}
 ${quickView()}
@@ -606,7 +642,7 @@ function buildProduct(p) {
       return esc(v);
     };
     variantBlock = `
-  <section class="section section--tight" id="varianten">
+  <section class="section section--tight sec-light pdp-light" id="varianten">
     <div class="wrap">
       <div class="section-head reveal">
         <p class="kicker">${sw('Varianten', 'Variants')}</p>
@@ -662,6 +698,51 @@ function buildProduct(p) {
     return u ? `<a class="chip chip--blue" href="${r}einsatzbereiche/index.html#${u.slug}">${t(u.name)}</a>` : '';
   }).join('');
 
+  /* v42 · Abschnittsnavigation, Entwicklungsfähigkeiten, Unterlagen */
+  const navItems = [['ueberblick', swx('Überblick', 'Overview', '概要')]];
+  if (p.variantTable) navItems.push(['varianten', swx('Versionen', 'Versions', '版本')]);
+  navItems.push(['technische-daten', swx('Technische Daten', 'Specifications', '参数')]);
+  if (p.dev) navItems.push(['entwicklung', swx('Entwicklung', 'Development', '开发能力')]);
+  navItems.push(['unterlagen', swx('Unterlagen', 'Documents', '资料')]);
+  const pdpNav = `<nav class="pdp-nav" aria-label="${esc(p.name)}">
+    <div class="wrap">
+      <strong>${pTitle(p)}</strong>
+      <ul>${navItems.map(([id, l]) => `<li><a href="#${id}">${l}</a></li>`).join('')}</ul>
+      <button class="btn btn--sm" type="button" data-modal-open="offer-modal" data-product="${attr(p.name)} (${esc(p.sku)})" data-sku="${esc(p.sku)}" data-pid="${esc(p.id)}">${swx('Angebot', 'Quote', '询价')}</button>
+    </div>
+  </nav>`;
+
+  const ST = { ok: swx('bestätigt', 'confirmed', '已确认'), part: swx('teilweise', 'partly', '部分确认'), tbc: swx('offen', 'open', '待确认') };
+  const devBlock = p.dev ? `
+  <section class="section section--tight sec-light pdp-light" id="entwicklung">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="kicker">${swx('Entwicklung', 'Development', '开发能力')}</p>
+        <h2 style="font-size:var(--step-2)">${swx('Was Sie auf dieser Plattform selbst entwickeln können', 'What you can build on this platform yourself', '在这台平台上可以自行开发什么')}</h2>
+      </div>
+      <div class="vtable-wrap">
+        <table class="vtable devtable">
+          <thead><tr><th scope="col">${swx('Fähigkeit', 'Capability', '能力')}</th><th scope="col">${swx('Stand', 'Status', '说明')}</th><th scope="col">${swx('Bestätigt', 'Confirmed', '确认状态')}</th></tr></thead>
+          <tbody>${p.dev.map(([k, v, st]) => `<tr><th scope="row">${t(k)}</th><td>${t(v)}</td><td><span class="dev-st dev-st--${st}">${ST[st]}</span></td></tr>`).join('')}</tbody>
+        </table>
+      </div>
+      <p class="t-small t-dim mt">${swx('„Offen“ heißt: nicht im Datenblatt ausgewiesen. Wir klären diese Punkte vor dem Angebot schriftlich mit dem Hersteller.', '“Open” means: not stated in the datasheet. We clarify these points in writing with the manufacturer before quoting.', '“待确认”表示数据表中未列明，我们会在报价前与厂家书面确认。')}</p>
+    </div>
+  </section>` : '';
+
+  const docMail = (d) => `mailto:${SITE.emailSales}?subject=${encodeURIComponent('Unterlagen ' + p.name + ': ' + d.de)}`;
+  const docsBlock = `
+  <section class="section section--tight" id="unterlagen">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="kicker">${swx('Unterlagen', 'Documents', '资料')}</p>
+        <h2 style="font-size:var(--step-2)">${swx('Datenblatt und Dokumentation auf Anfrage', 'Datasheet and documentation on request', '数据表与技术文档，按需索取')}</h2>
+      </div>
+      <ul class="doclist">${(p.docs || []).map(([d, ty]) => `<li><span class="doclist__ty">${esc(ty)}</span><span class="doclist__n">${t(d)}</span><a class="btn btn--sm btn--ghost" href="${docMail(d)}">${swx('Anfordern', 'Request', '索取')}</a></li>`).join('')}</ul>
+      <p class="t-small t-dim mt">${swx('Wir senden die aktuelle Fassung per E-Mail. Alle Unterlagen im Überblick:', 'We send the current version by e-mail. All documents at a glance:', '我们会通过邮件发送最新版本。全部资料一览：')} <a href="${r}ressourcen/index.html">${swx('Technische Ressourcen', 'Technical resources', '技术资源')}</a></p>
+    </div>
+  </section>`;
+
   const html = `${head({
     title: `${p.name} — ${attr(p.family)}`,
     description: `${attr(p.name)}: ${attr(p.tagline)} Technische Daten, Preis und Angebotsanfrage bei NIC Robotics, Deutschland.`,
@@ -695,6 +776,7 @@ ${header(CATS, PRODUCTS, 1)}
           <p class="buybox__brand">NIC Robotics · ${t(p.family)}</p>
           <h1>${pTitle(p)}</h1>
           <p class="buybox__tag">${t(p.tagline, 'span')}</p>
+          ${p.kind === 'config' && prodOf(p.basedOn) ? `<p class="buybox__kind"><span class="kind-tag">${swx('Branchenkonfiguration', 'Industry configuration', '行业配置方案')}</span> ${swx('auf Basis der Plattform', 'built on the platform', '基于平台')} <a href="${r}produkte/${prodOf(p.basedOn).slug}.html">${pTitle(prodOf(p.basedOn))}</a></p>` : ''}
 
           <div class="priceline">
             ${priceHTML(p)}
@@ -706,7 +788,7 @@ ${header(CATS, PRODUCTS, 1)}
             <button class="btn btn--lg btn--ghost btn--block span-2" type="button"
               data-modal-open="offer-modal"
               data-product="${attr(p.name)} (${esc(p.sku)})"
-              data-sku="${esc(p.sku)}">${sw('Persönliches Angebot', 'Personal quote')}</button>
+              data-sku="${esc(p.sku)}" data-pid="${esc(p.id)}">${sw('Persönliches Angebot', 'Personal quote')}</button>
             <a class="btn btn--ghost btn--block span-2" href="mailto:${SITE.emailSales}?subject=${encodeURIComponent('Anfrage ' + p.name + ' (' + p.sku + ')')}">${ICON.mail} ${sw('Direkt per E-Mail anfragen', 'Enquire by e-mail')}</a>
           </div>
 
@@ -717,6 +799,8 @@ ${header(CATS, PRODUCTS, 1)}
             <li>${ICON.check}<span>${sw('Staffelpreise ab zwei Einheiten — im Angebot anfragen', 'Tiered pricing from two units — ask in the quote')}</span></li>
           </ul>
 
+          <a class="buybox__tech" href="${r}service/kontakt.html?produkt=${encodeURIComponent(p.name)}&amp;thema=technik">${ICON.cpu} ${swx('Technische Frage zu diesem Modell stellen', 'Ask a technical question about this model', '技术问题咨询')}</a>
+
           <div class="sku-line">
             <span>${sw('Artikelnummer', 'Part number')}: ${esc(p.sku)}</span>
           </div>
@@ -725,8 +809,10 @@ ${header(CATS, PRODUCTS, 1)}
     </div>
   </section>
 
+  ${pdpNav}
+
   <!-- summary + highlights -->
-  <section class="section section--tight section--flush-top">
+  <section class="section section--tight section--flush-top" id="ueberblick">
     <div class="wrap">
       <div class="grid cols-2" style="align-items:start;gap:var(--gap-l)">
         <div class="reveal">
@@ -746,11 +832,11 @@ ${header(CATS, PRODUCTS, 1)}
   ${variantBlock}
 
   <!-- specs -->
-  <section class="section section--tight" id="technische-daten">
+  <section class="section section--tight sec-light pdp-light" id="technische-daten">
     <div class="wrap">
       <div class="section-head reveal">
         <p class="kicker">${sw('Technische Daten', 'Specifications')}</p>
-        <h2 style="font-size:var(--step-2)">${sw('Jede Zahl aus dem Datenblatt des Herstellers.', 'Every figure from the manufacturer datasheet.', 'span')}</h2>
+        <h2 style="font-size:var(--step-2)">${swx('Die wichtigsten Werte. Das vollständige Datenblatt senden wir auf Anfrage.', 'The key figures. We send the full datasheet on request.', '主要参数一览，完整数据表可按需索取。')}</h2>
       </div>
       <div class="grid cols-2" style="align-items:start;gap:var(--gap-l)">
         <div>${specBlocks.split('</div>').slice(0, Math.ceil((p.specs || []).length / 2)).join('</div>') + '</div>'}</div>
@@ -762,6 +848,10 @@ ${header(CATS, PRODUCTS, 1)}
       )}</p>
     </div>
   </section>
+
+  ${devBlock}
+
+  ${docsBlock}
 
   ${scenes}
 
@@ -790,14 +880,14 @@ ${scripts(1, `<script type="application/ld+json">
   "brand": { "@type": "Brand", "name": "NIC Robotics" },
   "description": ${JSON.stringify(attr(p.summary).replace(/<[^>]+>/g, ''))},
   "image": "${SITE.domain}/assets/img/products/${(p.gallery || [''])[0]}.${imgExt((p.gallery || [''])[0])}",
+  "url": "${SITE.domain}/produkte/${p.slug}.html"${p.price != null ? `,
   "offers": {
     "@type": "Offer",
     "priceCurrency": "EUR",
     "price": "${p.price}",
-    "availability": "https://schema.org/InStock",
     "seller": { "@type": "Organization", "name": "An Yuan GmbH" },
     "url": "${SITE.domain}/produkte/${p.slug}.html"
-  }
+  }` : ''}
 }
 </script>`)}`;
 
@@ -1132,7 +1222,7 @@ ${header(CATS, PRODUCTS, 1)}
         <li><a href="${r}index.html">${swx('Start', 'Home', '首页')}</a></li>
         <li>${swx('Referenzen', 'References', '客户案例')}</li>
       </ol>
-      <h1 class="t-xl" style="max-width:18ch"><span data-i18n-de>Nicht im Labor. <em>Im Einsatz.</em></span><span data-i18n-en>Not in the lab. <em>In service.</em></span><span data-i18n-zh>不在实验室，<em>在作业现场。</em></span></h1>
+      <h1 class="t-xl" style="max-width:18ch"><span data-i18n-de>Vom Labor <em>bis in den Einsatz.</em></span><span data-i18n-en>From the lab <em>to the field.</em></span><span data-i18n-zh>从实验室，<em>到真实现场。</em></span></h1>
       <p class="t-lead" style="max-width:60ch;margin-top:1.1rem">${swx(
         'Die Robotik-Plattformen, die wir anbieten, arbeiten heute in Stromnetzen, Kraftwerken, Stadien, Stahlwerken und bei Rettungsdiensten in 45 Ländern.',
         'The robotics platforms we offer are working today in power grids, power plants, stadiums, steelworks and rescue services in 45 countries.',
@@ -1225,6 +1315,7 @@ ${sceneSources(u.scene, '../')}
         ${prods.length ? `<div class="scenario__links">
           <span class="t-small t-dim" style="width:100%">${sw('Geeignete Modelle', 'Suitable models')}</span>
           ${prods.map((p) => `<a class="chip chip--blue" href="../produkte/${p.slug}.html">${pTitle(p)}</a>`).join('')}
+          ${u.id === 'forschung' ? `<a class="btn btn--sm btn--arrow" href="../forschung/index.html" style="margin-top:.4rem">${swx('Zu Forschung & Lehre', 'Go to Research & Teaching', '前往科研与教学')} ${ICON.arrow}</a>` : ''}
         </div>` : `<div class="scenario__links">
           <a class="btn btn--sm btn--ghost btn--arrow" href="../service/kontakt.html">${sw('Verfügbarkeit anfragen', 'Ask about availability')} ${ICON.arrow}</a>
         </div>`}
@@ -1634,6 +1725,222 @@ ${scripts(1)}`;
   write('produkte/reinigungsroboter.html', html);
 }
 
+
+/* ======================================================== v42 · FORSCHUNG == */
+const RS_NEEDS = [
+  { id: 'bewegung', ic: 'forschung',
+    t: ['Bewegungsregelung und Lernen', 'Motion control and learning', '运动控制与学习'],
+    q: ['Eigene Regler, Reinforcement Learning, Sim-to-Real.', 'Your own controllers, reinforcement learning, sim-to-real.', '自研控制器、强化学习、仿真到实机迁移。'],
+    models: ['lite3'],
+    why: ['Leicht (ab 12 kg) und damit im Labor gut handhabbar; URDF- und Simulationsmodell laut Datenblatt; Low-Level-Regelung bis 1 kHz.', 'Light (from 12 kg) and easy to handle in the lab; URDF and simulation model per datasheet; low-level control up to 1 kHz.', '整机 12 kg 起，实验室内易于搬运；数据表列明 URDF 与仿真模型；底层控制最高 1 kHz。'],
+    opt: ['VENTURE oder PRO, wenn ein eigener Rechner per Ethernet angebunden wird. Zugriff auf Gelenkebene und nutzbare Regelfrequenz: vom Hersteller zu bestätigen.', 'VENTURE or PRO if you connect your own computer over Ethernet. Joint-level access and usable control rate: to be confirmed by the manufacturer.', '如需通过以太网连接自有计算机，建议 VENTURE 或 PRO。关节级访问与可用控制频率：待厂家确认。'] },
+  { id: 'wahrnehmung', ic: 'sicherheit',
+    t: ['Wahrnehmung und Navigation', 'Perception and navigation', '感知与导航'],
+    q: ['SLAM, Hindernisvermeidung, Kartierung, Multisensor-Fusion.', 'SLAM, obstacle avoidance, mapping, multi-sensor fusion.', 'SLAM、避障、建图、多传感器融合。'],
+    models: ['lite3', 'lynx-m20-pro'],
+    why: ['Lite3 LIDAR mit autonomer Navigation, PRO mit aktiver Hindernisvermeidung nach vorn; Lynx M20 Pro mit dreifachem Industrierechner, Gigabit-Ethernet und USB 3.0.', 'Lite3 LIDAR with autonomous navigation, PRO with forward active obstacle avoidance; Lynx M20 Pro with three industrial computers, Gigabit Ethernet and USB 3.0.', 'Lite3 LIDAR 版具备自主导航，PRO 版具备前向主动避障；Lynx M20 Pro 配备三台工业计算单元、千兆以太网与 USB 3.0。'],
+    opt: ['Lite3 LIDAR oder PRO; beim M20 Pro eigene Sensoren über die Datenschnittstellen. SDK- und ROS-Umfang für M20: vom Hersteller zu bestätigen.', 'Lite3 LIDAR or PRO; on the M20 Pro, own sensors via the data interfaces. SDK and ROS scope for M20: to be confirmed by the manufacturer.', 'Lite3 选 LIDAR 或 PRO 版；M20 Pro 可通过数据接口接入自有传感器。M20 的 SDK 与 ROS 支持范围：待厂家确认。'] },
+  { id: 'feld', ic: 'energie',
+    t: ['Feldforschung', 'Field research', '野外与现场科研'],
+    q: ['Messkampagnen im Freien, Wetter, Gelände, eigene Sensorik.', 'Outdoor measurement campaigns, weather, terrain, your own sensors.', '户外测量、恶劣天气、复杂地形、自有传感器。'],
+    models: ['x30', 'lynx-m20s'],
+    why: ['X30: IP67, −20 °C bis 55 °C, 20 kg Nutzlast, SDK für C++ / Python laut Datenblatt. Lynx M20 S: IP67, bis 35 kg Nutzlast, Gigabit-Ethernet, USB und GMSL.', 'X30: IP67, −20 °C to 55 °C, 20 kg payload, SDK for C++ / Python per datasheet. Lynx M20 S: IP67, up to 35 kg payload, Gigabit Ethernet, USB and GMSL.', 'X30：IP67，−20 °C 至 55 °C，20 kg 负载，数据表列明 C++ / Python SDK。Lynx M20 S：IP67，负载最高 35 kg，千兆以太网、USB 与 GMSL。'],
+    opt: ['Nutzlast-Halterung und Stromversorgung für eigene Messtechnik klären wir mit Ihnen vor dem Angebot.', 'We clarify payload mounting and power for your own instruments with you before quoting.', '自有测量设备的安装与供电方案，我们会在报价前与您确认。'] },
+  { id: 'lehre', ic: 'museum',
+    t: ['Lehre und Praktikum', 'Teaching and lab courses', '教学与实训'],
+    q: ['Mehrere Geräte für Lehrveranstaltungen, Abschlussarbeiten und Wettbewerbe.', 'Several units for courses, theses and competitions.', '用于课程、毕业设计与竞赛的多台设备。'],
+    models: ['lite3'],
+    why: ['Robuste Plattform in vier Versionen; Sprachsteuerung, Bewegungsbibliothek und Mehrgeräte-Formationen laut Datenblatt; Ersatzteile und Reparatur über uns in Deutschland.', 'Robust platform in four versions; voice control, motion library and multi-unit formations per datasheet; spare parts and repair through us in Germany.', '四个版本的耐用平台；数据表列明语音控制、动作库与多机编队；备件与维修由我们在德国提供。'],
+    opt: ['Staffelpreise ab zwei Einheiten. Lehrinhalte und Kurse bieten wir nicht an — wir liefern Hardware, Unterlagen und Service.', 'Tiered pricing from two units. We do not offer course content — we supply hardware, documents and service.', '两台起可享阶梯价格。我们不提供课程内容——我们提供硬件、技术资料与服务。'] }
+];
+
+function buildResearch() {
+  const r = '../';
+  const ST = { ok: swx('bestätigt', 'confirmed', '已确认'), part: swx('teilweise', 'partly', '部分确认'), tbc: swx('offen', 'open', '待确认') };
+  const needs = RS_NEEDS.map((n, i) => {
+    const ms = n.models.map(prodOf).filter(Boolean);
+    return `
+<article class="rs-need reveal" id="${n.id}">
+  <div class="rs-need__head">
+    <span class="mi-ic">${P.MENU_ICON ? P.MENU_ICON[n.ic] || '' : ''}</span>
+    <div><p class="kicker">${String(i + 1).padStart(2, '0')}</p><h2>${swx(...n.t)}</h2><p class="t-dim">${swx(...n.q)}</p></div>
+  </div>
+  <div class="rs-need__models">${ms.map((p) => `
+    <a class="rs-model" href="${r}produkte/${p.slug}.html">
+      <img src="${r}assets/img/products/${p.gallery[0]}.webp" alt="" loading="lazy" width="200" height="150">
+      <span><strong>${pTitle(p)}</strong><small>${t(p.family)}</small></span>
+    </a>`).join('')}</div>
+  <dl class="rs-need__dl">
+    <div><dt>${swx('Warum geeignet', 'Why it fits', '为什么合适')}</dt><dd>${swx(...n.why)}</dd></div>
+    <div><dt>${swx('Version und Optionen', 'Version and options', '版本与选配')}</dt><dd>${swx(...n.opt)}</dd></div>
+  </dl>
+  <p class="rs-need__links"><a href="${r}ressourcen/index.html#${ms[0].slug}">${swx('Unterlagen anfordern', 'Request documents', '索取技术资料')} ${ICON.arrow}</a></p>
+</article>`;
+  }).join('');
+
+  const devProds = ['lite3', 'x30', 'lynx-m20-pro', 'lynx-m20s'].map(prodOf).filter((p) => p && p.dev);
+  const devTables = devProds.map((p) => `
+  <div class="rs-dev">
+    <h3><a href="${r}produkte/${p.slug}.html#entwicklung">${pTitle(p)}</a></h3>
+    <ul>${p.dev.map(([k, v, st]) => `<li><span class="dev-st dev-st--${st}">${ST[st]}</span><span><b>${t(k)}</b> — ${t(v)}</span></li>`).join('')}</ul>
+  </div>`).join('');
+
+  const html = `${head({
+    title: 'Forschung & Lehre',
+    description: 'Offene Roboterplattformen für Hochschulen und Forschungsinstitute: Lite3, X30 und Lynx M20 für Bewegungsregelung, Wahrnehmung, Feldforschung und Lehre — mit Unterlagen und Service in Deutschland.',
+    path: '/forschung/',
+    image: '/assets/img/scenes/lite3-hero.jpg',
+    depth: 1
+  })}
+${header(CATS, PRODUCTS, 1)}
+
+<main id="main" class="rspage">
+  <section class="page-hero page-hero--plain">
+    <div class="wrap">
+      <ol class="crumbs">
+        <li><a href="${r}index.html">${swx('Start', 'Home', '首页')}</a></li>
+        <li>${swx('Forschung & Lehre', 'Research & Teaching', '科研与教学')}</li>
+      </ol>
+      <p class="kicker">${swx('Forschung & Lehre', 'Research & Teaching', '科研与教学')}</p>
+      <h1 class="t-xl" style="max-width:20ch">${swx('Offene Roboterplattformen für Labor, Feld und Hörsaal.', 'Open robot platforms for lab, field and lecture hall.', '面向实验室、野外与课堂的开放机器人平台。')}</h1>
+      <p class="t-lead" style="max-width:62ch;margin-top:1rem">${swx(
+        'Wählen Sie nach Ihrer Forschungsfrage, nicht nach dem Katalog. Wir liefern Hardware, Unterlagen und Service aus Deutschland — mit Angebot und Rechnung, die zu Hochschulbeschaffung passen.',
+        'Choose by your research question, not by the catalogue. We supply hardware, documents and service from Germany — with quotes and invoices that fit university procurement.',
+        '按研究问题选型，而不是按目录。我们从德国提供硬件、技术资料与服务，报价与发票符合高校采购流程。')}</p>
+      <ul class="rs-jump">${RS_NEEDS.map((n) => `<li><a href="#${n.id}">${swx(...n.t)}</a></li>`).join('')}</ul>
+    </div>
+  </section>
+
+  <section class="section sec-light">
+    <div class="wrap rs-needs">${needs}</div>
+  </section>
+
+  <section class="section" id="entwicklungsfaehigkeit">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="kicker">${swx('Checkliste', 'Checklist', '开发能力清单')}</p>
+        <h2 style="font-size:var(--step-2)">${swx('Was bestätigt ist — und was wir noch klären', 'What is confirmed — and what we still clarify', '哪些已确认，哪些仍在核实')}</h2>
+        <p class="t-dim" style="max-width:62ch">${swx('„Bestätigt“ heißt: im Datenblatt ausgewiesen. „Offen“ klären wir vor dem Angebot schriftlich mit dem Hersteller.', '“Confirmed” means: stated in the datasheet. We clarify “open” items in writing with the manufacturer before quoting.', '“已确认”表示数据表中已列明；“待确认”的项目，我们会在报价前与厂家书面确认。')}</p>
+      </div>
+      <div class="rs-devgrid">${devTables}</div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="cat-help">
+        <div>
+          <h3>${swx('Beschreiben Sie Ihr Vorhaben', 'Describe your project', '告诉我们您的研究计划')}</h3>
+          <p>${swx('Forschungsfrage, geplante Sensorik, Software-Stack und Stückzahl genügen. Wir antworten mit einer Versionsempfehlung und den offenen Punkten.', 'Research question, planned sensors, software stack and quantity are enough. We reply with a version recommendation and the open points.', '告诉我们研究问题、计划使用的传感器、软件栈与数量即可。我们会回复版本建议以及仍需确认的事项。')}</p>
+        </div>
+        <a class="btn btn--arrow" href="${r}service/kontakt.html?thema=technik&amp;produkt=${encodeURIComponent('Forschung')}">${swx('Anfrage senden', 'Send enquiry', '发送咨询')} ${ICON.arrow}</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+${footer(CATS, 1)}
+${offerModal(1)}
+${quickView()}
+${scripts(1)}`;
+  write('forschung/index.html', html);
+}
+
+/* ======================================================= v42 · RESSOURCEN == */
+function buildResources() {
+  const r = '../';
+  const groups = CATS.filter((c) => inCat(c.id).length).map((c) => `
+  <div class="res-group reveal">
+    <h2>${t(c.name)}</h2>
+    ${inCat(c.id).map((p) => `
+    <div class="res-prod" id="${p.slug}">
+      <a class="res-prod__head" href="${r}produkte/${p.slug}.html">
+        <img src="${r}assets/img/products/${p.gallery[0]}.webp" alt="" loading="lazy" width="120" height="90">
+        <span><strong>${pTitle(p)}</strong><small>${t(p.family)}</small></span>
+      </a>
+      <ul class="doclist doclist--compact">${(p.docs || []).map(([d, ty]) => `<li><span class="doclist__ty">${esc(ty)}</span><span class="doclist__n">${t(d)}</span><a class="btn btn--sm btn--ghost" href="mailto:${SITE.emailSales}?subject=${encodeURIComponent('Unterlagen ' + p.name + ': ' + d.de)}">${swx('Anfordern', 'Request', '索取')}</a></li>`).join('')}</ul>
+    </div>`).join('')}
+  </div>`).join('');
+
+  const html = `${head({
+    title: 'Technische Ressourcen',
+    description: 'Datenblätter, Bedienungsanleitungen, SDK-Dokumentation und Simulationsmodelle zu allen Robotern von NIC Robotics — auf Anfrage per E-Mail.',
+    path: '/ressourcen/',
+    depth: 1
+  })}
+${header(CATS, PRODUCTS, 1)}
+
+<main id="main" class="respage">
+  <section class="page-hero page-hero--plain">
+    <div class="wrap">
+      <ol class="crumbs">
+        <li><a href="${r}index.html">${swx('Start', 'Home', '首页')}</a></li>
+        <li>${swx('Technische Ressourcen', 'Technical resources', '技术资源')}</li>
+      </ol>
+      <p class="kicker">${swx('Technische Ressourcen', 'Technical resources', '技术资源')}</p>
+      <h1 class="t-xl" style="max-width:20ch">${swx('Datenblätter und Dokumentation zu jedem Modell.', 'Datasheets and documentation for every model.', '每款机型的数据表与技术文档。')}</h1>
+      <p class="t-lead" style="max-width:62ch;margin-top:1rem">${swx(
+        'Wir senden Ihnen die jeweils aktuelle Fassung per E-Mail, meist am selben Werktag. Ein Klick auf „Anfordern“ öffnet eine vorbereitete Nachricht.',
+        'We send you the current version by e-mail, usually the same working day. Clicking “Request” opens a prepared message.',
+        '我们会通过邮件发送最新版本，通常当个工作日内回复。点击“索取”即可打开已填好的邮件。')}</p>
+      <p class="mt"><a class="btn btn--ghost btn--arrow" href="${r}forschung/index.html#entwicklungsfaehigkeit">${swx('Entwicklungsfähigkeiten im Überblick', 'Development capabilities at a glance', '开发能力一览')} ${ICON.arrow}</a></p>
+    </div>
+  </section>
+  <section class="section sec-light">
+    <div class="wrap res-wrap">${groups}</div>
+  </section>
+</main>
+
+${footer(CATS, 1)}
+${offerModal(1)}
+${quickView()}
+${scripts(1)}`;
+  write('ressourcen/index.html', html);
+}
+
+/* ========================================================= v42 · VERGLEICH == */
+function buildCompare() {
+  const r = '../';
+  const pick = PRODUCTS.slice().sort((a, b) => CATS.findIndex((c) => c.id === a.category) - CATS.findIndex((c) => c.id === b.category) || (a.order || 99) - (b.order || 99))
+    .map((p) => `<label class="cmp-pick"><input type="checkbox" data-cmp="${esc(p.id)}"> <span>${pTitle(p)}</span></label>`).join('');
+  const html = `${head({
+    title: 'Produktvergleich',
+    description: 'Bis zu vier Roboter von NIC Robotics nebeneinander vergleichen — technische Daten, Versionen und Typ.',
+    path: '/produkte/vergleich.html',
+    depth: 1
+  })}
+${header(CATS, PRODUCTS, 1)}
+
+<main id="main" class="cmppage">
+  <section class="page-hero page-hero--plain cat-hero">
+    <div class="wrap">
+      <ol class="crumbs">
+        <li><a href="${r}index.html">${swx('Start', 'Home', '首页')}</a></li>
+        <li><a href="${r}produkte/index.html">${swx('Produkte', 'Products', '产品')}</a></li>
+        <li>${swx('Vergleich', 'Compare', '产品比较')}</li>
+      </ol>
+      <h1>${swx('Modelle vergleichen', 'Compare models', '产品比较')}</h1>
+      <p class="t-lead">${swx('Wählen Sie zwei bis vier Modelle. Gleiche Werte sind grau, Unterschiede bleiben hervorgehoben.', 'Choose two to four models. Identical values are greyed out, differences stay highlighted.', '选择 2–4 款机型。相同数值显示为灰色，差异保持高亮。')}</p>
+    </div>
+  </section>
+  <section class="section sec-light">
+    <div class="wrap">
+      <div class="cmp-picks">${pick}</div>
+      <p class="cf-empty" data-cmp-empty>${swx('Bitte mindestens zwei Modelle auswählen.', 'Please choose at least two models.', '请至少选择两款机型。')}</p>
+      <div class="vtable-wrap" data-cmp-table data-root="${r}"></div>
+      <p class="t-small t-dim mt">${swx('Werte laut Datenblatt des Herstellers; „—“ = für dieses Modell nicht angegeben. Preise auf Anfrage.', 'Values per manufacturer datasheet; “—” = not stated for this model. Prices on request.', '数值来自厂家数据表；“—”表示该机型未列明。价格请询价。')}</p>
+    </div>
+  </section>
+</main>
+
+${cmpBar()}
+${footer(CATS, 1)}
+${offerModal(1)}
+${quickView()}
+${scripts(1)}`;
+  write('produkte/vergleich.html', html);
+}
+
 module.exports = { NIC, CATS, PRODUCTS, USECASES, write, prodOf, inCat, productCard, buildHome, buildProductIndex, buildProduct, buildSpareParts, buildUseCases };
 
 /* ============================================================== RUN ===== */
@@ -1647,6 +1954,9 @@ if (require.main === module) {
   buildCases();
   buildHomeRobots();
   buildCleaning();
+  buildResearch();
+  buildResources();
+  buildCompare();
   require('./build-pages').run();
   const missing = reportMissingZh();
   console.log(missing ? `\nFertig — aber ${missing} UI-Strings ohne Chinesisch.` : '\nDone. DE · EN · ZH vollständig.');

@@ -3597,3 +3597,193 @@ html[lang='zh'] .home .kicker { font-size: 1rem; letter-spacing: .12em; }
 }
 @media (min-width: 1600px) { .brand img { height: 38px; } .site-header.is-stuck .brand img { height: 34px; } }
 @media (min-width: 1081px) and (max-width: 1360px) { .brand img, .site-header.is-stuck .brand img { height: 31px; } }
+
+/* ===================== 46 · FORSCHUNG, VERGLEICH, PDP v42 ================== */
+/* Dunkle Flächen: graue Texte etwas heller für besseren Kontrast */
+:root { --fg-dim: #8794a6; }
+.pdp .t-dim, .buybox .t-dim, .pdp-nav { --fg-dim: #95a1b2; }
+
+/* Helle Tabellen-Abschnitte auf der Produktseite */
+.sec-light .vtable-wrap { background: #fff; border-color: #dde3ec; }
+.sec-light .vtable thead th { background: #eef2f7; color: #121822; border-bottom-color: #d3dbe6; }
+.sec-light .vtable tbody th { color: #3f4a5a; }
+.sec-light .vtable tbody td { color: #121822; }
+.sec-light .vtable tbody tr:nth-child(even) { background: #f8fafc; }
+.sec-light .spec-table tbody tr:hover { background: rgba(10,20,35,.03); }
+.sec-light .no { color: #9aa5b4; }
+.sec-light .yes { color: #138a52; }
+.pdp-light .section-head h2 { color: #121822; }
+.pdp-light + .pdp-light { padding-top: 0; }
+
+/* Abschnittsnavigation (sticky) */
+.pdp-nav { position: sticky; top: calc(var(--header-h) + 6px); z-index: 40; margin: 0 0 1.2rem; }
+.pdp-nav .wrap {
+  display: flex; align-items: center; gap: 1rem;
+  background: rgba(13,17,24,.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--hair); border-radius: 999px; padding: .4rem .5rem .4rem 1.2rem;
+}
+.pdp-nav strong { font-family: var(--font-display); font-size: .95rem; white-space: nowrap; }
+.pdp-nav ul { display: flex; gap: .2rem; margin: 0 auto 0 .5rem; padding: 0; list-style: none; overflow-x: auto; scrollbar-width: none; }
+.pdp-nav ul::-webkit-scrollbar { display: none; }
+.pdp-nav a { display: block; padding: .45rem .8rem; border-radius: 99px; font-size: .86rem; color: #c3ccd8; white-space: nowrap; text-decoration: none; }
+.pdp-nav a:hover { background: rgba(255,255,255,.07); color: #fff; }
+.pdp-nav .btn { flex: none; }
+[id="ueberblick"], [id="varianten"], [id="technische-daten"], [id="entwicklung"], [id="unterlagen"] { scroll-margin-top: calc(var(--header-h) + 80px); }
+@media (max-width: 700px) {
+  .pdp-nav { top: calc(var(--header-h) + 2px); }
+  .pdp-nav .wrap { padding-left: .7rem; gap: .4rem; }
+  .pdp-nav strong { display: none; }
+  .pdp-nav ul { margin-left: 0; }
+  .pdp-nav a { padding: .4rem .6rem; font-size: .8rem; }
+}
+
+.buybox__tech { display: inline-flex; align-items: center; gap: .5rem; margin-top: 1rem; font-size: .9rem; color: var(--blue-400); text-decoration: none; }
+.buybox__tech svg { width: 18px; height: 18px; }
+.buybox__tech:hover { text-decoration: underline; }
+.buybox__kind { margin-top: .6rem; font-size: .88rem; color: var(--fg-muted); }
+.buybox__kind a { color: var(--blue-400); }
+.kind-tag { display: inline-block; padding: .12rem .5rem; border-radius: 99px; font-size: .7rem; font-weight: 600; letter-spacing: .02em; color: #9a5b00; background: #fff3dc; border: 1px solid #f2d39a; vertical-align: .1em; }
+
+/* Entwicklungsfähigkeit */
+.devtable { min-width: 560px; }
+.devtable tbody td { text-align: left; font-family: var(--font-body, inherit); }
+.devtable tbody td:last-child { width: 1%; white-space: nowrap; }
+.devtable tbody th { white-space: normal; }
+.dev-st { display: inline-block; padding: .12rem .55rem; border-radius: 99px; font-size: .74rem; font-weight: 600; white-space: nowrap; }
+.dev-st--ok { color: #0f7a47; background: #e2f6ec; border: 1px solid #b7e5cd; }
+.dev-st--part { color: #7a5a00; background: #fff4d6; border: 1px solid #f0dc9e; }
+.dev-st--tbc { color: #55606f; background: #eef1f5; border: 1px solid #d6dce5; }
+
+/* Unterlagen */
+.doclist { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: .7rem; }
+.doclist li { display: flex; align-items: center; gap: .8rem; padding: .8rem .9rem; border: 1px solid var(--hair); border-radius: 12px; background: rgba(255,255,255,.02); }
+.doclist__ty { flex: none; font-family: var(--font-mono); font-size: .68rem; font-weight: 600; padding: .25rem .45rem; border-radius: 6px; background: rgba(60,152,247,.14); color: var(--blue-400); }
+.doclist__n { flex: 1; font-size: .92rem; }
+.sec-light .doclist li { background: #fff; border-color: #dde3ec; }
+.sec-light .doclist__ty { background: #e6f0fd; color: #1d6fd1; }
+.doclist--compact { grid-template-columns: 1fr; gap: .45rem; }
+.doclist--compact li { padding: .55rem .7rem; }
+
+/* Katalogkarte: Vergleich und Typ */
+.ccard__meta { display: flex; align-items: center; justify-content: space-between; gap: .6rem; margin-top: .7rem; }
+.ccard__meta .ccard__price { margin-top: 0; }
+.ccard__cmp { display: inline-flex; align-items: center; gap: .35rem; font-size: .78rem; color: #475569; cursor: pointer; user-select: none; }
+.ccard__cmp input { width: 15px; height: 15px; accent-color: #1d6fd1; }
+.ccard__type .kind-tag { margin-left: .3rem; }
+.img-missing { opacity: 0; }
+.ccard__media:has(.img-missing), .gallery__stage:has(.img-missing) { background: linear-gradient(135deg, #e9edf3, #f6f8fb); }
+
+/* Vergleichsleiste */
+.cmpbar { position: fixed; left: 0; right: 0; bottom: 14px; z-index: 60; pointer-events: none; }
+.cmpbar[hidden] { display: none; }
+.cmpbar .wrap { pointer-events: auto; display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; max-width: 980px; background: #0f141c; color: #e8edf3; border: 1px solid rgba(255,255,255,.12); border-radius: 16px; padding: .7rem .8rem .7rem 1.1rem; box-shadow: 0 18px 40px -12px rgba(0,0,0,.55); }
+.cmpbar p { margin: 0; font-size: .85rem; color: #aab4c2; }
+.cmpbar p b { color: #fff; }
+.cmpbar__list { display: flex; gap: .4rem; flex-wrap: wrap; flex: 1; }
+.cmpbar__list span { display: inline-flex; align-items: center; gap: .3rem; padding: .25rem .3rem .25rem .65rem; border-radius: 99px; background: rgba(255,255,255,.08); font-size: .82rem; }
+.cmpbar__list button { width: 20px; height: 20px; border-radius: 50%; border: 0; background: rgba(255,255,255,.12); color: #fff; cursor: pointer; line-height: 1; }
+.cmpbar .is-off { opacity: .45; pointer-events: none; }
+
+/* Vergleichsseite */
+.cmp-picks { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.4rem; }
+.cmp-pick { display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .75rem; border: 1px solid #d3dbe6; border-radius: 99px; background: #fff; font-size: .88rem; cursor: pointer; }
+.cmp-pick:has(input:checked) { border-color: #1d6fd1; background: #eaf2fd; color: #0f4d99; }
+.cmp-pick input { accent-color: #1d6fd1; }
+.cmptable { min-width: 720px; }
+.cmptable thead th { vertical-align: top; text-align: left; white-space: normal; }
+.cmptable thead th a { display: block; color: inherit; text-decoration: none; }
+.cmptable thead th img { display: block; width: 100%; max-width: 160px; height: auto; aspect-ratio: 4/3; object-fit: contain; margin-bottom: .4rem; }
+.cmptable thead th small { display: block; font-family: var(--font-body, inherit); font-weight: 400; color: #5b6676; font-size: .78rem; margin-top: .15rem; }
+.cmptable tbody td { text-align: left; font-size: .85rem; }
+.cmptable tbody tr.is-same td { color: #8a95a5; }
+.cmptable tbody th { white-space: normal; min-width: 150px; }
+
+/* Angebotsformular */
+.om-incl { margin: .2rem 0 0; padding: .7rem .9rem; border-radius: 10px; background: rgba(60,152,247,.08); border: 1px solid rgba(60,152,247,.22); font-size: .84rem; color: var(--fg-muted); }
+
+/* Forschung & Lehre */
+.rs-jump { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; margin: 1.6rem 0 0; padding: 0; }
+.rs-jump a { display: inline-block; padding: .5rem .9rem; border: 1px solid var(--hair-strong); border-radius: 99px; font-size: .9rem; color: var(--fg); text-decoration: none; }
+.rs-jump a:hover { border-color: var(--blue-400); color: var(--blue-400); }
+.rs-needs { display: grid; gap: 1.4rem; }
+.rs-need { background: #fff; border: 1px solid #dde3ec; border-radius: 20px; padding: clamp(1.3rem, 3vw, 2.2rem); display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1.2rem 2.4rem; scroll-margin-top: calc(var(--header-h) + 24px); }
+.rs-need__head { display: flex; gap: 1rem; align-items: flex-start; grid-column: 1 / -1; }
+.rs-need__head .mi-ic { flex: none; width: 46px; height: 46px; display: grid; place-items: center; border-radius: 12px; background: #e6f0fd; color: #1d6fd1; }
+.rs-need__head .mi-ic svg { width: 24px; height: 24px; }
+.rs-need__head .kicker { margin: 0 0 .2rem; }
+.rs-need__head h2 { font-size: var(--step-2); margin: 0; }
+.rs-need__head p.t-dim { margin: .35rem 0 0; }
+.rs-need__models { display: grid; gap: .6rem; align-content: start; }
+.rs-model { display: flex; align-items: center; gap: .9rem; padding: .5rem; border: 1px solid #e1e6ee; border-radius: 14px; color: inherit; text-decoration: none; background: #f8fafc; }
+.rs-model:hover { border-color: #1d6fd1; }
+.rs-model img { width: 96px; height: 72px; object-fit: contain; background: #fff; border-radius: 10px; }
+.rs-model strong { display: block; font-family: var(--font-display); }
+.rs-model small { color: #5b6676; }
+.rs-need__dl { margin: 0; display: grid; gap: 1rem; align-content: start; }
+.rs-need__dl dt { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: #1d6fd1; margin-bottom: .3rem; }
+.rs-need__dl dd { margin: 0; color: #2d3746; line-height: 1.55; }
+.rs-need__links { grid-column: 1 / -1; margin: 0; }
+.rs-need__links a { color: #1d6fd1; font-weight: 600; text-decoration: none; display: inline-flex; gap: .4rem; align-items: center; }
+.rs-need__links svg { width: 16px; height: 16px; }
+@media (max-width: 820px) { .rs-need { grid-template-columns: 1fr; } }
+.rs-devgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+.rs-dev { border: 1px solid var(--hair); border-radius: 16px; padding: 1.2rem 1.3rem; background: rgba(255,255,255,.02); }
+.rs-dev h3 { margin: 0 0 .8rem; font-size: 1.15rem; }
+.rs-dev h3 a { color: inherit; text-decoration: none; }
+.rs-dev ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+.rs-dev li { display: grid; grid-template-columns: 78px 1fr; gap: .6rem; align-items: start; font-size: .88rem; color: var(--fg-muted); }
+.rs-dev li b { color: var(--fg); font-weight: 600; }
+.rs-dev .dev-st { text-align: center; }
+
+/* Ressourcen */
+.res-wrap { display: grid; gap: 2.4rem; }
+.res-group h2 { font-size: var(--step-1); margin: 0 0 1rem; }
+.res-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+.res-group > h2 { grid-column: 1 / -1; }
+.res-prod { background: #fff; border: 1px solid #dde3ec; border-radius: 16px; padding: 1rem; scroll-margin-top: calc(var(--header-h) + 24px); }
+.res-prod__head { display: flex; gap: .8rem; align-items: center; color: inherit; text-decoration: none; margin-bottom: .8rem; }
+.res-prod__head img { width: 80px; height: 60px; object-fit: contain; background: #f4f6f9; border-radius: 8px; }
+.res-prod__head strong { display: block; font-family: var(--font-display); }
+.res-prod__head small { color: #5b6676; }
+.res-prod:target { border-color: #1d6fd1; box-shadow: 0 0 0 3px rgba(29,111,209,.15); }
+
+/* Startseite: Forschungsrichtungen */
+.home-rs__head { margin-bottom: 1.2rem; }
+.home-rs__head h2 { margin: .2rem 0 0; }
+.home-rs__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8rem; }
+.home-rs__list a { height: 100%; display: flex; flex-direction: column; gap: .45rem; padding: 1.1rem 1.15rem; border: 1px solid var(--hair); border-radius: 16px; background: linear-gradient(160deg, rgba(255,255,255,.04), rgba(255,255,255,.01)); color: inherit; text-decoration: none; transition: border-color .2s, transform .2s; }
+.home-rs__list a:hover { border-color: var(--blue-400); transform: translateY(-2px); }
+.home-rs__list strong { font-family: var(--font-display); font-size: 1.05rem; }
+.home-rs__list span { font-size: .88rem; color: var(--fg-muted); }
+.home-rs__list i { margin-top: auto; font-style: normal; font-family: var(--font-mono); font-size: .74rem; color: var(--blue-400); display: inline-flex; align-items: center; gap: .35rem; }
+.home-rs__list i svg { width: 14px; height: 14px; }
+@media (max-width: 1000px) { .home-rs__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .home-rs__list { grid-template-columns: 1fr; } }
+
+/* Startseite: kürzerer Hero, nächster Abschnitt schaut hervor */
+.hero.hero--v27 { min-height: 84svh; }
+.hero__more { margin: 1.1rem 0 0; }
+.hero__more a { color: #dfe7f1; font-size: .92rem; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.35); padding-bottom: 1px; }
+@media (max-width: 700px) { .hero.hero--v27 { min-height: 78svh; } }
+
+/* Kopfzeile: Schatten und Glanz etwas zurücknehmen (blaue Schräge bleibt) */
+.site-header::before {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 6px 22px -10px rgba(0,0,0,.3), 0 1px 3px rgba(0,0,0,.08);
+}
+
+/* Einsatzbereiche: Modell-Links über dem Bild gut lesbar */
+.scenario__links .chip--blue { background: rgba(9,13,20,.86); color: #fff; border-color: rgba(96,170,250,.65); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.scenario__links .chip--blue:hover { background: #1d6fd1; border-color: #1d6fd1; }
+.scenario__links .t-dim { color: #c9d2de !important; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+/* v42 · sechs Menüpunkte: auf schmalen Desktops etwas enger setzen */
+@media (min-width: 1081px) and (max-width: 1280px) {
+  .site-header .nav-link, .site-header .nav-link:hover, .site-header .nav-link[aria-expanded='true'] { font-size: .94rem; padding: .6rem .66rem; }
+  .site-header .nav-link::after { left: .66rem; right: .66rem; }
+}
+@media (min-width: 1281px) and (max-width: 1480px) {
+  .site-header .nav-link, .site-header .nav-link:hover, .site-header .nav-link[aria-expanded='true'] { font-size: 1rem; padding: .62rem .85rem; }
+}
+/* v42 · Hero-Überschrift kompakter, damit die Buttons über dem Videotext bleiben */
+.hero--v27 .hero__inner { max-width: 900px; }
+.hero--v27 h1.t-hero { font-size: clamp(2.3rem, 1.2rem + 3.2vw, 4.1rem); line-height: 1.04; }
+html[lang='zh'] .hero--v27 h1.t-hero { font-size: clamp(2.1rem, 1.1rem + 2.9vw, 3.7rem); }

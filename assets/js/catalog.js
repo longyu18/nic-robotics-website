@@ -1567,7 +1567,7 @@ NIC.productsIn = function (catId) {
    {
     "de": "Lite3 in mehreren Ausführungen — vom Einstieg bis zur Lidar-Version",
     "en": "Lite3 in several editions — from entry level to the lidar version",
-    "zh": "绝影 Lite3 多个版本：体验版、探索版、专业版、激光版"
+    "zh": "Lite3 多个版本：体验版、探索版、专业版、激光版"
    },
    {
     "de": "Offene SDKs und ROS-2-Schnittstelle für eigene Algorithmen",
@@ -1602,7 +1602,7 @@ NIC.productsIn = function (catId) {
    {
     "de": "Lite3 in mehreren Ausführungen — vom Einstieg bis zur Lidar-Version",
     "en": "Lite3 in several editions — from entry level to the lidar version",
-    "zh": "绝影 Lite3 多个版本：体验版、探索版、专业版、激光版"
+    "zh": "Lite3 多个版本：体验版、探索版、专业版、激光版"
    },
    {
     "de": "Offene SDKs und ROS-2-Schnittstelle für eigene Algorithmen",
@@ -2173,4 +2173,116 @@ NIC.productsIn = function (catId) {
       if (u.pains && u.pains.length > 1) u.pains[1] = pain;
     }
   });
+})();
+
+/* v42 · Forschung: Lite3-Angaben präzisiert (Nennwerte statt Werbeformeln),
+   ROS-2-Umfang als „vom Hersteller zu bestätigen“ markiert; Plattform vs.
+   Branchenkonfiguration; Entwicklungsfähigkeiten und Unterlagen je Modell. */
+(function () {
+  var N = (typeof window !== 'undefined' ? window : globalThis).NIC;
+  if (!N || !N.products) return;
+  var L = function (de, en, zh) { return { de: de, en: en, zh: zh }; };
+  var TBC = L('vom Hersteller zu bestätigen', 'to be confirmed by the manufacturer', '待厂家确认');
+
+  var lite = N.products.filter(function (p) { return p.id === 'lite3'; })[0];
+  if (lite) {
+    lite.highlights = (lite.highlights || []).map(function (h) {
+      var d = (h && h.de) || '';
+      if (/1 kHz/.test(d)) return L('Industrie-IMU und Echtzeit-Kernel; Low-Level-Regelung bis 1 kHz (über die Nutzer-Schnittstelle verfügbare Frequenz vom Hersteller zu bestätigen)', 'Industrial IMU and real-time kernel; low-level control up to 1 kHz (frequency available through the user interface to be confirmed by the manufacturer)', '工业级 IMU 与实时内核；底层控制频率最高 1 kHz（用户接口可用频率待厂家确认）');
+      if (/7[,.]5 kg/.test(d) || /40/.test(d)) return L('Extremlast beim Gehen 7,5 kg laut Hersteller (Prüfbedingungen zu bestätigen); Nennlast je Version siehe Versionstabelle', 'Extreme walking load 7.5 kg per manufacturer (test conditions to be confirmed); rated payload per version in the version table', '极限行走负载 7.5 kg 为厂家标称值（测试条件待确认）；各版本额定负载见版本表');
+      if (/18 cm/.test(d)) return L('Stufen bis 18 cm', 'Steps up to 18 cm', '可跨越 18 cm 台阶');
+      if (/drei|3 ?×|3 ?倍|three/i.test(d + (h.zh || '') + (h.en || ''))) return L('Software-Updates per OTA', 'Software updates over the air (OTA)', '支持 OTA 在线升级');
+      return h;
+    });
+    (lite.specs || []).forEach(function (g) {
+      (g.rows || []).forEach(function (r) {
+        if (r.k && r.k.de === 'Regelfrequenz') r.v = L('bis 1 kHz (Low-Level; Nutzer-Schnittstelle zu bestätigen)', 'up to 1 kHz (low level; user interface to be confirmed)', '最高 1 kHz（底层；用户接口待确认）');
+      });
+    });
+    if (lite.variantTable) lite.variantTable.rows.forEach(function (r) {
+      if (r.k && r.k.de === 'Nutzlast') r.k = L('Nennlast', 'Rated payload', '额定负载');
+    });
+  }
+
+  /* Plattform oder fertige Branchenkonfiguration */
+  var CONFIG = { 'patrol-m20': 'lynx-m20', 'fire-cannon': 'x30', 'fire-recon': 'lynx-m20' };
+  N.products.forEach(function (p) {
+    p.kind = CONFIG[p.id] ? 'config' : 'platform';
+    if (CONFIG[p.id]) p.basedOn = CONFIG[p.id];
+  });
+
+  /* Entwicklungsfähigkeiten — nur was im Datenblatt steht; alles andere offen. */
+  var DEV = {
+    lite3: [
+      [L('Bewegungs-SDK und API', 'Motion SDK and API', '运动控制 SDK 与 API'), L('laut Datenblatt enthalten, mit Beispielcode', 'included per datasheet, with sample code', '数据表列明，含示例代码'), 'ok'],
+      [L('URDF- und Simulationsmodell', 'URDF and simulation model', 'URDF 与仿真模型'), L('laut Datenblatt verfügbar', 'available per datasheet', '数据表列明'), 'ok'],
+      [L('Wahrnehmungs-Schnittstelle', 'Perception interface', '感知接口'), L('visuelle Lokalisierung, Umgebungsrekonstruktion', 'visual localisation, environment reconstruction', '视觉定位、环境重建'), 'ok'],
+      [L('Low-Level-Regelfrequenz', 'Low-level control rate', '底层控制频率'), L('bis 1 kHz; über die Nutzer-Schnittstelle verfügbare Frequenz offen', 'up to 1 kHz; frequency available to users open', '最高 1 kHz；用户可用频率待确认'), 'part'],
+      [L('ROS / ROS 2', 'ROS / ROS 2', 'ROS / ROS 2'), L('Version und Umfang der Unterstützung vom Hersteller zu bestätigen', 'version and scope of support to be confirmed by the manufacturer', '版本与支持范围待厂家确认'), 'tbc'],
+      [L('Gelenkebene (Drehmoment / Position)', 'Joint level (torque / position)', '关节级控制（力矩 / 位置）'), TBC, 'tbc'],
+      [L('Eigene Rechner und Sensoren', 'Own computers and sensors', '加装自有计算单元与传感器'), L('Ethernet, USB 3.0/HDMI und 24/12/5 V ab VENTURE bzw. PRO (siehe Versionstabelle)', 'Ethernet, USB 3.0/HDMI and 24/12/5 V from VENTURE or PRO (see version table)', '以太网、USB 3.0/HDMI 与 24/12/5 V 外部供电，VENTURE / PRO 起提供（见版本表）'), 'ok'],
+      [L('Software-Updates', 'Software updates', '软件升级'), L('OTA laut Datenblatt', 'OTA per datasheet', '数据表列明支持 OTA'), 'ok']
+    ]
+  };
+  var GENERIC = [
+    [L('SDK / API', 'SDK / API', 'SDK / API'), TBC, 'tbc'],
+    [L('ROS / ROS 2', 'ROS / ROS 2', 'ROS / ROS 2'), TBC, 'tbc'],
+    [L('Nutzlast-Schnittstellen', 'Payload interfaces', '负载接口'), L('siehe technische Daten', 'see specifications', '见技术参数'), 'part'],
+    [L('URDF / Simulation', 'URDF / simulation', 'URDF / 仿真模型'), TBC, 'tbc']
+  ];
+  DEV.x30 = [
+    [L('SDK', 'SDK', 'SDK'), L('Bewegungs- und Wahrnehmungs-Schnittstellen, C++ / Python, Beispielcode (laut Datenblatt)', 'Motion and perception interfaces, C++ / Python, sample code (per datasheet)', '运动控制与感知接口，C++ / Python，含示例代码（数据表列明）'), 'ok'],
+    [L('ROS / ROS 2', 'ROS / ROS 2', 'ROS / ROS 2'), L('im Datenblatt genannt; Version und Umfang offen', 'named in the datasheet; version and scope open', '数据表列明接口；版本与支持范围待确认'), 'part'],
+    [L('Nutzlast-Schnittstellen', 'Payload interfaces', '负载接口'), L('für Wärmebild, Gassensorik, Ultraschall, Akustik (siehe technische Daten)', 'for thermal, gas, ultrasound, acoustics (see specifications)', '可接热成像、气体、超声、声学等负载（见技术参数）'), 'ok'],
+    [L('URDF / Simulation', 'URDF / simulation', 'URDF / 仿真模型'), TBC, 'tbc'],
+    [L('Gelenkebene (Drehmoment / Position)', 'Joint level (torque / position)', '关节级控制（力矩 / 位置）'), TBC, 'tbc']
+  ];
+  ['lynx-m20s', 'lynx-m20-pro', 'lynx-m20'].forEach(function (id) {
+    var pr = N.products.filter(function (x) { return x.id === id; })[0];
+    var io = null;
+    (pr && pr.specs || []).forEach(function (g) { (g.rows || []).forEach(function (r) { if (r.k && r.k.zh === '数据接口') io = r.v; }); });
+    DEV[id] = [
+      [L('Datenschnittstellen', 'Data interfaces', '数据接口'), io || L('siehe technische Daten', 'see specifications', '见技术参数'), io ? 'ok' : 'part'],
+      [L('SDK / API', 'SDK / API', 'SDK / API'), TBC, 'tbc'],
+      [L('ROS / ROS 2', 'ROS / ROS 2', 'ROS / ROS 2'), TBC, 'tbc'],
+      [L('URDF / Simulation', 'URDF / simulation', 'URDF / 仿真模型'), TBC, 'tbc']
+    ];
+  });
+  N.products.forEach(function (p) {
+    if (DEV[p.id]) p.dev = DEV[p.id];
+    else if ((p.useCases || []).indexOf('forschung') >= 0 && p.category !== 'heim') p.dev = GENERIC;
+    var docs = [
+      [L('Produktdatenblatt', 'Product datasheet', '产品数据表'), 'PDF'],
+      [L('Bedienungsanleitung', 'User manual', '用户手册'), 'PDF']
+    ];
+    if (p.id === 'lite3') docs.push(
+      [L('SDK-Dokumentation und Beispielcode', 'SDK documentation and sample code', 'SDK 文档与示例代码'), 'SDK'],
+      [L('URDF- und Simulationsmodell', 'URDF and simulation model', 'URDF 与仿真模型'), 'URDF']);
+    else if (p.dev) docs.push([L('Schnittstellen-Dokumentation', 'Interface documentation', '接口文档'), 'DOC']);
+    if (p.kind === 'config') docs.push([L('Konfigurationsübersicht', 'Configuration overview', '配置清单'), 'PDF']);
+    p.docs = docs;
+  });
+
+  /* Einsatzbereich Forschung: keine Herstellerreihennamen, keine ungeklärten Werte */
+  var u = (N.useCases || []).filter(function (x) { return x.id === 'forschung'; })[0];
+  if (u) {
+    var ed = L('Lite3 in vier Versionen — BASIC, VENTURE, PRO, LIDAR', 'Lite3 in four versions — BASIC, VENTURE, PRO, LIDAR', 'Lite3 四个版本：BASIC、VENTURE、PRO、LIDAR');
+    var sdk = L('Offenes SDK; ROS-/ROS-2-Umfang vom Hersteller zu bestätigen', 'Open SDK; ROS / ROS 2 scope to be confirmed by the manufacturer', '开放 SDK；ROS / ROS 2 支持范围待厂家确认');
+    var fix = function (arr) { return (arr || []).map(function (x) {
+      var d = (x && x.de) || '';
+      if (/Ausführungen|Versionen/.test(d)) return ed;
+      if (/ROS/.test(d)) return sdk;
+      return x; }); };
+    u.points = fix(u.points); u.solution = fix(u.solution);
+    u.proof = [L('Lite3: Nennlast 2,5–5 kg je Version, Reichweite bis 5 km, Stufen bis 18 cm', 'Lite3: rated payload 2.5–5 kg by version, range up to 5 km, steps up to 18 cm', 'Lite3：额定负载 2.5–5 kg（按版本），续航最远 5 km，可跨越 18 cm 台阶')];
+    u.facts = [
+      { v: '4', de: 'Versionen', en: 'Versions', zh: '配置版本' },
+      { v: 'SDK', de: 'Offene Schnittstelle', en: 'Open interface', zh: '开放接口' },
+      { v: 'URDF', de: 'Simulationsmodell', en: 'Simulation model', zh: '仿真模型' }
+    ];
+    u.body = L(
+      'Für Lehrstühle und Forschungsgruppen zählt, was sich auf dem Roboter ersetzen lässt. Lite3 bringt laut Datenblatt Bewegungs-SDK, API, Wahrnehmungs-Schnittstelle, Beispielcode sowie URDF- und Simulationsmodell mit; ab VENTURE und PRO lassen sich eigene Rechner und Sensoren anschließen. Den Umfang der ROS-/ROS-2-Unterstützung bestätigen wir vor dem Angebot mit dem Hersteller. Wir liefern an europäische Hochschulen mit Angebot und Rechnung, die den Beschaffungsregeln entsprechen.',
+      'For chairs and research groups what counts is what can be replaced on the robot. Per datasheet Lite3 ships a motion SDK, API, perception interface, sample code and a URDF and simulation model; from VENTURE and PRO you can attach your own computers and sensors. We confirm the scope of ROS / ROS 2 support with the manufacturer before quoting. We supply European universities with quotes and invoices that fit procurement rules.',
+      '对院系与课题组来说，重要的是机器人上有多少东西可以被替换。根据数据表，Lite3 提供运动控制 SDK、API、感知接口、示例代码以及 URDF 与仿真模型；VENTURE 与 PRO 版本起可加装自有计算单元和传感器。ROS / ROS 2 的支持范围，我们会在报价前与厂家确认。我们可向欧洲高校供货，并提供符合采购流程要求的报价与发票。');
+  }
 })();

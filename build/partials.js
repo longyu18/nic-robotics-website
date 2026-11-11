@@ -45,11 +45,14 @@ const MENU_ICON = {
   ersatzteile: MI('<circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/><circle cx="12" cy="12" r="6.5"/>'),
   vorfuehrung: MI('<rect x="3" y="4" width="18" height="12" rx="2"/><path d="m10.3 7.6 4.2 2.4-4.2 2.4zM8 21l4-5 4 5"/>'),
   schulung:  MI('<path d="M4 13.5v-1.5a8 8 0 0 1 16 0v1.5"/><rect x="2.8" y="13" width="4" height="6" rx="1.5"/><rect x="17.2" y="13" width="4" height="6" rx="1.5"/><path d="M19.2 19c0 1.6-1.6 2.5-4.2 2.5h-1.5"/>'),
+  ueber:     MI('<circle cx="12" cy="8" r="3.5"/><path d="M4.5 21c.6-4.2 3.6-6.8 7.5-6.8s6.9 2.6 7.5 6.8"/>'),
+  kontakt:   MI('<rect x="2.8" y="5" width="18.4" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/>'),
+  ressourcen: MI('<path d="M6 2.8h8.5L19 7.3v13.9H6z"/><path d="M14 2.8v5h5M9 12.5h7M9 16h7"/>'),
   rma:       MI('<path d="M3.5 8.5 12 4l8.5 4.5v7L12 20l-8.5-4.5z"/><path d="M3.5 8.5 12 13l8.5-4.5M12 13v7"/><path d="M8.5 2.8 6 5.3l2.5 2.5"/>')
 };
 const SVC_KEY = (href) => href.includes('garantie') ? 'garantie' : href.includes('servicezentrum') ? 'servicezentrum'
   : href.includes('ersatzteile') ? 'ersatzteile' : href.includes('vorfuehrung') ? 'vorfuehrung'
-  : href.includes('schulung') ? 'schulung' : 'rma';
+  : href.includes('schulung') ? 'schulung' : href.includes('ueber-uns') ? 'ueber' : href.includes('kontakt') ? 'kontakt' : 'rma';
 
 const SERVICE_ITEMS = [
   ['service/index.html#garantie', 'Garantie & Gewährleistung', 'Warranty', '保修服务',
@@ -61,7 +64,11 @@ const SERVICE_ITEMS = [
   ['service/index.html#schulung', 'Schulung & Fernsupport', 'Training & remote support', '培训与远程支持',
    'Einweisung, Hotline, Updates', 'Instruction, hotline, updates', '操作培训、热线、软件更新'],
   ['service/ruecksendung.html', 'Rücksendung & Reparatur (RMA)', 'Returns & repair (RMA)', '退货与返修（RMA）',
-   'Online-Formular mit Foto-Upload', 'Online form with photo upload', '在线表单，可上传照片']
+   'Online-Formular mit Foto-Upload', 'Online form with photo upload', '在线表单，可上传照片'],
+  ['unternehmen/ueber-uns.html', 'Über uns', 'About us', '关于我们',
+   'An Yuan GmbH, Sitz in Deutschland', 'An Yuan GmbH, based in Germany', 'An Yuan GmbH，总部位于德国'],
+  ['service/kontakt.html', 'Kontakt', 'Contact', '联系我们',
+   'Beratung, Angebot, technische Fragen', 'Advice, quotes, technical questions', '咨询、报价、技术问题']
 ];
 
 /* -------------------------------------------------------------- helpers */
@@ -233,7 +240,7 @@ function header(categories, products, depth = 0) {
 </div>`;
   }).join('\n');
 
-  const useItems = USECASES.map((u) =>
+  const useItems = USECASES.filter((u) => u.id !== 'forschung').map((u) =>
     `<li><a class="mi-item" href="${r}einsatzbereiche/index.html#${u.slug}">
   <span class="mi-ic">${MENU_ICON[u.id] || ''}</span>
   <span class="mi-txt"><strong>${t(u.name)}</strong><span>${t(u.tagline)}</span></span>
@@ -250,7 +257,6 @@ function header(categories, products, depth = 0) {
 
     <nav aria-label="Hauptnavigation">
       <ul class="nav">
-        <li><a class="nav-link" href="${r}index.html" data-nav-home>${swx('Startseite', 'Home', '首页')}</a></li>
         <li>
           <button class="nav-link" aria-expanded="false" aria-haspopup="true">
             ${swx('Produkte', 'Products', '产品中心')} ${ICON.caret}
@@ -262,21 +268,27 @@ function header(categories, products, depth = 0) {
             </div>
           </div>
         </li>
+        <li><a class="nav-link" href="${r}forschung/index.html">${swx('Forschung & Lehre', 'Research & Teaching', '科研与教学')}</a></li>
         <li>
           <button class="nav-link" aria-expanded="false" aria-haspopup="true">
-            ${swx('Anwendungen', 'Applications', '应用场景')} ${ICON.caret}
+            ${swx('Anwendungen', 'Applications', '行业应用')} ${ICON.caret}
           </button>
           <div class="mega mega--wide">
-            <ul class="mi-grid mi-grid--4">${useItems}</ul>
+            <ul class="mi-grid mi-grid--4">${useItems}
+<li><a class="mi-item" href="${r}forschung/index.html">
+  <span class="mi-ic">${MENU_ICON.forschung}</span>
+  <span class="mi-txt"><strong>${swx('Forschung & Lehre', 'Research & Teaching', '科研与教学')}</strong><span>${swx('Eigene Seite mit Plattformen und Unterlagen', 'Own page with platforms and documents', '独立页面：平台与技术资料')}</span></span>
+</a></li></ul>
             <div class="pm-foot">
               <a class="pm-all" href="${r}einsatzbereiche/index.html">${sw('Alle Einsatzbereiche', 'All applications')} ${ICON.arrow}</a>
             </div>
           </div>
         </li>
+        <li><a class="nav-link" href="${r}ressourcen/index.html">${swx('Ressourcen', 'Resources', '技术资源')}</a></li>
         <li><a class="nav-link" href="${r}referenzen/index.html">${swx('Referenzen', 'References', '客户案例')}</a></li>
         <li>
           <button class="nav-link" aria-expanded="false" aria-haspopup="true">
-            ${swx('Service', 'Service', '技术服务')} ${ICON.caret}
+            ${swx('Service & Support', 'Service & Support', '服务与支持')} ${ICON.caret}
           </button>
           <div class="mega mega--wide">
             <ul class="mi-grid mi-grid--3">
@@ -291,8 +303,6 @@ function header(categories, products, depth = 0) {
             </div>
           </div>
         </li>
-        <li><a class="nav-link" href="${r}unternehmen/ueber-uns.html">${swx('Über uns', 'About us', '关于我们')}</a></li>
-        <li><a class="nav-link" href="${r}service/kontakt.html">${swx('Kontakt', 'Contact', '联系我们')}</a></li>
       </ul>
     </nav>
 
@@ -458,14 +468,21 @@ function offerModal(depth = 0) {
             <input class="input" type="number" id="om-qty" name="stueckzahl" min="1" value="1">
           </div>
           <div class="field">
-            <label for="om-target">${sw('Wunschpreis je Stück', 'Target price per unit')} <span class="opt">${sw('optional', 'optional')}</span></label>
+            <label for="om-target">${swx('Voraussichtliches Budget', 'Expected budget', '预计预算')} <span class="opt">${swx('optional', 'optional', '选填')}</span></label>
             <div class="input-group">
-              <input class="input" type="number" id="om-target" name="wunschpreis" min="0" step="100" placeholder="—">
+              <input class="input" type="number" id="om-target" name="budget" min="0" step="100" placeholder="—">
               <span class="unit">EUR</span>
             </div>
-            <span class="hint">${sw('Sagen Sie offen, welches Budget Sie haben. Wir sagen Ihnen ebenso offen, was dafür geht.', 'Tell us your budget plainly. We will tell you just as plainly what fits it.')}</span>
           </div>
-          <div class="field span-2">
+          <div class="field">
+            <label for="om-purpose">${swx('Zweck der Anfrage', 'Purpose of the enquiry', '询价用途')}</label>
+            <select class="select" id="om-purpose" name="zweck">
+              <option value="auswahl">${swx('Technische Auswahl', 'Technical selection', '技术选型')}</option>
+              <option value="budget" selected>${swx('Projektbudget', 'Project budget', '项目预算')}</option>
+              <option value="beschaffung">${swx('Verbindliche Beschaffung', 'Formal procurement', '正式采购')}</option>
+            </select>
+          </div>
+          <div class="field">
             <label for="om-when">${sw('Geplanter Beschaffungszeitraum', 'Planned procurement window')}</label>
             <select class="select" id="om-when" name="zeitraum">
               <option value="sofort">${sw('Sofort — Budget freigegeben', 'Now — budget approved')}</option>
@@ -475,6 +492,10 @@ function offerModal(depth = 0) {
               <option value="info">${sw('Nur Information, keine Beschaffung', 'Information only, no procurement')}</option>
             </select>
           </div>
+          <div class="field span-2" data-version-field hidden>
+            <label for="om-version">${swx('Version', 'Version', '版本')}</label>
+            <select class="select" id="om-version" name="version"></select>
+          </div>
           <div class="field span-2">
             <label for="om-msg">${sw('Ihr Einsatzfall und Ihre Fragen', 'Your application and questions')}</label>
             <textarea class="textarea" id="om-msg" name="nachricht" ${ph(
@@ -483,6 +504,7 @@ function offerModal(depth = 0) {
               '机器人将在哪里工作？需要多大负载、什么样的环境、哪些接口？它需要具备什么能力才值得您考虑？'
             )}></textarea>
           </div>
+          <p class="om-incl span-2">${swx('Das Angebot enthält: Konfiguration und Version, Stückpreis netto, Lieferzeit, Lieferumfang, Gewährleistung sowie Einweisung und Service in Deutschland.', 'The quote covers: configuration and version, net unit price, lead time, scope of delivery, warranty, plus instruction and service in Germany.', '报价包含：配置与版本、不含税单价、交货期、供货范围、质保，以及德国本地培训与服务。')}</p>
           <div class="field span-2">
             <label class="consent">
               <input type="checkbox" name="datenschutz" required>
@@ -523,4 +545,4 @@ function quickView() {
 </div>`;
 }
 
-module.exports = { SERVICE_ITEMS, SITE, LANGS, esc, t, attr, sw, swx, ph, setUseCases, money, ICON, head, header, footer, scripts, offerModal, quickView, reportMissingZh };
+module.exports = { MENU_ICON, SERVICE_ITEMS, SITE, LANGS, esc, t, attr, sw, swx, ph, setUseCases, money, ICON, head, header, footer, scripts, offerModal, quickView, reportMissingZh };
