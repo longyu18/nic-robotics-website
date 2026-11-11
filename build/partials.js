@@ -291,9 +291,9 @@ function header(categories, products, depth = 0) {
     <nav aria-label="Hauptnavigation">
       <ul class="nav">
         <li>
-          <button class="nav-link" aria-expanded="false" aria-haspopup="true">
+          <a class="nav-link" href="${r}produkte/index.html" aria-expanded="false" aria-haspopup="true">
             ${swx('Produkte', 'Products', '产品中心')} ${ICON.caret}
-          </button>
+          </a>
           <div class="mega mega--prod">
             <div class="pm-grid">${prodMenu}</div>
             <div class="pm-foot">
@@ -302,9 +302,9 @@ function header(categories, products, depth = 0) {
           </div>
         </li>
         <li>
-          <button class="nav-link" aria-expanded="false" aria-haspopup="true">
+          <a class="nav-link" href="${r}einsatzbereiche/index.html" aria-expanded="false" aria-haspopup="true">
             ${swx('Anwendungen', 'Applications', '行业应用')} ${ICON.caret}
-          </button>
+          </a>
           <div class="mega mega--wide">
             <ul class="mi-grid mi-grid--4">${useItems}</ul>
             <div class="pm-foot">
@@ -313,9 +313,9 @@ function header(categories, products, depth = 0) {
           </div>
         </li>
         <li>
-          <button class="nav-link" aria-expanded="false" aria-haspopup="true">
+          <a class="nav-link" href="${r}forschung/index.html" aria-expanded="false" aria-haspopup="true">
             ${swx('Forschung & Lehre', 'Research & Teaching', '科研与教学')} ${ICON.caret}
-          </button>
+          </a>
           <div class="mega mega--wide">
             <ul class="mi-grid mi-grid--3">${RS_MENU.map((n) => `
 <li><a class="mi-item" href="${r}forschung/index.html#${n.id}">
@@ -330,9 +330,9 @@ function header(categories, products, depth = 0) {
         <li><a class="nav-link" href="${r}ressourcen/index.html">${swx('Ressourcen', 'Resources', '技术资源')}</a></li>
         <li><a class="nav-link" href="${r}referenzen/index.html">${swx('Referenzen', 'References', '客户案例')}</a></li>
         <li>
-          <button class="nav-link" aria-expanded="false" aria-haspopup="true">
+          <a class="nav-link" href="${r}service/index.html" aria-expanded="false" aria-haspopup="true">
             ${swx('Service & Support', 'Service & Support', '服务与支持')} ${ICON.caret}
-          </button>
+          </a>
           <div class="mega mega--wide">
             <ul class="mi-grid mi-grid--3">
               ${SERVICE_ITEMS.map(([href, tDe, tEn, tZh, sDe, sEn, sZh]) => `

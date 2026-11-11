@@ -123,7 +123,11 @@
     // sofort wieder — das Menü klappte unter dem Cursor zu.
     var openedByHover = false;
 
+    // v46 · Der Menütitel ist ein Link: am Desktop öffnet Hover das Panel und der
+    // Klick führt zur Übersichtsseite; im mobilen Menü klappt der Tipp das Panel auf.
+    var desktop = window.matchMedia('(hover: hover) and (min-width: 1081px)');
     trigger.addEventListener('click', function (e) {
+      if (trigger.tagName === 'A' && desktop.matches) { open(false); openedByHover = false; return; }
       e.preventDefault();
       var wasOpen = li.classList.contains('is-open') && !openedByHover;
       openedByHover = false;
