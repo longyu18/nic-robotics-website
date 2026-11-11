@@ -2286,3 +2286,95 @@ NIC.productsIn = function (catId) {
       '对院系与课题组来说，重要的是机器人上有多少东西可以被替换。根据数据表，Lite3 提供运动控制 SDK、API、感知接口、示例代码以及 URDF 与仿真模型；VENTURE 与 PRO 版本起可加装自有计算单元和传感器。ROS / ROS 2 的支持范围，我们会在报价前与厂家确认。我们可向欧洲高校供货，并提供符合采购流程要求的报价与发票。');
   }
 })();
+
+/* v43 · Neuer Schwerlast-Vierbeiner X50 / X50 Pro (Werte laut Datenblatt des Herstellers) */
+(function () {
+  var N = (typeof window !== 'undefined' ? window : globalThis).NIC;
+  if (!N || !N.products) return;
+  var L = function (de, en, zh) { return { de: de, en: en, zh: zh }; };
+  var TBC = L('vom Hersteller zu bestätigen', 'to be confirmed by the manufacturer', '待厂家确认');
+  if (N.products.some(function (p) { return p.id === 'x50'; })) return;
+  N.products.push({
+    id: 'x50', slug: 'x50', sku: 'NIC-QD-X50', category: 'vierbeiner', brand: 'NIC Robotics', order: 1.5,
+    name: 'X50',
+    family: L('Schwerlast-Vierbeiner', 'Heavy-Duty Quadruped', '重载四足机器人'),
+    price: null,
+    badge: L('Neu', 'New', '新品'),
+    tagline: L('50 kg Nutzlast, IP67, 3 m/s Dauerlauf — mehr tragen, weiter kommen.', '50 kg payload, IP67, 3 m/s sustained — carry more, go further.', '50 kg 负载，IP67，3 m/s 持续奔跑——载得更多，走得更远。'),
+    summary: L(
+      'Der X50 ist der Lastenträger unter den Industrie-Vierbeinern: Bei gleicher Baugröße trägt er dauerhaft 50 kg — Löschtechnik, Messgeräte oder Ausrüstung — und läuft damit 2 km am Stück mit 3 m/s. Er setzt die Füße vorausschauend, steigt auch offene Gitter- und Hohltreppen unter Last und hält die Körperlage bei Stößen stabil. Vier Lidar-Sensoren und eine Weitwinkelkamera erkennen Hindernisse, bei niedrigem Akku fährt er selbst in die Ladestation. Die Pro-Version ergänzt SLAM-Kartierung, autonome Navigation und einen dritten Rechner.',
+      'The X50 is the load carrier among industrial quadrupeds: in the same body size it carries 50 kg continuously — firefighting gear, instruments or equipment — and runs 2 km in one go at 3 m/s. It places its feet with foresight, climbs open grating and hollow stairs under load and keeps its body stable when pushed. Four lidar sensors and a wide-angle camera detect obstacles, and on low battery it returns to its dock by itself. The Pro version adds SLAM mapping, autonomous navigation and a third computer.',
+      'X50 是工业四足机器人中的“扛重型”：同样的机身尺寸，可持续承载 50 kg——消防装备、检测仪器或其他设备——并以 3 m/s 连续奔跑 2 km。它能预判落脚点，负载状态下也能攀爬镂空楼梯，受到冲击时保持机身姿态稳定。4 颗激光雷达与 1 个广角相机感知障碍物，电量不足时自动返回充电桩。Pro 版另增 SLAM 建图、自主导航和第三台计算单元。'),
+    highlights: [
+      L('50 kg Dauerlast bei gleicher Baugröße; Standlast bis 200 kg (Extremwert, nicht für den Regelbetrieb)', '50 kg continuous payload in the same body size; standing load up to 200 kg (extreme value, not for routine use)', '同尺寸下持续负载 50 kg；站立极限负载 200 kg（极限值，非常规使用）'),
+      L('Dauerlauf mit 3 m/s über 2 km — mit 50 kg Nutzlast', 'Sustained running at 3 m/s over 2 km — with 50 kg payload', '满载 50 kg 以 3 m/s 持续奔跑 2 km'),
+      L('Laufzeit 2 h mit 50 kg, 3,5 h mit 20 kg', 'Runtime 2 h with 50 kg, 3.5 h with 20 kg', '续航：50 kg 负载 2 小时，20 kg 负载 3.5 小时'),
+      L('IP67, Betrieb von −20 °C bis 55 °C', 'IP67, operation from −20 °C to 55 °C', 'IP67，工作温度 −20 °C 至 55 °C'),
+      L('Stufen bis 25 cm, Steigungen bis 35°, offene Gittertreppen auch unter Last', 'Steps up to 25 cm, gradients up to 35°, open grating stairs even under load', '可连续跨越 25 cm 台阶、爬 35° 坡，负载也能上下镂空楼梯'),
+      L('Vorausschauende Fußsetzung und aktive Lageregelung bei Störungen', 'Predictive foot placement and active attitude control under disturbance', '预判落脚点，受扰动时主动调整姿态保持稳定'),
+      L('4 Lidar-Sensoren und Weitwinkelkamera für Hinderniserkennung und -vermeidung', '4 lidar sensors and wide-angle camera for obstacle detection and avoidance', '4 颗激光雷达 + 广角相机，多模态感知自主避障'),
+      L('Selbstständiges Laden für Dauerstreifen; separater Not-Aus-Taster; Statusleuchten für Betrieb, Alarm und Laden', 'Self-docking charge for continuous patrols; separate emergency-stop button; status lights for running, alarm and charging', '自主回充支持连续巡检；独立物理急停按钮；运行、告警、充电状态灯')
+    ],
+    variantTable: {
+      caption: L('X50 und X50 Pro im Vergleich', 'X50 and X50 Pro compared', 'X50 与 X50 Pro 对比'),
+      cols: ['X50', 'X50 Pro'],
+      rows: [
+        { k: L('Maße (stehend)', 'Dimensions (standing)', '站立尺寸'), v: [L('ca. 990 × 455 × 685 mm', 'approx. 990 × 455 × 685 mm', '约 990 × 455 × 685 mm'), L('ca. 990 × 455 × 705 mm', 'approx. 990 × 455 × 705 mm', '约 990 × 455 × 705 mm')] },
+        { k: L('Gewicht inkl. Akku', 'Weight incl. battery', '整机重量（含电池）'), v: [L('ca. 57,5 kg', 'approx. 57.5 kg', '约 57.5 kg'), L('ca. 60 kg', 'approx. 60 kg', '约 60 kg')] },
+        { k: L('Rechner', 'Computing', '计算单元'), v: [L('2 × Octa-Core', '2 × octa-core', '2 × 八核'), L('3 × Octa-Core', '3 × octa-core', '3 × 八核')] },
+        { k: L('SLAM-Kartierung und Navigation', 'SLAM mapping and navigation', 'SLAM 建图与导航'), v: [false, true] },
+        { k: L('Autonome Navigation', 'Autonomous navigation', '自主导航'), v: [false, true] },
+        { k: L('Autonomes Laden', 'Autonomous charging', '自主回充'), v: [true, true] },
+        { k: L('Sekundärentwicklung', 'Secondary development', '二次开发'), v: [true, true] },
+        { k: L('OTA-Updates', 'OTA updates', 'OTA 升级'), v: [true, true] },
+        { k: L('Hardware-Schnittstellen', 'Hardware interfaces', '硬件接口'), v: [L('72-V-Akkuanschluss, Ethernet / WLAN', '72 V battery port, Ethernet / Wi-Fi', '72V 电池接口，以太网 / WiFi'), L('5 / 12 / 24 V, USB 2.0 / 3.0, Ethernet / WLAN', '5 / 12 / 24 V, USB 2.0 / 3.0, Ethernet / Wi-Fi', '5V / 12V / 24V，USB 2.0 / 3.0，以太网 / WiFi')] }
+      ]
+    },
+    specs: [
+      { group: L('Last und Laufzeit', 'Payload and runtime', '负载与续航'), rows: [
+        { k: L('Nutzlast (dauerhaft)', 'Payload (continuous)', '持续负载'), v: '50 kg' },
+        { k: L('Standlast (Extremwert)', 'Standing load (extreme value)', '站立极限负载'), v: L('200 kg — nicht für den Regelbetrieb', '200 kg — not for routine use', '200 kg（非常规使用）') },
+        { k: L('Laufzeit', 'Runtime', '续航时间'), v: L('2 h mit 50 kg · 3,5 h mit 20 kg', '2 h with 50 kg · 3.5 h with 20 kg', '50 kg 负载 2 h · 20 kg 负载 3.5 h') }
+      ]},
+      { group: L('Bewegung', 'Motion', '运动性能'), rows: [
+        { k: L('Arbeitsgeschwindigkeit (Gehen)', 'Working speed (walking)', '最大作业行走速度'), v: '1,5 m/s' },
+        { k: L('Dauerlauf', 'Sustained running', '最大持续奔跑速度'), v: L('3 m/s über 2 km (mit 50 kg)', '3 m/s over 2 km (with 50 kg)', '3 m/s，持续 2 km（50 kg 负载）') },
+        { k: L('Höchstgeschwindigkeit', 'Top speed', '最大速度'), v: L('4,5 m/s (Laborwert unter Prüfbedingungen; aus Sicherheitsgründen nicht freigegeben)', '4.5 m/s (lab value under test conditions; not released for safety reasons)', '4.5 m/s（特定条件下实验室测得，出于安全考虑未对外开放）') },
+        { k: L('Stufenhöhe (fortlaufend)', 'Step height (continuous)', '最大连续台阶高度'), v: '25 cm' },
+        { k: L('Steigung', 'Gradient', '爬坡能力'), v: L('35° (abhängig vom Untergrund)', '35° (depends on surface)', '35°（随地面材质变化）') }
+      ]},
+      { group: L('Umgebung', 'Environment', '环境适应'), rows: [
+        { k: L('Schutzart', 'Ingress protection', '防护等级'), v: 'IP67' },
+        { k: L('Umgebungstemperatur', 'Ambient temperature', '工作温度'), v: L('−20 °C … 55 °C (Leistung bei Extremtemperaturen ggf. reduziert)', '−20 °C … 55 °C (performance may drop at extreme temperatures)', '−20 °C 至 55 °C（极端温度下性能可能下降）') }
+      ]},
+      { group: L('Wahrnehmung und Sicherheit', 'Perception and safety', '感知与安全'), rows: [
+        { k: L('Lidar', 'Lidar', '激光雷达'), v: '4' },
+        { k: L('Weitwinkelkamera', 'Wide-angle camera', '广角相机'), v: '1' },
+        { k: L('Hindernisvermeidung', 'Obstacle avoidance', '避障'), v: L('autonom, multimodale Wahrnehmung', 'autonomous, multimodal perception', '多模态感知自主避障') },
+        { k: L('Not-Aus', 'Emergency stop', '急停'), v: L('separater physischer Taster, blockiert die Maschine', 'separate physical button, locks the machine', '独立物理急停按钮，一键锁止') },
+        { k: L('Statusanzeige', 'Status display', '状态灯'), v: L('Farbleuchten für Betrieb, Alarm, Laden', 'Coloured lights for running, alarm, charging', '运行、告警、充电多色灯效') }
+      ]}
+    ],
+    gallery: ['x50-main'],
+    scenes: [],
+    hero: 'hero-poster',
+    useCases: ['energie', 'feuerwehr', 'sicherheit', 'forschung'],
+    kind: 'platform',
+    dev: [
+      [L('Sekundärentwicklung', 'Secondary development', '二次开发'), L('laut Datenblatt unterstützt; Umfang von SDK / API vom Hersteller zu bestätigen', 'supported per datasheet; SDK / API scope to be confirmed by the manufacturer', '数据表列明支持；SDK / API 范围待厂家确认'), 'part'],
+      [L('Hardware-Schnittstellen', 'Hardware interfaces', '硬件接口'), L('Pro: 5 / 12 / 24 V, USB 2.0 / 3.0, Ethernet / WLAN; Standard: 72-V-Akkuanschluss, Ethernet / WLAN', 'Pro: 5 / 12 / 24 V, USB 2.0 / 3.0, Ethernet / Wi-Fi; standard: 72 V battery port, Ethernet / Wi-Fi', 'Pro：5V/12V/24V、USB 2.0/3.0、以太网/WiFi；标准版：72V 电池接口、以太网/WiFi'), 'ok'],
+      [L('SLAM und autonome Navigation', 'SLAM and autonomous navigation', 'SLAM 与自主导航'), L('nur X50 Pro (laut Datenblatt)', 'X50 Pro only (per datasheet)', '仅 X50 Pro（数据表列明）'), 'ok'],
+      [L('ROS / ROS 2', 'ROS / ROS 2', 'ROS / ROS 2'), TBC, 'tbc'],
+      [L('URDF / Simulation', 'URDF / simulation', 'URDF / 仿真模型'), TBC, 'tbc'],
+      [L('Software-Updates', 'Software updates', '软件升级'), L('OTA laut Datenblatt', 'OTA per datasheet', '数据表列明支持 OTA'), 'ok']
+    ],
+    docs: [
+      [L('Produktdatenblatt', 'Product datasheet', '产品数据表'), 'PDF'],
+      [L('Bedienungsanleitung', 'User manual', '用户手册'), 'PDF'],
+      [L('Schnittstellen-Dokumentation', 'Interface documentation', '接口文档'), 'DOC']
+    ]
+  });
+  (N.useCases || []).forEach(function (u) {
+    if (['energie', 'feuerwehr', 'sicherheit'].indexOf(u.id) >= 0 && u.products && u.products.indexOf('x50') < 0) u.products.push('x50');
+  });
+})();

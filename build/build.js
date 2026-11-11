@@ -57,6 +57,7 @@ const inCat = (cid) => PRODUCTS.filter((p) => p.category === cid).sort((a, b) =>
 /* --------------------------------------------------- key spec extraction */
 const KEY_SPECS = {
   x30:            ['IP67', '−20…55 °C', '20 kg Nutzlast', '4 h'],
+  x50:            ['50 kg Nutzlast', 'IP67', '3 m/s Dauerlauf', '25 cm Stufen'],
   'lynx-m20s':    ['IP67', '9 m/s', '35 kg Nutzlast', '−30…55 °C'],
   'lynx-m20-pro': ['IP66', '5 m/s', '15 kg Nutzlast', '3× Rechenleistung'],
   'lynx-m20':     ['IP66', '5 m/s', '15 kg Nutzlast', '2× Rechenleistung'],
@@ -67,6 +68,7 @@ const KEY_SPECS = {
 };
 const KEY_SPECS_EN = {
   x30: ['IP67', '−20…55 °C', '20 kg payload', '4 h'],
+  x50: ['50 kg payload', 'IP67', '3 m/s sustained', '25 cm steps'],
   'lynx-m20s': ['IP67', '9 m/s', '35 kg payload', '−30…55 °C'],
   'lynx-m20-pro': ['IP66', '5 m/s', '15 kg payload', '3× computing'],
   'lynx-m20': ['IP66', '5 m/s', '15 kg payload', '2× computing'],
@@ -77,6 +79,7 @@ const KEY_SPECS_EN = {
 };
 const KEY_SPECS_ZH = {
   x30:            ['IP67', '−20…55 °C', '20 kg 负载', '4 小时'],
+  x50:            ['50 kg 负载', 'IP67', '3 m/s 持续奔跑', '25 cm 台阶'],
   'lynx-m20s':    ['IP67', '9 m/s', '35 kg 负载', '−30…55 °C'],
   'lynx-m20-pro': ['IP66', '5 m/s', '15 kg 负载', '3× 算力'],
   'lynx-m20':     ['IP66', '5 m/s', '15 kg 负载', '2× 算力'],
@@ -460,6 +463,7 @@ ${scripts(0, `<script type="application/ld+json">
    Filter: Kategorie · Suche · Einsatzbereich · Sortierung. */
 const CARD = {
   x30:            [['Vierbeiner für Industrieinspektion und schwieriges Gelände.', 'Quadruped for industrial inspection and difficult terrain.', '面向工业巡检与复杂地形作业的四足机器人。'], [['IP67', 'IP67', 'IP67'], ['20 kg Nutzlast', '20 kg payload', '20 kg 负载']]],
+  x50:            [['Schwerlast-Vierbeiner für Transport, Brandschutz und Inspektion.', 'Heavy-duty quadruped for transport, firefighting and inspection.', '面向运输、消防与巡检的重载四足机器人。'], [['50 kg Nutzlast', '50 kg payload', '50 kg 负载'], ['IP67', 'IP67', 'IP67']]],
   'lynx-m20s':    [['Hohes Tempo und Geländegängigkeit in einem Roboter.', 'High speed and terrain capability in one robot.', '兼具高速移动与复杂地形通过能力。'], [['9 m/s', '9 m/s', '9 m/s'], ['IP67', 'IP67', 'IP67']]],
   'lynx-m20-pro': [['Leistungsstarker Rad-Bein-Roboter für professionelle Inspektion.', 'High-performance wheel-legged robot for professional inspection.', '面向专业巡检任务的高性能轮足机器人。'], [['3× Rechenleistung', '3× computing', '3× 算力'], ['IP66', 'IP66', 'IP66']]],
   'lynx-m20':     [['Rad-Bein-Plattform für unterschiedliches Gelände.', 'Wheel-legged platform for varied terrain.', '适用于多种地形的轮足移动平台。'], [['5 m/s', '5 m/s', '5 m/s'], ['IP66', 'IP66', 'IP66']]],
@@ -662,7 +666,7 @@ function buildProduct(p) {
         </table>
       </div>
       ${vt.rows.some((r) => /\*/.test(r.k.de)) ? `<p class="t-small t-dim mt">${swx('* Vom Hersteller angekündigt, Bereitstellung per Software-Update. Wir bestätigen den Stand bei Lieferung.', '* Announced by the manufacturer, delivered via software update. We confirm the status at delivery.', '* 厂商已公布、将通过后续 OTA 升级提供，交付时我们会确认当前状态。')}</p>` : ''}
-      ${p.category === 'heim' ? '' : `<p class="t-small t-dim mt">${sw(
+      ${p.category === 'heim' || p.id === 'x50' ? '' : `<p class="t-small t-dim mt">${sw(
         'Ausstattungsstufen sind nachrüstbar. Sprechen Sie uns auf ein Upgrade einer vorhandenen Einheit an.',
         'Build levels can be retrofitted. Talk to us about upgrading a unit you already own.'
       )}</p>`}
@@ -1740,11 +1744,23 @@ const RS_NEEDS = [
     models: ['lite3', 'lynx-m20-pro'],
     why: ['Lite3 LIDAR mit autonomer Navigation, PRO mit aktiver Hindernisvermeidung nach vorn; Lynx M20 Pro mit dreifachem Industrierechner, Gigabit-Ethernet und USB 3.0.', 'Lite3 LIDAR with autonomous navigation, PRO with forward active obstacle avoidance; Lynx M20 Pro with three industrial computers, Gigabit Ethernet and USB 3.0.', 'Lite3 LIDAR 版具备自主导航，PRO 版具备前向主动避障；Lynx M20 Pro 配备三台工业计算单元、千兆以太网与 USB 3.0。'],
     opt: ['Lite3 LIDAR oder PRO; beim M20 Pro eigene Sensoren über die Datenschnittstellen. SDK- und ROS-Umfang für M20: vom Hersteller zu bestätigen.', 'Lite3 LIDAR or PRO; on the M20 Pro, own sensors via the data interfaces. SDK and ROS scope for M20: to be confirmed by the manufacturer.', 'Lite3 选 LIDAR 或 PRO 版；M20 Pro 可通过数据接口接入自有传感器。M20 的 SDK 与 ROS 支持范围：待厂家确认。'] },
+  { id: 'manipulation', ic: 'servicezentrum',
+    t: ['Mobile Manipulation und Embodied AI', 'Mobile manipulation and embodied AI', '移动操作与具身智能'],
+    q: ['Laufen und Greifen kombinieren, Ganzkörperregelung, Humanoide, lernende Modelle auf echter Hardware.', 'Combining walking and grasping, whole-body control, humanoids, learned models on real hardware.', '行走与抓取结合、全身控制、人形机器人、大模型上实机。'],
+    models: ['x30', 'x50', 'dr02', 'q1'],
+    why: ['X30 und X50 tragen 20 bzw. 50 kg dauerhaft und bieten damit Reserve für einen Arm samt Rechner. DR02: Humanoid mit 275 TOPS Rechenleistung (optional 2.070 TOPS). Q1: kleiner Humanoid mit 22 Freiheitsgraden und SDK/HDK in der Explorer-Version.', 'X30 and X50 carry 20 and 50 kg continuously, leaving reserve for an arm plus computer. DR02: humanoid with 275 TOPS computing (2,070 TOPS optional). Q1: small humanoid with 22 degrees of freedom and SDK/HDK in the Explorer edition.', 'X30 与 X50 可持续负载 20 kg 和 50 kg，为加装机械臂与计算单元留有余量。DR02：人形机器人，标配 275 TOPS 算力（可选 2070 TOPS）。Q1：22 自由度小型人形，探索版提供 SDK/HDK。'],
+    opt: ['Arm, Greifer und deren mechanische und elektrische Anbindung sind nicht Teil des Datenblatts — Montagepunkte, Stromversorgung und Schnittstellen: vom Hersteller zu bestätigen.', 'Arm, gripper and their mechanical and electrical integration are not part of the datasheet — mounting points, power supply and interfaces: to be confirmed by the manufacturer.', '机械臂、夹爪及其机械与电气接入不在数据表范围内——安装位、供电与接口：待厂家确认。'] },
+  { id: 'interaktion', ic: 'ueber',
+    t: ['Mensch-Roboter-Interaktion und Mehrrobotersysteme', 'Human-robot interaction and multi-robot systems', '人机交互与多机协同'],
+    q: ['Bedienkonzepte, Sprach- und Gestensteuerung, Akzeptanzstudien, Schwarm- und Teamverhalten.', 'Operating concepts, voice and gesture control, acceptance studies, swarm and team behaviour.', '操控方式、语音与手势控制、接受度研究、集群与编队行为。'],
+    models: ['lite3', 'q1'],
+    why: ['Lite3: Sprachsteuerung, visuelles Folgen und Formationen mit mehreren Geräten laut Datenblatt — klein genug für Studien mit Probanden. Q1: Sprache, Bild, Berührung und Gesichtserkennung in einem 88 cm großen Humanoiden.', 'Lite3: voice control, visual following and multi-unit formations per datasheet — small enough for studies with participants. Q1: voice, vision, touch and face recognition in an 88 cm humanoid.', 'Lite3：数据表列明语音控制、视觉跟随与多机编队，体型小，适合有受试者参与的研究。Q1：88 cm 人形，集语音、视觉、触摸与人脸识别于一身。'],
+    opt: ['Für Mehrroboter-Versuche mehrere Lite3 derselben Version. Zugriff auf Rohdaten von Kamera und Mikrofon sowie Datenschutz-Einstellungen: vom Hersteller zu bestätigen.', 'For multi-robot experiments, several Lite3 of the same version. Access to raw camera and microphone data and privacy settings: to be confirmed by the manufacturer.', '多机实验建议选用同一版本的多台 Lite3。摄像头与麦克风原始数据的访问方式及隐私设置：待厂家确认。'] },
   { id: 'feld', ic: 'energie',
-    t: ['Feldforschung', 'Field research', '野外与现场科研'],
-    q: ['Messkampagnen im Freien, Wetter, Gelände, eigene Sensorik.', 'Outdoor measurement campaigns, weather, terrain, your own sensors.', '户外测量、恶劣天气、复杂地形、自有传感器。'],
-    models: ['x30', 'lynx-m20s'],
-    why: ['X30: IP67, −20 °C bis 55 °C, 20 kg Nutzlast, SDK für C++ / Python laut Datenblatt. Lynx M20 S: IP67, bis 35 kg Nutzlast, Gigabit-Ethernet, USB und GMSL.', 'X30: IP67, −20 °C to 55 °C, 20 kg payload, SDK for C++ / Python per datasheet. Lynx M20 S: IP67, up to 35 kg payload, Gigabit Ethernet, USB and GMSL.', 'X30：IP67，−20 °C 至 55 °C，20 kg 负载，数据表列明 C++ / Python SDK。Lynx M20 S：IP67，负载最高 35 kg，千兆以太网、USB 与 GMSL。'],
+    t: ['Feldrobotik und extreme Umgebungen', 'Field robotics and extreme environments', '野外与极端环境机器人'],
+    q: ['Autonomie außerhalb des Labors: Wetter, Gelände, lange Einsätze, eigene Sensorik.', 'Autonomy outside the lab: weather, terrain, long missions, your own sensors.', '走出实验室的自主系统：天气、地形、长时间作业、自有传感器。'],
+    models: ['x30', 'x50', 'lynx-m20s'],
+    why: ['X30: IP67, −20 °C bis 55 °C, 20 kg Nutzlast, SDK für C++ / Python laut Datenblatt. X50: 50 kg Dauerlast für schwere Messtechnik. Lynx M20 S: IP67, bis 35 kg Nutzlast, Gigabit-Ethernet, USB und GMSL.', 'X30: IP67, −20 °C to 55 °C, 20 kg payload, SDK for C++ / Python per datasheet. X50: 50 kg continuous payload for heavy instruments. Lynx M20 S: IP67, up to 35 kg payload, Gigabit Ethernet, USB and GMSL.', 'X30：IP67，−20 °C 至 55 °C，20 kg 负载，数据表列明 C++ / Python SDK。X50：持续负载 50 kg，可搭载较重的测量设备。Lynx M20 S：IP67，负载最高 35 kg，千兆以太网、USB 与 GMSL。'],
     opt: ['Nutzlast-Halterung und Stromversorgung für eigene Messtechnik klären wir mit Ihnen vor dem Angebot.', 'We clarify payload mounting and power for your own instruments with you before quoting.', '自有测量设备的安装与供电方案，我们会在报价前与您确认。'] },
   { id: 'lehre', ic: 'museum',
     t: ['Lehre und Praktikum', 'Teaching and lab courses', '教学与实训'],
@@ -1778,7 +1794,7 @@ function buildResearch() {
 </article>`;
   }).join('');
 
-  const devProds = ['lite3', 'x30', 'lynx-m20-pro', 'lynx-m20s'].map(prodOf).filter((p) => p && p.dev);
+  const devProds = ['lite3', 'x30', 'x50', 'lynx-m20-pro', 'lynx-m20s'].map(prodOf).filter((p) => p && p.dev);
   const devTables = devProds.map((p) => `
   <div class="rs-dev">
     <h3><a href="${r}produkte/${p.slug}.html#entwicklung">${pTitle(p)}</a></h3>

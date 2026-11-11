@@ -3787,3 +3787,5 @@ html[lang='zh'] .home .kicker { font-size: 1rem; letter-spacing: .12em; }
 .hero--v27 .hero__inner { max-width: 900px; }
 .hero--v27 h1.t-hero { font-size: clamp(2.3rem, 1.2rem + 3.2vw, 4.1rem); line-height: 1.04; }
 html[lang='zh'] .hero--v27 h1.t-hero { font-size: clamp(2.1rem, 1.1rem + 2.9vw, 3.7rem); }
+/* v44 · sechs Forschungsrichtungen: 3 × 2 auf der Startseite */
+@media (min-width: 1001px) { .home-rs__list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
