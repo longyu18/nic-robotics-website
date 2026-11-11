@@ -45,11 +45,44 @@ const MENU_ICON = {
   ersatzteile: MI('<circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/><circle cx="12" cy="12" r="6.5"/>'),
   vorfuehrung: MI('<rect x="3" y="4" width="18" height="12" rx="2"/><path d="m10.3 7.6 4.2 2.4-4.2 2.4zM8 21l4-5 4 5"/>'),
   schulung:  MI('<path d="M4 13.5v-1.5a8 8 0 0 1 16 0v1.5"/><rect x="2.8" y="13" width="4" height="6" rx="1.5"/><rect x="17.2" y="13" width="4" height="6" rx="1.5"/><path d="M19.2 19c0 1.6-1.6 2.5-4.2 2.5h-1.5"/>'),
+  rs_bewegung:    MI('<path d="M2.5 13h3.5l2.5-7 4 13 3-9 1.5 3h4.5"/>'),
+  rs_wahrnehmung: MI('<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>'),
+  rs_manipulation: MI('<path d="M4 21v-3h7v3M7.5 18V11l6-5.5 4 3"/><circle cx="7.5" cy="11" r="1.6"/><circle cx="13.5" cy="5.5" r="1.6"/><path d="M17.5 8.5 20 7M17.5 8.5l1.5 2.6M20 7l1.5 1M19 11.1l1.7.4"/>'),
+  rs_interaktion: MI('<circle cx="7" cy="7.5" r="2.6"/><path d="M2.5 19c.4-3.4 2.2-5.3 4.5-5.3 1 0 1.9.3 2.7 1"/><rect x="13" y="5" width="8" height="6.5" rx="1.6"/><path d="M15.6 8.2h.01M18.4 8.2h.01M17 5V3M13.5 19v-2.2c0-1.5 1.2-2.6 2.6-2.6h1.8c1.400 0 2.600 1.100 2.600 2.600V19"/>'),
+  rs_feld:        MI('<path d="m2.500 19.500 6.500-11 4 6.500 2.500-3.500 6 8z"/><circle cx="17.500" cy="6" r="2"/>'),
   ueber:     MI('<circle cx="12" cy="8" r="3.5"/><path d="M4.5 21c.6-4.2 3.6-6.8 7.5-6.8s6.9 2.6 7.5 6.8"/>'),
   kontakt:   MI('<rect x="2.8" y="5" width="18.4" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/>'),
   ressourcen: MI('<path d="M6 2.8h8.5L19 7.3v13.9H6z"/><path d="M14 2.8v5h5M9 12.5h7M9 16h7"/>'),
   rma:       MI('<path d="M3.5 8.5 12 4l8.5 4.5v7L12 20l-8.5-4.5z"/><path d="M3.5 8.5 12 13l8.5-4.5M12 13v7"/><path d="M8.5 2.8 6 5.3l2.5 2.5"/>')
 };
+/* v45 · Forschung & Lehre: sechs Richtungen — Quelle für Menü, Startseite und Forschungsseite */
+const RS_MENU = [
+  { id: 'bewegung', ic: 'rs_bewegung',
+    t: ['Bewegungsregelung und Lernen', 'Motion control and learning', '运动控制与学习'],
+    q: ['Eigene Regler, Reinforcement Learning, Sim-to-Real.', 'Your own controllers, reinforcement learning, sim-to-real.', '自研控制器、强化学习、仿真到实机迁移。'],
+    s: ['Regler, Reinforcement Learning, Sim-to-Real', 'Controllers, reinforcement learning, sim-to-real', '控制器、强化学习、仿真到实机'] },
+  { id: 'wahrnehmung', ic: 'rs_wahrnehmung',
+    t: ['Wahrnehmung und Navigation', 'Perception and navigation', '感知与导航'],
+    q: ['SLAM, Hindernisvermeidung, Kartierung, Multisensor-Fusion.', 'SLAM, obstacle avoidance, mapping, multi-sensor fusion.', 'SLAM、避障、建图、多传感器融合。'],
+    s: ['SLAM, Kartierung, Sensorfusion', 'SLAM, mapping, sensor fusion', 'SLAM、建图、多传感器融合'] },
+  { id: 'manipulation', ic: 'rs_manipulation',
+    t: ['Mobile Manipulation und Embodied AI', 'Mobile manipulation and embodied AI', '移动操作与具身智能'],
+    q: ['Laufen und Greifen kombinieren, Ganzkörperregelung, Humanoide, lernende Modelle auf echter Hardware.', 'Combining walking and grasping, whole-body control, humanoids, learned models on real hardware.', '行走与抓取结合、全身控制、人形机器人、大模型上实机。'],
+    s: ['Laufen und Greifen, Humanoide', 'Walking and grasping, humanoids', '行走与抓取、人形机器人'] },
+  { id: 'interaktion', ic: 'rs_interaktion',
+    t: ['Mensch-Roboter-Interaktion und Mehrrobotersysteme', 'Human-robot interaction and multi-robot systems', '人机交互与多机协同'],
+    q: ['Bedienkonzepte, Sprach- und Gestensteuerung, Akzeptanzstudien, Schwarm- und Teamverhalten.', 'Operating concepts, voice and gesture control, acceptance studies, swarm and team behaviour.', '操控方式、语音与手势控制、接受度研究、集群与编队行为。'],
+    s: ['Sprache, Gesten, Schwarmverhalten', 'Voice, gestures, swarm behaviour', '语音、手势、集群编队'] },
+  { id: 'feld', ic: 'rs_feld',
+    t: ['Feldrobotik und extreme Umgebungen', 'Field robotics and extreme environments', '野外与极端环境机器人'],
+    q: ['Autonomie außerhalb des Labors: Wetter, Gelände, lange Einsätze, eigene Sensorik.', 'Autonomy outside the lab: weather, terrain, long missions, your own sensors.', '走出实验室的自主系统：天气、地形、长时间作业、自有传感器。'],
+    s: ['Autonomie außerhalb des Labors', 'Autonomy outside the lab', '走出实验室的自主系统'] },
+  { id: 'lehre', ic: 'forschung',
+    t: ['Lehre und Praktikum', 'Teaching and lab courses', '教学与实训'],
+    q: ['Mehrere Geräte für Lehrveranstaltungen, Abschlussarbeiten und Wettbewerbe.', 'Several units for courses, theses and competitions.', '用于课程、毕业设计与竞赛的多台设备。'],
+    s: ['Kurse, Abschlussarbeiten, Wettbewerbe', 'Courses, theses, competitions', '课程、毕业设计、竞赛'] }
+];
+
 const SVC_KEY = (href) => href.includes('garantie') ? 'garantie' : href.includes('servicezentrum') ? 'servicezentrum'
   : href.includes('ersatzteile') ? 'ersatzteile' : href.includes('vorfuehrung') ? 'vorfuehrung'
   : href.includes('schulung') ? 'schulung' : href.includes('ueber-uns') ? 'ueber' : href.includes('kontakt') ? 'kontakt' : 'rma';
@@ -268,19 +301,29 @@ function header(categories, products, depth = 0) {
             </div>
           </div>
         </li>
-        <li><a class="nav-link" href="${r}forschung/index.html">${swx('Forschung & Lehre', 'Research & Teaching', '科研与教学')}</a></li>
         <li>
           <button class="nav-link" aria-expanded="false" aria-haspopup="true">
             ${swx('Anwendungen', 'Applications', '行业应用')} ${ICON.caret}
           </button>
           <div class="mega mega--wide">
-            <ul class="mi-grid mi-grid--4">${useItems}
-<li><a class="mi-item" href="${r}forschung/index.html">
-  <span class="mi-ic">${MENU_ICON.forschung}</span>
-  <span class="mi-txt"><strong>${swx('Forschung & Lehre', 'Research & Teaching', '科研与教学')}</strong><span>${swx('Eigene Seite mit Plattformen und Unterlagen', 'Own page with platforms and documents', '独立页面：平台与技术资料')}</span></span>
-</a></li></ul>
+            <ul class="mi-grid mi-grid--4">${useItems}</ul>
             <div class="pm-foot">
               <a class="pm-all" href="${r}einsatzbereiche/index.html">${sw('Alle Einsatzbereiche', 'All applications')} ${ICON.arrow}</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <button class="nav-link" aria-expanded="false" aria-haspopup="true">
+            ${swx('Forschung & Lehre', 'Research & Teaching', '科研与教学')} ${ICON.caret}
+          </button>
+          <div class="mega mega--wide">
+            <ul class="mi-grid mi-grid--3">${RS_MENU.map((n) => `
+<li><a class="mi-item" href="${r}forschung/index.html#${n.id}">
+  <span class="mi-ic">${MENU_ICON[n.ic] || ''}</span>
+  <span class="mi-txt"><strong>${swx(...n.t)}</strong><span>${swx(...n.s)}</span></span>
+</a></li>`).join('')}</ul>
+            <div class="pm-foot">
+              <a class="pm-all" href="${r}forschung/index.html">${swx('Forschung & Lehre im Überblick', 'Research & Teaching overview', '科研与教学总览')} ${ICON.arrow}</a>
             </div>
           </div>
         </li>
@@ -545,4 +588,4 @@ function quickView() {
 </div>`;
 }
 
-module.exports = { MENU_ICON, SERVICE_ITEMS, SITE, LANGS, esc, t, attr, sw, swx, ph, setUseCases, money, ICON, head, header, footer, scripts, offerModal, quickView, reportMissingZh };
+module.exports = { RS_MENU, MENU_ICON, SERVICE_ITEMS, SITE, LANGS, esc, t, attr, sw, swx, ph, setUseCases, money, ICON, head, header, footer, scripts, offerModal, quickView, reportMissingZh };

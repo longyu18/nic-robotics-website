@@ -1732,43 +1732,33 @@ ${scripts(1)}`;
 
 /* ======================================================== v42 · FORSCHUNG == */
 const RS_NEEDS = [
-  { id: 'bewegung', ic: 'forschung',
-    t: ['Bewegungsregelung und Lernen', 'Motion control and learning', '运动控制与学习'],
-    q: ['Eigene Regler, Reinforcement Learning, Sim-to-Real.', 'Your own controllers, reinforcement learning, sim-to-real.', '自研控制器、强化学习、仿真到实机迁移。'],
+  { id: 'bewegung',
     models: ['lite3'],
     why: ['Leicht (ab 12 kg) und damit im Labor gut handhabbar; URDF- und Simulationsmodell laut Datenblatt; Low-Level-Regelung bis 1 kHz.', 'Light (from 12 kg) and easy to handle in the lab; URDF and simulation model per datasheet; low-level control up to 1 kHz.', '整机 12 kg 起，实验室内易于搬运；数据表列明 URDF 与仿真模型；底层控制最高 1 kHz。'],
     opt: ['VENTURE oder PRO, wenn ein eigener Rechner per Ethernet angebunden wird. Zugriff auf Gelenkebene und nutzbare Regelfrequenz: vom Hersteller zu bestätigen.', 'VENTURE or PRO if you connect your own computer over Ethernet. Joint-level access and usable control rate: to be confirmed by the manufacturer.', '如需通过以太网连接自有计算机，建议 VENTURE 或 PRO。关节级访问与可用控制频率：待厂家确认。'] },
-  { id: 'wahrnehmung', ic: 'sicherheit',
-    t: ['Wahrnehmung und Navigation', 'Perception and navigation', '感知与导航'],
-    q: ['SLAM, Hindernisvermeidung, Kartierung, Multisensor-Fusion.', 'SLAM, obstacle avoidance, mapping, multi-sensor fusion.', 'SLAM、避障、建图、多传感器融合。'],
+  { id: 'wahrnehmung',
     models: ['lite3', 'lynx-m20-pro'],
     why: ['Lite3 LIDAR mit autonomer Navigation, PRO mit aktiver Hindernisvermeidung nach vorn; Lynx M20 Pro mit dreifachem Industrierechner, Gigabit-Ethernet und USB 3.0.', 'Lite3 LIDAR with autonomous navigation, PRO with forward active obstacle avoidance; Lynx M20 Pro with three industrial computers, Gigabit Ethernet and USB 3.0.', 'Lite3 LIDAR 版具备自主导航，PRO 版具备前向主动避障；Lynx M20 Pro 配备三台工业计算单元、千兆以太网与 USB 3.0。'],
     opt: ['Lite3 LIDAR oder PRO; beim M20 Pro eigene Sensoren über die Datenschnittstellen. SDK- und ROS-Umfang für M20: vom Hersteller zu bestätigen.', 'Lite3 LIDAR or PRO; on the M20 Pro, own sensors via the data interfaces. SDK and ROS scope for M20: to be confirmed by the manufacturer.', 'Lite3 选 LIDAR 或 PRO 版；M20 Pro 可通过数据接口接入自有传感器。M20 的 SDK 与 ROS 支持范围：待厂家确认。'] },
-  { id: 'manipulation', ic: 'servicezentrum',
-    t: ['Mobile Manipulation und Embodied AI', 'Mobile manipulation and embodied AI', '移动操作与具身智能'],
-    q: ['Laufen und Greifen kombinieren, Ganzkörperregelung, Humanoide, lernende Modelle auf echter Hardware.', 'Combining walking and grasping, whole-body control, humanoids, learned models on real hardware.', '行走与抓取结合、全身控制、人形机器人、大模型上实机。'],
+  { id: 'manipulation',
     models: ['x30', 'x50', 'dr02', 'q1'],
     why: ['X30 und X50 tragen 20 bzw. 50 kg dauerhaft und bieten damit Reserve für einen Arm samt Rechner. DR02: Humanoid mit 275 TOPS Rechenleistung (optional 2.070 TOPS). Q1: kleiner Humanoid mit 22 Freiheitsgraden und SDK/HDK in der Explorer-Version.', 'X30 and X50 carry 20 and 50 kg continuously, leaving reserve for an arm plus computer. DR02: humanoid with 275 TOPS computing (2,070 TOPS optional). Q1: small humanoid with 22 degrees of freedom and SDK/HDK in the Explorer edition.', 'X30 与 X50 可持续负载 20 kg 和 50 kg，为加装机械臂与计算单元留有余量。DR02：人形机器人，标配 275 TOPS 算力（可选 2070 TOPS）。Q1：22 自由度小型人形，探索版提供 SDK/HDK。'],
     opt: ['Arm, Greifer und deren mechanische und elektrische Anbindung sind nicht Teil des Datenblatts — Montagepunkte, Stromversorgung und Schnittstellen: vom Hersteller zu bestätigen.', 'Arm, gripper and their mechanical and electrical integration are not part of the datasheet — mounting points, power supply and interfaces: to be confirmed by the manufacturer.', '机械臂、夹爪及其机械与电气接入不在数据表范围内——安装位、供电与接口：待厂家确认。'] },
-  { id: 'interaktion', ic: 'ueber',
-    t: ['Mensch-Roboter-Interaktion und Mehrrobotersysteme', 'Human-robot interaction and multi-robot systems', '人机交互与多机协同'],
-    q: ['Bedienkonzepte, Sprach- und Gestensteuerung, Akzeptanzstudien, Schwarm- und Teamverhalten.', 'Operating concepts, voice and gesture control, acceptance studies, swarm and team behaviour.', '操控方式、语音与手势控制、接受度研究、集群与编队行为。'],
+  { id: 'interaktion',
     models: ['lite3', 'q1'],
     why: ['Lite3: Sprachsteuerung, visuelles Folgen und Formationen mit mehreren Geräten laut Datenblatt — klein genug für Studien mit Probanden. Q1: Sprache, Bild, Berührung und Gesichtserkennung in einem 88 cm großen Humanoiden.', 'Lite3: voice control, visual following and multi-unit formations per datasheet — small enough for studies with participants. Q1: voice, vision, touch and face recognition in an 88 cm humanoid.', 'Lite3：数据表列明语音控制、视觉跟随与多机编队，体型小，适合有受试者参与的研究。Q1：88 cm 人形，集语音、视觉、触摸与人脸识别于一身。'],
     opt: ['Für Mehrroboter-Versuche mehrere Lite3 derselben Version. Zugriff auf Rohdaten von Kamera und Mikrofon sowie Datenschutz-Einstellungen: vom Hersteller zu bestätigen.', 'For multi-robot experiments, several Lite3 of the same version. Access to raw camera and microphone data and privacy settings: to be confirmed by the manufacturer.', '多机实验建议选用同一版本的多台 Lite3。摄像头与麦克风原始数据的访问方式及隐私设置：待厂家确认。'] },
-  { id: 'feld', ic: 'energie',
-    t: ['Feldrobotik und extreme Umgebungen', 'Field robotics and extreme environments', '野外与极端环境机器人'],
-    q: ['Autonomie außerhalb des Labors: Wetter, Gelände, lange Einsätze, eigene Sensorik.', 'Autonomy outside the lab: weather, terrain, long missions, your own sensors.', '走出实验室的自主系统：天气、地形、长时间作业、自有传感器。'],
+  { id: 'feld',
     models: ['x30', 'x50', 'lynx-m20s'],
     why: ['X30: IP67, −20 °C bis 55 °C, 20 kg Nutzlast, SDK für C++ / Python laut Datenblatt. X50: 50 kg Dauerlast für schwere Messtechnik. Lynx M20 S: IP67, bis 35 kg Nutzlast, Gigabit-Ethernet, USB und GMSL.', 'X30: IP67, −20 °C to 55 °C, 20 kg payload, SDK for C++ / Python per datasheet. X50: 50 kg continuous payload for heavy instruments. Lynx M20 S: IP67, up to 35 kg payload, Gigabit Ethernet, USB and GMSL.', 'X30：IP67，−20 °C 至 55 °C，20 kg 负载，数据表列明 C++ / Python SDK。X50：持续负载 50 kg，可搭载较重的测量设备。Lynx M20 S：IP67，负载最高 35 kg，千兆以太网、USB 与 GMSL。'],
     opt: ['Nutzlast-Halterung und Stromversorgung für eigene Messtechnik klären wir mit Ihnen vor dem Angebot.', 'We clarify payload mounting and power for your own instruments with you before quoting.', '自有测量设备的安装与供电方案，我们会在报价前与您确认。'] },
-  { id: 'lehre', ic: 'museum',
-    t: ['Lehre und Praktikum', 'Teaching and lab courses', '教学与实训'],
-    q: ['Mehrere Geräte für Lehrveranstaltungen, Abschlussarbeiten und Wettbewerbe.', 'Several units for courses, theses and competitions.', '用于课程、毕业设计与竞赛的多台设备。'],
+  { id: 'lehre',
     models: ['lite3'],
     why: ['Robuste Plattform in vier Versionen; Sprachsteuerung, Bewegungsbibliothek und Mehrgeräte-Formationen laut Datenblatt; Ersatzteile und Reparatur über uns in Deutschland.', 'Robust platform in four versions; voice control, motion library and multi-unit formations per datasheet; spare parts and repair through us in Germany.', '四个版本的耐用平台；数据表列明语音控制、动作库与多机编队；备件与维修由我们在德国提供。'],
     opt: ['Staffelpreise ab zwei Einheiten. Lehrinhalte und Kurse bieten wir nicht an — wir liefern Hardware, Unterlagen und Service.', 'Tiered pricing from two units. We do not offer course content — we supply hardware, documents and service.', '两台起可享阶梯价格。我们不提供课程内容——我们提供硬件、技术资料与服务。'] }
 ];
+/* Titel, Kurztext und Symbol stehen in partials.js (RS_MENU) — eine Quelle für Menü und Seite */
+RS_NEEDS.forEach((n) => Object.assign(n, P.RS_MENU.find((m) => m.id === n.id)));
 
 function buildResearch() {
   const r = '../';
@@ -1778,7 +1768,7 @@ function buildResearch() {
     return `
 <article class="rs-need reveal" id="${n.id}">
   <div class="rs-need__head">
-    <span class="mi-ic">${P.MENU_ICON ? P.MENU_ICON[n.ic] || '' : ''}</span>
+    <span class="mi-ic">${P.MENU_ICON[n.ic] || ''}</span>
     <div><p class="kicker">${String(i + 1).padStart(2, '0')}</p><h2>${swx(...n.t)}</h2><p class="t-dim">${swx(...n.q)}</p></div>
   </div>
   <div class="rs-need__models">${ms.map((p) => `
