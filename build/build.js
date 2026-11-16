@@ -274,8 +274,8 @@ ${header(CATS, PRODUCTS, 0)}
     <div class="hero__media">
       <video data-hero-video autoplay muted loop playsinline preload="auto"
              poster="assets/img/scenes/hero-poster.jpg" aria-hidden="true">
-        <source src="assets/video/hero-v47-720.mp4" type="video/mp4" media="(max-width: 900px)">
-        <source src="assets/video/hero-v47-1080.mp4" type="video/mp4">
+        <source src="assets/video/hero-v48-m.mp4" type="video/mp4" media="(max-width: 900px)">
+        <source src="assets/video/hero-v48-1080.mp4" type="video/mp4">
       </video>
     </div>
     <div class="wrap">
@@ -314,14 +314,13 @@ ${header(CATS, PRODUCTS, 0)}
   <section class="section section--tight" id="film">
     <div class="wrap">
       <div class="section-head reveal">
-        <h2>${swx('68 Sekunden — so läuft er.', '68 seconds — see how it moves.', '68 秒，看它怎么走。')}</h2>
+        <h2>${swx('Wasser, Wald, Steilhang. Ein Roboter.', 'Water, forest, steep slopes. One robot.', '涉水、穿林、爬坡，一台搞定。')}</h2>
       </div>
       <figure class="film reveal">
         <div class="film__stage"><div class="film__frame">
           <video class="film__video" data-film playsinline preload="none"
                  controlslist="nodownload noplaybackrate" disablepictureinpicture
                  poster="assets/img/scenes/film-poster.jpg">
-            <source src="assets/video/film-720.mp4" type="video/mp4" media="(max-width: 900px)">
             <source src="assets/video/film-1080.mp4" type="video/mp4">
           </video>
           <button class="film__play" type="button" data-film-play aria-label="Film abspielen">
