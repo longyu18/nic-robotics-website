@@ -274,8 +274,8 @@ ${header(CATS, PRODUCTS, 0)}
     <div class="hero__media">
       <video data-hero-video autoplay muted loop playsinline preload="auto"
              poster="assets/img/scenes/hero-poster.jpg" aria-hidden="true">
-        <source src="assets/video/hero-loop-720.mp4" type="video/mp4" media="(max-width: 900px)">
-        <source src="assets/video/hero-loop-1080.mp4" type="video/mp4">
+        <source src="assets/video/hero-v47-720.mp4" type="video/mp4" media="(max-width: 900px)">
+        <source src="assets/video/hero-v47-1080.mp4" type="video/mp4">
       </video>
     </div>
     <div class="wrap">
@@ -299,18 +299,6 @@ ${header(CATS, PRODUCTS, 0)}
     </div>
   </section>
 
-  <!-- ================= EXPLORE OUR ROBOTS (hell) ================= -->
-  <section class="section sec-light" id="kategorien">
-    <div class="wrap">
-      <div class="section-head section-head--center reveal">
-        <p class="kicker">${swx('Produkte', 'Products', '产品')}</p>
-        <h2>${swx('Unsere Roboter entdecken', 'Explore Our Robots', '探索我们的机器人')}</h2>
-        <p class="t-lead">${swx('Finden Sie die passende Plattform für Ihre Anwendung.', 'Find the right platform for your application.', '为您的应用找到合适的平台。')}</p>
-      </div>
-      <div class="hcat-grid">${catCards}</div>
-    </div>
-  </section>
-
   <!-- ================= v42 · FORSCHUNGSRICHTUNGEN ================= -->
   <section class="section section--tight home-rs">
     <div class="wrap">
@@ -326,7 +314,6 @@ ${header(CATS, PRODUCTS, 0)}
   <section class="section section--tight" id="film">
     <div class="wrap">
       <div class="section-head reveal">
-        <p class="kicker">${swx('Film', 'Film', '影片')}</p>
         <h2>${swx('68 Sekunden — so läuft er.', '68 seconds — see how it moves.', '68 秒，看它怎么走。')}</h2>
       </div>
       <figure class="film reveal">
@@ -348,8 +335,20 @@ ${header(CATS, PRODUCTS, 0)}
     </div>
   </section>
 
+  <!-- ================= EXPLORE OUR ROBOTS (hell) ================= -->
+  <section class="section sec-light" id="kategorien">
+    <div class="wrap">
+      <div class="section-head section-head--center reveal">
+        <p class="kicker">${swx('Produkte', 'Products', '产品')}</p>
+        <h2>${swx('Unsere Roboter entdecken', 'Explore Our Robots', '探索我们的机器人')}</h2>
+        <p class="t-lead">${swx('Finden Sie die passende Plattform für Ihre Anwendung.', 'Find the right platform for your application.', '为您的应用找到合适的平台。')}</p>
+      </div>
+      <div class="hcat-grid">${catCards}</div>
+    </div>
+  </section>
+
   <!-- ================= FEATURED ROBOTS (hell) ================= -->
-  <section class="section section--tight sec-light sec-light--alt" id="produkte">
+  <section class="section section--tight sec-light home-feat" id="produkte">
     <div class="wrap">
       <div class="section-head section-head--split reveal">
         <div>
@@ -386,6 +385,17 @@ ${header(CATS, PRODUCTS, 0)}
         </div></div>
         <figcaption>${swx('Humanoid DR02 — IP66, für jedes Wetter. Jetzt anfragen.', 'DR02 humanoid — IP66, for any weather. Enquire now.', 'DR02 人形机器人——IP66 全天候作业，现已接受询价。')} <a class="link" href="produkte/humanoid-dr02.html">DR02 ${ICON.arrow}</a></figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- ================= v47 · LEITSATZ (wortweise) ================= -->
+  <section class="section tagline" aria-label="${attr({ de: 'Leitsatz', en: 'Tagline', zh: '理念' })}">
+    <div class="wrap">
+      <p class="tagline__text" data-words>
+        <span data-i18n-de>Roboter gehen ins Risiko.<br>Menschen bleiben in Sicherheit.</span>
+        <span data-i18n-en>Robots take the risk.<br>People stay safe.</span>
+        <span data-i18n-zh>危险交给机器人，<br>安全留给人。</span>
+      </p>
     </div>
   </section>
 
@@ -482,13 +492,14 @@ const CARD_BADGE = ['Neu', 'Flaggschiff'];
 
 function catalogCard(p) {
   const r = '../';
-  const img = p.gallery && p.gallery[0];
+  const img = p.cardImg || (p.gallery && p.gallery[0]);
   const c = CARD[p.id];
   const href = `${r}produkte/${p.slug}.html`;
   const title = p.title ? `${p.title.de} ${p.title.en} ${p.title.zh}` : p.name;
   const search = `${p.name} ${title} ${p.sku || ''} ${p.family.de} ${p.family.en} ${p.family.zh}`.toLowerCase();
   return `
-<article class="ccard${p.photo ? ' ccard--photo' : ''}" data-cat="${p.category}" data-kind="${p.kind || 'platform'}" data-id="${esc(p.id)}" data-uses="${(p.useCases || []).join(' ')}" data-search="${attr(search)}" data-order="${p.order || 99}" data-name="${attr(p.name)}">
+<article class="ccard${p.photo && !p.cardImg ? ' ccard--photo' : ''}${p.cardBlend ? ' ccard--blend' : ''}" data-cat="${p.category}" data-kind="${p.kind || 'platform'}" data-id="${esc(p.id)}" data-uses="${(p.useCases || []).join(' ')}" data-search="${attr(search)}" data-order="${p.order || 99}" data-name="${attr(p.name)}">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="${esc(p.id)}"> <span>${swx('Vergleichen', 'Compare', '比较')}</span></label>
   <a class="ccard__media" href="${href}" tabindex="-1" aria-hidden="true">
     ${p.badge && CARD_BADGE.includes(p.badge.de) ? `<span class="ccard__badge">${t(p.badge)}</span>` : ''}
     ${img ? `<picture>
@@ -502,12 +513,8 @@ function catalogCard(p) {
     <p class="ccard__desc">${c ? swx(...c[0]) : t(p.tagline)}</p>
     ${c ? `<p class="ccard__specs">${c[1].map((s) => `<span data-de="${esc(s[0])}" data-en="${esc(s[1])}" data-zh="${esc(s[2])}">${esc(s[0])}</span>`).join('')}</p>` : ''}
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="${href}">${swx('Details ansehen', 'View details', '查看详情')}</a>
-      <button class="ccard__inq" type="button" data-inq-add="${esc(p.id)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>${swx('Zur Anfrageliste', 'Add to inquiry list', '加入询价清单')}</button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price">${swx('Preis auf Anfrage', 'Price on request', '价格请询价')}</p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="${esc(p.id)}"> <span>${swx('Vergleichen', 'Compare', '加入比较')}</span></label>
+      <p class="ccard__price">${swx('Preis auf Anfrage', 'Price on request', '询价')}</p>
+      <button class="ccard__inq" type="button" data-inq-add="${esc(p.id)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>${swx('Anfrageliste', 'Inquiry list', '询价清单')}</button>
     </div>
   </div>
 </article>`;
@@ -1947,6 +1954,264 @@ ${scripts(1)}`;
   write('produkte/vergleich.html', html);
 }
 
+/* ============================================================ v48 · ROI == */
+/* Feld: [name, [de,en,zh], Einheit, Standardwert, [Hinweis de,en,zh] | null, Optionen]
+   opt: { adv: true } = unter „Weitere Annahmen“, { ex: true } = Beispielwert-Kennzeichen */
+const ROI_F = {
+  preis:   ['preis',   ['Anschaffungspreis je Roboter (netto)', 'Purchase price per robot (net)', '单台采购价（不含税）'], '€', '', ['Ihr Angebotspreis. Wir zeigen bewusst keinen Platzhalterpreis.', 'Your quoted price. We deliberately show no placeholder price.', '填入您的报价。我们不显示占位价格。'], { req: true }],
+  anzahl:  ['anzahl',  ['Anzahl Roboter', 'Number of robots', '机器人台数'], '', 1, null, { step: 1, min: 1 }],
+  einmal:  ['einmal',  ['Einmalige Kosten', 'One-off costs', '一次性费用'], '€', 0, ['Inbetriebnahme, Schulung, Ladestation, Zubehör', 'Commissioning, training, charging station, accessories', '部署调试、培训、充电桩、配件'], { adv: true }],
+  betrieb: ['betrieb', ['Betriebskosten pro Jahr', 'Operating costs per year', '每年运行成本'], '€', 0, ['Wartung, Strom, Akkutausch, Software, Versicherung', 'Maintenance, power, battery replacement, software, insurance', '维护、电费、电池更换、软件、保险'], { adv: true }],
+  jahre:   ['jahre',   ['Nutzungsdauer', 'Service life', '使用年限'], ['Jahre', 'years', '年'], 5, null, { adv: true, step: 1, min: 1 }],
+  faktor:  ['faktor',  ['Arbeitgeber-Zuschlag', 'Employer on-costs', '雇主附加成本'], '%', 25, ['Sozialabgaben, Urlaub, Krankheit. Beispielannahme. Bei Fremdvergabe: Verrechnungssatz oben eintragen und hier 0 setzen.', 'Social contributions, holiday, sickness. Example assumption. If outsourced: enter the billing rate above and set this to 0.', '社保、带薪假、病假。示例假设。若为外包：上面填服务商计费单价，这里填 0。'], { adv: true, ex: true }]
+};
+const F = (k, over = {}) => { const f = ROI_F[k].slice(); if (over.def !== undefined) f[3] = over.def; if (over.hint) f[4] = over.hint; f[5] = Object.assign({}, f[5] || {}, over.opt || {}); return f; };
+
+const ROI_CALCS = [
+  { id: 'streife', ic: 'sicherheit', kind: 'labor',
+    t: ['Inspektion & Sicherheit', 'Inspection & security', '巡检与安保'],
+    q: ['Streifen- und Inspektionsgänge, die ein Roboter übernimmt.', 'Patrol and inspection rounds a robot takes over.', '由机器人承担的巡逻与巡检。'],
+    prods: ['patrol-m20', 'x30', 'lynx-m20-pro'],
+    groups: [
+      [['Investition', 'Investment', '投入'], [F('preis'), F('anzahl')]],
+      [['Betrieb', 'Operation', '运行'], [
+        ['std', ['Betriebsstunden pro Tag', 'Operating hours per day', '每天运行小时'], 'h', 8, ['Reine Einsatzzeit ohne Laden. Laufzeit je Akkuladung siehe Datenblatt.', 'Pure operating time without charging. Runtime per charge: see datasheet.', '不含充电的实际作业时间。单次续航见数据表。'], { max: 24 }],
+        ['tage', ['Betriebstage pro Jahr', 'Operating days per year', '每年运行天数'], '', 365, null, { step: 1, max: 366 }]
+      ]],
+      [['Personal heute', 'Staff today', '现有人工'], [
+        ['lohn', ['Stundenlohn (brutto) oder Verrechnungssatz', 'Hourly wage (gross) or billing rate', '时薪（税前）或外包单价'], '€/h', 15.15, ['Beispiel: Tarif Sicherheitsdienst Sachsen ab 02/2026. Bitte Ihren Wert eintragen.', 'Example: security services tariff, Saxony, from 02/2026. Please enter your value.', '示例：萨克森州安保行业集体工资，2026 年 2 月起。请填入您的数值。'], { ex: true }],
+        ['zuschlag', ['Ø Zuschlag Nacht / Wochenende', 'Avg. night / weekend premium', '夜班/周末平均补贴'], '%', 0, ['Gemittelt über alle Betriebsstunden', 'Averaged over all operating hours', '按全部运行小时平均'], {}]
+      ]],
+      [['Weitere Annahmen', 'More assumptions', '更多假设'], [
+        ['abdeckung', ['Aufgabenabdeckung', 'Task coverage', '任务覆盖率'], '%', 70, ['Anteil der Tätigkeit, den der Roboter übernimmt. Beispielannahme.', 'Share of the job the robot takes over. Example assumption.', '机器人能承担的工作比例。示例假设。'], { adv: true, ex: true, max: 100 }],
+        ['aufsicht', ['Betreuung durch Personal', 'Supervision by staff', '人工看护'], ['h/Tag', 'h/day', '小时/天'], 1, ['Leitstand, Akkuwechsel, Störungen', 'Control room, battery swap, faults', '监控、换电、处理异常'], { adv: true, ex: true }],
+        F('faktor'), F('einmal'), F('betrieb'), F('jahre')
+      ]]
+    ] },
+  { id: 'reinigung', ic: 'garantie', kind: 'clean',
+    t: ['Gewerbliche Reinigung', 'Commercial cleaning', '商业清洁'],
+    q: ['Bodenreinigung großer Flächen mit C4 oder C5.', 'Floor cleaning of large areas with C4 or C5.', '用 C4 或 C5 清洁大面积地面。'],
+    prods: ['c4', 'c5'],
+    groups: [
+      [['Investition', 'Investment', '投入'], [F('preis'), F('anzahl')]],
+      [['Fläche', 'Area', '面积'], [
+        ['flaeche', ['Bodenfläche je Reinigung', 'Floor area per cleaning', '每次清洁面积'], 'm²', 3000, null, { step: 50 }],
+        ['freq', ['Reinigungen pro Monat', 'Cleanings per month', '每月清洁次数'], '', 22, null, { step: 1 }]
+      ]],
+      [['Personal heute', 'Staff today', '现有人工'], [
+        ['leistMensch', ['Ihr Leistungswert heute', 'Your current performance rate', '目前的人工效率定额'], 'm²/h', 250, ['Manuell oder mit handgeführter Maschine. Beispielwert, bitte Ihren Kalkulationswert eintragen.', 'Manual or with a walk-behind machine. Example value, please enter your own rate.', '纯人工或手推洗地机。示例值，请填入您自己的定额。'], { ex: true }],
+        ['lohn', ['Stundenlohn (brutto) oder Verrechnungssatz', 'Hourly wage (gross) or billing rate', '时薪（税前）或外包单价'], '€/h', 15, ['Branchenmindestlohn Gebäudereinigung, Lohngruppe 1, seit 01.01.2026', 'Sector minimum wage, building cleaning, wage group 1, since 01.01.2026', '德国清洁行业最低工资（工资组 1），2026 年 1 月 1 日起'], {}]
+      ]],
+      [['Weitere Annahmen', 'More assumptions', '更多假设'], [
+        ['leistRobot', ['Flächenleistung Roboter (Praxis)', 'Robot area rate (in practice)', '机器人实际清洁效率'], 'm²/h', 350, ['Praxis-Richtwert 200–800 m²/h laut Branchen-Fallstudie; Herstellerangabe theoretisch bis 1.400 (C4) bzw. 1.980 m²/h (C5).', 'Practical guide value 200–800 m²/h per industry case study; manufacturer figure theoretically up to 1,400 (C4) or 1,980 m²/h (C5).', '行业实测参考 200–800 m²/h；厂家理论值最高 1,400（C4）/ 1,980 m²/h（C5）。'], { adv: true }],
+        ['rest', ['Manuelle Restfläche', 'Manual remainder', '仍需人工的面积'], '%', 10, ['Ränder, Ecken, verstellte Bereiche. Laut Fallstudie mindestens 10 %.', 'Edges, corners, obstructed areas. At least 10 % per case study.', '边角与被遮挡区域。案例研究建议至少 10%。'], { adv: true, max: 100 }],
+        ['ruest', ['Betreuung je Einsatz', 'Attendance per run', '每次看护时间'], ['min', 'min', '分钟'], 15, ['Wasser, Schmutztank, Start', 'Water, waste tank, start', '加水、倒污水、启动'], { adv: true, ex: true }],
+        F('faktor'), F('einmal'), F('betrieb'), F('jahre')
+      ]]
+    ] },
+  { id: 'humanoid', ic: 'industrie', kind: 'labor',
+    t: ['Humanoide in der Fertigung', 'Humanoids in production', '工厂人形机器人'],
+    q: ['Szenariorechnung: einfache, wiederkehrende Tätigkeiten.', 'Scenario calculation: simple, repetitive tasks.', '情景测算：简单重复性工作。'],
+    prods: ['dr02'],
+    groups: [
+      [['Investition', 'Investment', '投入'], [F('preis'), F('anzahl')]],
+      [['Betrieb', 'Operation', '运行'], [
+        ['std', ['Betriebsstunden pro Tag', 'Operating hours per day', '每天运行小时'], 'h', 8, ['Reine Einsatzzeit ohne Laden', 'Pure operating time without charging', '不含充电的实际作业时间'], { max: 24 }],
+        ['tage', ['Betriebstage pro Jahr', 'Operating days per year', '每年运行天数'], '', 250, null, { step: 1, max: 366 }]
+      ]],
+      [['Personal heute', 'Staff today', '现有人工'], [
+        ['lohn', ['Stundenlohn (brutto)', 'Hourly wage (gross)', '时薪（税前）'], '€/h', 13.9, ['Untergrenze: gesetzlicher Mindestlohn seit 01.01.2026. Bitte Ihren Lohn eintragen.', 'Lower bound: statutory minimum wage since 01.01.2026. Please enter your wage.', '下限：德国法定最低工资（2026 年 1 月 1 日起）。请填入实际工资。'], {}],
+        ['zuschlag', ['Ø Schichtzuschlag', 'Avg. shift premium', '平均轮班补贴'], '%', 0, null, {}]
+      ]],
+      [['Weitere Annahmen', 'More assumptions', '更多假设'], [
+        ['abdeckung', ['Aufgabenabdeckung', 'Task coverage', '任务覆盖率'], '%', 50, ['Anteil der Tätigkeit, den der Roboter übernimmt. Beispielannahme.', 'Share of the job the robot takes over. Example assumption.', '机器人能承担的工作比例。示例假设。'], { adv: true, ex: true, max: 100 }],
+        ['tempo', ['Tempo im Vergleich zum Menschen', 'Speed compared with a person', '相对人工的速度'], '%', 60, ['Beispielannahme', 'Example assumption', '示例假设'], { adv: true, ex: true }],
+        ['aufsicht', ['Betreuung durch Personal', 'Supervision by staff', '人工看护'], ['h/Tag', 'h/day', '小时/天'], 1, null, { adv: true, ex: true }],
+        F('faktor'), F('einmal'), F('betrieb'), F('jahre')
+      ]]
+    ] },
+  { id: 'feuerwehr', ic: 'feuerwehr', kind: 'fire',
+    t: ['Feuerwehr & Gefahrenabwehr', 'Fire & hazard response', '消防与应急'],
+    q: ['Weniger Menschen im Gefahrenbereich.', 'Fewer people in the danger zone.', '让更少的人进入危险区。'],
+    prods: ['fire-cannon', 'fire-recon', 'x50'],
+    groups: [
+      [['Investition', 'Investment', '投入'], [F('preis'), F('anzahl')]],
+      [['Einsätze', 'Operations', '出动情况'], [
+        ['einsaetze', ['Einsätze im Gefahrenbereich pro Jahr', 'Operations in the danger zone per year', '每年进入危险区的出动次数'], '', 20, ['Beispielwert', 'Example value', '示例值'], { ex: true, step: 1 }],
+        ['personen', ['Einsatzkräfte im Gefahrenbereich je Einsatz', 'Responders in the danger zone per operation', '每次进入危险区的人数'], '', 2, ['Beispielwert', 'Example value', '示例值'], { ex: true, step: 1 }],
+        ['minuten', ['Aufenthalt je Einsatz', 'Time inside per operation', '每次停留时间'], ['min', 'min', '分钟'], 30, ['Beispielwert', 'Example value', '示例值'], { ex: true }],
+        ['anteil', ['Davon übernimmt der Roboter', 'Share the robot takes over', '其中由机器人承担'], '%', 50, ['Erkundung, Kühlung, Löschangriff aus der Distanz. Beispielannahme.', 'Reconnaissance, cooling, remote fire attack. Example assumption.', '侦察、冷却、远程灭火。示例假设。'], { ex: true, max: 100 }]
+      ]],
+      [['Vermeidbare Kosten (optional, Ihre Werte)', 'Avoidable costs (optional, your values)', '可避免的损失（选填，请用您自己的数据）'], [
+        ['verl', ['Verletzungen je 100 Einsätze', 'Injuries per 100 operations', '每 100 次出动的受伤人次'], '', '', ['Aus Ihrer eigenen Unfallstatistik. Wir geben hier bewusst keinen Wert vor.', 'From your own accident statistics. We deliberately give no default here.', '来自贵单位的事故统计。此处我们不提供默认值。'], { adv: true }],
+        ['ausfall', ['Ausfalltage je Verletzung', 'Days lost per injury', '每次受伤离岗天数'], '', '', null, { adv: true }],
+        ['tagkosten', ['Kosten je Ausfalltag', 'Cost per day lost', '每个离岗日的成本'], '€', '', ['Lohnfortzahlung und Vertretung', 'Continued pay and cover', '工资续付与顶班'], { adv: true }],
+        ['dauer', ['Anteil dauerhaft dienstunfähig', 'Share permanently unfit for duty', '其中永久离岗的比例'], '%', '', null, { adv: true, max: 100 }],
+        ['ausbildung', ['Ausbildungsaufwand je Einsatzkraft', 'Training cost per responder', '每名队员的培训投入'], '€', 51264, ['Beispiel: 18 Monate Anwärterbezüge inkl. Sonderzuschlag (Berufsfeuerwehr Köln), ohne Lehrgangs- und Ausbilderkosten.', 'Example: 18 months of trainee pay incl. special allowance (Cologne fire service), excluding course and instructor costs.', '示例：18 个月见习工资含特别补贴（科隆职业消防队），不含课程与教官成本。'], { adv: true, ex: true }],
+        ['stillstand', ['Vermiedener Sach- und Stillstandsschaden pro Jahr', 'Avoided property and downtime loss per year', '每年避免的财产与停产损失'], '€', '', ['Für Werkfeuerwehren: Ihre eigene Schätzung', 'For plant fire brigades: your own estimate', '适用于企业专职消防队：请自行估算'], { adv: true }],
+        F('einmal'), F('betrieb'), F('jahre', { def: 8 })
+      ]]
+    ] },
+  { id: 'pflege', ic: 'pflege', kind: 'care',
+    t: ['Pflege & Betreuung', 'Care & companionship', '养老陪伴'],
+    q: ['Zeit für Pflege freispielen, nicht Pflege ersetzen.', 'Free up time for care, not replace care.', '为护理腾出时间，而不是替代护理。'],
+    prods: ['q1', 't1'],
+    groups: [
+      [['Investition', 'Investment', '投入'], [F('preis'), F('anzahl')]],
+      [['Einsatz', 'Use', '使用情况'], [
+        ['bewohner', ['Betreute Personen je Roboter', 'People supported per robot', '每台机器人服务的人数'], '', 10, ['Beispielwert', 'Example value', '示例值'], { ex: true, step: 1 }],
+        ['minuten', ['Übernommene Zeit je Person und Tag', 'Time taken over per person and day', '每人每天由机器人承担的时间'], ['min', 'min', '分钟'], 10, ['Erinnern, Unterhaltung, Aktivierung, einfache Botengänge. Beispielannahme.', 'Reminders, conversation, activation, simple errands. Example assumption.', '提醒、陪聊、活动引导、简单跑腿。示例假设。'], { ex: true }],
+        ['tage', ['Einsatztage pro Jahr', 'Days of use per year', '每年使用天数'], '', 365, null, { step: 1, max: 366 }]
+      ]],
+      [['Personal', 'Staff', '人员'], [
+        ['lohn', ['Stundenlohn Pflegehilfskraft (brutto)', 'Hourly wage, care assistant (gross)', '护理助理时薪（税前）'], '€/h', 16.52, ['Pflegemindestlohn für Pflegehilfskräfte seit 01.07.2026', 'Care minimum wage for care assistants since 01.07.2026', '德国护理助理最低工资，2026 年 7 月 1 日起'], {}]
+      ]],
+      [['Weitere Annahmen', 'More assumptions', '更多假设'], [F('faktor'), F('einmal'), F('betrieb'), F('jahre')]]
+    ] }
+];
+
+function buildRoi() {
+  const r = '../';
+  const tx = (a) => Array.isArray(a) ? swx(...a) : esc(a);
+  const field = (cid, f) => {
+    const [name, label, unit, def, hint, o = {}] = f;
+    const id = `roi-${cid}-${name}`;
+    return `<div class="roi-f${o.req ? ' roi-f--req' : ''}">
+      <label for="${id}">${swx(...label)}${o.ex ? ` <span class="roi-ex">${swx('Beispiel', 'example', '示例')}</span>` : ''}</label>
+      <div class="roi-in"><input id="${id}" name="${name}" type="number" inputmode="decimal" min="${o.min !== undefined ? o.min : 0}"${o.max ? ` max="${o.max}"` : ''} step="${o.step || 'any'}" value="${def}"${o.req ? ' placeholder="—"' : ''}>${unit ? `<span>${tx(unit)}</span>` : ''}</div>
+      ${hint ? `<p class="roi-hint">${swx(...hint)}</p>` : ''}
+    </div>`;
+  };
+  const panel = (c, i) => `
+  <form class="roi-panel" id="rechner-${c.id}" data-roi="${c.kind}" data-roi-id="${c.id}" data-roi-name="${attr({ de: c.t[0], en: c.t[1], zh: c.t[2] })}"${i ? ' hidden' : ''} novalidate onsubmit="return false">
+    <a class="roi-mini" href="#ergebnis-${c.id}" data-roi-mini aria-live="polite"></a>
+    <div class="roi-inputs">
+      <p class="roi-q">${swx(...c.q)}</p>
+      ${c.id === 'reinigung' ? `<div class="roi-seg" role="group">
+        <label><input type="radio" name="modell" value="c4" checked><span>C4</span></label>
+        <label><input type="radio" name="modell" value="c5"><span>C5</span></label>
+      </div>` : ''}
+      ${c.groups.map(([gt, fs]) => fs.every((f) => (f[5] || {}).adv)
+        ? `<details class="roi-adv"><summary>${swx(...gt)}</summary><div class="roi-grid">${fs.map((f) => field(c.id, f)).join('')}</div></details>`
+        : `<fieldset><legend>${swx(...gt)}</legend><div class="roi-grid">${fs.map((f) => field(c.id, f)).join('')}</div></fieldset>`).join('')}
+      <p class="roi-models">${swx('Passende Modelle:', 'Matching models:', '对应机型：')} ${c.prods.map(prodOf).filter(Boolean).map((p) => `<a href="${r}produkte/${p.slug}.html">${pTitle(p)}</a>`).join(' · ')}</p>
+    </div>
+    <aside class="roi-out" id="ergebnis-${c.id}">
+      <p class="roi-out__k">${swx('Ihr Ergebnis · Schätzung', 'Your result · estimate', '测算结果 · 估算')}</p>
+      <div data-roi-result></div>
+      <a class="btn btn--arrow roi-cta" data-roi-cta href="${r}service/kontakt.html">${swx('Mit diesen Werten Angebot anfragen', 'Request a quote with these values', '带着这组数值询价')} ${ICON.arrow}</a>
+      <p class="roi-note">${swx('Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen.', 'Non-binding example calculation based on your inputs, all amounts net. Not a performance promise.', '基于您输入数值的示例测算，不具约束力，金额均不含税，不构成效果承诺。')}</p>
+    </aside>
+  </form>`;
+
+  const SRC = [
+    [['Gesetzlicher Mindestlohn 13,90 €/h seit 01.01.2026', 'Statutory minimum wage €13.90/h since 01.01.2026', '德国法定最低工资 13.90 €/小时，2026-01-01 起'], 'Mindestlohngesetz'],
+    [['Gebäudereinigung, Lohngruppe 1: 15,00 €/h seit 01.01.2026 (Verordnung gültig bis 31.12.2026)', 'Building cleaning, wage group 1: €15.00/h since 01.01.2026 (ordinance valid until 31.12.2026)', '清洁行业工资组 1：15.00 €/小时，2026-01-01 起（条例有效期至 2026-12-31）'], '10. GebäudeArbbV'],
+    [['Pflegemindestlohn Pflegehilfskräfte: 16,52 €/h seit 01.07.2026', 'Care minimum wage, care assistants: €16.52/h since 01.07.2026', '护理助理最低工资：16.52 €/小时，2026-07-01 起'], 'PflegeArbbV · Bundesregierung'],
+    [['Sicherheitsdienst Sachsen, unterste Vergütungsgruppe: 15,15 €/h ab 01.02.2026', 'Security services Saxony, lowest pay group: €15.15/h from 01.02.2026', '萨克森州安保行业最低工资组：15.15 €/小时，2026-02-01 起'], 'ZEFAS Sachsen'],
+    [['Scheuersaugroboter in der Praxis: Ø ca. 350 m²/h im Test, Richtwert 200–800 m²/h, mind. 10 % der Fläche manuell', 'Scrubber robots in practice: avg. approx. 350 m²/h in test, guide value 200–800 m²/h, at least 10 % of the area manual', '洗地机器人实测：平均约 350 m²/h，参考范围 200–800 m²/h，至少 10% 面积需人工'], 'WKO Fallstudie Scheuersaug-Roboter'],
+    [['Anwärterbezüge Brandmeister-Ausbildung, 18 Monate: ca. 1.499 € + ca. 1.349 € Sonderzuschlag pro Monat', 'Trainee pay, firefighter training, 18 months: approx. €1,499 + approx. €1,349 special allowance per month', '消防员培训 18 个月见习工资：每月约 1,499 € + 约 1,349 € 特别补贴'], 'Stadt Köln, Berufsfeuerwehr']
+  ];
+
+  const html = `${head({
+    title: 'ROI-Rechner',
+    description: 'Rechnen Sie selbst: Wann amortisiert sich ein Roboter für Inspektion, Reinigung, Fertigung, Feuerwehr oder Pflege? Mit Ihren Zahlen, offenen Annahmen und Quellen.',
+    path: '/rechner/',
+    depth: 1
+  })}
+${header(CATS, PRODUCTS, 1)}
+
+<main id="main" class="roipage">
+  <section class="page-hero page-hero--plain">
+    <div class="wrap">
+      <ol class="crumbs">
+        <li><a href="${r}index.html">${swx('Start', 'Home', '首页')}</a></li>
+        <li>${swx('ROI-Rechner', 'ROI calculator', '投资回报测算')}</li>
+      </ol>
+      <p class="kicker">${swx('ROI-Rechner', 'ROI calculator', '投资回报测算')}</p>
+      <h1 class="t-xl" style="max-width:18ch">${swx('Wann rechnet sich Ihr Roboter?', 'When does your robot pay off?', '您的机器人多久回本？')}</h1>
+      <p class="t-lead" style="max-width:60ch;margin-top:1rem">${swx(
+        'Einsatzbereich wählen, Preis und Ihre Zahlen eintragen, Ergebnis sofort sehen. Jede Annahme ist sichtbar und lässt sich ändern.',
+        'Choose the application, enter the price and your figures, see the result at once. Every assumption is visible and can be changed.',
+        '选择应用场景，填入价格和您的数据，立即看到结果。每一项假设都公开可见，并且可以修改。')}</p>
+    </div>
+  </section>
+
+  <section class="section sec-light roi-sec">
+    <div class="wrap">
+      <div class="roi-tabs" role="tablist">${ROI_CALCS.map((c, i) => `
+        <button type="button" role="tab" aria-selected="${i ? 'false' : 'true'}" data-roi-tab="${c.id}"><span class="mi-ic">${P.MENU_ICON[c.ic] || ''}</span>${swx(...c.t)}</button>`).join('')}
+      </div>
+      ${ROI_CALCS.map(panel).join('')}
+    </div>
+  </section>
+
+  <section class="section section--tight" id="methode">
+    <div class="wrap roi-method">
+      <div>
+        <p class="kicker">${swx('So rechnen wir', 'How we calculate', '计算方法')}</p>
+        <h2 style="font-size:var(--step-2)">${swx('Offene Formeln statt Versprechen', 'Open formulas instead of promises', '公开公式，而不是承诺')}</h2>
+        <ol class="roi-formula">${[
+          [['Gesamtinvestition', 'Total investment', '总投入'], ['Preis × Anzahl + einmalige Kosten', 'price × units + one-off costs', '单价 × 台数 + 一次性费用']],
+          [['Personalkosten je Stunde', 'Staff cost per hour', '每小时人工成本'], ['Stundenlohn × (1 + Arbeitgeber-Zuschlag) × (1 + Schichtzuschlag)', 'hourly wage × (1 + employer on-costs) × (1 + shift premium)', '时薪 ×（1 + 雇主附加成本）×（1 + 轮班补贴）']],
+          [['Ersparnis pro Jahr', 'Saving per year', '年净节省'], ['Betriebsstunden × Aufgabenabdeckung × Tempo × Personalkosten − Betreuung − Betriebskosten', 'operating hours × task coverage × speed × staff cost − supervision − operating costs', '运行小时 × 任务覆盖率 × 速度系数 × 人工成本 − 看护成本 − 运行成本']],
+          [['Amortisation', 'Payback', '回本时间'], ['Gesamtinvestition ÷ Ersparnis pro Jahr', 'total investment ÷ saving per year', '总投入 ÷ 年净节省']]
+        ].map(([l, f]) => `<li><b>${swx(...l)}</b> = ${swx(...f)}</li>`).join('')}
+        </ol>
+        <p class="t-small t-dim">${swx('Reinigung: eingesparte Stunden = Fläche × Häufigkeit ÷ Ihr Leistungswert, abzüglich manueller Restfläche und Betreuung. Feuerwehr und Pflege zeigen bewusst keine Amortisation, sondern vermiedene Gefahrenstunden bzw. freigespielte Pflegezeit.', 'Cleaning: hours saved = area × frequency ÷ your performance rate, minus manual remainder and attendance. Fire and care deliberately show no payback, but avoided hazard hours and freed-up care time.', '清洁：节省工时 = 面积 × 频次 ÷ 您的效率定额，再减去人工补扫和看护时间。消防与养老不显示回本时间，而是显示减少的危险暴露小时和腾出的护理时间。')}</p>
+      </div>
+      <div>
+        <p class="kicker">${swx('Quellen der Vorgabewerte', 'Sources of default values', '默认值来源')}</p>
+        <ul class="roi-src">${SRC.map(([t3, s]) => `<li>${swx(...t3)}<small>${esc(s)}</small></li>`).join('')}</ul>
+        <p class="t-small t-dim">${swx('Stand: November 2026. Als „Beispiel“ markierte Werte sind Annahmen ohne amtliche Quelle. Bitte durch Ihre eigenen Zahlen ersetzen.', 'As of November 2026. Values marked “example” are assumptions without an official source. Please replace them with your own figures.', '数据截至 2026 年 11 月。标注“示例”的数值是没有官方来源的假设，请替换为您自己的数据。')}</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+${footer(CATS, 1)}
+${offerModal(1)}
+${quickView()}
+${scripts(1, '<script src="../assets/js/roi.js"></script>')}`;
+  write('rechner/index.html', html);
+}
+
+/* ============================================================ v47 · 404 == */
+function build404() {
+  let html = `${head({
+    title: 'Seite nicht gefunden',
+    description: 'Diese Seite gibt es nicht (mehr). Zurück zu Produkten, Anwendungen oder Kontakt.',
+    path: '/404.html',
+    depth: 0
+  })}
+${header(CATS, PRODUCTS, 0)}
+
+<main id="main">
+  <section class="nf">
+    <div>
+      <img class="nf__img" src="assets/img/products/lite3-main.webp" alt="" width="420" height="315">
+      <p class="nf__code">404</p>
+      <h1>${swx('Hier ist der Roboter falsch abgebogen.', 'Our robot took a wrong turn here.', '机器人在这里走错了路。')}</h1>
+      <p>${swx('Die Seite gibt es nicht oder nicht mehr. Von hier aus geht es weiter:', 'This page does not exist or no longer exists. Carry on from here:', '该页面不存在或已移除。可以从这里继续：')}</p>
+      <div class="nf__links">
+        <a class="btn btn--arrow" href="produkte/index.html">${swx('Alle Roboter', 'All robots', '全部机器人')} ${ICON.arrow}</a>
+        <a class="btn btn--ghost" href="forschung/index.html">${swx('Forschung & Lehre', 'Research & Teaching', '科研与教学')}</a>
+        <a class="btn btn--ghost" href="einsatzbereiche/index.html">${swx('Anwendungen', 'Applications', '行业应用')}</a>
+        <a class="btn btn--ghost" href="service/kontakt.html">${swx('Kontakt', 'Contact', '联系我们')}</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+${footer(CATS, 0)}
+${offerModal(0)}
+${quickView()}
+${scripts(0)}`;
+  html = html.replace('<head>', '<head>\n<base href="/">').replace('<meta name="robots" content="index, follow">', '');
+  html = html.replace('</head>', '<meta name="robots" content="noindex">\n</head>');
+  write('404.html', html);
+}
+
 module.exports = { NIC, CATS, PRODUCTS, USECASES, write, prodOf, inCat, productCard, buildHome, buildProductIndex, buildProduct, buildSpareParts, buildUseCases };
 
 /* ============================================================== RUN ===== */
@@ -1963,6 +2228,8 @@ if (require.main === module) {
   buildResearch();
   buildResources();
   buildCompare();
+  build404();
+  buildRoi();
   require('./build-pages').run();
   const missing = reportMissingZh();
   console.log(missing ? `\nFertig — aber ${missing} UI-Strings ohne Chinesisch.` : '\nDone. DE · EN · ZH vollständig.');

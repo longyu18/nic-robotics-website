@@ -220,9 +220,7 @@ function head({ title, description, path = '/', image = '/assets/img/scenes/x30-
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="${r}assets/img/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="${r}assets/img/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..800;1,600..800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="${r}assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${r}assets/css/style.css">
 </head>
 <body>
@@ -327,6 +325,7 @@ function header(categories, products, depth = 0) {
             </div>
           </div>
         </li>
+        <li><a class="nav-link" href="${r}rechner/index.html">${swx('ROI-Rechner', 'ROI Calculator', '投资回报测算')}</a></li>
         <li><a class="nav-link" href="${r}ressourcen/index.html">${swx('Ressourcen', 'Resources', '技术资源')}</a></li>
         <li><a class="nav-link" href="${r}referenzen/index.html">${swx('Referenzen', 'References', '客户案例')}</a></li>
         <li>

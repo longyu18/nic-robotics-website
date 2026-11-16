@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ROI-Rechner — NIC Robotics</title>
+<meta name="description" content="Rechnen Sie selbst: Wann amortisiert sich ein Roboter für Inspektion, Reinigung, Fertigung, Feuerwehr oder Pflege? Mit Ihren Zahlen, offenen Annahmen und Quellen.">
+<meta name="theme-color" content="#07090d">
+<link rel="canonical" href="https://www.nic-robotics.de/rechner/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NIC Robotics">
+<meta property="og:title" content="ROI-Rechner — NIC Robotics">
+<meta property="og:description" content="Rechnen Sie selbst: Wann amortisiert sich ein Roboter für Inspektion, Reinigung, Fertigung, Feuerwehr oder Pflege? Mit Ihren Zahlen, offenen Annahmen und Quellen.">
+<meta property="og:url" content="https://www.nic-robotics.de/rechner/">
+<meta property="og:image" content="https://www.nic-robotics.de/assets/img/scenes/x30-climb.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="preload" href="../assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="NIC Robotics — Startseite">
+      <img src="../assets/img/logo-dark-900.webp" alt="NIC Robotics" width="900" height="153" fetchpriority="high">
+    </a>
+    <span class="hdr-badge"><i aria-hidden="true"></i><span data-de="Service in Deutschland" data-en="Service in Germany" data-zh="德国本地服务">Service in Deutschland</span></span>
+
+    <nav aria-label="Hauptnavigation">
+      <ul class="nav">
+        <li>
+          <a class="nav-link" href="../produkte/index.html" aria-expanded="false" aria-haspopup="true">
+            <span data-de="Produkte" data-en="Products" data-zh="产品中心">Produkte</span> <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
+          <div class="mega mega--prod">
+            <div class="pm-grid"><div class="pm-col pm-col--wide">
+  <a class="pm-cat" href="../produkte/index.html?kategorie=vierbeiner"><span data-i18n-de>Vierbeiner-Roboter</span><span data-i18n-en>Quadruped Robots</span><span data-i18n-zh>四足机器人</span></a>
+  <ul><li><a class="pm-item" href="../produkte/x30.html">
+    <span class="pm-thumb"><img src="../assets/img/products/x30-main.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong>X30</strong><small><span data-i18n-de>Industrie-Vierbeiner</span><span data-i18n-en>Industrial Quadruped</span><span data-i18n-zh>工业四足机器人</span></small></span>
+  </a></li><li><a class="pm-item" href="../produkte/x50.html">
+    <span class="pm-thumb"><img src="../assets/img/products/x50-main.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong>X50</strong><small><span data-i18n-de>Schwerlast-Vierbeiner</span><span data-i18n-en>Heavy-Duty Quadruped</span><span data-i18n-zh>重载四足机器人</span></small></span>
+  </a></li><li><a class="pm-item" href="../produkte/lite3.html">
+    <span class="pm-thumb"><img src="../assets/img/products/lite3-main.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong>Lite3</strong><small><span data-i18n-de>Forschungs- &amp; Bildungsplattform</span><span data-i18n-en>Research &amp; Education Platform</span><span data-i18n-zh>科研与教学平台</span></small></span>
+  </a></li><li><a class="pm-item" href="../produkte/loeschroboter-x30.html">
+    <span class="pm-thumb"><img src="../assets/img/products/firecannon-main.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong><span data-i18n-de>Löschroboter X30-SP</span><span data-i18n-en>Fire Monitor Robot X30-SP</span><span data-i18n-zh>消防水炮机器人 X30-SP</span></strong><small><span data-i18n-de>Einsatzkonfiguration · Brandbekämpfung</span><span data-i18n-en>Mission configuration · Firefighting</span><span data-i18n-zh>任务配置 · 消防灭火</span></small></span>
+  </a></li></ul>
+</div>
+<div class="pm-col pm-col--wide">
+  <a class="pm-cat" href="../produkte/index.html?kategorie=radbein"><span data-i18n-de>Rad-Bein-Roboter</span><span data-i18n-en>Wheel-Legged Robots</span><span data-i18n-zh>轮足机器人</span></a>
+  <ul><li><a class="pm-item" href="../produkte/lynx-m20s.html">
+    <span class="pm-thumb"><img src="../assets/img/products/lynx-m20-main.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong>Lynx M20 S</strong><small><span data-i18n-de>Rad-Bein-Roboter</span><span data-i18n-en>Wheel-Legged Robot</span><span data-i18n-zh>轮足机器人</span></small></span>
+  </a></li><li><a class="pm-item" href="../produkte/lynx-m20-pro.html">
+    <span class="pm-thumb"><img src="../assets/img/products/lynx-m20-alt.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong>Lynx M20 Pro</strong><small><span data-i18n-de>Rad-Bein-Roboter</span><span data-i18n-en>Wheel-Legged Robot</span><span data-i18n-zh>轮足机器人</span></small></span>
+  </a></li><li><a class="pm-item" href="../produkte/lynx-m20.html">
+    <span class="pm-thumb"><img src="../assets/img/products/lynx-m20-main.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong>Lynx M20</strong><small><span data-i18n-de>Rad-Bein-Roboter</span><span data-i18n-en>Wheel-Legged Robot</span><span data-i18n-zh>轮足机器人</span></small></span>
+  </a></li><li><a class="pm-item" href="../produkte/streifenroboter-m20.html">
+    <span class="pm-thumb"><img src="../assets/img/products/patrol-main.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong><span data-i18n-de>Streifenroboter M20</span><span data-i18n-en>Patrol Robot M20</span><span data-i18n-zh>巡逻机器人 M20</span></strong><small><span data-i18n-de>Einsatzkonfiguration · Sicherheit</span><span data-i18n-en>Mission configuration · Security</span><span data-i18n-zh>任务配置 · 安防</span></small></span>
+  </a></li><li><a class="pm-item" href="../produkte/erkundungsroboter-m20.html">
+    <span class="pm-thumb"><img src="../assets/img/products/firerecon-main.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong><span data-i18n-de>Erkundungsroboter M20</span><span data-i18n-en>Reconnaissance Robot M20</span><span data-i18n-zh>消防侦察机器人 M20</span></strong><small><span data-i18n-de>Einsatzkonfiguration · Erkundung</span><span data-i18n-en>Mission configuration · Reconnaissance</span><span data-i18n-zh>任务配置 · 侦察</span></small></span>
+  </a></li><li><a class="pm-item" href="../produkte/lynx-s10.html">
+    <span class="pm-thumb pm-thumb--photo"><img src="../assets/img/products/s10-main.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong>Lynx S10</strong><small><span data-i18n-de>Kompakter Rad-Bein-Roboter</span><span data-i18n-en>Compact Wheel-Legged Robot</span><span data-i18n-zh>小型轮足机器人</span></small></span>
+  </a></li></ul>
+</div>
+<div class="pm-col">
+  <a class="pm-cat" href="../produkte/index.html?kategorie=humanoid"><span data-i18n-de>Humanoide Roboter</span><span data-i18n-en>Humanoid Robots</span><span data-i18n-zh>人形机器人</span></a>
+  <ul><li><a class="pm-item" href="../produkte/humanoid-dr02.html">
+    <span class="pm-thumb pm-thumb--photo"><img src="../assets/img/products/dr02-main.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong>DR02</strong><small><span data-i18n-de>Industrieller Humanoid</span><span data-i18n-en>Industrial Humanoid</span><span data-i18n-zh>工业级人形机器人</span></small></span>
+  </a></li></ul>
+</div>
+<div class="pm-col">
+  <a class="pm-cat" href="../produkte/heimroboter.html"><span data-i18n-de>Heimroboter</span><span data-i18n-en>Home Robots</span><span data-i18n-zh>家庭机器人</span></a>
+  <ul><li><a class="pm-item" href="../produkte/heimroboter-q1.html">
+    <span class="pm-thumb"><img src="../assets/img/products/q1-main.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong>Q1</strong><small><span data-i18n-de>Persönlicher Humanoid</span><span data-i18n-en>Personal humanoid</span><span data-i18n-zh>个人人形机器人</span></small></span>
+  </a></li><li><a class="pm-item" href="../produkte/heimroboter-t1.html">
+    <span class="pm-thumb"><img src="../assets/img/products/t1-main.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong>T1</strong><small><span data-i18n-de>Wandelbarer Begleitroboter</span><span data-i18n-en>Transforming companion robot</span><span data-i18n-zh>轮足变形陪伴机器人</span></small></span>
+  </a></li></ul>
+</div>
+<div class="pm-col">
+  <a class="pm-cat" href="../produkte/reinigungsroboter.html"><span data-i18n-de>Gewerbliche Reinigungsroboter</span><span data-i18n-en>Commercial Cleaning Robots</span><span data-i18n-zh>商用清洁机器人</span></a>
+  <ul><li><a class="pm-item" href="../produkte/reinigungsroboter-c5.html">
+    <span class="pm-thumb"><img src="../assets/img/products/c5-main.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong>C5</strong><small><span data-i18n-de>Reinigungsroboter für große Flächen</span><span data-i18n-en>Cleaning robot for large areas</span><span data-i18n-zh>中大型场景清洁机器人</span></small></span>
+  </a></li><li><a class="pm-item" href="../produkte/reinigungsroboter-c4.html">
+    <span class="pm-thumb"><img src="../assets/img/products/c4-white.webp" alt="" loading="lazy" width="96" height="96"></span>
+    <span class="pm-txt"><strong>C4</strong><small><span data-i18n-de>Kompakter Reinigungsroboter für enge Wege</span><span data-i18n-en>Compact cleaning robot for narrow routes</span><span data-i18n-zh>窄通道商用清洁机器人</span></small></span>
+  </a></li></ul>
+</div></div>
+            <div class="pm-foot">
+              <a class="pm-all" href="../produkte/index.html"><span data-de="Alle Produkte ansehen" data-en="View all products" data-zh="查看全部产品">Alle Produkte ansehen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a class="nav-link" href="../einsatzbereiche/index.html" aria-expanded="false" aria-haspopup="true">
+            <span data-de="Anwendungen" data-en="Applications" data-zh="行业应用">Anwendungen</span> <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
+          <div class="mega mega--wide">
+            <ul class="mi-grid mi-grid--4"><li><a class="mi-item" href="../einsatzbereiche/index.html#energie-und-netze">
+  <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 6.5 21.5M12 2.5l5.5 19M4 7.5h16M6 12h12M9.6 7.5 12 10l2.4-2.5M8.6 12l3.4 4 3.4-4"/><path d="M3.5 21.5h17"/></svg></span>
+  <span class="mi-txt"><strong><span data-i18n-de>Energie &amp; Stromnetz</span><span data-i18n-en>Energy &amp; power grid</span><span data-i18n-zh>能源电力</span></strong><span><span data-i18n-de>Netzinspektion. Vollautonom.</span><span data-i18n-en>Grid inspection. Fully autonomous.</span><span data-i18n-zh>电力巡检，全程自主。</span></span></span>
+</a></li>
+<li><a class="mi-item" href="../einsatzbereiche/index.html#industrieinspektion">
+  <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10.5l5 3v-3l5 3v-3l5 3V3.5h3V21z"/><path d="M3 21h18M7 17.5h2M11.5 17.5h2M16 17.5h2"/></svg></span>
+  <span class="mi-txt"><strong><span data-i18n-de>Industrielle Instandhaltung</span><span data-i18n-en>Industrial operations &amp; maintenance</span><span data-i18n-zh>工业运维</span></strong><span><span data-i18n-de>Gefahr? Der Roboter geht zuerst.</span><span data-i18n-en>Hazard ahead? The robot goes first.</span><span data-i18n-zh>危险环境，机器人先去。</span></span></span>
+</a></li>
+<li><a class="mi-item" href="../einsatzbereiche/index.html#feuerwehr-und-rettung">
+  <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5c-3.9 0-6.5-2.6-6.5-6.2 0-3.3 2.2-5.3 3.6-7.4.9 1.6 1.9 2.4 2.9 2.7-.4-2.9.6-5.6 2.9-8.1.3 3.2 1.9 5.2 3.4 7.2 1.1 1.5 1.7 3.4 1.7 5.6 0 3.6-2.6 6.2-6 6.2z"/><path d="M12 21.5c-1.7 0-2.9-1.2-2.9-2.9 0-1.9 1.6-2.9 2.6-4.6 1.4 1.5 3.2 2.5 3.2 4.6 0 1.7-1.2 2.9-2.9 2.9z"/></svg></span>
+  <span class="mi-txt"><strong><span data-i18n-de>Brandschutz &amp; Rettung</span><span data-i18n-en>Firefighting &amp; rescue</span><span data-i18n-zh>应急消防</span></strong><span><span data-i18n-de>Erst der Roboter. Dann der Mensch.</span><span data-i18n-en>Robots first. People safer.</span><span data-i18n-zh>机器人先上，人更安全。</span></span></span>
+</a></li>
+<li><a class="mi-item" href="../einsatzbereiche/index.html#objektschutz">
+  <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4.5 5.5v6c0 4.6 3.1 8.4 7.5 10 4.4-1.6 7.5-5.4 7.5-10v-6z"/><path d="m8.6 12 2.4 2.4 4.4-4.6"/></svg></span>
+  <span class="mi-txt"><strong><span data-i18n-de>Sicherheit &amp; Streife</span><span data-i18n-en>Security &amp; patrol</span><span data-i18n-zh>安防巡逻</span></strong><span><span data-i18n-de>Rund um die Uhr auf Streife.</span><span data-i18n-en>On patrol around the clock.</span><span data-i18n-zh>全天候巡逻，从不松懈。</span></span></span>
+</a></li>
+<li><a class="mi-item" href="../einsatzbereiche/index.html#museum-und-besucherfuehrung">
+  <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 12 3.5 21 9z"/><path d="M5 9v9M9.7 9v9M14.3 9v9M19 9v9M3 18h18M2.5 21.5h19"/></svg></span>
+  <span class="mi-txt"><strong><span data-i18n-de>Öffentliche Dienste &amp; Veranstaltungsorte</span><span data-i18n-en>Public services &amp; venues</span><span data-i18n-zh>民生服务与场馆</span></strong><span><span data-i18n-de>Tragen, filmen, führen.</span><span data-i18n-en>Carry, film, guide.</span><span data-i18n-zh>搬运、跟拍、导览，一机多用。</span></span></span>
+</a></li>
+<li><a class="mi-item" href="../einsatzbereiche/index.html#logistik-und-transport">
+  <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 3.5 7v10L12 21.5l8.5-4.5V7z"/><path d="M3.5 7 12 11.5 20.5 7M12 11.5v10M7.8 4.8l8.4 4.5"/></svg></span>
+  <span class="mi-txt"><strong><span data-i18n-de>Logistik &amp; Zustellung</span><span data-i18n-en>Logistics &amp; delivery</span><span data-i18n-zh>物流配送</span></strong><span><span data-i18n-de>Die letzten hundert Meter.</span><span data-i18n-en>The last hundred metres, delivered.</span><span data-i18n-zh>最后一百米，机器人送达。</span></span></span>
+</a></li>
+<li><a class="mi-item" href="../einsatzbereiche/index.html#zuhause-und-familie">
+  <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3.5l9 7.5"/><path d="M5.5 9v11.5h13V9"/><path d="M12 18.2s-3.4-2-3.4-4.3c0-1.2.9-2 2-2 .6 0 1.1.3 1.4.8.3-.5.8-.8 1.4-.8 1.1 0 2 .8 2 2 0 2.3-3.4 4.3-3.4 4.3z"/></svg></span>
+  <span class="mi-txt"><strong><span data-i18n-de>Zuhause &amp; Familie</span><span data-i18n-en>Home &amp; family</span><span data-i18n-zh>家庭陪伴</span></strong><span><span data-i18n-de>Mehr Gesellschaft im Alltag.</span><span data-i18n-en>More company at home.</span><span data-i18n-zh>家里多一份陪伴。</span></span></span>
+</a></li></ul>
+            <div class="pm-foot">
+              <a class="pm-all" href="../einsatzbereiche/index.html"><span data-de="Alle Einsatzbereiche" data-en="All applications" data-zh="全部应用领域">Alle Einsatzbereiche</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a class="nav-link" href="../forschung/index.html" aria-expanded="false" aria-haspopup="true">
+            <span data-de="Forschung &amp; Lehre" data-en="Research &amp; Teaching" data-zh="科研与教学">Forschung &amp; Lehre</span> <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
+          <div class="mega mega--wide">
+            <ul class="mi-grid mi-grid--3">
+<li><a class="mi-item" href="../forschung/index.html#bewegung">
+  <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 13h3.5l2.5-7 4 13 3-9 1.5 3h4.5"/></svg></span>
+  <span class="mi-txt"><strong><span data-de="Bewegungsregelung und Lernen" data-en="Motion control and learning" data-zh="运动控制与学习">Bewegungsregelung und Lernen</span></strong><span><span data-de="Regler, Reinforcement Learning, Sim-to-Real" data-en="Controllers, reinforcement learning, sim-to-real" data-zh="控制器、强化学习、仿真到实机">Regler, Reinforcement Learning, Sim-to-Real</span></span></span>
+</a></li>
+<li><a class="mi-item" href="../forschung/index.html#wahrnehmung">
+  <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+  <span class="mi-txt"><strong><span data-de="Wahrnehmung und Navigation" data-en="Perception and navigation" data-zh="感知与导航">Wahrnehmung und Navigation</span></strong><span><span data-de="SLAM, Kartierung, Sensorfusion" data-en="SLAM, mapping, sensor fusion" data-zh="SLAM、建图、多传感器融合">SLAM, Kartierung, Sensorfusion</span></span></span>
+</a></li>
+<li><a class="mi-item" href="../forschung/index.html#manipulation">
+  <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-3h7v3M7.5 18V11l6-5.5 4 3"/><circle cx="7.5" cy="11" r="1.6"/><circle cx="13.5" cy="5.5" r="1.6"/><path d="M17.5 8.5 20 7M17.5 8.5l1.5 2.6M20 7l1.5 1M19 11.1l1.7.4"/></svg></span>
+  <span class="mi-txt"><strong><span data-de="Mobile Manipulation und Embodied AI" data-en="Mobile manipulation and embodied AI" data-zh="移动操作与具身智能">Mobile Manipulation und Embodied AI</span></strong><span><span data-de="Laufen und Greifen, Humanoide" data-en="Walking and grasping, humanoids" data-zh="行走与抓取、人形机器人">Laufen und Greifen, Humanoide</span></span></span>
+</a></li>
+<li><a class="mi-item" href="../forschung/index.html#interaktion">
+  <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7.5" r="2.6"/><path d="M2.5 19c.4-3.4 2.2-5.3 4.5-5.3 1 0 1.9.3 2.7 1"/><rect x="13" y="5" width="8" height="6.5" rx="1.6"/><path d="M15.6 8.2h.01M18.4 8.2h.01M17 5V3M13.5 19v-2.2c0-1.5 1.2-2.6 2.6-2.6h1.8c1.400 0 2.600 1.100 2.600 2.600V19"/></svg></span>
+  <span class="mi-txt"><strong><span data-de="Mensch-Roboter-Interaktion und Mehrrobotersysteme" data-en="Human-robot interaction and multi-robot systems" data-zh="人机交互与多机协同">Mensch-Roboter-Interaktion und Mehrrobotersysteme</span></strong><span><span data-de="Sprache, Gesten, Schwarmverhalten" data-en="Voice, gestures, swarm behaviour" data-zh="语音、手势、集群编队">Sprache, Gesten, Schwarmverhalten</span></span></span>
+</a></li>
+<li><a class="mi-item" href="../forschung/index.html#feld">
+  <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m2.500 19.500 6.500-11 4 6.500 2.500-3.500 6 8z"/><circle cx="17.500" cy="6" r="2"/></svg></span>
+  <span class="mi-txt"><strong><span data-de="Feldrobotik und extreme Umgebungen" data-en="Field robotics and extreme environments" data-zh="野外与极端环境机器人">Feldrobotik und extreme Umgebungen</span></strong><span><span data-de="Autonomie außerhalb des Labors" data-en="Autonomy outside the lab" data-zh="走出实验室的自主系统">Autonomie außerhalb des Labors</span></span></span>
+</a></li>
+<li><a class="mi-item" href="../forschung/index.html#lehre">
+  <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 9 12 14l9.5-5z"/><path d="M6.5 11.2v4.6c1.5 1.5 3.4 2.2 5.5 2.2s4-.7 5.5-2.2v-4.6M21.5 9v6"/></svg></span>
+  <span class="mi-txt"><strong><span data-de="Lehre und Praktikum" data-en="Teaching and lab courses" data-zh="教学与实训">Lehre und Praktikum</span></strong><span><span data-de="Kurse, Abschlussarbeiten, Wettbewerbe" data-en="Courses, theses, competitions" data-zh="课程、毕业设计、竞赛">Kurse, Abschlussarbeiten, Wettbewerbe</span></span></span>
+</a></li></ul>
+            <div class="pm-foot">
+              <a class="pm-all" href="../forschung/index.html"><span data-de="Forschung &amp; Lehre im Überblick" data-en="Research &amp; Teaching overview" data-zh="科研与教学总览">Forschung &amp; Lehre im Überblick</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </div>
+        </li>
+        <li><a class="nav-link" href="../rechner/index.html"><span data-de="ROI-Rechner" data-en="ROI Calculator" data-zh="投资回报测算">ROI-Rechner</span></a></li>
+        <li><a class="nav-link" href="../ressourcen/index.html"><span data-de="Ressourcen" data-en="Resources" data-zh="技术资源">Ressourcen</span></a></li>
+        <li><a class="nav-link" href="../referenzen/index.html"><span data-de="Referenzen" data-en="References" data-zh="客户案例">Referenzen</span></a></li>
+        <li>
+          <a class="nav-link" href="../service/index.html" aria-expanded="false" aria-haspopup="true">
+            <span data-de="Service &amp; Support" data-en="Service &amp; Support" data-zh="服务与支持">Service &amp; Support</span> <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
+          <div class="mega mega--wide">
+            <ul class="mi-grid mi-grid--3">
+              
+              <li><a class="mi-item" href="../service/index.html#garantie">
+                <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m9.4 9 1.8 1.8 3.4-3.4M8.3 13.8 7 21.5l5-2.6 5 2.6-1.3-7.7"/></svg></span>
+                <span class="mi-txt"><strong><span data-de="Garantie &amp; Gewährleistung" data-en="Warranty" data-zh="保修服务">Garantie &amp; Gewährleistung</span></strong><span><span data-de="Deutsche Gewährleistung, Garantieabwicklung" data-en="German warranty, claims handling" data-zh="德国本地质保与理赔">Deutsche Gewährleistung, Garantieabwicklung</span></span></span>
+              </a></li>
+              <li><a class="mi-item" href="../service/index.html#servicezentrum">
+                <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.2 5.2l-6 6a1.8 1.8 0 0 0 2.5 2.5l6-6a4 4 0 0 0 5.2-5.2l-2.6 2.6-2.4-.5-.5-2.4z"/></svg></span>
+                <span class="mi-txt"><strong><span data-de="Servicezentrum Deutschland" data-en="Service centre Germany" data-zh="德国维修中心">Servicezentrum Deutschland</span></strong><span><span data-de="Diagnose, Reparatur, Wartung" data-en="Diagnosis, repair, maintenance" data-zh="检测、维修、保养">Diagnose, Reparatur, Wartung</span></span></span>
+              </a></li>
+              <li><a class="mi-item" href="../produkte/ersatzteile.html">
+                <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/><circle cx="12" cy="12" r="6.5"/></svg></span>
+                <span class="mi-txt"><strong><span data-de="Ersatzteile" data-en="Spare parts" data-zh="备件更换">Ersatzteile</span></strong><span><span data-de="Verschleißteile zum Selbsttausch" data-en="Wear parts you swap yourself" data-zh="易损件，客户可自行更换">Verschleißteile zum Selbsttausch</span></span></span>
+              </a></li>
+              <li><a class="mi-item" href="../service/index.html#schulung">
+                <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13.5v-1.5a8 8 0 0 1 16 0v1.5"/><rect x="2.8" y="13" width="4" height="6" rx="1.5"/><rect x="17.2" y="13" width="4" height="6" rx="1.5"/><path d="M19.2 19c0 1.6-1.6 2.5-4.2 2.5h-1.5"/></svg></span>
+                <span class="mi-txt"><strong><span data-de="Schulung &amp; Fernsupport" data-en="Training &amp; remote support" data-zh="培训与远程支持">Schulung &amp; Fernsupport</span></strong><span><span data-de="Einweisung, Hotline, Updates" data-en="Instruction, hotline, updates" data-zh="操作培训、热线、软件更新">Einweisung, Hotline, Updates</span></span></span>
+              </a></li>
+              <li><a class="mi-item" href="../service/ruecksendung.html">
+                <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5 12 4l8.5 4.5v7L12 20l-8.5-4.5z"/><path d="M3.5 8.5 12 13l8.5-4.5M12 13v7"/><path d="M8.5 2.8 6 5.3l2.5 2.5"/></svg></span>
+                <span class="mi-txt"><strong><span data-de="Rücksendung &amp; Reparatur (RMA)" data-en="Returns &amp; repair (RMA)" data-zh="退货与返修（RMA）">Rücksendung &amp; Reparatur (RMA)</span></strong><span><span data-de="Online-Formular mit Foto-Upload" data-en="Online form with photo upload" data-zh="在线表单，可上传照片">Online-Formular mit Foto-Upload</span></span></span>
+              </a></li>
+              <li><a class="mi-item" href="../unternehmen/ueber-uns.html">
+                <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 21c.6-4.2 3.6-6.8 7.5-6.8s6.9 2.6 7.5 6.8"/></svg></span>
+                <span class="mi-txt"><strong><span data-de="Über uns" data-en="About us" data-zh="关于我们">Über uns</span></strong><span><span data-de="An Yuan GmbH, Sitz in Deutschland" data-en="An Yuan GmbH, based in Germany" data-zh="An Yuan GmbH，总部位于德国">An Yuan GmbH, Sitz in Deutschland</span></span></span>
+              </a></li>
+              <li><a class="mi-item" href="../service/kontakt.html">
+                <span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="5" width="18.4" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></span>
+                <span class="mi-txt"><strong><span data-de="Kontakt" data-en="Contact" data-zh="联系我们">Kontakt</span></strong><span><span data-de="Beratung, Angebot, technische Fragen" data-en="Advice, quotes, technical questions" data-zh="咨询、报价、技术问题">Beratung, Angebot, technische Fragen</span></span></span>
+              </a></li>
+            </ul>
+            <div class="pm-foot">
+              <a class="pm-all" href="../service/index.html"><span data-de="Alle Serviceleistungen" data-en="All services" data-zh="全部技术服务">Alle Serviceleistungen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <div class="lang-pick">
+        <button class="lang-globe" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Sprache / Language / 语言">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="lang" role="group" aria-label="Sprache / Language / 语言">
+          <button type="button" data-lang="de" aria-pressed="true" lang="de">Deutsch</button>
+          <button type="button" data-lang="en" aria-pressed="false" lang="en">English</button>
+          <button type="button" data-lang="zh" aria-pressed="false" lang="zh">中文</button>
+        </div>
+      </div>
+      <a class="btn btn--sm" href="../service/angebot.html"><span data-de="Angebot anfordern" data-en="Request a quote" data-zh="索取报价">Angebot anfordern</span></a>
+      <button class="burger" type="button" aria-label="Menü" aria-expanded="false" aria-controls="nav"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="roipage">
+  <section class="page-hero page-hero--plain">
+    <div class="wrap">
+      <ol class="crumbs">
+        <li><a href="../index.html"><span data-de="Start" data-en="Home" data-zh="首页">Start</span></a></li>
+        <li><span data-de="ROI-Rechner" data-en="ROI calculator" data-zh="投资回报测算">ROI-Rechner</span></li>
+      </ol>
+      <p class="kicker"><span data-de="ROI-Rechner" data-en="ROI calculator" data-zh="投资回报测算">ROI-Rechner</span></p>
+      <h1 class="t-xl" style="max-width:18ch"><span data-de="Wann rechnet sich Ihr Roboter?" data-en="When does your robot pay off?" data-zh="您的机器人多久回本？">Wann rechnet sich Ihr Roboter?</span></h1>
+      <p class="t-lead" style="max-width:60ch;margin-top:1rem"><span data-de="Einsatzbereich wählen, Preis und Ihre Zahlen eintragen, Ergebnis sofort sehen. Jede Annahme ist sichtbar und lässt sich ändern." data-en="Choose the application, enter the price and your figures, see the result at once. Every assumption is visible and can be changed." data-zh="选择应用场景，填入价格和您的数据，立即看到结果。每一项假设都公开可见，并且可以修改。">Einsatzbereich wählen, Preis und Ihre Zahlen eintragen, Ergebnis sofort sehen. Jede Annahme ist sichtbar und lässt sich ändern.</span></p>
+    </div>
+  </section>
+
+  <section class="section sec-light roi-sec">
+    <div class="wrap">
+      <div class="roi-tabs" role="tablist">
+        <button type="button" role="tab" aria-selected="true" data-roi-tab="streife"><span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4.5 5.5v6c0 4.6 3.1 8.4 7.5 10 4.4-1.6 7.5-5.4 7.5-10v-6z"/><path d="m8.6 12 2.4 2.4 4.4-4.6"/></svg></span><span data-de="Inspektion &amp; Sicherheit" data-en="Inspection &amp; security" data-zh="巡检与安保">Inspektion &amp; Sicherheit</span></button>
+        <button type="button" role="tab" aria-selected="false" data-roi-tab="reinigung"><span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m9.4 9 1.8 1.8 3.4-3.4M8.3 13.8 7 21.5l5-2.6 5 2.6-1.3-7.7"/></svg></span><span data-de="Gewerbliche Reinigung" data-en="Commercial cleaning" data-zh="商业清洁">Gewerbliche Reinigung</span></button>
+        <button type="button" role="tab" aria-selected="false" data-roi-tab="humanoid"><span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10.5l5 3v-3l5 3v-3l5 3V3.5h3V21z"/><path d="M3 21h18M7 17.5h2M11.5 17.5h2M16 17.5h2"/></svg></span><span data-de="Humanoide in der Fertigung" data-en="Humanoids in production" data-zh="工厂人形机器人">Humanoide in der Fertigung</span></button>
+        <button type="button" role="tab" aria-selected="false" data-roi-tab="feuerwehr"><span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5c-3.9 0-6.5-2.6-6.5-6.2 0-3.3 2.2-5.3 3.6-7.4.9 1.6 1.9 2.4 2.9 2.7-.4-2.9.6-5.6 2.9-8.1.3 3.2 1.9 5.2 3.4 7.2 1.1 1.5 1.7 3.4 1.7 5.6 0 3.6-2.6 6.2-6 6.2z"/><path d="M12 21.5c-1.7 0-2.9-1.2-2.9-2.9 0-1.9 1.6-2.9 2.6-4.6 1.4 1.5 3.2 2.5 3.2 4.6 0 1.7-1.2 2.9-2.9 2.9z"/></svg></span><span data-de="Feuerwehr &amp; Gefahrenabwehr" data-en="Fire &amp; hazard response" data-zh="消防与应急">Feuerwehr &amp; Gefahrenabwehr</span></button>
+        <button type="button" role="tab" aria-selected="false" data-roi-tab="pflege"><span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3.5l9 7.5"/><path d="M5.5 9v11.5h13V9"/><path d="M12 18.2s-3.4-2-3.4-4.3c0-1.2.9-2 2-2 .6 0 1.1.3 1.4.8.3-.5.8-.8 1.4-.8 1.1 0 2 .8 2 2 0 2.3-3.4 4.3-3.4 4.3z"/></svg></span><span data-de="Pflege &amp; Betreuung" data-en="Care &amp; companionship" data-zh="养老陪伴">Pflege &amp; Betreuung</span></button>
+      </div>
+      
+  <form class="roi-panel" id="rechner-streife" data-roi="labor" data-roi-id="streife" data-roi-name="Inspektion &amp; Sicherheit" novalidate onsubmit="return false">
+    <a class="roi-mini" href="#ergebnis-streife" data-roi-mini aria-live="polite"></a>
+    <div class="roi-inputs">
+      <p class="roi-q"><span data-de="Streifen- und Inspektionsgänge, die ein Roboter übernimmt." data-en="Patrol and inspection rounds a robot takes over." data-zh="由机器人承担的巡逻与巡检。">Streifen- und Inspektionsgänge, die ein Roboter übernimmt.</span></p>
+      
+      <fieldset><legend><span data-de="Investition" data-en="Investment" data-zh="投入">Investition</span></legend><div class="roi-grid"><div class="roi-f roi-f--req">
+      <label for="roi-streife-preis"><span data-de="Anschaffungspreis je Roboter (netto)" data-en="Purchase price per robot (net)" data-zh="单台采购价（不含税）">Anschaffungspreis je Roboter (netto)</span></label>
+      <div class="roi-in"><input id="roi-streife-preis" name="preis" type="number" inputmode="decimal" min="0" step="any" value="" placeholder="—"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Ihr Angebotspreis. Wir zeigen bewusst keinen Platzhalterpreis." data-en="Your quoted price. We deliberately show no placeholder price." data-zh="填入您的报价。我们不显示占位价格。">Ihr Angebotspreis. Wir zeigen bewusst keinen Platzhalterpreis.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-streife-anzahl"><span data-de="Anzahl Roboter" data-en="Number of robots" data-zh="机器人台数">Anzahl Roboter</span></label>
+      <div class="roi-in"><input id="roi-streife-anzahl" name="anzahl" type="number" inputmode="decimal" min="1" step="1" value="1"></div>
+      
+    </div></div></fieldset><fieldset><legend><span data-de="Betrieb" data-en="Operation" data-zh="运行">Betrieb</span></legend><div class="roi-grid"><div class="roi-f">
+      <label for="roi-streife-std"><span data-de="Betriebsstunden pro Tag" data-en="Operating hours per day" data-zh="每天运行小时">Betriebsstunden pro Tag</span></label>
+      <div class="roi-in"><input id="roi-streife-std" name="std" type="number" inputmode="decimal" min="0" max="24" step="any" value="8"><span>h</span></div>
+      <p class="roi-hint"><span data-de="Reine Einsatzzeit ohne Laden. Laufzeit je Akkuladung siehe Datenblatt." data-en="Pure operating time without charging. Runtime per charge: see datasheet." data-zh="不含充电的实际作业时间。单次续航见数据表。">Reine Einsatzzeit ohne Laden. Laufzeit je Akkuladung siehe Datenblatt.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-streife-tage"><span data-de="Betriebstage pro Jahr" data-en="Operating days per year" data-zh="每年运行天数">Betriebstage pro Jahr</span></label>
+      <div class="roi-in"><input id="roi-streife-tage" name="tage" type="number" inputmode="decimal" min="0" max="366" step="1" value="365"></div>
+      
+    </div></div></fieldset><fieldset><legend><span data-de="Personal heute" data-en="Staff today" data-zh="现有人工">Personal heute</span></legend><div class="roi-grid"><div class="roi-f">
+      <label for="roi-streife-lohn"><span data-de="Stundenlohn (brutto) oder Verrechnungssatz" data-en="Hourly wage (gross) or billing rate" data-zh="时薪（税前）或外包单价">Stundenlohn (brutto) oder Verrechnungssatz</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-streife-lohn" name="lohn" type="number" inputmode="decimal" min="0" step="any" value="15.15"><span>€/h</span></div>
+      <p class="roi-hint"><span data-de="Beispiel: Tarif Sicherheitsdienst Sachsen ab 02/2026. Bitte Ihren Wert eintragen." data-en="Example: security services tariff, Saxony, from 02/2026. Please enter your value." data-zh="示例：萨克森州安保行业集体工资，2026 年 2 月起。请填入您的数值。">Beispiel: Tarif Sicherheitsdienst Sachsen ab 02/2026. Bitte Ihren Wert eintragen.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-streife-zuschlag"><span data-de="Ø Zuschlag Nacht / Wochenende" data-en="Avg. night / weekend premium" data-zh="夜班/周末平均补贴">Ø Zuschlag Nacht / Wochenende</span></label>
+      <div class="roi-in"><input id="roi-streife-zuschlag" name="zuschlag" type="number" inputmode="decimal" min="0" step="any" value="0"><span>%</span></div>
+      <p class="roi-hint"><span data-de="Gemittelt über alle Betriebsstunden" data-en="Averaged over all operating hours" data-zh="按全部运行小时平均">Gemittelt über alle Betriebsstunden</span></p>
+    </div></div></fieldset><details class="roi-adv"><summary><span data-de="Weitere Annahmen" data-en="More assumptions" data-zh="更多假设">Weitere Annahmen</span></summary><div class="roi-grid"><div class="roi-f">
+      <label for="roi-streife-abdeckung"><span data-de="Aufgabenabdeckung" data-en="Task coverage" data-zh="任务覆盖率">Aufgabenabdeckung</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-streife-abdeckung" name="abdeckung" type="number" inputmode="decimal" min="0" max="100" step="any" value="70"><span>%</span></div>
+      <p class="roi-hint"><span data-de="Anteil der Tätigkeit, den der Roboter übernimmt. Beispielannahme." data-en="Share of the job the robot takes over. Example assumption." data-zh="机器人能承担的工作比例。示例假设。">Anteil der Tätigkeit, den der Roboter übernimmt. Beispielannahme.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-streife-aufsicht"><span data-de="Betreuung durch Personal" data-en="Supervision by staff" data-zh="人工看护">Betreuung durch Personal</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-streife-aufsicht" name="aufsicht" type="number" inputmode="decimal" min="0" step="any" value="1"><span><span data-de="h/Tag" data-en="h/day" data-zh="小时/天">h/Tag</span></span></div>
+      <p class="roi-hint"><span data-de="Leitstand, Akkuwechsel, Störungen" data-en="Control room, battery swap, faults" data-zh="监控、换电、处理异常">Leitstand, Akkuwechsel, Störungen</span></p>
+    </div><div class="roi-f">
+      <label for="roi-streife-faktor"><span data-de="Arbeitgeber-Zuschlag" data-en="Employer on-costs" data-zh="雇主附加成本">Arbeitgeber-Zuschlag</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-streife-faktor" name="faktor" type="number" inputmode="decimal" min="0" step="any" value="25"><span>%</span></div>
+      <p class="roi-hint"><span data-de="Sozialabgaben, Urlaub, Krankheit. Beispielannahme. Bei Fremdvergabe: Verrechnungssatz oben eintragen und hier 0 setzen." data-en="Social contributions, holiday, sickness. Example assumption. If outsourced: enter the billing rate above and set this to 0." data-zh="社保、带薪假、病假。示例假设。若为外包：上面填服务商计费单价，这里填 0。">Sozialabgaben, Urlaub, Krankheit. Beispielannahme. Bei Fremdvergabe: Verrechnungssatz oben eintragen und hier 0 setzen.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-streife-einmal"><span data-de="Einmalige Kosten" data-en="One-off costs" data-zh="一次性费用">Einmalige Kosten</span></label>
+      <div class="roi-in"><input id="roi-streife-einmal" name="einmal" type="number" inputmode="decimal" min="0" step="any" value="0"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Inbetriebnahme, Schulung, Ladestation, Zubehör" data-en="Commissioning, training, charging station, accessories" data-zh="部署调试、培训、充电桩、配件">Inbetriebnahme, Schulung, Ladestation, Zubehör</span></p>
+    </div><div class="roi-f">
+      <label for="roi-streife-betrieb"><span data-de="Betriebskosten pro Jahr" data-en="Operating costs per year" data-zh="每年运行成本">Betriebskosten pro Jahr</span></label>
+      <div class="roi-in"><input id="roi-streife-betrieb" name="betrieb" type="number" inputmode="decimal" min="0" step="any" value="0"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Wartung, Strom, Akkutausch, Software, Versicherung" data-en="Maintenance, power, battery replacement, software, insurance" data-zh="维护、电费、电池更换、软件、保险">Wartung, Strom, Akkutausch, Software, Versicherung</span></p>
+    </div><div class="roi-f">
+      <label for="roi-streife-jahre"><span data-de="Nutzungsdauer" data-en="Service life" data-zh="使用年限">Nutzungsdauer</span></label>
+      <div class="roi-in"><input id="roi-streife-jahre" name="jahre" type="number" inputmode="decimal" min="1" step="1" value="5"><span><span data-de="Jahre" data-en="years" data-zh="年">Jahre</span></span></div>
+      
+    </div></div></details>
+      <p class="roi-models"><span data-de="Passende Modelle:" data-en="Matching models:" data-zh="对应机型：">Passende Modelle:</span> <a href="../produkte/streifenroboter-m20.html"><span data-i18n-de>Streifenroboter M20</span><span data-i18n-en>Patrol Robot M20</span><span data-i18n-zh>巡逻机器人 M20</span></a> · <a href="../produkte/x30.html">X30</a> · <a href="../produkte/lynx-m20-pro.html">Lynx M20 Pro</a></p>
+    </div>
+    <aside class="roi-out" id="ergebnis-streife">
+      <p class="roi-out__k"><span data-de="Ihr Ergebnis · Schätzung" data-en="Your result · estimate" data-zh="测算结果 · 估算">Ihr Ergebnis · Schätzung</span></p>
+      <div data-roi-result></div>
+      <a class="btn btn--arrow roi-cta" data-roi-cta href="../service/kontakt.html"><span data-de="Mit diesen Werten Angebot anfragen" data-en="Request a quote with these values" data-zh="带着这组数值询价">Mit diesen Werten Angebot anfragen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p class="roi-note"><span data-de="Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen." data-en="Non-binding example calculation based on your inputs, all amounts net. Not a performance promise." data-zh="基于您输入数值的示例测算，不具约束力，金额均不含税，不构成效果承诺。">Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen.</span></p>
+    </aside>
+  </form>
+  <form class="roi-panel" id="rechner-reinigung" data-roi="clean" data-roi-id="reinigung" data-roi-name="Gewerbliche Reinigung" hidden novalidate onsubmit="return false">
+    <a class="roi-mini" href="#ergebnis-reinigung" data-roi-mini aria-live="polite"></a>
+    <div class="roi-inputs">
+      <p class="roi-q"><span data-de="Bodenreinigung großer Flächen mit C4 oder C5." data-en="Floor cleaning of large areas with C4 or C5." data-zh="用 C4 或 C5 清洁大面积地面。">Bodenreinigung großer Flächen mit C4 oder C5.</span></p>
+      <div class="roi-seg" role="group">
+        <label><input type="radio" name="modell" value="c4" checked><span>C4</span></label>
+        <label><input type="radio" name="modell" value="c5"><span>C5</span></label>
+      </div>
+      <fieldset><legend><span data-de="Investition" data-en="Investment" data-zh="投入">Investition</span></legend><div class="roi-grid"><div class="roi-f roi-f--req">
+      <label for="roi-reinigung-preis"><span data-de="Anschaffungspreis je Roboter (netto)" data-en="Purchase price per robot (net)" data-zh="单台采购价（不含税）">Anschaffungspreis je Roboter (netto)</span></label>
+      <div class="roi-in"><input id="roi-reinigung-preis" name="preis" type="number" inputmode="decimal" min="0" step="any" value="" placeholder="—"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Ihr Angebotspreis. Wir zeigen bewusst keinen Platzhalterpreis." data-en="Your quoted price. We deliberately show no placeholder price." data-zh="填入您的报价。我们不显示占位价格。">Ihr Angebotspreis. Wir zeigen bewusst keinen Platzhalterpreis.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-reinigung-anzahl"><span data-de="Anzahl Roboter" data-en="Number of robots" data-zh="机器人台数">Anzahl Roboter</span></label>
+      <div class="roi-in"><input id="roi-reinigung-anzahl" name="anzahl" type="number" inputmode="decimal" min="1" step="1" value="1"></div>
+      
+    </div></div></fieldset><fieldset><legend><span data-de="Fläche" data-en="Area" data-zh="面积">Fläche</span></legend><div class="roi-grid"><div class="roi-f">
+      <label for="roi-reinigung-flaeche"><span data-de="Bodenfläche je Reinigung" data-en="Floor area per cleaning" data-zh="每次清洁面积">Bodenfläche je Reinigung</span></label>
+      <div class="roi-in"><input id="roi-reinigung-flaeche" name="flaeche" type="number" inputmode="decimal" min="0" step="50" value="3000"><span>m²</span></div>
+      
+    </div><div class="roi-f">
+      <label for="roi-reinigung-freq"><span data-de="Reinigungen pro Monat" data-en="Cleanings per month" data-zh="每月清洁次数">Reinigungen pro Monat</span></label>
+      <div class="roi-in"><input id="roi-reinigung-freq" name="freq" type="number" inputmode="decimal" min="0" step="1" value="22"></div>
+      
+    </div></div></fieldset><fieldset><legend><span data-de="Personal heute" data-en="Staff today" data-zh="现有人工">Personal heute</span></legend><div class="roi-grid"><div class="roi-f">
+      <label for="roi-reinigung-leistMensch"><span data-de="Ihr Leistungswert heute" data-en="Your current performance rate" data-zh="目前的人工效率定额">Ihr Leistungswert heute</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-reinigung-leistMensch" name="leistMensch" type="number" inputmode="decimal" min="0" step="any" value="250"><span>m²/h</span></div>
+      <p class="roi-hint"><span data-de="Manuell oder mit handgeführter Maschine. Beispielwert, bitte Ihren Kalkulationswert eintragen." data-en="Manual or with a walk-behind machine. Example value, please enter your own rate." data-zh="纯人工或手推洗地机。示例值，请填入您自己的定额。">Manuell oder mit handgeführter Maschine. Beispielwert, bitte Ihren Kalkulationswert eintragen.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-reinigung-lohn"><span data-de="Stundenlohn (brutto) oder Verrechnungssatz" data-en="Hourly wage (gross) or billing rate" data-zh="时薪（税前）或外包单价">Stundenlohn (brutto) oder Verrechnungssatz</span></label>
+      <div class="roi-in"><input id="roi-reinigung-lohn" name="lohn" type="number" inputmode="decimal" min="0" step="any" value="15"><span>€/h</span></div>
+      <p class="roi-hint"><span data-de="Branchenmindestlohn Gebäudereinigung, Lohngruppe 1, seit 01.01.2026" data-en="Sector minimum wage, building cleaning, wage group 1, since 01.01.2026" data-zh="德国清洁行业最低工资（工资组 1），2026 年 1 月 1 日起">Branchenmindestlohn Gebäudereinigung, Lohngruppe 1, seit 01.01.2026</span></p>
+    </div></div></fieldset><details class="roi-adv"><summary><span data-de="Weitere Annahmen" data-en="More assumptions" data-zh="更多假设">Weitere Annahmen</span></summary><div class="roi-grid"><div class="roi-f">
+      <label for="roi-reinigung-leistRobot"><span data-de="Flächenleistung Roboter (Praxis)" data-en="Robot area rate (in practice)" data-zh="机器人实际清洁效率">Flächenleistung Roboter (Praxis)</span></label>
+      <div class="roi-in"><input id="roi-reinigung-leistRobot" name="leistRobot" type="number" inputmode="decimal" min="0" step="any" value="350"><span>m²/h</span></div>
+      <p class="roi-hint"><span data-de="Praxis-Richtwert 200–800 m²/h laut Branchen-Fallstudie; Herstellerangabe theoretisch bis 1.400 (C4) bzw. 1.980 m²/h (C5)." data-en="Practical guide value 200–800 m²/h per industry case study; manufacturer figure theoretically up to 1,400 (C4) or 1,980 m²/h (C5)." data-zh="行业实测参考 200–800 m²/h；厂家理论值最高 1,400（C4）/ 1,980 m²/h（C5）。">Praxis-Richtwert 200–800 m²/h laut Branchen-Fallstudie; Herstellerangabe theoretisch bis 1.400 (C4) bzw. 1.980 m²/h (C5).</span></p>
+    </div><div class="roi-f">
+      <label for="roi-reinigung-rest"><span data-de="Manuelle Restfläche" data-en="Manual remainder" data-zh="仍需人工的面积">Manuelle Restfläche</span></label>
+      <div class="roi-in"><input id="roi-reinigung-rest" name="rest" type="number" inputmode="decimal" min="0" max="100" step="any" value="10"><span>%</span></div>
+      <p class="roi-hint"><span data-de="Ränder, Ecken, verstellte Bereiche. Laut Fallstudie mindestens 10 %." data-en="Edges, corners, obstructed areas. At least 10 % per case study." data-zh="边角与被遮挡区域。案例研究建议至少 10%。">Ränder, Ecken, verstellte Bereiche. Laut Fallstudie mindestens 10 %.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-reinigung-ruest"><span data-de="Betreuung je Einsatz" data-en="Attendance per run" data-zh="每次看护时间">Betreuung je Einsatz</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-reinigung-ruest" name="ruest" type="number" inputmode="decimal" min="0" step="any" value="15"><span><span data-de="min" data-en="min" data-zh="分钟">min</span></span></div>
+      <p class="roi-hint"><span data-de="Wasser, Schmutztank, Start" data-en="Water, waste tank, start" data-zh="加水、倒污水、启动">Wasser, Schmutztank, Start</span></p>
+    </div><div class="roi-f">
+      <label for="roi-reinigung-faktor"><span data-de="Arbeitgeber-Zuschlag" data-en="Employer on-costs" data-zh="雇主附加成本">Arbeitgeber-Zuschlag</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-reinigung-faktor" name="faktor" type="number" inputmode="decimal" min="0" step="any" value="25"><span>%</span></div>
+      <p class="roi-hint"><span data-de="Sozialabgaben, Urlaub, Krankheit. Beispielannahme. Bei Fremdvergabe: Verrechnungssatz oben eintragen und hier 0 setzen." data-en="Social contributions, holiday, sickness. Example assumption. If outsourced: enter the billing rate above and set this to 0." data-zh="社保、带薪假、病假。示例假设。若为外包：上面填服务商计费单价，这里填 0。">Sozialabgaben, Urlaub, Krankheit. Beispielannahme. Bei Fremdvergabe: Verrechnungssatz oben eintragen und hier 0 setzen.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-reinigung-einmal"><span data-de="Einmalige Kosten" data-en="One-off costs" data-zh="一次性费用">Einmalige Kosten</span></label>
+      <div class="roi-in"><input id="roi-reinigung-einmal" name="einmal" type="number" inputmode="decimal" min="0" step="any" value="0"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Inbetriebnahme, Schulung, Ladestation, Zubehör" data-en="Commissioning, training, charging station, accessories" data-zh="部署调试、培训、充电桩、配件">Inbetriebnahme, Schulung, Ladestation, Zubehör</span></p>
+    </div><div class="roi-f">
+      <label for="roi-reinigung-betrieb"><span data-de="Betriebskosten pro Jahr" data-en="Operating costs per year" data-zh="每年运行成本">Betriebskosten pro Jahr</span></label>
+      <div class="roi-in"><input id="roi-reinigung-betrieb" name="betrieb" type="number" inputmode="decimal" min="0" step="any" value="0"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Wartung, Strom, Akkutausch, Software, Versicherung" data-en="Maintenance, power, battery replacement, software, insurance" data-zh="维护、电费、电池更换、软件、保险">Wartung, Strom, Akkutausch, Software, Versicherung</span></p>
+    </div><div class="roi-f">
+      <label for="roi-reinigung-jahre"><span data-de="Nutzungsdauer" data-en="Service life" data-zh="使用年限">Nutzungsdauer</span></label>
+      <div class="roi-in"><input id="roi-reinigung-jahre" name="jahre" type="number" inputmode="decimal" min="1" step="1" value="5"><span><span data-de="Jahre" data-en="years" data-zh="年">Jahre</span></span></div>
+      
+    </div></div></details>
+      <p class="roi-models"><span data-de="Passende Modelle:" data-en="Matching models:" data-zh="对应机型：">Passende Modelle:</span> <a href="../produkte/reinigungsroboter-c4.html">C4</a> · <a href="../produkte/reinigungsroboter-c5.html">C5</a></p>
+    </div>
+    <aside class="roi-out" id="ergebnis-reinigung">
+      <p class="roi-out__k"><span data-de="Ihr Ergebnis · Schätzung" data-en="Your result · estimate" data-zh="测算结果 · 估算">Ihr Ergebnis · Schätzung</span></p>
+      <div data-roi-result></div>
+      <a class="btn btn--arrow roi-cta" data-roi-cta href="../service/kontakt.html"><span data-de="Mit diesen Werten Angebot anfragen" data-en="Request a quote with these values" data-zh="带着这组数值询价">Mit diesen Werten Angebot anfragen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p class="roi-note"><span data-de="Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen." data-en="Non-binding example calculation based on your inputs, all amounts net. Not a performance promise." data-zh="基于您输入数值的示例测算，不具约束力，金额均不含税，不构成效果承诺。">Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen.</span></p>
+    </aside>
+  </form>
+  <form class="roi-panel" id="rechner-humanoid" data-roi="labor" data-roi-id="humanoid" data-roi-name="Humanoide in der Fertigung" hidden novalidate onsubmit="return false">
+    <a class="roi-mini" href="#ergebnis-humanoid" data-roi-mini aria-live="polite"></a>
+    <div class="roi-inputs">
+      <p class="roi-q"><span data-de="Szenariorechnung: einfache, wiederkehrende Tätigkeiten." data-en="Scenario calculation: simple, repetitive tasks." data-zh="情景测算：简单重复性工作。">Szenariorechnung: einfache, wiederkehrende Tätigkeiten.</span></p>
+      
+      <fieldset><legend><span data-de="Investition" data-en="Investment" data-zh="投入">Investition</span></legend><div class="roi-grid"><div class="roi-f roi-f--req">
+      <label for="roi-humanoid-preis"><span data-de="Anschaffungspreis je Roboter (netto)" data-en="Purchase price per robot (net)" data-zh="单台采购价（不含税）">Anschaffungspreis je Roboter (netto)</span></label>
+      <div class="roi-in"><input id="roi-humanoid-preis" name="preis" type="number" inputmode="decimal" min="0" step="any" value="" placeholder="—"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Ihr Angebotspreis. Wir zeigen bewusst keinen Platzhalterpreis." data-en="Your quoted price. We deliberately show no placeholder price." data-zh="填入您的报价。我们不显示占位价格。">Ihr Angebotspreis. Wir zeigen bewusst keinen Platzhalterpreis.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-humanoid-anzahl"><span data-de="Anzahl Roboter" data-en="Number of robots" data-zh="机器人台数">Anzahl Roboter</span></label>
+      <div class="roi-in"><input id="roi-humanoid-anzahl" name="anzahl" type="number" inputmode="decimal" min="1" step="1" value="1"></div>
+      
+    </div></div></fieldset><fieldset><legend><span data-de="Betrieb" data-en="Operation" data-zh="运行">Betrieb</span></legend><div class="roi-grid"><div class="roi-f">
+      <label for="roi-humanoid-std"><span data-de="Betriebsstunden pro Tag" data-en="Operating hours per day" data-zh="每天运行小时">Betriebsstunden pro Tag</span></label>
+      <div class="roi-in"><input id="roi-humanoid-std" name="std" type="number" inputmode="decimal" min="0" max="24" step="any" value="8"><span>h</span></div>
+      <p class="roi-hint"><span data-de="Reine Einsatzzeit ohne Laden" data-en="Pure operating time without charging" data-zh="不含充电的实际作业时间">Reine Einsatzzeit ohne Laden</span></p>
+    </div><div class="roi-f">
+      <label for="roi-humanoid-tage"><span data-de="Betriebstage pro Jahr" data-en="Operating days per year" data-zh="每年运行天数">Betriebstage pro Jahr</span></label>
+      <div class="roi-in"><input id="roi-humanoid-tage" name="tage" type="number" inputmode="decimal" min="0" max="366" step="1" value="250"></div>
+      
+    </div></div></fieldset><fieldset><legend><span data-de="Personal heute" data-en="Staff today" data-zh="现有人工">Personal heute</span></legend><div class="roi-grid"><div class="roi-f">
+      <label for="roi-humanoid-lohn"><span data-de="Stundenlohn (brutto)" data-en="Hourly wage (gross)" data-zh="时薪（税前）">Stundenlohn (brutto)</span></label>
+      <div class="roi-in"><input id="roi-humanoid-lohn" name="lohn" type="number" inputmode="decimal" min="0" step="any" value="13.9"><span>€/h</span></div>
+      <p class="roi-hint"><span data-de="Untergrenze: gesetzlicher Mindestlohn seit 01.01.2026. Bitte Ihren Lohn eintragen." data-en="Lower bound: statutory minimum wage since 01.01.2026. Please enter your wage." data-zh="下限：德国法定最低工资（2026 年 1 月 1 日起）。请填入实际工资。">Untergrenze: gesetzlicher Mindestlohn seit 01.01.2026. Bitte Ihren Lohn eintragen.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-humanoid-zuschlag"><span data-de="Ø Schichtzuschlag" data-en="Avg. shift premium" data-zh="平均轮班补贴">Ø Schichtzuschlag</span></label>
+      <div class="roi-in"><input id="roi-humanoid-zuschlag" name="zuschlag" type="number" inputmode="decimal" min="0" step="any" value="0"><span>%</span></div>
+      
+    </div></div></fieldset><details class="roi-adv"><summary><span data-de="Weitere Annahmen" data-en="More assumptions" data-zh="更多假设">Weitere Annahmen</span></summary><div class="roi-grid"><div class="roi-f">
+      <label for="roi-humanoid-abdeckung"><span data-de="Aufgabenabdeckung" data-en="Task coverage" data-zh="任务覆盖率">Aufgabenabdeckung</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-humanoid-abdeckung" name="abdeckung" type="number" inputmode="decimal" min="0" max="100" step="any" value="50"><span>%</span></div>
+      <p class="roi-hint"><span data-de="Anteil der Tätigkeit, den der Roboter übernimmt. Beispielannahme." data-en="Share of the job the robot takes over. Example assumption." data-zh="机器人能承担的工作比例。示例假设。">Anteil der Tätigkeit, den der Roboter übernimmt. Beispielannahme.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-humanoid-tempo"><span data-de="Tempo im Vergleich zum Menschen" data-en="Speed compared with a person" data-zh="相对人工的速度">Tempo im Vergleich zum Menschen</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-humanoid-tempo" name="tempo" type="number" inputmode="decimal" min="0" step="any" value="60"><span>%</span></div>
+      <p class="roi-hint"><span data-de="Beispielannahme" data-en="Example assumption" data-zh="示例假设">Beispielannahme</span></p>
+    </div><div class="roi-f">
+      <label for="roi-humanoid-aufsicht"><span data-de="Betreuung durch Personal" data-en="Supervision by staff" data-zh="人工看护">Betreuung durch Personal</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-humanoid-aufsicht" name="aufsicht" type="number" inputmode="decimal" min="0" step="any" value="1"><span><span data-de="h/Tag" data-en="h/day" data-zh="小时/天">h/Tag</span></span></div>
+      
+    </div><div class="roi-f">
+      <label for="roi-humanoid-faktor"><span data-de="Arbeitgeber-Zuschlag" data-en="Employer on-costs" data-zh="雇主附加成本">Arbeitgeber-Zuschlag</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-humanoid-faktor" name="faktor" type="number" inputmode="decimal" min="0" step="any" value="25"><span>%</span></div>
+      <p class="roi-hint"><span data-de="Sozialabgaben, Urlaub, Krankheit. Beispielannahme. Bei Fremdvergabe: Verrechnungssatz oben eintragen und hier 0 setzen." data-en="Social contributions, holiday, sickness. Example assumption. If outsourced: enter the billing rate above and set this to 0." data-zh="社保、带薪假、病假。示例假设。若为外包：上面填服务商计费单价，这里填 0。">Sozialabgaben, Urlaub, Krankheit. Beispielannahme. Bei Fremdvergabe: Verrechnungssatz oben eintragen und hier 0 setzen.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-humanoid-einmal"><span data-de="Einmalige Kosten" data-en="One-off costs" data-zh="一次性费用">Einmalige Kosten</span></label>
+      <div class="roi-in"><input id="roi-humanoid-einmal" name="einmal" type="number" inputmode="decimal" min="0" step="any" value="0"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Inbetriebnahme, Schulung, Ladestation, Zubehör" data-en="Commissioning, training, charging station, accessories" data-zh="部署调试、培训、充电桩、配件">Inbetriebnahme, Schulung, Ladestation, Zubehör</span></p>
+    </div><div class="roi-f">
+      <label for="roi-humanoid-betrieb"><span data-de="Betriebskosten pro Jahr" data-en="Operating costs per year" data-zh="每年运行成本">Betriebskosten pro Jahr</span></label>
+      <div class="roi-in"><input id="roi-humanoid-betrieb" name="betrieb" type="number" inputmode="decimal" min="0" step="any" value="0"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Wartung, Strom, Akkutausch, Software, Versicherung" data-en="Maintenance, power, battery replacement, software, insurance" data-zh="维护、电费、电池更换、软件、保险">Wartung, Strom, Akkutausch, Software, Versicherung</span></p>
+    </div><div class="roi-f">
+      <label for="roi-humanoid-jahre"><span data-de="Nutzungsdauer" data-en="Service life" data-zh="使用年限">Nutzungsdauer</span></label>
+      <div class="roi-in"><input id="roi-humanoid-jahre" name="jahre" type="number" inputmode="decimal" min="1" step="1" value="5"><span><span data-de="Jahre" data-en="years" data-zh="年">Jahre</span></span></div>
+      
+    </div></div></details>
+      <p class="roi-models"><span data-de="Passende Modelle:" data-en="Matching models:" data-zh="对应机型：">Passende Modelle:</span> <a href="../produkte/humanoid-dr02.html">DR02</a></p>
+    </div>
+    <aside class="roi-out" id="ergebnis-humanoid">
+      <p class="roi-out__k"><span data-de="Ihr Ergebnis · Schätzung" data-en="Your result · estimate" data-zh="测算结果 · 估算">Ihr Ergebnis · Schätzung</span></p>
+      <div data-roi-result></div>
+      <a class="btn btn--arrow roi-cta" data-roi-cta href="../service/kontakt.html"><span data-de="Mit diesen Werten Angebot anfragen" data-en="Request a quote with these values" data-zh="带着这组数值询价">Mit diesen Werten Angebot anfragen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p class="roi-note"><span data-de="Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen." data-en="Non-binding example calculation based on your inputs, all amounts net. Not a performance promise." data-zh="基于您输入数值的示例测算，不具约束力，金额均不含税，不构成效果承诺。">Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen.</span></p>
+    </aside>
+  </form>
+  <form class="roi-panel" id="rechner-feuerwehr" data-roi="fire" data-roi-id="feuerwehr" data-roi-name="Feuerwehr &amp; Gefahrenabwehr" hidden novalidate onsubmit="return false">
+    <a class="roi-mini" href="#ergebnis-feuerwehr" data-roi-mini aria-live="polite"></a>
+    <div class="roi-inputs">
+      <p class="roi-q"><span data-de="Weniger Menschen im Gefahrenbereich." data-en="Fewer people in the danger zone." data-zh="让更少的人进入危险区。">Weniger Menschen im Gefahrenbereich.</span></p>
+      
+      <fieldset><legend><span data-de="Investition" data-en="Investment" data-zh="投入">Investition</span></legend><div class="roi-grid"><div class="roi-f roi-f--req">
+      <label for="roi-feuerwehr-preis"><span data-de="Anschaffungspreis je Roboter (netto)" data-en="Purchase price per robot (net)" data-zh="单台采购价（不含税）">Anschaffungspreis je Roboter (netto)</span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-preis" name="preis" type="number" inputmode="decimal" min="0" step="any" value="" placeholder="—"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Ihr Angebotspreis. Wir zeigen bewusst keinen Platzhalterpreis." data-en="Your quoted price. We deliberately show no placeholder price." data-zh="填入您的报价。我们不显示占位价格。">Ihr Angebotspreis. Wir zeigen bewusst keinen Platzhalterpreis.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-feuerwehr-anzahl"><span data-de="Anzahl Roboter" data-en="Number of robots" data-zh="机器人台数">Anzahl Roboter</span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-anzahl" name="anzahl" type="number" inputmode="decimal" min="1" step="1" value="1"></div>
+      
+    </div></div></fieldset><fieldset><legend><span data-de="Einsätze" data-en="Operations" data-zh="出动情况">Einsätze</span></legend><div class="roi-grid"><div class="roi-f">
+      <label for="roi-feuerwehr-einsaetze"><span data-de="Einsätze im Gefahrenbereich pro Jahr" data-en="Operations in the danger zone per year" data-zh="每年进入危险区的出动次数">Einsätze im Gefahrenbereich pro Jahr</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-einsaetze" name="einsaetze" type="number" inputmode="decimal" min="0" step="1" value="20"></div>
+      <p class="roi-hint"><span data-de="Beispielwert" data-en="Example value" data-zh="示例值">Beispielwert</span></p>
+    </div><div class="roi-f">
+      <label for="roi-feuerwehr-personen"><span data-de="Einsatzkräfte im Gefahrenbereich je Einsatz" data-en="Responders in the danger zone per operation" data-zh="每次进入危险区的人数">Einsatzkräfte im Gefahrenbereich je Einsatz</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-personen" name="personen" type="number" inputmode="decimal" min="0" step="1" value="2"></div>
+      <p class="roi-hint"><span data-de="Beispielwert" data-en="Example value" data-zh="示例值">Beispielwert</span></p>
+    </div><div class="roi-f">
+      <label for="roi-feuerwehr-minuten"><span data-de="Aufenthalt je Einsatz" data-en="Time inside per operation" data-zh="每次停留时间">Aufenthalt je Einsatz</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-minuten" name="minuten" type="number" inputmode="decimal" min="0" step="any" value="30"><span><span data-de="min" data-en="min" data-zh="分钟">min</span></span></div>
+      <p class="roi-hint"><span data-de="Beispielwert" data-en="Example value" data-zh="示例值">Beispielwert</span></p>
+    </div><div class="roi-f">
+      <label for="roi-feuerwehr-anteil"><span data-de="Davon übernimmt der Roboter" data-en="Share the robot takes over" data-zh="其中由机器人承担">Davon übernimmt der Roboter</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-anteil" name="anteil" type="number" inputmode="decimal" min="0" max="100" step="any" value="50"><span>%</span></div>
+      <p class="roi-hint"><span data-de="Erkundung, Kühlung, Löschangriff aus der Distanz. Beispielannahme." data-en="Reconnaissance, cooling, remote fire attack. Example assumption." data-zh="侦察、冷却、远程灭火。示例假设。">Erkundung, Kühlung, Löschangriff aus der Distanz. Beispielannahme.</span></p>
+    </div></div></fieldset><details class="roi-adv"><summary><span data-de="Vermeidbare Kosten (optional, Ihre Werte)" data-en="Avoidable costs (optional, your values)" data-zh="可避免的损失（选填，请用您自己的数据）">Vermeidbare Kosten (optional, Ihre Werte)</span></summary><div class="roi-grid"><div class="roi-f">
+      <label for="roi-feuerwehr-verl"><span data-de="Verletzungen je 100 Einsätze" data-en="Injuries per 100 operations" data-zh="每 100 次出动的受伤人次">Verletzungen je 100 Einsätze</span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-verl" name="verl" type="number" inputmode="decimal" min="0" step="any" value=""></div>
+      <p class="roi-hint"><span data-de="Aus Ihrer eigenen Unfallstatistik. Wir geben hier bewusst keinen Wert vor." data-en="From your own accident statistics. We deliberately give no default here." data-zh="来自贵单位的事故统计。此处我们不提供默认值。">Aus Ihrer eigenen Unfallstatistik. Wir geben hier bewusst keinen Wert vor.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-feuerwehr-ausfall"><span data-de="Ausfalltage je Verletzung" data-en="Days lost per injury" data-zh="每次受伤离岗天数">Ausfalltage je Verletzung</span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-ausfall" name="ausfall" type="number" inputmode="decimal" min="0" step="any" value=""></div>
+      
+    </div><div class="roi-f">
+      <label for="roi-feuerwehr-tagkosten"><span data-de="Kosten je Ausfalltag" data-en="Cost per day lost" data-zh="每个离岗日的成本">Kosten je Ausfalltag</span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-tagkosten" name="tagkosten" type="number" inputmode="decimal" min="0" step="any" value=""><span>€</span></div>
+      <p class="roi-hint"><span data-de="Lohnfortzahlung und Vertretung" data-en="Continued pay and cover" data-zh="工资续付与顶班">Lohnfortzahlung und Vertretung</span></p>
+    </div><div class="roi-f">
+      <label for="roi-feuerwehr-dauer"><span data-de="Anteil dauerhaft dienstunfähig" data-en="Share permanently unfit for duty" data-zh="其中永久离岗的比例">Anteil dauerhaft dienstunfähig</span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-dauer" name="dauer" type="number" inputmode="decimal" min="0" max="100" step="any" value=""><span>%</span></div>
+      
+    </div><div class="roi-f">
+      <label for="roi-feuerwehr-ausbildung"><span data-de="Ausbildungsaufwand je Einsatzkraft" data-en="Training cost per responder" data-zh="每名队员的培训投入">Ausbildungsaufwand je Einsatzkraft</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-ausbildung" name="ausbildung" type="number" inputmode="decimal" min="0" step="any" value="51264"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Beispiel: 18 Monate Anwärterbezüge inkl. Sonderzuschlag (Berufsfeuerwehr Köln), ohne Lehrgangs- und Ausbilderkosten." data-en="Example: 18 months of trainee pay incl. special allowance (Cologne fire service), excluding course and instructor costs." data-zh="示例：18 个月见习工资含特别补贴（科隆职业消防队），不含课程与教官成本。">Beispiel: 18 Monate Anwärterbezüge inkl. Sonderzuschlag (Berufsfeuerwehr Köln), ohne Lehrgangs- und Ausbilderkosten.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-feuerwehr-stillstand"><span data-de="Vermiedener Sach- und Stillstandsschaden pro Jahr" data-en="Avoided property and downtime loss per year" data-zh="每年避免的财产与停产损失">Vermiedener Sach- und Stillstandsschaden pro Jahr</span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-stillstand" name="stillstand" type="number" inputmode="decimal" min="0" step="any" value=""><span>€</span></div>
+      <p class="roi-hint"><span data-de="Für Werkfeuerwehren: Ihre eigene Schätzung" data-en="For plant fire brigades: your own estimate" data-zh="适用于企业专职消防队：请自行估算">Für Werkfeuerwehren: Ihre eigene Schätzung</span></p>
+    </div><div class="roi-f">
+      <label for="roi-feuerwehr-einmal"><span data-de="Einmalige Kosten" data-en="One-off costs" data-zh="一次性费用">Einmalige Kosten</span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-einmal" name="einmal" type="number" inputmode="decimal" min="0" step="any" value="0"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Inbetriebnahme, Schulung, Ladestation, Zubehör" data-en="Commissioning, training, charging station, accessories" data-zh="部署调试、培训、充电桩、配件">Inbetriebnahme, Schulung, Ladestation, Zubehör</span></p>
+    </div><div class="roi-f">
+      <label for="roi-feuerwehr-betrieb"><span data-de="Betriebskosten pro Jahr" data-en="Operating costs per year" data-zh="每年运行成本">Betriebskosten pro Jahr</span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-betrieb" name="betrieb" type="number" inputmode="decimal" min="0" step="any" value="0"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Wartung, Strom, Akkutausch, Software, Versicherung" data-en="Maintenance, power, battery replacement, software, insurance" data-zh="维护、电费、电池更换、软件、保险">Wartung, Strom, Akkutausch, Software, Versicherung</span></p>
+    </div><div class="roi-f">
+      <label for="roi-feuerwehr-jahre"><span data-de="Nutzungsdauer" data-en="Service life" data-zh="使用年限">Nutzungsdauer</span></label>
+      <div class="roi-in"><input id="roi-feuerwehr-jahre" name="jahre" type="number" inputmode="decimal" min="1" step="1" value="8"><span><span data-de="Jahre" data-en="years" data-zh="年">Jahre</span></span></div>
+      
+    </div></div></details>
+      <p class="roi-models"><span data-de="Passende Modelle:" data-en="Matching models:" data-zh="对应机型：">Passende Modelle:</span> <a href="../produkte/loeschroboter-x30.html"><span data-i18n-de>Löschroboter X30-SP</span><span data-i18n-en>Fire Monitor Robot X30-SP</span><span data-i18n-zh>消防水炮机器人 X30-SP</span></a> · <a href="../produkte/erkundungsroboter-m20.html"><span data-i18n-de>Erkundungsroboter M20</span><span data-i18n-en>Reconnaissance Robot M20</span><span data-i18n-zh>消防侦察机器人 M20</span></a> · <a href="../produkte/x50.html">X50</a></p>
+    </div>
+    <aside class="roi-out" id="ergebnis-feuerwehr">
+      <p class="roi-out__k"><span data-de="Ihr Ergebnis · Schätzung" data-en="Your result · estimate" data-zh="测算结果 · 估算">Ihr Ergebnis · Schätzung</span></p>
+      <div data-roi-result></div>
+      <a class="btn btn--arrow roi-cta" data-roi-cta href="../service/kontakt.html"><span data-de="Mit diesen Werten Angebot anfragen" data-en="Request a quote with these values" data-zh="带着这组数值询价">Mit diesen Werten Angebot anfragen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p class="roi-note"><span data-de="Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen." data-en="Non-binding example calculation based on your inputs, all amounts net. Not a performance promise." data-zh="基于您输入数值的示例测算，不具约束力，金额均不含税，不构成效果承诺。">Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen.</span></p>
+    </aside>
+  </form>
+  <form class="roi-panel" id="rechner-pflege" data-roi="care" data-roi-id="pflege" data-roi-name="Pflege &amp; Betreuung" hidden novalidate onsubmit="return false">
+    <a class="roi-mini" href="#ergebnis-pflege" data-roi-mini aria-live="polite"></a>
+    <div class="roi-inputs">
+      <p class="roi-q"><span data-de="Zeit für Pflege freispielen, nicht Pflege ersetzen." data-en="Free up time for care, not replace care." data-zh="为护理腾出时间，而不是替代护理。">Zeit für Pflege freispielen, nicht Pflege ersetzen.</span></p>
+      
+      <fieldset><legend><span data-de="Investition" data-en="Investment" data-zh="投入">Investition</span></legend><div class="roi-grid"><div class="roi-f roi-f--req">
+      <label for="roi-pflege-preis"><span data-de="Anschaffungspreis je Roboter (netto)" data-en="Purchase price per robot (net)" data-zh="单台采购价（不含税）">Anschaffungspreis je Roboter (netto)</span></label>
+      <div class="roi-in"><input id="roi-pflege-preis" name="preis" type="number" inputmode="decimal" min="0" step="any" value="" placeholder="—"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Ihr Angebotspreis. Wir zeigen bewusst keinen Platzhalterpreis." data-en="Your quoted price. We deliberately show no placeholder price." data-zh="填入您的报价。我们不显示占位价格。">Ihr Angebotspreis. Wir zeigen bewusst keinen Platzhalterpreis.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-pflege-anzahl"><span data-de="Anzahl Roboter" data-en="Number of robots" data-zh="机器人台数">Anzahl Roboter</span></label>
+      <div class="roi-in"><input id="roi-pflege-anzahl" name="anzahl" type="number" inputmode="decimal" min="1" step="1" value="1"></div>
+      
+    </div></div></fieldset><fieldset><legend><span data-de="Einsatz" data-en="Use" data-zh="使用情况">Einsatz</span></legend><div class="roi-grid"><div class="roi-f">
+      <label for="roi-pflege-bewohner"><span data-de="Betreute Personen je Roboter" data-en="People supported per robot" data-zh="每台机器人服务的人数">Betreute Personen je Roboter</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-pflege-bewohner" name="bewohner" type="number" inputmode="decimal" min="0" step="1" value="10"></div>
+      <p class="roi-hint"><span data-de="Beispielwert" data-en="Example value" data-zh="示例值">Beispielwert</span></p>
+    </div><div class="roi-f">
+      <label for="roi-pflege-minuten"><span data-de="Übernommene Zeit je Person und Tag" data-en="Time taken over per person and day" data-zh="每人每天由机器人承担的时间">Übernommene Zeit je Person und Tag</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-pflege-minuten" name="minuten" type="number" inputmode="decimal" min="0" step="any" value="10"><span><span data-de="min" data-en="min" data-zh="分钟">min</span></span></div>
+      <p class="roi-hint"><span data-de="Erinnern, Unterhaltung, Aktivierung, einfache Botengänge. Beispielannahme." data-en="Reminders, conversation, activation, simple errands. Example assumption." data-zh="提醒、陪聊、活动引导、简单跑腿。示例假设。">Erinnern, Unterhaltung, Aktivierung, einfache Botengänge. Beispielannahme.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-pflege-tage"><span data-de="Einsatztage pro Jahr" data-en="Days of use per year" data-zh="每年使用天数">Einsatztage pro Jahr</span></label>
+      <div class="roi-in"><input id="roi-pflege-tage" name="tage" type="number" inputmode="decimal" min="0" max="366" step="1" value="365"></div>
+      
+    </div></div></fieldset><fieldset><legend><span data-de="Personal" data-en="Staff" data-zh="人员">Personal</span></legend><div class="roi-grid"><div class="roi-f">
+      <label for="roi-pflege-lohn"><span data-de="Stundenlohn Pflegehilfskraft (brutto)" data-en="Hourly wage, care assistant (gross)" data-zh="护理助理时薪（税前）">Stundenlohn Pflegehilfskraft (brutto)</span></label>
+      <div class="roi-in"><input id="roi-pflege-lohn" name="lohn" type="number" inputmode="decimal" min="0" step="any" value="16.52"><span>€/h</span></div>
+      <p class="roi-hint"><span data-de="Pflegemindestlohn für Pflegehilfskräfte seit 01.07.2026" data-en="Care minimum wage for care assistants since 01.07.2026" data-zh="德国护理助理最低工资，2026 年 7 月 1 日起">Pflegemindestlohn für Pflegehilfskräfte seit 01.07.2026</span></p>
+    </div></div></fieldset><details class="roi-adv"><summary><span data-de="Weitere Annahmen" data-en="More assumptions" data-zh="更多假设">Weitere Annahmen</span></summary><div class="roi-grid"><div class="roi-f">
+      <label for="roi-pflege-faktor"><span data-de="Arbeitgeber-Zuschlag" data-en="Employer on-costs" data-zh="雇主附加成本">Arbeitgeber-Zuschlag</span> <span class="roi-ex"><span data-de="Beispiel" data-en="example" data-zh="示例">Beispiel</span></span></label>
+      <div class="roi-in"><input id="roi-pflege-faktor" name="faktor" type="number" inputmode="decimal" min="0" step="any" value="25"><span>%</span></div>
+      <p class="roi-hint"><span data-de="Sozialabgaben, Urlaub, Krankheit. Beispielannahme. Bei Fremdvergabe: Verrechnungssatz oben eintragen und hier 0 setzen." data-en="Social contributions, holiday, sickness. Example assumption. If outsourced: enter the billing rate above and set this to 0." data-zh="社保、带薪假、病假。示例假设。若为外包：上面填服务商计费单价，这里填 0。">Sozialabgaben, Urlaub, Krankheit. Beispielannahme. Bei Fremdvergabe: Verrechnungssatz oben eintragen und hier 0 setzen.</span></p>
+    </div><div class="roi-f">
+      <label for="roi-pflege-einmal"><span data-de="Einmalige Kosten" data-en="One-off costs" data-zh="一次性费用">Einmalige Kosten</span></label>
+      <div class="roi-in"><input id="roi-pflege-einmal" name="einmal" type="number" inputmode="decimal" min="0" step="any" value="0"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Inbetriebnahme, Schulung, Ladestation, Zubehör" data-en="Commissioning, training, charging station, accessories" data-zh="部署调试、培训、充电桩、配件">Inbetriebnahme, Schulung, Ladestation, Zubehör</span></p>
+    </div><div class="roi-f">
+      <label for="roi-pflege-betrieb"><span data-de="Betriebskosten pro Jahr" data-en="Operating costs per year" data-zh="每年运行成本">Betriebskosten pro Jahr</span></label>
+      <div class="roi-in"><input id="roi-pflege-betrieb" name="betrieb" type="number" inputmode="decimal" min="0" step="any" value="0"><span>€</span></div>
+      <p class="roi-hint"><span data-de="Wartung, Strom, Akkutausch, Software, Versicherung" data-en="Maintenance, power, battery replacement, software, insurance" data-zh="维护、电费、电池更换、软件、保险">Wartung, Strom, Akkutausch, Software, Versicherung</span></p>
+    </div><div class="roi-f">
+      <label for="roi-pflege-jahre"><span data-de="Nutzungsdauer" data-en="Service life" data-zh="使用年限">Nutzungsdauer</span></label>
+      <div class="roi-in"><input id="roi-pflege-jahre" name="jahre" type="number" inputmode="decimal" min="1" step="1" value="5"><span><span data-de="Jahre" data-en="years" data-zh="年">Jahre</span></span></div>
+      
+    </div></div></details>
+      <p class="roi-models"><span data-de="Passende Modelle:" data-en="Matching models:" data-zh="对应机型：">Passende Modelle:</span> <a href="../produkte/heimroboter-q1.html">Q1</a> · <a href="../produkte/heimroboter-t1.html">T1</a></p>
+    </div>
+    <aside class="roi-out" id="ergebnis-pflege">
+      <p class="roi-out__k"><span data-de="Ihr Ergebnis · Schätzung" data-en="Your result · estimate" data-zh="测算结果 · 估算">Ihr Ergebnis · Schätzung</span></p>
+      <div data-roi-result></div>
+      <a class="btn btn--arrow roi-cta" data-roi-cta href="../service/kontakt.html"><span data-de="Mit diesen Werten Angebot anfragen" data-en="Request a quote with these values" data-zh="带着这组数值询价">Mit diesen Werten Angebot anfragen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p class="roi-note"><span data-de="Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen." data-en="Non-binding example calculation based on your inputs, all amounts net. Not a performance promise." data-zh="基于您输入数值的示例测算，不具约束力，金额均不含税，不构成效果承诺。">Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen.</span></p>
+    </aside>
+  </form>
+    </div>
+  </section>
+
+  <section class="section section--tight" id="methode">
+    <div class="wrap roi-method">
+      <div>
+        <p class="kicker"><span data-de="So rechnen wir" data-en="How we calculate" data-zh="计算方法">So rechnen wir</span></p>
+        <h2 style="font-size:var(--step-2)"><span data-de="Offene Formeln statt Versprechen" data-en="Open formulas instead of promises" data-zh="公开公式，而不是承诺">Offene Formeln statt Versprechen</span></h2>
+        <ol class="roi-formula"><li><b><span data-de="Gesamtinvestition" data-en="Total investment" data-zh="总投入">Gesamtinvestition</span></b> = <span data-de="Preis × Anzahl + einmalige Kosten" data-en="price × units + one-off costs" data-zh="单价 × 台数 + 一次性费用">Preis × Anzahl + einmalige Kosten</span></li><li><b><span data-de="Personalkosten je Stunde" data-en="Staff cost per hour" data-zh="每小时人工成本">Personalkosten je Stunde</span></b> = <span data-de="Stundenlohn × (1 + Arbeitgeber-Zuschlag) × (1 + Schichtzuschlag)" data-en="hourly wage × (1 + employer on-costs) × (1 + shift premium)" data-zh="时薪 ×（1 + 雇主附加成本）×（1 + 轮班补贴）">Stundenlohn × (1 + Arbeitgeber-Zuschlag) × (1 + Schichtzuschlag)</span></li><li><b><span data-de="Ersparnis pro Jahr" data-en="Saving per year" data-zh="年净节省">Ersparnis pro Jahr</span></b> = <span data-de="Betriebsstunden × Aufgabenabdeckung × Tempo × Personalkosten − Betreuung − Betriebskosten" data-en="operating hours × task coverage × speed × staff cost − supervision − operating costs" data-zh="运行小时 × 任务覆盖率 × 速度系数 × 人工成本 − 看护成本 − 运行成本">Betriebsstunden × Aufgabenabdeckung × Tempo × Personalkosten − Betreuung − Betriebskosten</span></li><li><b><span data-de="Amortisation" data-en="Payback" data-zh="回本时间">Amortisation</span></b> = <span data-de="Gesamtinvestition ÷ Ersparnis pro Jahr" data-en="total investment ÷ saving per year" data-zh="总投入 ÷ 年净节省">Gesamtinvestition ÷ Ersparnis pro Jahr</span></li>
+        </ol>
+        <p class="t-small t-dim"><span data-de="Reinigung: eingesparte Stunden = Fläche × Häufigkeit ÷ Ihr Leistungswert, abzüglich manueller Restfläche und Betreuung. Feuerwehr und Pflege zeigen bewusst keine Amortisation, sondern vermiedene Gefahrenstunden bzw. freigespielte Pflegezeit." data-en="Cleaning: hours saved = area × frequency ÷ your performance rate, minus manual remainder and attendance. Fire and care deliberately show no payback, but avoided hazard hours and freed-up care time." data-zh="清洁：节省工时 = 面积 × 频次 ÷ 您的效率定额，再减去人工补扫和看护时间。消防与养老不显示回本时间，而是显示减少的危险暴露小时和腾出的护理时间。">Reinigung: eingesparte Stunden = Fläche × Häufigkeit ÷ Ihr Leistungswert, abzüglich manueller Restfläche und Betreuung. Feuerwehr und Pflege zeigen bewusst keine Amortisation, sondern vermiedene Gefahrenstunden bzw. freigespielte Pflegezeit.</span></p>
+      </div>
+      <div>
+        <p class="kicker"><span data-de="Quellen der Vorgabewerte" data-en="Sources of default values" data-zh="默认值来源">Quellen der Vorgabewerte</span></p>
+        <ul class="roi-src"><li><span data-de="Gesetzlicher Mindestlohn 13,90 €/h seit 01.01.2026" data-en="Statutory minimum wage €13.90/h since 01.01.2026" data-zh="德国法定最低工资 13.90 €/小时，2026-01-01 起">Gesetzlicher Mindestlohn 13,90 €/h seit 01.01.2026</span><small>Mindestlohngesetz</small></li><li><span data-de="Gebäudereinigung, Lohngruppe 1: 15,00 €/h seit 01.01.2026 (Verordnung gültig bis 31.12.2026)" data-en="Building cleaning, wage group 1: €15.00/h since 01.01.2026 (ordinance valid until 31.12.2026)" data-zh="清洁行业工资组 1：15.00 €/小时，2026-01-01 起（条例有效期至 2026-12-31）">Gebäudereinigung, Lohngruppe 1: 15,00 €/h seit 01.01.2026 (Verordnung gültig bis 31.12.2026)</span><small>10. GebäudeArbbV</small></li><li><span data-de="Pflegemindestlohn Pflegehilfskräfte: 16,52 €/h seit 01.07.2026" data-en="Care minimum wage, care assistants: €16.52/h since 01.07.2026" data-zh="护理助理最低工资：16.52 €/小时，2026-07-01 起">Pflegemindestlohn Pflegehilfskräfte: 16,52 €/h seit 01.07.2026</span><small>PflegeArbbV · Bundesregierung</small></li><li><span data-de="Sicherheitsdienst Sachsen, unterste Vergütungsgruppe: 15,15 €/h ab 01.02.2026" data-en="Security services Saxony, lowest pay group: €15.15/h from 01.02.2026" data-zh="萨克森州安保行业最低工资组：15.15 €/小时，2026-02-01 起">Sicherheitsdienst Sachsen, unterste Vergütungsgruppe: 15,15 €/h ab 01.02.2026</span><small>ZEFAS Sachsen</small></li><li><span data-de="Scheuersaugroboter in der Praxis: Ø ca. 350 m²/h im Test, Richtwert 200–800 m²/h, mind. 10 % der Fläche manuell" data-en="Scrubber robots in practice: avg. approx. 350 m²/h in test, guide value 200–800 m²/h, at least 10 % of the area manual" data-zh="洗地机器人实测：平均约 350 m²/h，参考范围 200–800 m²/h，至少 10% 面积需人工">Scheuersaugroboter in der Praxis: Ø ca. 350 m²/h im Test, Richtwert 200–800 m²/h, mind. 10 % der Fläche manuell</span><small>WKO Fallstudie Scheuersaug-Roboter</small></li><li><span data-de="Anwärterbezüge Brandmeister-Ausbildung, 18 Monate: ca. 1.499 € + ca. 1.349 € Sonderzuschlag pro Monat" data-en="Trainee pay, firefighter training, 18 months: approx. €1,499 + approx. €1,349 special allowance per month" data-zh="消防员培训 18 个月见习工资：每月约 1,499 € + 约 1,349 € 特别补贴">Anwärterbezüge Brandmeister-Ausbildung, 18 Monate: ca. 1.499 € + ca. 1.349 € Sonderzuschlag pro Monat</span><small>Stadt Köln, Berufsfeuerwehr</small></li></ul>
+        <p class="t-small t-dim"><span data-de="Stand: November 2026. Als „Beispiel“ markierte Werte sind Annahmen ohne amtliche Quelle. Bitte durch Ihre eigenen Zahlen ersetzen." data-en="As of November 2026. Values marked “example” are assumptions without an official source. Please replace them with your own figures." data-zh="数据截至 2026 年 11 月。标注“示例”的数值是没有官方来源的假设，请替换为您自己的数据。">Stand: November 2026. Als „Beispiel“ markierte Werte sind Annahmen ohne amtliche Quelle. Bitte durch Ihre eigenen Zahlen ersetzen.</span></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img src="../assets/img/logo-light-900.webp" alt="NIC Robotics" width="900" height="153" loading="lazy">
+        <p><span data-de="Vierbeiner, Rad-Bein-Roboter und Servicerobotik für Industrie, Energieversorgung, Rettungsdienst und Forschung. Vertrieb, Integration und Service in Europa." data-en="Quadrupeds, wheel-legged robots and service robotics for industry, utilities, emergency services and research. Sales, integration and service across Europe." data-zh="面向工业、电力、消防救援与科研机构的四足机器人、轮足机器人与服务机器人。在欧洲本地销售、集成与售后。">Vierbeiner, Rad-Bein-Roboter und Servicerobotik für Industrie, Energieversorgung, Rettungsdienst und Forschung. Vertrieb, Integration und Service in Europa.</span></p>
+        <p class="t-small t-dim" style="margin-top:1rem">
+          <span data-de="Eine Marke der" data-en="A brand of" data-zh="隶属于">Eine Marke der</span> <a class="link" href="https://www.ayjy.de" rel="noopener">An Yuan GmbH</a>
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4><span data-de="Produkte" data-en="Products" data-zh="产品">Produkte</span></h4>
+        <ul>
+          <li><a href="../produkte/index.html?kategorie=vierbeiner"><span data-i18n-de>Vierbeiner-Roboter</span><span data-i18n-en>Quadruped Robots</span><span data-i18n-zh>四足机器人</span></a></li>
+<li><a href="../produkte/index.html?kategorie=radbein"><span data-i18n-de>Rad-Bein-Roboter</span><span data-i18n-en>Wheel-Legged Robots</span><span data-i18n-zh>轮足机器人</span></a></li>
+<li><a href="../produkte/index.html?kategorie=humanoid"><span data-i18n-de>Humanoide Roboter</span><span data-i18n-en>Humanoid Robots</span><span data-i18n-zh>人形机器人</span></a></li>
+<li><a href="../produkte/heimroboter.html"><span data-i18n-de>Heimroboter</span><span data-i18n-en>Home Robots</span><span data-i18n-zh>家庭机器人</span></a></li>
+<li><a href="../produkte/reinigungsroboter.html"><span data-i18n-de>Gewerbliche Reinigungsroboter</span><span data-i18n-en>Commercial Cleaning Robots</span><span data-i18n-zh>商用清洁机器人</span></a></li>
+          <li><a href="../produkte/ersatzteile.html"><span data-de="Ersatzteile &amp; Zubehör" data-en="Spare parts" data-zh="配件与备件">Ersatzteile &amp; Zubehör</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4><span data-de="Service &amp; Support" data-en="Service &amp; Support" data-zh="技术服务">Service &amp; Support</span></h4>
+        <ul>
+          <li><a href="../service/index.html"><span data-de="Garantie &amp; Servicezentrum" data-en="Warranty &amp; service centre" data-zh="保修与维修中心">Garantie &amp; Servicezentrum</span></a></li>
+          <li><a href="../service/angebot.html"><span data-de="Persönliches Angebot" data-en="Personal quote" data-zh="专属报价">Persönliches Angebot</span></a></li>
+          <li><a href="../service/ruecksendung.html"><span data-de="Rücksendung &amp; Reparatur" data-en="Returns &amp; repair" data-zh="退货与维修">Rücksendung &amp; Reparatur</span></a></li>
+          <li><a href="../service/kontakt.html"><span data-de="Kontakt &amp; Beratung" data-en="Contact &amp; advice" data-zh="联系与咨询">Kontakt &amp; Beratung</span></a></li>
+          <li><a href="../einsatzbereiche/index.html"><span data-de="Anwendungen" data-en="Applications" data-zh="应用场景">Anwendungen</span></a></li>
+          <li><a href="../referenzen/index.html"><span data-de="Referenzen" data-en="References" data-zh="客户案例">Referenzen</span></a></li>
+          <li><a href="https://wa.me/491776812580" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4><span data-de="Unternehmen" data-en="Company" data-zh="公司">Unternehmen</span></h4>
+        <ul>
+          <li><a href="../unternehmen/ueber-uns.html"><span data-de="Über uns" data-en="About us" data-zh="关于我们">Über uns</span></a></li>
+          <li><a href="../unternehmen/impressum.html">Impressum</a></li>
+          <li><a href="../unternehmen/datenschutz.html"><span data-de="Datenschutz" data-en="Privacy" data-zh="隐私政策">Datenschutz</span></a></li>
+          <li><a href="../unternehmen/agb.html"><span data-de="AGB" data-en="Terms" data-zh="通用条款">AGB</span></a></li>
+          <li><a href="../unternehmen/widerruf.html"><span data-de="Widerrufsrecht" data-en="Right of withdrawal" data-zh="撤回权">Widerrufsrecht</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4><span data-de="Kontakt" data-en="Contact" data-zh="联系我们">Kontakt</span></h4>
+        <div class="footer-contact">
+          <address>
+            An Yuan GmbH<br>
+            Ober der Röth 4<br>
+            65824 Schwalbach am Taunus<br>
+            Deutschland
+          </address>
+          <a href="tel:+491776812580"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1z"/></svg> 0177 6812580</a>
+          <a href="mailto:info@nic-robotics.de">info@nic-robotics.de</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> An Yuan GmbH. <span data-de="Alle Rechte vorbehalten." data-en="All rights reserved." data-zh="保留所有权利。">Alle Rechte vorbehalten.</span></span>
+      <span class="t-mono"><span data-de="Alle Preise netto zzgl. USt. und Versand." data-en="All prices net, plus VAT and shipping." data-zh="所有价格均为净价，不含增值税与运费。">Alle Preise netto zzgl. USt. und Versand.</span></span>
+      <nav aria-label="Rechtliches">
+        <a href="../unternehmen/impressum.html">Impressum</a>
+        <a href="../unternehmen/datenschutz.html"><span data-de="Datenschutz" data-en="Privacy" data-zh="隐私政策">Datenschutz</span></a>
+        <a href="../unternehmen/agb.html"><span data-de="AGB" data-en="Terms" data-zh="通用条款">AGB</span></a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="offer-modal" role="dialog" aria-modal="true" aria-labelledby="offer-modal-title">
+  <div class="modal__panel">
+    <div class="modal__head">
+      <div>
+        <h2 id="offer-modal-title"><span data-de="Persönliches Angebot" data-en="Personal quote" data-zh="专属报价">Persönliches Angebot</span></h2>
+        <p><span data-de="Sagen Sie uns, was Sie vorhaben — wir rechnen Konfiguration, Stückzahl und Lieferzeit und melden uns innerhalb eines Werktages." data-en="Tell us what you have in mind — we will price the configuration, quantity and lead time and reply within one working day." data-zh="告诉我们您的计划——我们会核算配置、数量与交期，并在一个工作日内回复您。">Sagen Sie uns, was Sie vorhaben — wir rechnen Konfiguration, Stückzahl und Lieferzeit und melden uns innerhalb eines Werktages.</span></p>
+      </div>
+      <button class="modal__close" type="button" data-modal-close aria-label="Schließen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <form data-validate data-mailto="sales@nic-robotics.de" novalidate>
+        <div class="form-status" role="status" aria-live="polite"></div>
+        <div class="field-grid field-grid--2">
+          <div class="field span-2">
+            <label for="om-product"><span data-de="Produkt" data-en="Product" data-zh="产品">Produkt</span></label>
+            <input class="input" type="text" id="om-product" name="produkt" data-fill="product" readonly>
+          </div>
+          <div class="field">
+            <label for="om-name"><span data-de="Name" data-en="Name" data-zh="姓名">Name</span> <span class="req">*</span></label>
+            <input class="input" type="text" id="om-name" name="name" required autocomplete="name">
+            <span class="err-msg"><span data-de="Bitte Namen angeben." data-en="Please enter your name." data-zh="请填写姓名。">Bitte Namen angeben.</span></span>
+          </div>
+          <div class="field">
+            <label for="om-company"><span data-de="Firma / Einrichtung" data-en="Company / institution" data-zh="公司 / 机构">Firma / Einrichtung</span> <span class="req">*</span></label>
+            <input class="input" type="text" id="om-company" name="firma" required autocomplete="organization">
+            <span class="err-msg"><span data-de="Bitte Firma angeben." data-en="Please enter your organisation." data-zh="请填写公司名称。">Bitte Firma angeben.</span></span>
+          </div>
+          <div class="field">
+            <label for="om-email">E-Mail <span class="req">*</span></label>
+            <input class="input" type="email" id="om-email" name="email" required autocomplete="email">
+            <span class="err-msg"><span data-de="Bitte gültige E-Mail angeben." data-en="Please enter a valid e-mail." data-zh="请填写有效的电子邮箱。">Bitte gültige E-Mail angeben.</span></span>
+          </div>
+          <div class="field">
+            <label for="om-phone"><span data-de="Telefon" data-en="Phone" data-zh="电话">Telefon</span> <span class="opt"><span data-de="optional" data-en="optional" data-zh="选填">optional</span></span></label>
+            <input class="input" type="tel" id="om-phone" name="telefon" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="om-qty"><span data-de="Stückzahl" data-en="Quantity" data-zh="数量">Stückzahl</span></label>
+            <input class="input" type="number" id="om-qty" name="stueckzahl" min="1" value="1">
+          </div>
+          <div class="field">
+            <label for="om-target"><span data-de="Voraussichtliches Budget" data-en="Expected budget" data-zh="预计预算">Voraussichtliches Budget</span> <span class="opt"><span data-de="optional" data-en="optional" data-zh="选填">optional</span></span></label>
+            <div class="input-group">
+              <input class="input" type="number" id="om-target" name="budget" min="0" step="100" placeholder="—">
+              <span class="unit">EUR</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="om-purpose"><span data-de="Zweck der Anfrage" data-en="Purpose of the enquiry" data-zh="询价用途">Zweck der Anfrage</span></label>
+            <select class="select" id="om-purpose" name="zweck">
+              <option value="auswahl"><span data-de="Technische Auswahl" data-en="Technical selection" data-zh="技术选型">Technische Auswahl</span></option>
+              <option value="budget" selected><span data-de="Projektbudget" data-en="Project budget" data-zh="项目预算">Projektbudget</span></option>
+              <option value="beschaffung"><span data-de="Verbindliche Beschaffung" data-en="Formal procurement" data-zh="正式采购">Verbindliche Beschaffung</span></option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="om-when"><span data-de="Geplanter Beschaffungszeitraum" data-en="Planned procurement window" data-zh="计划采购时间">Geplanter Beschaffungszeitraum</span></label>
+            <select class="select" id="om-when" name="zeitraum">
+              <option value="sofort"><span data-de="Sofort — Budget freigegeben" data-en="Now — budget approved" data-zh="立即——预算已批准">Sofort — Budget freigegeben</span></option>
+              <option value="quartal"><span data-de="Innerhalb dieses Quartals" data-en="Within this quarter" data-zh="本季度内">Innerhalb dieses Quartals</span></option>
+              <option value="jahr" selected><span data-de="Innerhalb dieses Jahres" data-en="Within this year" data-zh="本年度内">Innerhalb dieses Jahres</span></option>
+              <option value="projekt"><span data-de="Noch in der Projektierung" data-en="Still at planning stage" data-zh="仍在项目规划阶段">Noch in der Projektierung</span></option>
+              <option value="info"><span data-de="Nur Information, keine Beschaffung" data-en="Information only, no procurement" data-zh="仅了解信息，暂不采购">Nur Information, keine Beschaffung</span></option>
+            </select>
+          </div>
+          <div class="field span-2" data-version-field hidden>
+            <label for="om-version"><span data-de="Version" data-en="Version" data-zh="版本">Version</span></label>
+            <select class="select" id="om-version" name="version"></select>
+          </div>
+          <div class="field span-2">
+            <label for="om-msg"><span data-de="Ihr Einsatzfall und Ihre Fragen" data-en="Your application and questions" data-zh="您的应用场景与问题">Ihr Einsatzfall und Ihre Fragen</span></label>
+            <textarea class="textarea" id="om-msg" name="nachricht" placeholder="Wo soll der Roboter arbeiten? Welche Nutzlast, welche Umgebung, welche Schnittstellen? Was muss er können, damit er für Sie infrage kommt?" data-attr="placeholder" data-de="Wo soll der Roboter arbeiten? Welche Nutzlast, welche Umgebung, welche Schnittstellen? Was muss er können, damit er für Sie infrage kommt?" data-en="Where will the robot work? What payload, what environment, what interfaces? What does it have to do to be worth considering?" data-zh="机器人将在哪里工作？需要多大负载、什么样的环境、哪些接口？它需要具备什么能力才值得您考虑？"></textarea>
+          </div>
+          <p class="om-incl span-2"><span data-de="Das Angebot enthält: Konfiguration und Version, Stückpreis netto, Lieferzeit, Lieferumfang, Gewährleistung sowie Einweisung und Service in Deutschland." data-en="The quote covers: configuration and version, net unit price, lead time, scope of delivery, warranty, plus instruction and service in Germany." data-zh="报价包含：配置与版本、不含税单价、交货期、供货范围、质保，以及德国本地培训与服务。">Das Angebot enthält: Konfiguration und Version, Stückpreis netto, Lieferzeit, Lieferumfang, Gewährleistung sowie Einweisung und Service in Deutschland.</span></p>
+          <div class="field span-2">
+            <label class="consent">
+              <input type="checkbox" name="datenschutz" required>
+              <span><span data-de="Ich willige ein, dass meine Angaben zur Bearbeitung der Anfrage gespeichert und verwendet werden." data-en="I consent to my details being stored and used to process this enquiry." data-zh="我同意贵公司存储并使用我提交的信息，用于处理本次咨询。">Ich willige ein, dass meine Angaben zur Bearbeitung der Anfrage gespeichert und verwendet werden.</span>
+                <a href="../unternehmen/datenschutz.html"><span data-de="Datenschutzerklärung" data-en="Privacy notice" data-zh="隐私声明">Datenschutzerklärung</span></a> <span class="req">*</span></span>
+            </label>
+            <span class="err-msg"><span data-de="Bitte bestätigen Sie die Datenschutzerklärung." data-en="Please confirm the privacy notice." data-zh="请确认隐私声明。">Bitte bestätigen Sie die Datenschutzerklärung.</span></span>
+          </div>
+        </div>
+        <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="cluster mt">
+          <button class="btn btn--lg btn--arrow" type="submit"><span data-de="Angebot anfordern" data-en="Request quote" data-zh="索取报价">Angebot anfordern</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <span class="t-small t-dim"><span data-de="Antwort innerhalb eines Werktages." data-en="Reply within one working day." data-zh="一个工作日内回复。">Antwort innerhalb eines Werktages.</span></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal modal--wide" id="quickview" role="dialog" aria-modal="true" aria-labelledby="qv-title">
+  <div class="modal__panel">
+    <div class="modal__head">
+      <div>
+        <p class="qv-brand t-mono"></p>
+        <h2 id="qv-title"></h2>
+        <p class="qv-tag"></p>
+      </div>
+      <button class="modal__close" type="button" data-modal-close aria-label="Schließen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal__body qv-body"></div>
+  </div>
+</div>
+
+<script src="../assets/js/catalog.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>window.NIC_CONTACT = {"whatsapp":"491776812580","crisp":"5d7708ec-1961-4e2c-b304-30ce137eece1","email":"sales@nic-robotics.de","root":"../"};</script>
+<script src="../assets/js/inquiry.js"></script>
+<script src="../assets/js/roi.js"></script>
+</body>
+</html>

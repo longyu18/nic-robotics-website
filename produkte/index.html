@@ -16,9 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..800;1,600..800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="../assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -181,6 +179,7 @@
             </div>
           </div>
         </li>
+        <li><a class="nav-link" href="../rechner/index.html"><span data-de="ROI-Rechner" data-en="ROI Calculator" data-zh="投资回报测算">ROI-Rechner</span></a></li>
         <li><a class="nav-link" href="../ressourcen/index.html"><span data-de="Ressourcen" data-en="Resources" data-zh="技术资源">Ressourcen</span></a></li>
         <li><a class="nav-link" href="../referenzen/index.html"><span data-de="Referenzen" data-en="References" data-zh="客户案例">Referenzen</span></a></li>
         <li>
@@ -286,6 +285,7 @@
       </div>
       <div class="ccard-grid" data-cf-grid>
 <article class="ccard" data-cat="vierbeiner" data-kind="platform" data-id="x30" data-uses="industrie energie feuerwehr forschung" data-search="x30 x30 nic-qd-x30 industrie-vierbeiner industrial quadruped 工业四足机器人" data-order="1" data-name="X30">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="x30"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/x30.html" tabindex="-1" aria-hidden="true">
     <span class="ccard__badge"><span data-i18n-de>Flaggschiff</span><span data-i18n-en>Flagship</span><span data-i18n-zh>旗舰机型</span></span>
     <picture>
@@ -299,16 +299,13 @@
     <p class="ccard__desc"><span data-de="Vierbeiner für Industrieinspektion und schwieriges Gelände." data-en="Quadruped for industrial inspection and difficult terrain." data-zh="面向工业巡检与复杂地形作业的四足机器人。">Vierbeiner für Industrieinspektion und schwieriges Gelände.</span></p>
     <p class="ccard__specs"><span data-de="IP67" data-en="IP67" data-zh="IP67">IP67</span><span data-de="20 kg Nutzlast" data-en="20 kg payload" data-zh="20 kg 负载">20 kg Nutzlast</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/x30.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="x30"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="x30"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="x30"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article>
 <article class="ccard" data-cat="vierbeiner" data-kind="platform" data-id="x50" data-uses="energie feuerwehr sicherheit forschung" data-search="x50 x50 nic-qd-x50 schwerlast-vierbeiner heavy-duty quadruped 重载四足机器人" data-order="1.5" data-name="X50">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="x50"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/x50.html" tabindex="-1" aria-hidden="true">
     <span class="ccard__badge"><span data-i18n-de>Neu</span><span data-i18n-en>New</span><span data-i18n-zh>新品</span></span>
     <picture>
@@ -322,16 +319,13 @@
     <p class="ccard__desc"><span data-de="Schwerlast-Vierbeiner für Transport, Brandschutz und Inspektion." data-en="Heavy-duty quadruped for transport, firefighting and inspection." data-zh="面向运输、消防与巡检的重载四足机器人。">Schwerlast-Vierbeiner für Transport, Brandschutz und Inspektion.</span></p>
     <p class="ccard__specs"><span data-de="50 kg Nutzlast" data-en="50 kg payload" data-zh="50 kg 负载">50 kg Nutzlast</span><span data-de="IP67" data-en="IP67" data-zh="IP67">IP67</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/x50.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="x50"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="x50"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="x50"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article>
 <article class="ccard" data-cat="vierbeiner" data-kind="platform" data-id="lite3" data-uses="forschung museum" data-search="lite3 lite3 nic-qd-lite3 forschungs- &amp; bildungsplattform research &amp; education platform 科研与教学平台" data-order="2" data-name="Lite3">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="lite3"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/lite3.html" tabindex="-1" aria-hidden="true">
     
     <picture>
@@ -345,16 +339,13 @@
     <p class="ccard__desc"><span data-de="Für Robotik-Lehre, Forschung und Eigenentwicklung." data-en="For robotics teaching, research and custom development." data-zh="适用于机器人教学、科研与二次开发。">Für Robotik-Lehre, Forschung und Eigenentwicklung.</span></p>
     <p class="ccard__specs"><span data-de="12 kg" data-en="12 kg" data-zh="12 kg">12 kg</span><span data-de="Offenes SDK" data-en="Open SDK" data-zh="开放 SDK">Offenes SDK</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/lite3.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="lite3"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="lite3"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="lite3"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article>
 <article class="ccard" data-cat="vierbeiner" data-kind="config" data-id="fire-cannon" data-uses="feuerwehr industrie" data-search="löschroboter x30-sp löschroboter x30-sp fire monitor robot x30-sp 消防水炮机器人 x30-sp nic-qd-fire einsatzkonfiguration · brandbekämpfung mission configuration · firefighting 任务配置 · 消防灭火" data-order="3" data-name="Löschroboter X30-SP">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="fire-cannon"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/loeschroboter-x30.html" tabindex="-1" aria-hidden="true">
     
     <picture>
@@ -368,16 +359,13 @@
     <p class="ccard__desc"><span data-de="Professionelle Roboterplattform für Brandbekämpfung." data-en="Professional robot platform for firefighting." data-zh="面向消防救援场景的专业机器人平台。">Professionelle Roboterplattform für Brandbekämpfung.</span></p>
     <p class="ccard__specs"><span data-de="Wurfweite 60 m" data-en="60 m throw" data-zh="射程 60 m">Wurfweite 60 m</span><span data-de="IP67" data-en="IP67" data-zh="IP67">IP67</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/loeschroboter-x30.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="fire-cannon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="fire-cannon"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="fire-cannon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article>
 <article class="ccard" data-cat="radbein" data-kind="platform" data-id="lynx-m20s" data-uses="energie sicherheit feuerwehr logistik forschung" data-search="lynx m20 s lynx m20 s nic-wl-m20s rad-bein-roboter wheel-legged robot 轮足机器人" data-order="1" data-name="Lynx M20 S">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="lynx-m20s"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/lynx-m20s.html" tabindex="-1" aria-hidden="true">
     <span class="ccard__badge"><span data-i18n-de>Neu</span><span data-i18n-en>New</span><span data-i18n-zh>新品</span></span>
     <picture>
@@ -391,16 +379,13 @@
     <p class="ccard__desc"><span data-de="Hohes Tempo und Geländegängigkeit in einem Roboter." data-en="High speed and terrain capability in one robot." data-zh="兼具高速移动与复杂地形通过能力。">Hohes Tempo und Geländegängigkeit in einem Roboter.</span></p>
     <p class="ccard__specs"><span data-de="9 m/s" data-en="9 m/s" data-zh="9 m/s">9 m/s</span><span data-de="IP67" data-en="IP67" data-zh="IP67">IP67</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/lynx-m20s.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="lynx-m20s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="lynx-m20s"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="lynx-m20s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article>
 <article class="ccard" data-cat="radbein" data-kind="platform" data-id="lynx-m20-pro" data-uses="energie logistik forschung sicherheit" data-search="lynx m20 pro lynx m20 pro nic-wl-m20p rad-bein-roboter wheel-legged robot 轮足机器人" data-order="2" data-name="Lynx M20 Pro">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="lynx-m20-pro"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/lynx-m20-pro.html" tabindex="-1" aria-hidden="true">
     
     <picture>
@@ -414,16 +399,13 @@
     <p class="ccard__desc"><span data-de="Leistungsstarker Rad-Bein-Roboter für professionelle Inspektion." data-en="High-performance wheel-legged robot for professional inspection." data-zh="面向专业巡检任务的高性能轮足机器人。">Leistungsstarker Rad-Bein-Roboter für professionelle Inspektion.</span></p>
     <p class="ccard__specs"><span data-de="3× Rechenleistung" data-en="3× computing" data-zh="3× 算力">3× Rechenleistung</span><span data-de="IP66" data-en="IP66" data-zh="IP66">IP66</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/lynx-m20-pro.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="lynx-m20-pro"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="lynx-m20-pro"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="lynx-m20-pro"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article>
 <article class="ccard" data-cat="radbein" data-kind="platform" data-id="lynx-m20" data-uses="energie logistik forschung" data-search="lynx m20 lynx m20 nic-wl-m20 rad-bein-roboter wheel-legged robot 轮足机器人" data-order="3" data-name="Lynx M20">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="lynx-m20"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/lynx-m20.html" tabindex="-1" aria-hidden="true">
     
     <picture>
@@ -437,16 +419,13 @@
     <p class="ccard__desc"><span data-de="Rad-Bein-Plattform für unterschiedliches Gelände." data-en="Wheel-legged platform for varied terrain." data-zh="适用于多种地形的轮足移动平台。">Rad-Bein-Plattform für unterschiedliches Gelände.</span></p>
     <p class="ccard__specs"><span data-de="5 m/s" data-en="5 m/s" data-zh="5 m/s">5 m/s</span><span data-de="IP66" data-en="IP66" data-zh="IP66">IP66</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/lynx-m20.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="lynx-m20"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="lynx-m20"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="lynx-m20"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article>
 <article class="ccard" data-cat="radbein" data-kind="config" data-id="patrol-m20" data-uses="sicherheit museum industrie" data-search="streifenroboter m20 streifenroboter m20 patrol robot m20 巡逻机器人 m20 nic-wl-patrol einsatzkonfiguration · sicherheit mission configuration · security 任务配置 · 安防" data-order="4" data-name="Streifenroboter M20">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="patrol-m20"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/streifenroboter-m20.html" tabindex="-1" aria-hidden="true">
     
     <picture>
@@ -460,16 +439,13 @@
     <p class="ccard__desc"><span data-de="Robotersystem für Streife auf Gelände und Werksflächen." data-en="Robot system for patrols on campuses and sites." data-zh="面向园区与安防巡逻的机器人系统。">Robotersystem für Streife auf Gelände und Werksflächen.</span></p>
     <p class="ccard__specs"><span data-de="33× Zoom" data-en="33× zoom" data-zh="33 倍变焦">33× Zoom</span><span data-de="5G" data-en="5G" data-zh="5G">5G</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/streifenroboter-m20.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="patrol-m20"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="patrol-m20"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="patrol-m20"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article>
 <article class="ccard" data-cat="radbein" data-kind="config" data-id="fire-recon" data-uses="feuerwehr industrie sicherheit" data-search="erkundungsroboter m20 erkundungsroboter m20 reconnaissance robot m20 消防侦察机器人 m20 nic-wl-recon einsatzkonfiguration · erkundung mission configuration · reconnaissance 任务配置 · 侦察" data-order="5" data-name="Erkundungsroboter M20">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="fire-recon"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/erkundungsroboter-m20.html" tabindex="-1" aria-hidden="true">
     
     <picture>
@@ -483,16 +459,13 @@
     <p class="ccard__desc"><span data-de="Erkundung von Gefahrenbereichen und Erfassung von Umgebungsdaten." data-en="Reconnaissance of hazard zones and environmental data capture." data-zh="用于危险区域侦察与环境信息采集。">Erkundung von Gefahrenbereichen und Erfassung von Umgebungsdaten.</span></p>
     <p class="ccard__specs"><span data-de="6 Gase" data-en="6 gases" data-zh="6 种气体">6 Gase</span><span data-de="Mesh-Funknetz" data-en="Mesh network" data-zh="Mesh 自组网">Mesh-Funknetz</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/erkundungsroboter-m20.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="fire-recon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="fire-recon"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="fire-recon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article>
 <article class="ccard ccard--photo" data-cat="radbein" data-kind="platform" data-id="lynx-s10" data-uses="feuerwehr sicherheit industrie" data-search="lynx s10 lynx s10 nic-wl-s10 kompakter rad-bein-roboter compact wheel-legged robot 小型轮足机器人" data-order="99" data-name="Lynx S10">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="lynx-s10"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/lynx-s10.html" tabindex="-1" aria-hidden="true">
     <span class="ccard__badge"><span data-i18n-de>Neu</span><span data-i18n-en>New</span><span data-i18n-zh>新品</span></span>
     <picture>
@@ -506,21 +479,18 @@
     <p class="ccard__desc"><span data-de="Leichter Rad-Bein-Roboter für flexible Einsätze." data-en="Lightweight wheel-legged robot for agile missions." data-zh="轻量化轮足机器人，适合灵活移动任务。">Leichter Rad-Bein-Roboter für flexible Einsätze.</span></p>
     <p class="ccard__specs"><span data-de="&lt; 20 kg" data-en="&lt; 20 kg" data-zh="&lt; 20 kg">&lt; 20 kg</span><span data-de="&gt; 8 m/s" data-en="&gt; 8 m/s" data-zh="&gt; 8 m/s">&gt; 8 m/s</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/lynx-s10.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="lynx-s10"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="lynx-s10"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="lynx-s10"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article>
-<article class="ccard ccard--photo" data-cat="humanoid" data-kind="platform" data-id="dr02" data-uses="energie feuerwehr industrie" data-search="dr02 dr02 nic-hu-dr02 industrieller humanoid industrial humanoid 工业级人形机器人" data-order="1" data-name="DR02">
+<article class="ccard" data-cat="humanoid" data-kind="platform" data-id="dr02" data-uses="energie feuerwehr industrie" data-search="dr02 dr02 nic-hu-dr02 industrieller humanoid industrial humanoid 工业级人形机器人" data-order="1" data-name="DR02">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="dr02"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/humanoid-dr02.html" tabindex="-1" aria-hidden="true">
     
     <picture>
-      <source srcset="../assets/img/products/dr02-main.webp" type="image/webp">
-      <img src="../assets/img/products/dr02-main.png" alt="DR02 — Industrieller Humanoid" loading="lazy" width="600" height="450">
+      <source srcset="../assets/img/products/dr02-cut.webp" type="image/webp">
+      <img src="../assets/img/products/dr02-cut.png" alt="DR02 — Industrieller Humanoid" loading="lazy" width="600" height="450">
     </picture>
   </a>
   <div class="ccard__body">
@@ -529,16 +499,13 @@
     <p class="ccard__desc"><span data-de="Humanoide Plattform für industrielle Anwendungen." data-en="Humanoid platform for industrial applications." data-zh="面向工业应用的人形机器人平台。">Humanoide Plattform für industrielle Anwendungen.</span></p>
     <p class="ccard__specs"><span data-de="IP66" data-en="IP66" data-zh="IP66">IP66</span><span data-de="−20…55 °C" data-en="−20…55 °C" data-zh="−20…55 °C">−20…55 °C</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/humanoid-dr02.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="dr02"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="dr02"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="dr02"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article>
-<article class="ccard ccard--photo" data-cat="heim" data-kind="platform" data-id="q1" data-uses="pflege forschung" data-search="q1 q1 nic-hr-q1 persönlicher humanoid personal humanoid 个人人形机器人" data-order="1" data-name="Q1">
+<article class="ccard ccard--blend" data-cat="heim" data-kind="platform" data-id="q1" data-uses="pflege forschung" data-search="q1 q1 nic-hr-q1 persönlicher humanoid personal humanoid 个人人形机器人" data-order="1" data-name="Q1">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="q1"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/heimroboter-q1.html" tabindex="-1" aria-hidden="true">
     <span class="ccard__badge"><span data-i18n-de>Neu</span><span data-i18n-en>New</span><span data-i18n-zh>新品</span></span>
     <picture>
@@ -552,16 +519,13 @@
     <p class="ccard__desc"><span data-de="Kleiner Humanoid für Interaktion und Robotik-Erlebnis." data-en="Small humanoid for personal interaction and robotics experience." data-zh="面向个人交互与机器人体验的小型人形机器人。">Kleiner Humanoid für Interaktion und Robotik-Erlebnis.</span></p>
     <p class="ccard__specs"><span data-de="88 cm" data-en="88 cm" data-zh="88 cm">88 cm</span><span data-de="22 Gelenke" data-en="22 joints" data-zh="22 自由度">22 Gelenke</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/heimroboter-q1.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="q1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="q1"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="q1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article>
 <article class="ccard" data-cat="heim" data-kind="platform" data-id="t1" data-uses="pflege" data-search="t1 t1 nic-hr-t1 wandelbarer begleitroboter transforming companion robot 轮足变形陪伴机器人" data-order="2" data-name="T1">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="t1"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/heimroboter-t1.html" tabindex="-1" aria-hidden="true">
     <span class="ccard__badge"><span data-i18n-de>Neu</span><span data-i18n-en>New</span><span data-i18n-zh>新品</span></span>
     <picture>
@@ -575,16 +539,13 @@
     <p class="ccard__desc"><span data-de="Rad-Bein-Roboter mit zwei umschaltbaren Bewegungsformen." data-en="Wheel-legged robot with two switchable motion modes." data-zh="可切换运动形态的轮足双形态机器人。">Rad-Bein-Roboter mit zwei umschaltbaren Bewegungsformen.</span></p>
     <p class="ccard__specs"><span data-de="2 Formen" data-en="2 modes" data-zh="双形态">2 Formen</span><span data-de="3 m/s" data-en="3 m/s" data-zh="3 m/s">3 m/s</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/heimroboter-t1.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="t1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="t1"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="t1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article>
 <article class="ccard" data-cat="reinigung" data-kind="platform" data-id="c5" data-uses="logistik museum" data-search="c5 c5 nic-cl-c5 reinigungsroboter für große flächen cleaning robot for large areas 中大型场景清洁机器人" data-order="1" data-name="C5">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="c5"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/reinigungsroboter-c5.html" tabindex="-1" aria-hidden="true">
     
     <picture>
@@ -598,21 +559,18 @@
     <p class="ccard__desc"><span data-de="Autonome Reinigung für große gewerbliche Flächen." data-en="Autonomous cleaning for large commercial spaces." data-zh="面向大型商业空间的自主清洁机器人。">Autonome Reinigung für große gewerbliche Flächen.</span></p>
     <p class="ccard__specs"><span data-de="1.980 m²/h" data-en="1,980 m²/h" data-zh="1,980 m²/h">1.980 m²/h</span><span data-de="3-in-1" data-en="3-in-1" data-zh="三合一">3-in-1</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/reinigungsroboter-c5.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="c5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="c5"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="c5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article>
-<article class="ccard ccard--photo" data-cat="reinigung" data-kind="platform" data-id="c4" data-uses="logistik museum" data-search="c4 c4 nic-cl-c4 kompakter reinigungsroboter für enge wege compact cleaning robot for narrow routes 窄通道商用清洁机器人" data-order="2" data-name="C4">
+<article class="ccard ccard--blend" data-cat="reinigung" data-kind="platform" data-id="c4" data-uses="logistik museum" data-search="c4 c4 nic-cl-c4 kompakter reinigungsroboter für enge wege compact cleaning robot for narrow routes 窄通道商用清洁机器人" data-order="2" data-name="C4">
+  <label class="ccard__cmp"><input type="checkbox" data-cmp="c4"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="比较">Vergleichen</span></span></label>
   <a class="ccard__media" href="../produkte/reinigungsroboter-c4.html" tabindex="-1" aria-hidden="true">
     <span class="ccard__badge"><span data-i18n-de>Neu</span><span data-i18n-en>New</span><span data-i18n-zh>新品</span></span>
     <picture>
-      <source srcset="../assets/img/products/c4-main.webp" type="image/webp">
-      <img src="../assets/img/products/c4-main.jpg" alt="C4 — Kompakter Reinigungsroboter für enge Wege" loading="lazy" width="600" height="450">
+      <source srcset="../assets/img/products/c4-white.webp" type="image/webp">
+      <img src="../assets/img/products/c4-white.jpg" alt="C4 — Kompakter Reinigungsroboter für enge Wege" loading="lazy" width="600" height="450">
     </picture>
   </a>
   <div class="ccard__body">
@@ -621,12 +579,8 @@
     <p class="ccard__desc"><span data-de="Gewerbliche Reinigung für schmale Gänge." data-en="Commercial cleaning for narrow aisles." data-zh="适用于狭窄通道的商用清洁机器人。">Gewerbliche Reinigung für schmale Gänge.</span></p>
     <p class="ccard__specs"><span data-de="Gang 600 mm" data-en="600 mm aisle" data-zh="通道 600 mm">Gang 600 mm</span><span data-de="1.400 m²/h" data-en="1,400 m²/h" data-zh="1,400 m²/h">1.400 m²/h</span></p>
     <div class="ccard__foot">
-      <a class="btn btn--sm ccard__go" href="../produkte/reinigungsroboter-c4.html"><span data-de="Details ansehen" data-en="View details" data-zh="查看详情">Details ansehen</span></a>
-      <button class="ccard__inq" type="button" data-inq-add="c4"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Zur Anfrageliste" data-en="Add to inquiry list" data-zh="加入询价清单">Zur Anfrageliste</span></button>
-    </div>
-    <div class="ccard__meta">
-      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="价格请询价">Preis auf Anfrage</span></p>
-      <label class="ccard__cmp"><input type="checkbox" data-cmp="c4"> <span><span data-de="Vergleichen" data-en="Compare" data-zh="加入比较">Vergleichen</span></span></label>
+      <p class="ccard__price"><span data-de="Preis auf Anfrage" data-en="Price on request" data-zh="询价">Preis auf Anfrage</span></p>
+      <button class="ccard__inq" type="button" data-inq-add="c4"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-de="Anfrageliste" data-en="Inquiry list" data-zh="询价清单">Anfrageliste</span></button>
     </div>
   </div>
 </article></div>

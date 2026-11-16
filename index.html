@@ -16,9 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..800;1,600..800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -181,6 +179,7 @@
             </div>
           </div>
         </li>
+        <li><a class="nav-link" href="rechner/index.html"><span data-de="ROI-Rechner" data-en="ROI Calculator" data-zh="投资回报测算">ROI-Rechner</span></a></li>
         <li><a class="nav-link" href="ressourcen/index.html"><span data-de="Ressourcen" data-en="Resources" data-zh="技术资源">Ressourcen</span></a></li>
         <li><a class="nav-link" href="referenzen/index.html"><span data-de="Referenzen" data-en="References" data-zh="客户案例">Referenzen</span></a></li>
         <li>
@@ -251,8 +250,8 @@
     <div class="hero__media">
       <video data-hero-video autoplay muted loop playsinline preload="auto"
              poster="assets/img/scenes/hero-poster.jpg" aria-hidden="true">
-        <source src="assets/video/hero-loop-720.mp4" type="video/mp4" media="(max-width: 900px)">
-        <source src="assets/video/hero-loop-1080.mp4" type="video/mp4">
+        <source src="assets/video/hero-v47-720.mp4" type="video/mp4" media="(max-width: 900px)">
+        <source src="assets/video/hero-v47-1080.mp4" type="video/mp4">
       </video>
     </div>
     <div class="wrap">
@@ -269,6 +268,42 @@
         </div>
         <p class="hero__more"><a href="#kategorien"><span data-de="Alle Roboter ansehen" data-en="See all robots" data-zh="查看全部机器人">Alle Roboter ansehen</span> ↓</a></p>
       </div>
+    </div>
+  </section>
+
+  <!-- ================= v42 · FORSCHUNGSRICHTUNGEN ================= -->
+  <section class="section section--tight home-rs">
+    <div class="wrap">
+      <div class="home-rs__head reveal">
+        <p class="kicker"><span data-de="Forschung &amp; Lehre" data-en="Research &amp; Teaching" data-zh="科研与教学">Forschung &amp; Lehre</span></p>
+        <h2><span data-de="Woran forschen Sie?" data-en="What are you researching?" data-zh="您在研究什么？">Woran forschen Sie?</span></h2>
+      </div>
+      <ul class="home-rs__list"><li><a class="reveal" href="forschung/index.html#bewegung"><strong><span data-de="Bewegungsregelung und Lernen" data-en="Motion control and learning" data-zh="运动控制与学习">Bewegungsregelung und Lernen</span></strong><span><span data-de="Eigene Regler, Reinforcement Learning, Sim-to-Real." data-en="Your own controllers, reinforcement learning, sim-to-real." data-zh="自研控制器、强化学习、仿真到实机迁移。">Eigene Regler, Reinforcement Learning, Sim-to-Real.</span></span><i>Lite3 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a></li><li><a class="reveal" href="forschung/index.html#wahrnehmung"><strong><span data-de="Wahrnehmung und Navigation" data-en="Perception and navigation" data-zh="感知与导航">Wahrnehmung und Navigation</span></strong><span><span data-de="SLAM, Hindernisvermeidung, Kartierung, Multisensor-Fusion." data-en="SLAM, obstacle avoidance, mapping, multi-sensor fusion." data-zh="SLAM、避障、建图、多传感器融合。">SLAM, Hindernisvermeidung, Kartierung, Multisensor-Fusion.</span></span><i>Lite3 · Lynx M20 Pro <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a></li><li><a class="reveal" href="forschung/index.html#manipulation"><strong><span data-de="Mobile Manipulation und Embodied AI" data-en="Mobile manipulation and embodied AI" data-zh="移动操作与具身智能">Mobile Manipulation und Embodied AI</span></strong><span><span data-de="Laufen und Greifen kombinieren, Ganzkörperregelung, Humanoide, lernende Modelle auf echter Hardware." data-en="Combining walking and grasping, whole-body control, humanoids, learned models on real hardware." data-zh="行走与抓取结合、全身控制、人形机器人、大模型上实机。">Laufen und Greifen kombinieren, Ganzkörperregelung, Humanoide, lernende Modelle auf echter Hardware.</span></span><i>X30 · X50 · DR02 · Q1 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a></li><li><a class="reveal" href="forschung/index.html#interaktion"><strong><span data-de="Mensch-Roboter-Interaktion und Mehrrobotersysteme" data-en="Human-robot interaction and multi-robot systems" data-zh="人机交互与多机协同">Mensch-Roboter-Interaktion und Mehrrobotersysteme</span></strong><span><span data-de="Bedienkonzepte, Sprach- und Gestensteuerung, Akzeptanzstudien, Schwarm- und Teamverhalten." data-en="Operating concepts, voice and gesture control, acceptance studies, swarm and team behaviour." data-zh="操控方式、语音与手势控制、接受度研究、集群与编队行为。">Bedienkonzepte, Sprach- und Gestensteuerung, Akzeptanzstudien, Schwarm- und Teamverhalten.</span></span><i>Lite3 · Q1 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a></li><li><a class="reveal" href="forschung/index.html#feld"><strong><span data-de="Feldrobotik und extreme Umgebungen" data-en="Field robotics and extreme environments" data-zh="野外与极端环境机器人">Feldrobotik und extreme Umgebungen</span></strong><span><span data-de="Autonomie außerhalb des Labors: Wetter, Gelände, lange Einsätze, eigene Sensorik." data-en="Autonomy outside the lab: weather, terrain, long missions, your own sensors." data-zh="走出实验室的自主系统：天气、地形、长时间作业、自有传感器。">Autonomie außerhalb des Labors: Wetter, Gelände, lange Einsätze, eigene Sensorik.</span></span><i>X30 · X50 · Lynx M20 S <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a></li><li><a class="reveal" href="forschung/index.html#lehre"><strong><span data-de="Lehre und Praktikum" data-en="Teaching and lab courses" data-zh="教学与实训">Lehre und Praktikum</span></strong><span><span data-de="Mehrere Geräte für Lehrveranstaltungen, Abschlussarbeiten und Wettbewerbe." data-en="Several units for courses, theses and competitions." data-zh="用于课程、毕业设计与竞赛的多台设备。">Mehrere Geräte für Lehrveranstaltungen, Abschlussarbeiten und Wettbewerbe.</span></span><i>Lite3 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a></li></ul>
+    </div>
+  </section>
+
+  <!-- ================= FILM ================= -->
+  <section class="section section--tight" id="film">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2><span data-de="68 Sekunden — so läuft er." data-en="68 seconds — see how it moves." data-zh="68 秒，看它怎么走。">68 Sekunden — so läuft er.</span></h2>
+      </div>
+      <figure class="film reveal">
+        <div class="film__stage"><div class="film__frame">
+          <video class="film__video" data-film playsinline preload="none"
+                 controlslist="nodownload noplaybackrate" disablepictureinpicture
+                 poster="assets/img/scenes/film-poster.jpg">
+            <source src="assets/video/film-720.mp4" type="video/mp4" media="(max-width: 900px)">
+            <source src="assets/video/film-1080.mp4" type="video/mp4">
+          </video>
+          <button class="film__play" type="button" data-film-play aria-label="Film abspielen">
+            <span class="film__btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+            <span class="film__label"><span data-de="Film ansehen · 1:08" data-en="Watch the film · 1:08" data-zh="观看影片 · 1:08">Film ansehen · 1:08</span></span>
+          </button>
+          <span class="film__tag" aria-hidden="true">NIC · FILM 01</span>
+        </div></div>
+        <figcaption><span data-de="Lynx M20 S — Wasser, Wald, Hang, Straße." data-en="Lynx M20 S — water, forest, slope, road." data-zh="Lynx M20 S——涉水、林地、陡坡、公路。">Lynx M20 S — Wasser, Wald, Hang, Straße.</span></figcaption>
+      </figure>
     </div>
   </section>
 
@@ -324,45 +359,8 @@
     </div>
   </section>
 
-  <!-- ================= v42 · FORSCHUNGSRICHTUNGEN ================= -->
-  <section class="section section--tight home-rs">
-    <div class="wrap">
-      <div class="home-rs__head reveal">
-        <p class="kicker"><span data-de="Forschung &amp; Lehre" data-en="Research &amp; Teaching" data-zh="科研与教学">Forschung &amp; Lehre</span></p>
-        <h2><span data-de="Woran forschen Sie?" data-en="What are you researching?" data-zh="您在研究什么？">Woran forschen Sie?</span></h2>
-      </div>
-      <ul class="home-rs__list"><li><a class="reveal" href="forschung/index.html#bewegung"><strong><span data-de="Bewegungsregelung und Lernen" data-en="Motion control and learning" data-zh="运动控制与学习">Bewegungsregelung und Lernen</span></strong><span><span data-de="Eigene Regler, Reinforcement Learning, Sim-to-Real." data-en="Your own controllers, reinforcement learning, sim-to-real." data-zh="自研控制器、强化学习、仿真到实机迁移。">Eigene Regler, Reinforcement Learning, Sim-to-Real.</span></span><i>Lite3 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a></li><li><a class="reveal" href="forschung/index.html#wahrnehmung"><strong><span data-de="Wahrnehmung und Navigation" data-en="Perception and navigation" data-zh="感知与导航">Wahrnehmung und Navigation</span></strong><span><span data-de="SLAM, Hindernisvermeidung, Kartierung, Multisensor-Fusion." data-en="SLAM, obstacle avoidance, mapping, multi-sensor fusion." data-zh="SLAM、避障、建图、多传感器融合。">SLAM, Hindernisvermeidung, Kartierung, Multisensor-Fusion.</span></span><i>Lite3 · Lynx M20 Pro <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a></li><li><a class="reveal" href="forschung/index.html#manipulation"><strong><span data-de="Mobile Manipulation und Embodied AI" data-en="Mobile manipulation and embodied AI" data-zh="移动操作与具身智能">Mobile Manipulation und Embodied AI</span></strong><span><span data-de="Laufen und Greifen kombinieren, Ganzkörperregelung, Humanoide, lernende Modelle auf echter Hardware." data-en="Combining walking and grasping, whole-body control, humanoids, learned models on real hardware." data-zh="行走与抓取结合、全身控制、人形机器人、大模型上实机。">Laufen und Greifen kombinieren, Ganzkörperregelung, Humanoide, lernende Modelle auf echter Hardware.</span></span><i>X30 · X50 · DR02 · Q1 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a></li><li><a class="reveal" href="forschung/index.html#interaktion"><strong><span data-de="Mensch-Roboter-Interaktion und Mehrrobotersysteme" data-en="Human-robot interaction and multi-robot systems" data-zh="人机交互与多机协同">Mensch-Roboter-Interaktion und Mehrrobotersysteme</span></strong><span><span data-de="Bedienkonzepte, Sprach- und Gestensteuerung, Akzeptanzstudien, Schwarm- und Teamverhalten." data-en="Operating concepts, voice and gesture control, acceptance studies, swarm and team behaviour." data-zh="操控方式、语音与手势控制、接受度研究、集群与编队行为。">Bedienkonzepte, Sprach- und Gestensteuerung, Akzeptanzstudien, Schwarm- und Teamverhalten.</span></span><i>Lite3 · Q1 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a></li><li><a class="reveal" href="forschung/index.html#feld"><strong><span data-de="Feldrobotik und extreme Umgebungen" data-en="Field robotics and extreme environments" data-zh="野外与极端环境机器人">Feldrobotik und extreme Umgebungen</span></strong><span><span data-de="Autonomie außerhalb des Labors: Wetter, Gelände, lange Einsätze, eigene Sensorik." data-en="Autonomy outside the lab: weather, terrain, long missions, your own sensors." data-zh="走出实验室的自主系统：天气、地形、长时间作业、自有传感器。">Autonomie außerhalb des Labors: Wetter, Gelände, lange Einsätze, eigene Sensorik.</span></span><i>X30 · X50 · Lynx M20 S <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a></li><li><a class="reveal" href="forschung/index.html#lehre"><strong><span data-de="Lehre und Praktikum" data-en="Teaching and lab courses" data-zh="教学与实训">Lehre und Praktikum</span></strong><span><span data-de="Mehrere Geräte für Lehrveranstaltungen, Abschlussarbeiten und Wettbewerbe." data-en="Several units for courses, theses and competitions." data-zh="用于课程、毕业设计与竞赛的多台设备。">Mehrere Geräte für Lehrveranstaltungen, Abschlussarbeiten und Wettbewerbe.</span></span><i>Lite3 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a></li></ul>
-    </div>
-  </section>
-
-  <!-- ================= FILM ================= -->
-  <section class="section section--tight" id="film">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <p class="kicker"><span data-de="Film" data-en="Film" data-zh="影片">Film</span></p>
-        <h2><span data-de="68 Sekunden — so läuft er." data-en="68 seconds — see how it moves." data-zh="68 秒，看它怎么走。">68 Sekunden — so läuft er.</span></h2>
-      </div>
-      <figure class="film reveal">
-        <div class="film__stage"><div class="film__frame">
-          <video class="film__video" data-film playsinline preload="none"
-                 controlslist="nodownload noplaybackrate" disablepictureinpicture
-                 poster="assets/img/scenes/film-poster.jpg">
-            <source src="assets/video/film-720.mp4" type="video/mp4" media="(max-width: 900px)">
-            <source src="assets/video/film-1080.mp4" type="video/mp4">
-          </video>
-          <button class="film__play" type="button" data-film-play aria-label="Film abspielen">
-            <span class="film__btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
-            <span class="film__label"><span data-de="Film ansehen · 1:08" data-en="Watch the film · 1:08" data-zh="观看影片 · 1:08">Film ansehen · 1:08</span></span>
-          </button>
-          <span class="film__tag" aria-hidden="true">NIC · FILM 01</span>
-        </div></div>
-        <figcaption><span data-de="Lynx M20 S — Wasser, Wald, Hang, Straße." data-en="Lynx M20 S — water, forest, slope, road." data-zh="Lynx M20 S——涉水、林地、陡坡、公路。">Lynx M20 S — Wasser, Wald, Hang, Straße.</span></figcaption>
-      </figure>
-    </div>
-  </section>
-
   <!-- ================= FEATURED ROBOTS (hell) ================= -->
-  <section class="section section--tight sec-light sec-light--alt" id="produkte">
+  <section class="section section--tight sec-light home-feat" id="produkte">
     <div class="wrap">
       <div class="section-head section-head--split reveal">
         <div>
@@ -462,6 +460,17 @@
         </div></div>
         <figcaption><span data-de="Humanoid DR02 — IP66, für jedes Wetter. Jetzt anfragen." data-en="DR02 humanoid — IP66, for any weather. Enquire now." data-zh="DR02 人形机器人——IP66 全天候作业，现已接受询价。">Humanoid DR02 — IP66, für jedes Wetter. Jetzt anfragen.</span> <a class="link" href="produkte/humanoid-dr02.html">DR02 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- ================= v47 · LEITSATZ (wortweise) ================= -->
+  <section class="section tagline" aria-label="Leitsatz">
+    <div class="wrap">
+      <p class="tagline__text" data-words>
+        <span data-i18n-de>Roboter gehen ins Risiko.<br>Menschen bleiben in Sicherheit.</span>
+        <span data-i18n-en>Robots take the risk.<br>People stay safe.</span>
+        <span data-i18n-zh>危险交给机器人，<br>安全留给人。</span>
+      </p>
     </div>
   </section>
 

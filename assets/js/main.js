@@ -1159,12 +1159,60 @@
       var o = Array.prototype.filter.call(subj.options, function (x) { return /techn|technical|技术/i.test(x.value + ' ' + x.textContent); })[0];
       if (o) subj.value = o.value;
     }
+    if (th === 'angebot' && subj) { var oa = Array.prototype.filter.call(subj.options, function (x) { return x.value === 'angebot'; })[0]; if (oa) subj.value = oa.value; }
     if (msg && !msg.value) msg.value = (th === 'technik'
       ? T({ de: 'Technische Frage zu ', en: 'Technical question about ', zh: '关于以下产品的技术问题：' })
-      : T({ de: 'Anfrage zu ', en: 'Enquiry about ', zh: '咨询产品：' })) + (pr || '') + '\n\n';
+      : T({ de: 'Anfrage zu ', en: 'Enquiry about ', zh: '咨询产品：' })) + (pr || '') + '\n' + (q.get('werte') ? q.get('werte').split(' | ').join('\n') + '\n' : '') + '\n';
   }
 
   function init() { sync(); renderTable(); prefill(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
   document.addEventListener('nic:lang', function () { sync(); renderTable(); });
+})();
+
+/* v47 · Zustand „gescrollt“ für kompakte Bedienelemente (rAF-gedrosselt) */
+(function () {
+  var on = false, ticking = false;
+  function upd() { ticking = false; var v = window.scrollY > 320; if (v !== on) { on = v; document.documentElement.classList.toggle('is-scrolled', v); } }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+  upd();
+})();
+
+/* v47 · Leitsatz: Wörter werden beim Scrollen nacheinander hell (rAF-gedrosselt) */
+(function () {
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('[data-words]'));
+  if (!boxes.length) return;
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  boxes.forEach(function (box) {
+    Array.prototype.forEach.call(box.children, function (sp) {
+      var zh = sp.hasAttribute('data-i18n-zh');
+      var esc = function (w) { return w.replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
+      sp.innerHTML = sp.innerHTML.split(/<br\s*\/?>/i).map(function (seg) {
+        var txt = seg.replace(/<[^>]+>/g, '').trim();
+        var parts = zh ? (txt.match(/[　-〿＀-￯]|[^　-〿＀-￯]{1,2}/g) || []) : txt.split(/\s+/);
+        return parts.map(function (w) { return '<i class="w">' + esc(w) + '</i>'; }).join(zh ? '' : ' ');
+      }).join('<br>');
+    });
+    if (still) box.classList.add('is-static');
+  });
+  if (still) return;
+  var ticking = false;
+  function run() {
+    ticking = false;
+    var vh = window.innerHeight;
+    boxes.forEach(function (box) {
+      var r = box.getBoundingClientRect();
+      var p = (vh * 0.85 - r.top) / (r.height + vh * 0.35);
+      p = Math.max(0, Math.min(1, p));
+      Array.prototype.forEach.call(box.children, function (sp) {
+        if (getComputedStyle(sp).display === 'none') return;
+        var ws = sp.querySelectorAll('.w'), n = Math.round(p * ws.length);
+        for (var i = 0; i < ws.length; i++) ws[i].classList.toggle('on', i < n);
+      });
+    });
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(run); } }, { passive: true });
+  window.addEventListener('resize', run);
+  document.addEventListener('nic:lang', run);
+  run();
 })();

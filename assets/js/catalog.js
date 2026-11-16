@@ -2378,3 +2378,13 @@ NIC.productsIn = function (catId) {
     if (['energie', 'feuerwehr', 'sicherheit'].indexOf(u.id) >= 0 && u.products && u.products.indexOf('x50') < 0) u.products.push('x50');
   });
 })();
+
+/* v47 · Einheitliche Produktbühne im Katalog: freigestellte Bilder statt Szenenfotos */
+(function () {
+  var N = (typeof window !== 'undefined' ? window : globalThis).NIC;
+  if (!N || !N.products) return;
+  N.products.forEach(function (p) {
+    if (p.id === 'dr02') p.cardImg = 'dr02-cut';
+    if (p.id === 'q1' || p.id === 'c4') { p.cardImg = p.id === 'c4' ? 'c4-white' : 'q1-main'; p.cardBlend = true; }
+  });
+})();
