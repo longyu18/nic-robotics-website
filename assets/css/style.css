@@ -4098,3 +4098,9 @@ html[lang='zh'] .tagline__text { max-width: none; font-size: clamp(2.2rem, 1.1re
   .roi-mini b { font-size: 1.3rem; }
   .roipage { padding-bottom: 72px; }
 }
+/* v48.2 · „Jetzt berechnen“ und hervorgehobenes Ergebnis */
+.roi-go { width: 100%; justify-content: center; margin: 4px 0 20px; }
+.roi-out { border: 2px solid #3c98f7; box-shadow: 0 24px 60px -28px rgba(29,111,209,.55); }
+.roi-out.is-flash { animation: roiFlash 1.1s var(--ease-out); }
+@keyframes roiFlash { 0% { box-shadow: 0 0 0 0 rgba(60,152,247,.7); } 100% { box-shadow: 0 0 0 22px rgba(60,152,247,0), 0 24px 60px -28px rgba(29,111,209,.55); } }
+@media (prefers-reduced-motion: reduce) { .roi-out.is-flash { animation: none; } }

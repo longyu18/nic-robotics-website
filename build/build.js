@@ -2083,7 +2083,7 @@ function buildRoi() {
     </div>`;
   };
   const panel = (c, i) => `
-  <form class="roi-panel" id="rechner-${c.id}" data-roi="${c.kind}" data-roi-id="${c.id}" data-roi-name="${attr({ de: c.t[0], en: c.t[1], zh: c.t[2] })}"${i ? ' hidden' : ''} novalidate onsubmit="return false">
+  <form class="roi-panel" id="rechner-${c.id}" data-roi="${c.kind}" data-roi-id="${c.id}" data-roi-name="${attr({ de: c.t[0], en: c.t[1], zh: c.t[2] })}"${i ? ' hidden' : ''} novalidate>
     <a class="roi-mini" href="#ergebnis-${c.id}" data-roi-mini aria-live="polite"></a>
     <div class="roi-inputs">
       <p class="roi-q">${swx(...c.q)}</p>
@@ -2094,11 +2094,12 @@ function buildRoi() {
       ${c.groups.map(([gt, fs]) => fs.every((f) => (f[5] || {}).adv)
         ? `<details class="roi-adv"><summary>${swx(...gt)}</summary><div class="roi-grid">${fs.map((f) => field(c.id, f)).join('')}</div></details>`
         : `<fieldset><legend>${swx(...gt)}</legend><div class="roi-grid">${fs.map((f) => field(c.id, f)).join('')}</div></fieldset>`).join('')}
+      <button class="btn btn--lg btn--arrow roi-go" type="button" data-roi-go>${swx('Jetzt berechnen', 'Calculate now', '立即测算')} ${ICON.arrow}</button>
       <p class="roi-models">${swx('Passende Modelle:', 'Matching models:', '对应机型：')} ${c.prods.map(prodOf).filter(Boolean).map((p) => `<a href="${r}produkte/${p.slug}.html">${pTitle(p)}</a>`).join(' · ')}</p>
     </div>
     <aside class="roi-out" id="ergebnis-${c.id}">
       <p class="roi-out__k">${swx('Ihr Ergebnis · Schätzung', 'Your result · estimate', '测算结果 · 估算')}</p>
-      <div data-roi-result></div>
+      <div data-roi-result><p class="roi-info">${swx('Werte eintragen und „Jetzt berechnen“ drücken. Erscheint hier kein Ergebnis, bitte die Seite neu laden.', 'Enter your values and press “Calculate now”. If no result appears here, please reload the page.', '填入数值后点击“立即测算”。如果这里没有出现结果，请刷新页面。')}</p></div>
       <a class="btn btn--arrow roi-cta" data-roi-cta href="${r}service/kontakt.html">${swx('Mit diesen Werten Angebot anfragen', 'Request a quote with these values', '带着这组数值询价')} ${ICON.arrow}</a>
       <p class="roi-note">${swx('Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen.', 'Non-binding example calculation based on your inputs, all amounts net. Not a performance promise.', '基于您输入数值的示例测算，不具约束力，金额均不含税，不构成效果承诺。')}</p>
     </aside>
@@ -2172,7 +2173,7 @@ ${header(CATS, PRODUCTS, 1)}
 ${footer(CATS, 1)}
 ${offerModal(1)}
 ${quickView()}
-${scripts(1, '<script src="../assets/js/roi.js"></script>')}`;
+${scripts(1)}`;
   write('rechner/index.html', html);
 }
 

@@ -266,7 +266,7 @@
         <button type="button" role="tab" aria-selected="false" data-roi-tab="pflege"><span class="mi-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3.5l9 7.5"/><path d="M5.5 9v11.5h13V9"/><path d="M12 18.2s-3.4-2-3.4-4.3c0-1.2.9-2 2-2 .6 0 1.1.3 1.4.8.3-.5.8-.8 1.4-.8 1.1 0 2 .8 2 2 0 2.3-3.4 4.3-3.4 4.3z"/></svg></span><span data-de="Pflege &amp; Betreuung" data-en="Care &amp; companionship" data-zh="养老陪伴">Pflege &amp; Betreuung</span></button>
       </div>
       
-  <form class="roi-panel" id="rechner-streife" data-roi="labor" data-roi-id="streife" data-roi-name="Inspektion &amp; Sicherheit" novalidate onsubmit="return false">
+  <form class="roi-panel" id="rechner-streife" data-roi="labor" data-roi-id="streife" data-roi-name="Inspektion &amp; Sicherheit" novalidate>
     <a class="roi-mini" href="#ergebnis-streife" data-roi-mini aria-live="polite"></a>
     <div class="roi-inputs">
       <p class="roi-q"><span data-de="Streifen- und Inspektionsgänge, die ein Roboter übernimmt." data-en="Patrol and inspection rounds a robot takes over." data-zh="由机器人承担的巡逻与巡检。">Streifen- und Inspektionsgänge, die ein Roboter übernimmt.</span></p>
@@ -320,16 +320,17 @@
       <div class="roi-in"><input id="roi-streife-jahre" name="jahre" type="number" inputmode="decimal" min="1" step="1" value="5"><span><span data-de="Jahre" data-en="years" data-zh="年">Jahre</span></span></div>
       
     </div></div></details>
+      <button class="btn btn--lg btn--arrow roi-go" type="button" data-roi-go><span data-de="Jetzt berechnen" data-en="Calculate now" data-zh="立即测算">Jetzt berechnen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="roi-models"><span data-de="Passende Modelle:" data-en="Matching models:" data-zh="对应机型：">Passende Modelle:</span> <a href="../produkte/streifenroboter-m20.html"><span data-i18n-de>Streifenroboter M20</span><span data-i18n-en>Patrol Robot M20</span><span data-i18n-zh>巡逻机器人 M20</span></a> · <a href="../produkte/x30.html">X30</a> · <a href="../produkte/lynx-m20-pro.html">Lynx M20 Pro</a></p>
     </div>
     <aside class="roi-out" id="ergebnis-streife">
       <p class="roi-out__k"><span data-de="Ihr Ergebnis · Schätzung" data-en="Your result · estimate" data-zh="测算结果 · 估算">Ihr Ergebnis · Schätzung</span></p>
-      <div data-roi-result></div>
+      <div data-roi-result><p class="roi-info"><span data-de="Werte eintragen und „Jetzt berechnen“ drücken. Erscheint hier kein Ergebnis, bitte die Seite neu laden." data-en="Enter your values and press “Calculate now”. If no result appears here, please reload the page." data-zh="填入数值后点击“立即测算”。如果这里没有出现结果，请刷新页面。">Werte eintragen und „Jetzt berechnen“ drücken. Erscheint hier kein Ergebnis, bitte die Seite neu laden.</span></p></div>
       <a class="btn btn--arrow roi-cta" data-roi-cta href="../service/kontakt.html"><span data-de="Mit diesen Werten Angebot anfragen" data-en="Request a quote with these values" data-zh="带着这组数值询价">Mit diesen Werten Angebot anfragen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <p class="roi-note"><span data-de="Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen." data-en="Non-binding example calculation based on your inputs, all amounts net. Not a performance promise." data-zh="基于您输入数值的示例测算，不具约束力，金额均不含税，不构成效果承诺。">Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen.</span></p>
     </aside>
   </form>
-  <form class="roi-panel" id="rechner-reinigung" data-roi="clean" data-roi-id="reinigung" data-roi-name="Gewerbliche Reinigung" hidden novalidate onsubmit="return false">
+  <form class="roi-panel" id="rechner-reinigung" data-roi="clean" data-roi-id="reinigung" data-roi-name="Gewerbliche Reinigung" hidden novalidate>
     <a class="roi-mini" href="#ergebnis-reinigung" data-roi-mini aria-live="polite"></a>
     <div class="roi-inputs">
       <p class="roi-q"><span data-de="Bodenreinigung großer Flächen mit C4 oder C5." data-en="Floor cleaning of large areas with C4 or C5." data-zh="用 C4 或 C5 清洁大面积地面。">Bodenreinigung großer Flächen mit C4 oder C5.</span></p>
@@ -390,16 +391,17 @@
       <div class="roi-in"><input id="roi-reinigung-jahre" name="jahre" type="number" inputmode="decimal" min="1" step="1" value="5"><span><span data-de="Jahre" data-en="years" data-zh="年">Jahre</span></span></div>
       
     </div></div></details>
+      <button class="btn btn--lg btn--arrow roi-go" type="button" data-roi-go><span data-de="Jetzt berechnen" data-en="Calculate now" data-zh="立即测算">Jetzt berechnen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="roi-models"><span data-de="Passende Modelle:" data-en="Matching models:" data-zh="对应机型：">Passende Modelle:</span> <a href="../produkte/reinigungsroboter-c4.html">C4</a> · <a href="../produkte/reinigungsroboter-c5.html">C5</a></p>
     </div>
     <aside class="roi-out" id="ergebnis-reinigung">
       <p class="roi-out__k"><span data-de="Ihr Ergebnis · Schätzung" data-en="Your result · estimate" data-zh="测算结果 · 估算">Ihr Ergebnis · Schätzung</span></p>
-      <div data-roi-result></div>
+      <div data-roi-result><p class="roi-info"><span data-de="Werte eintragen und „Jetzt berechnen“ drücken. Erscheint hier kein Ergebnis, bitte die Seite neu laden." data-en="Enter your values and press “Calculate now”. If no result appears here, please reload the page." data-zh="填入数值后点击“立即测算”。如果这里没有出现结果，请刷新页面。">Werte eintragen und „Jetzt berechnen“ drücken. Erscheint hier kein Ergebnis, bitte die Seite neu laden.</span></p></div>
       <a class="btn btn--arrow roi-cta" data-roi-cta href="../service/kontakt.html"><span data-de="Mit diesen Werten Angebot anfragen" data-en="Request a quote with these values" data-zh="带着这组数值询价">Mit diesen Werten Angebot anfragen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <p class="roi-note"><span data-de="Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen." data-en="Non-binding example calculation based on your inputs, all amounts net. Not a performance promise." data-zh="基于您输入数值的示例测算，不具约束力，金额均不含税，不构成效果承诺。">Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen.</span></p>
     </aside>
   </form>
-  <form class="roi-panel" id="rechner-humanoid" data-roi="labor" data-roi-id="humanoid" data-roi-name="Humanoide in der Fertigung" hidden novalidate onsubmit="return false">
+  <form class="roi-panel" id="rechner-humanoid" data-roi="labor" data-roi-id="humanoid" data-roi-name="Humanoide in der Fertigung" hidden novalidate>
     <a class="roi-mini" href="#ergebnis-humanoid" data-roi-mini aria-live="polite"></a>
     <div class="roi-inputs">
       <p class="roi-q"><span data-de="Szenariorechnung: einfache, wiederkehrende Tätigkeiten." data-en="Scenario calculation: simple, repetitive tasks." data-zh="情景测算：简单重复性工作。">Szenariorechnung: einfache, wiederkehrende Tätigkeiten.</span></p>
@@ -457,16 +459,17 @@
       <div class="roi-in"><input id="roi-humanoid-jahre" name="jahre" type="number" inputmode="decimal" min="1" step="1" value="5"><span><span data-de="Jahre" data-en="years" data-zh="年">Jahre</span></span></div>
       
     </div></div></details>
+      <button class="btn btn--lg btn--arrow roi-go" type="button" data-roi-go><span data-de="Jetzt berechnen" data-en="Calculate now" data-zh="立即测算">Jetzt berechnen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="roi-models"><span data-de="Passende Modelle:" data-en="Matching models:" data-zh="对应机型：">Passende Modelle:</span> <a href="../produkte/humanoid-dr02.html">DR02</a></p>
     </div>
     <aside class="roi-out" id="ergebnis-humanoid">
       <p class="roi-out__k"><span data-de="Ihr Ergebnis · Schätzung" data-en="Your result · estimate" data-zh="测算结果 · 估算">Ihr Ergebnis · Schätzung</span></p>
-      <div data-roi-result></div>
+      <div data-roi-result><p class="roi-info"><span data-de="Werte eintragen und „Jetzt berechnen“ drücken. Erscheint hier kein Ergebnis, bitte die Seite neu laden." data-en="Enter your values and press “Calculate now”. If no result appears here, please reload the page." data-zh="填入数值后点击“立即测算”。如果这里没有出现结果，请刷新页面。">Werte eintragen und „Jetzt berechnen“ drücken. Erscheint hier kein Ergebnis, bitte die Seite neu laden.</span></p></div>
       <a class="btn btn--arrow roi-cta" data-roi-cta href="../service/kontakt.html"><span data-de="Mit diesen Werten Angebot anfragen" data-en="Request a quote with these values" data-zh="带着这组数值询价">Mit diesen Werten Angebot anfragen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <p class="roi-note"><span data-de="Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen." data-en="Non-binding example calculation based on your inputs, all amounts net. Not a performance promise." data-zh="基于您输入数值的示例测算，不具约束力，金额均不含税，不构成效果承诺。">Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen.</span></p>
     </aside>
   </form>
-  <form class="roi-panel" id="rechner-feuerwehr" data-roi="fire" data-roi-id="feuerwehr" data-roi-name="Feuerwehr &amp; Gefahrenabwehr" hidden novalidate onsubmit="return false">
+  <form class="roi-panel" id="rechner-feuerwehr" data-roi="fire" data-roi-id="feuerwehr" data-roi-name="Feuerwehr &amp; Gefahrenabwehr" hidden novalidate>
     <a class="roi-mini" href="#ergebnis-feuerwehr" data-roi-mini aria-live="polite"></a>
     <div class="roi-inputs">
       <p class="roi-q"><span data-de="Weniger Menschen im Gefahrenbereich." data-en="Fewer people in the danger zone." data-zh="让更少的人进入危险区。">Weniger Menschen im Gefahrenbereich.</span></p>
@@ -532,16 +535,17 @@
       <div class="roi-in"><input id="roi-feuerwehr-jahre" name="jahre" type="number" inputmode="decimal" min="1" step="1" value="8"><span><span data-de="Jahre" data-en="years" data-zh="年">Jahre</span></span></div>
       
     </div></div></details>
+      <button class="btn btn--lg btn--arrow roi-go" type="button" data-roi-go><span data-de="Jetzt berechnen" data-en="Calculate now" data-zh="立即测算">Jetzt berechnen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="roi-models"><span data-de="Passende Modelle:" data-en="Matching models:" data-zh="对应机型：">Passende Modelle:</span> <a href="../produkte/loeschroboter-x30.html"><span data-i18n-de>Löschroboter X30-SP</span><span data-i18n-en>Fire Monitor Robot X30-SP</span><span data-i18n-zh>消防水炮机器人 X30-SP</span></a> · <a href="../produkte/erkundungsroboter-m20.html"><span data-i18n-de>Erkundungsroboter M20</span><span data-i18n-en>Reconnaissance Robot M20</span><span data-i18n-zh>消防侦察机器人 M20</span></a> · <a href="../produkte/x50.html">X50</a></p>
     </div>
     <aside class="roi-out" id="ergebnis-feuerwehr">
       <p class="roi-out__k"><span data-de="Ihr Ergebnis · Schätzung" data-en="Your result · estimate" data-zh="测算结果 · 估算">Ihr Ergebnis · Schätzung</span></p>
-      <div data-roi-result></div>
+      <div data-roi-result><p class="roi-info"><span data-de="Werte eintragen und „Jetzt berechnen“ drücken. Erscheint hier kein Ergebnis, bitte die Seite neu laden." data-en="Enter your values and press “Calculate now”. If no result appears here, please reload the page." data-zh="填入数值后点击“立即测算”。如果这里没有出现结果，请刷新页面。">Werte eintragen und „Jetzt berechnen“ drücken. Erscheint hier kein Ergebnis, bitte die Seite neu laden.</span></p></div>
       <a class="btn btn--arrow roi-cta" data-roi-cta href="../service/kontakt.html"><span data-de="Mit diesen Werten Angebot anfragen" data-en="Request a quote with these values" data-zh="带着这组数值询价">Mit diesen Werten Angebot anfragen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <p class="roi-note"><span data-de="Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen." data-en="Non-binding example calculation based on your inputs, all amounts net. Not a performance promise." data-zh="基于您输入数值的示例测算，不具约束力，金额均不含税，不构成效果承诺。">Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen.</span></p>
     </aside>
   </form>
-  <form class="roi-panel" id="rechner-pflege" data-roi="care" data-roi-id="pflege" data-roi-name="Pflege &amp; Betreuung" hidden novalidate onsubmit="return false">
+  <form class="roi-panel" id="rechner-pflege" data-roi="care" data-roi-id="pflege" data-roi-name="Pflege &amp; Betreuung" hidden novalidate>
     <a class="roi-mini" href="#ergebnis-pflege" data-roi-mini aria-live="polite"></a>
     <div class="roi-inputs">
       <p class="roi-q"><span data-de="Zeit für Pflege freispielen, nicht Pflege ersetzen." data-en="Free up time for care, not replace care." data-zh="为护理腾出时间，而不是替代护理。">Zeit für Pflege freispielen, nicht Pflege ersetzen.</span></p>
@@ -587,11 +591,12 @@
       <div class="roi-in"><input id="roi-pflege-jahre" name="jahre" type="number" inputmode="decimal" min="1" step="1" value="5"><span><span data-de="Jahre" data-en="years" data-zh="年">Jahre</span></span></div>
       
     </div></div></details>
+      <button class="btn btn--lg btn--arrow roi-go" type="button" data-roi-go><span data-de="Jetzt berechnen" data-en="Calculate now" data-zh="立即测算">Jetzt berechnen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="roi-models"><span data-de="Passende Modelle:" data-en="Matching models:" data-zh="对应机型：">Passende Modelle:</span> <a href="../produkte/heimroboter-q1.html">Q1</a> · <a href="../produkte/heimroboter-t1.html">T1</a></p>
     </div>
     <aside class="roi-out" id="ergebnis-pflege">
       <p class="roi-out__k"><span data-de="Ihr Ergebnis · Schätzung" data-en="Your result · estimate" data-zh="测算结果 · 估算">Ihr Ergebnis · Schätzung</span></p>
-      <div data-roi-result></div>
+      <div data-roi-result><p class="roi-info"><span data-de="Werte eintragen und „Jetzt berechnen“ drücken. Erscheint hier kein Ergebnis, bitte die Seite neu laden." data-en="Enter your values and press “Calculate now”. If no result appears here, please reload the page." data-zh="填入数值后点击“立即测算”。如果这里没有出现结果，请刷新页面。">Werte eintragen und „Jetzt berechnen“ drücken. Erscheint hier kein Ergebnis, bitte die Seite neu laden.</span></p></div>
       <a class="btn btn--arrow roi-cta" data-roi-cta href="../service/kontakt.html"><span data-de="Mit diesen Werten Angebot anfragen" data-en="Request a quote with these values" data-zh="带着这组数值询价">Mit diesen Werten Angebot anfragen</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <p class="roi-note"><span data-de="Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen." data-en="Non-binding example calculation based on your inputs, all amounts net. Not a performance promise." data-zh="基于您输入数值的示例测算，不具约束力，金额均不含税，不构成效果承诺。">Unverbindliche Beispielrechnung auf Basis Ihrer Eingaben, alle Beträge netto. Kein Leistungsversprechen.</span></p>
     </aside>
@@ -802,6 +807,6 @@
 <script src="../assets/js/main.js"></script>
 <script>window.NIC_CONTACT = {"whatsapp":"491776812580","crisp":"5d7708ec-1961-4e2c-b304-30ce137eece1","email":"sales@nic-robotics.de","root":"../"};</script>
 <script src="../assets/js/inquiry.js"></script>
-<script src="../assets/js/roi.js"></script>
+
 </body>
 </html>
