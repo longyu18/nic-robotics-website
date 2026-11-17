@@ -4236,3 +4236,71 @@ h1, h2, h3, h4 { color: #f6f8fa; }
 .film--right .film__play { grid-template-areas: 'cover cover' 'label btn'; place-content: end stretch; justify-items: end; text-align: right; }
 .film--right .film__cover { justify-items: end; }
 .film--right .film__tag { right: auto; left: 1.1rem; }
+
+/* v51 · Zwei Filme, zwei Stimmungen: Film 1 kühl-grau, Film 2 mit leichtem Blau von oben */
+#film { background: var(--ink-850); }
+#film-humanoid { background: radial-gradient(120% 70% at 50% 0%, rgba(60,152,247,.10) 0%, rgba(60,152,247,0) 60%), var(--ink-900); }
+#kategorien.sec-light { padding-bottom: clamp(3rem, 6vw, 5rem); }
+
+/* v52 · Reihenfolge: Forschung → Produkte → Film 1 (dunkel) → Film 2 (hell) → Leitsatz (dunkel).
+   Filme breiter: Desktop bis 1180 px, Handy fast randlos. */
+.home .film { max-width: 1180px; }
+#film { background: var(--ink-900); border-top-left-radius: 0; }
+#film-humanoid.film-sec--light {
+  background: #eceef1; color: #1b212b;
+  --fg: #1b212b; --fg-muted: #515c6c; --fg-dim: #6b7686; --hair: #dfe3e8;
+  border-radius: var(--sheet-r);
+}
+#film-humanoid.film-sec--light h2 { color: #151a22; }
+#film-humanoid.film-sec--light .kicker { color: #1b66c4; }
+#film-humanoid.film-sec--light .film figcaption { color: #515c6c; }
+#film-humanoid.film-sec--light .film__frame { box-shadow: 0 30px 70px -36px rgba(20,30,48,.55); }
+#kategorien.sec-light { border-bottom-left-radius: var(--sheet-r); border-bottom-right-radius: var(--sheet-r); padding-bottom: clamp(3rem, 6vw, 5rem); }
+@media (max-width: 760px) {
+  #film .wrap, #film-humanoid .wrap { padding-inline: 10px; }
+  #film .section-head, #film-humanoid .section-head, #film figcaption, #film-humanoid figcaption { padding-inline: 10px; }
+  .home .film .film__stage::before, .home .film .film__stage::after { display: none; }
+  .film__frame { border-radius: 14px; }
+}
+@media (max-width: 640px) {
+  .film__cover i { display: none; }
+  .film__cover b { font-size: clamp(1.15rem, 5.4vw, 1.5rem); }
+  .film__play { padding: 14px; gap: 8px 10px; }
+}
+
+/* v53 · Beide Filme gleich: blauer Verlaufsrahmen, darunter eine weiche blaue Wiege.
+   Abschnitte höher, damit der Film die Seite füllt. */
+.home .film { max-width: 1240px; }
+.home .film--glow .film__frame {
+  border: 2px solid transparent; border-radius: 22px;
+  background: linear-gradient(#000, #000) padding-box,
+              linear-gradient(135deg, #b9dcff 0%, #3c98f7 35%, #1d5fb8 65%, #6fb7ff 100%) border-box;
+  box-shadow: 0 0 0 1px rgba(60,152,247,.18), 0 30px 80px -30px rgba(29,111,209,.65), 0 0 60px -20px rgba(60,152,247,.45);
+}
+.home .film--glow .film__stage::before {
+  content: ''; position: absolute; z-index: -1; display: block;
+  inset: 28px -14px -14px -14px;
+  border: 2px solid #3c98f7; border-top: 0; border-radius: 0 0 30px 30px;
+  background: none; filter: drop-shadow(0 0 10px rgba(60,152,247,.7));
+  -webkit-mask-image: linear-gradient(180deg, transparent 25%, #000 80%);
+          mask-image: linear-gradient(180deg, transparent 25%, #000 80%);
+}
+.home .film--glow .film__stage::after {
+  content: ''; position: absolute; z-index: -1; display: block;
+  inset: auto 14% -28px 14%; height: 1px; border: 0; border-radius: 0;
+  background: linear-gradient(90deg, transparent, rgba(140,196,255,.95) 30%, rgba(140,196,255,.95) 70%, transparent);
+  box-shadow: 0 0 10px rgba(60,152,247,.85);
+  -webkit-mask-image: none; mask-image: none;
+}
+#film-humanoid.film-sec--light .film--glow .film__frame { box-shadow: 0 0 0 1px rgba(60,152,247,.2), 0 30px 70px -30px rgba(20,40,80,.55); }
+#film, #film-humanoid { padding-block: clamp(5rem, 4rem + 6vw, 9.5rem); }
+#film .section-head, #film-humanoid .section-head { margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+#film figcaption, #film-humanoid figcaption { margin-top: clamp(2.6rem, 4vw, 3.4rem); }
+@media (max-width: 760px) {
+  #film .wrap, #film-humanoid .wrap { padding-inline: 18px; }
+  #film .section-head, #film-humanoid .section-head, #film figcaption, #film-humanoid figcaption { padding-inline: 4px; }
+  .home .film--glow .film__stage::before { display: block; inset: 16px -8px -8px -8px; border-width: 0 2px 2px 2px; border-radius: 0 0 20px 20px; }
+  .home .film--glow .film__stage::after { display: block; bottom: -18px; }
+  .home .film--glow .film__frame { border-radius: 16px; }
+  #film, #film-humanoid { padding-block: 4.5rem; }
+}

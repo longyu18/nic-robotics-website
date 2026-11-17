@@ -310,31 +310,6 @@ ${header(CATS, PRODUCTS, 0)}
     </div>
   </section>
 
-  <!-- ================= FILM ================= -->
-  <section class="section section--tight" id="film">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <h2>${swx('Wasser, Wald, Steilhang. Ein Roboter.', 'Water, forest, steep slopes. One robot.', '涉水、穿林、爬坡，一台搞定。')}</h2>
-      </div>
-      <figure class="film film--right reveal">
-        <div class="film__stage"><div class="film__frame">
-          <video class="film__video" data-film playsinline preload="none"
-                 controlslist="nodownload noplaybackrate" disablepictureinpicture
-                 poster="assets/img/scenes/film-poster.jpg">
-            <source src="assets/video/film-1080.mp4" type="video/mp4">
-          </video>
-          <button class="film__play" type="button" data-film-play aria-label="Film abspielen">
-            <span class="film__btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
-<span class="film__cover" aria-hidden="true"><b>${swx('Kein Weg.', 'No road.', '没有路，')}<br>${swx('Kein Problem.', 'No problem.', '也能走。')}</b><i>${swx('Lynx M20 S · 68 Sekunden im Gelände', 'Lynx M20 S · 68 seconds off-road', 'Lynx M20 S · 68 秒野外实拍')}</i></span>
-            <span class="film__label">${swx('Film ansehen · 1:08', 'Watch the film · 1:08', '观看影片 · 1:08')}</span>
-          </button>
-          <span class="film__tag" aria-hidden="true">NIC · FILM 01</span>
-        </div></div>
-        <figcaption>${swx('Lynx M20 S — Wasser, Wald, Hang, Straße.', 'Lynx M20 S — water, forest, slope, road.', 'Lynx M20 S——涉水、林地、陡坡、公路。')}</figcaption>
-      </figure>
-    </div>
-  </section>
-
   <!-- ================= EXPLORE OUR ROBOTS (hell) ================= -->
   <section class="section sec-light" id="kategorien">
     <div class="wrap">
@@ -347,29 +322,39 @@ ${header(CATS, PRODUCTS, 0)}
     </div>
   </section>
 
-  <!-- ================= FEATURED ROBOTS (hell) ================= -->
-  <section class="section section--tight sec-light home-feat" id="produkte">
+  <!-- ================= FILM ================= -->
+  <section class="section section--tight" id="film">
     <div class="wrap">
-      <div class="section-head section-head--split reveal">
-        <div>
-          <p class="kicker">${swx('Top-Modelle', 'Featured', '精选')}</p>
-          <h2>${swx('Ausgewählte Roboter', 'Featured Robots', '精选机器人')}</h2>
-          <p class="t-lead">${swx('Eine Auswahl an Robotern für unterschiedliche Anforderungen.', 'A selection of robots for different needs.', '满足不同需求的精选机器人。')}</p>
-        </div>
-        <a class="btn btn--ghost btn--arrow" href="produkte/index.html">${swx('Alle Produkte', 'All products', '全部产品')} ${ICON.arrow}</a>
+      <div class="section-head reveal">
+        <h2>${swx('Wasser, Wald, Steilhang. Ein Roboter.', 'Water, forest, steep slopes. One robot.', '涉水、穿林、爬坡，一台搞定。')}</h2>
       </div>
-      <div class="product-grid">${featured.map(homeCard).join('')}</div>
+      <figure class="film film--right film--glow reveal">
+        <div class="film__stage"><div class="film__frame">
+          <video class="film__video" data-film playsinline preload="none"
+                 controlslist="nodownload noplaybackrate" disablepictureinpicture
+                 poster="assets/img/scenes/film-poster.jpg">
+            <source src="assets/video/film-1080.mp4" type="video/mp4">
+          </video>
+          <button class="film__play" type="button" data-film-play aria-label="Film abspielen">
+            <span class="film__btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+<span class="film__cover" aria-hidden="true"><b>${swx('Wo der Weg endet,', 'Where the road ends,', '路的尽头，')}<br>${swx('fängt er erst an.', 'it only begins.', '才是它的起点。')}</b><i>${swx('Lynx M20 S · 68 Sekunden im Gelände', 'Lynx M20 S · 68 seconds off-road', 'Lynx M20 S · 68 秒野外实拍')}</i></span>
+            <span class="film__label">${swx('Film ansehen · 1:08', 'Watch the film · 1:08', '观看影片 · 1:08')}</span>
+          </button>
+          <span class="film__tag" aria-hidden="true">NIC · FILM 01</span>
+        </div></div>
+        <figcaption>${swx('Lynx M20 S — Wasser, Wald, Hang, Straße.', 'Lynx M20 S — water, forest, slope, road.', 'Lynx M20 S——涉水、林地、陡坡、公路。')}</figcaption>
+      </figure>
     </div>
   </section>
 
   <!-- ================= FILM 2 · HUMANOID ================= -->
-  <section class="section section--tight" id="film-humanoid">
+  <section class="section section--tight film-sec--light" id="film-humanoid">
     <div class="wrap">
       <div class="section-head reveal">
         <p class="kicker">${swx('Humanoid', 'Humanoid', '人形机器人')}</p>
         <h2>${swx('Zwei Beine. Volle Kontrolle.', 'Two legs. Full control.', '两条腿，全掌控。')}</h2>
       </div>
-      <figure class="film film--cradle reveal">
+      <figure class="film film--cradle film--glow reveal">
         <div class="film__stage"><div class="film__frame">
           <video class="film__video" data-film playsinline preload="none"
                  controlslist="nodownload noplaybackrate" disablepictureinpicture
