@@ -316,7 +316,7 @@ ${header(CATS, PRODUCTS, 0)}
       <div class="section-head reveal">
         <h2>${swx('Wasser, Wald, Steilhang. Ein Roboter.', 'Water, forest, steep slopes. One robot.', '涉水、穿林、爬坡，一台搞定。')}</h2>
       </div>
-      <figure class="film reveal">
+      <figure class="film film--right reveal">
         <div class="film__stage"><div class="film__frame">
           <video class="film__video" data-film playsinline preload="none"
                  controlslist="nodownload noplaybackrate" disablepictureinpicture
@@ -325,6 +325,7 @@ ${header(CATS, PRODUCTS, 0)}
           </video>
           <button class="film__play" type="button" data-film-play aria-label="Film abspielen">
             <span class="film__btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+<span class="film__cover" aria-hidden="true"><b>${swx('Kein Weg.', 'No road.', '没有路，')}<br>${swx('Kein Problem.', 'No problem.', '也能走。')}</b><i>${swx('Lynx M20 S · 68 Sekunden im Gelände', 'Lynx M20 S · 68 seconds off-road', 'Lynx M20 S · 68 秒野外实拍')}</i></span>
             <span class="film__label">${swx('Film ansehen · 1:08', 'Watch the film · 1:08', '观看影片 · 1:08')}</span>
           </button>
           <span class="film__tag" aria-hidden="true">NIC · FILM 01</span>
@@ -378,6 +379,7 @@ ${header(CATS, PRODUCTS, 0)}
           </video>
           <button class="film__play" type="button" data-film-play aria-label="Film abspielen">
             <span class="film__btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+            <span class="film__cover" aria-hidden="true"><b>${swx('Balance', 'Balance', '一招一式，')}<br>${swx('in jeder Bewegung.', 'in every move.', '全靠平衡。')}</b><i>${swx('Humanoid DR02 · 49 Sekunden', 'Humanoid DR02 · 49 seconds', '人形机器人 DR02 · 49 秒')}</i></span>
             <span class="film__label">${swx('Film ansehen · 0:49', 'Watch the film · 0:49', '观看影片 · 0:49')}</span>
           </button>
           <span class="film__tag" aria-hidden="true">NIC · FILM 02</span>

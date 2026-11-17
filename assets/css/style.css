@@ -4127,3 +4127,112 @@ html[lang='zh'] .tagline__text { max-width: none; font-size: clamp(2.2rem, 1.1re
   .hero--v27 .hero__cta .btn { font-size: .84rem; padding: .62rem .5rem; letter-spacing: -.01em; }
 }
 @media (max-width: 380px) { .hero--v27 .hero__cta .btn { font-size: .78rem; } }
+
+/* ===================== 50 · FILM-COVER v50 =================================
+   Titelbild mit großer Zeile unten links; Wiedergabe-Knopf klein daneben,
+   damit das Motiv frei bleibt. Text liegt im Button und verschwindet beim Abspielen. */
+.film__play {
+  display: grid; grid-template-columns: auto 1fr; grid-template-areas: 'cover cover' 'btn label';
+  place-content: end start; justify-items: start; align-items: center; gap: 14px 14px;
+  padding: clamp(16px, 4%, 44px); text-align: left;
+  background: linear-gradient(180deg, rgba(8,10,14,0) 38%, rgba(8,10,14,.5) 68%, rgba(8,10,14,.86) 100%);
+}
+.film__play:hover { background: linear-gradient(180deg, rgba(8,10,14,0) 34%, rgba(8,10,14,.46) 66%, rgba(8,10,14,.82) 100%); }
+.film__cover { grid-area: cover; display: grid; gap: 6px; max-width: 18ch; }
+.film__cover b {
+  font-size: clamp(1.5rem, .9rem + 3vw, 3.5rem); font-weight: 700; line-height: 1.04; letter-spacing: -.035em;
+  text-wrap: balance; color: #fff; text-shadow: 0 2px 24px rgba(0,0,0,.45);
+}
+html[lang='zh'] .film__cover b { letter-spacing: 0; line-height: 1.2; }
+.film__cover i { font-style: normal; font-size: clamp(.78rem, .7rem + .3vw, .95rem); font-weight: 600; color: #cfe6ff; max-width: none; white-space: nowrap; }
+.film__btn { grid-area: btn; width: 60px; height: 60px; box-shadow: 0 0 0 6px rgba(60,152,247,.2), 0 12px 28px -10px rgba(60,152,247,.8); background: #3c98f7; }
+.film__btn::after { inset: -6px; border-width: 1.5px; }
+.film__btn svg { width: 24px; height: 24px; margin-left: 3px; }
+.film__play:hover .film__btn { transform: scale(1.06); box-shadow: 0 0 0 9px rgba(60,152,247,.22), 0 14px 32px -10px rgba(60,152,247,.9); }
+.film__label { grid-area: label; font-size: 1rem; font-weight: 600; letter-spacing: 0; }
+.film__tag { font-family: var(--font-data); letter-spacing: .08em; }
+@media (max-width: 640px) {
+  .film__btn { width: 46px; height: 46px; }
+  .film__btn svg { width: 18px; height: 18px; }
+  .film__label { font-size: .88rem; }
+  .film__play { gap: 10px 10px; }
+  .film__tag { display: none; }
+}
+
+/* ===================== 51 · FARBSYSTEM v50 =================================
+   Ziel: ruhiger beim Scrollen. Dunkle Flächen etwas heller und neutraler,
+   helle Flächen leicht gedämpft statt Reinweiß, Text nicht mehr Reinweiß/-schwarz.
+   Helle Abschnitte liegen als „Blatt“ mit runden Ecken auf dem dunklen Grund —
+   der Wechsel wirkt weich statt hart. */
+:root {
+  --ink-900: #0c0e12;
+  --ink-850: #101319;
+  --ink-800: #14181f;
+  --ink-750: #191e26;
+  --ink-700: #20252f;
+  --ink-600: #2a313d;
+  --fg:        #eceff3;
+  --fg-muted:  #a6afbc;
+  --fg-dim:    #8a94a3;
+  --hair: rgba(255, 255, 255, .08);
+  --hair-strong: rgba(255, 255, 255, .14);
+  --paper-2: #f3f4f6;
+  --sheet-r: clamp(20px, 3vw, 36px);
+}
+body { background: var(--ink-900); }
+h1, h2, h3, h4 { color: #f6f8fa; }
+
+/* Helle Abschnitte: gedämpftes Papier, weiche Kanten zum Dunkel */
+.sec-light {
+  background: #f3f4f6; color: #1b212b;
+  --fg: #1b212b; --fg-muted: #515c6c; --fg-dim: #6b7686; --hair: #e3e6eb; --hair-strong: #cdd3dc;
+}
+.sec-light h1, .sec-light h2, .sec-light h3, .sec-light h4, .pdp-light .section-head h2 { color: #151a22; }
+.sec-light--alt, .home-feat.sec-light { background: #f3f4f6; }
+:not(.sec-light) + .sec-light { border-top-left-radius: var(--sheet-r); border-top-right-radius: var(--sheet-r); }
+.sec-light:has(+ :not(.sec-light)), main > .sec-light:last-child { border-bottom-left-radius: var(--sheet-r); border-bottom-right-radius: var(--sheet-r); }
+.sec-light + .sec-light { border-top-left-radius: 0; border-top-right-radius: 0; }
+/* Karten auf Papier: reines Weiß nur für die Karte selbst, sehr feine Kante statt Schatten */
+.sec-light .ccard, .sec-light .hcat, .sec-light .rs-need, .sec-light .res-prod, .roi-inputs, .sec-light .vtable-wrap { background: #fff; box-shadow: 0 0 0 1px #e9ecf0; }
+.ccard__media { background: #f0f1f4; }
+
+/* Dunkle Abschnitte: zwei Stufen für Rhythmus, keine harten Schwarzflächen */
+.home-rs, .tagline, .page-hero--plain { background: var(--ink-850); }
+.page-hero--plain { background: linear-gradient(180deg, var(--ink-850), var(--ink-900)); }
+#film, #film-humanoid, #einsatz, #referenzen { background: var(--ink-900); }
+.site-footer { background: #0a0c10; }
+.roi-out, .cmpbar .wrap, .roi-mini { background: #12151b; }
+.roi-tabs button[aria-selected='true'] { background: #12151b; border-color: #12151b; }
+
+/* Text auf Dunkel: Fließtext gedämpft, nur Überschriften hell */
+.t-lead { color: #c4ccd7; }
+.sec-light .t-lead { color: #515c6c; }
+.tagline__text, .tagline__text .w.on, .tagline__text.is-static .w { color: #f6f8fa; }
+
+/* Akzentblau auf Hell: eine Stufe tiefer */
+.sec-light .kicker, .pdp-light .kicker { color: #1b66c4; }
+
+/* ===================== 52 · FAQ ============================================ */
+.faq { display: grid; gap: 48px; max-width: 920px; }
+.faq__group { scroll-margin-top: calc(var(--header-h) + 24px); }
+.faq__group h2 { font-size: var(--step-2); margin: 0 0 16px; }
+.faq__list { background: #fff; border-radius: 16px; box-shadow: 0 0 0 1px #e9ecf0; overflow: hidden; }
+.faq__item + .faq__item { border-top: 1px solid #edf0f3; }
+.faq__item summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; font-size: 1.0625rem; font-weight: 600; color: #151a22; transition: color var(--dur-fade) var(--ease-out); }
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after { content: '+'; flex: none; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: #eef2f7; color: #1b66c4; font-size: 1.1rem; font-weight: 500; transition: transform var(--dur-fade) var(--ease-out), background-color var(--dur-fade) var(--ease-out); }
+.faq__item summary:hover { color: #1b66c4; }
+.faq__item[open] summary::after { content: '−'; background: #1b66c4; color: #fff; }
+.faq__item p { margin: 0; padding: 0 22px 20px; max-width: 68ch; color: #515c6c; line-height: 1.65; }
+.faq .cat-help { margin-top: 0; }
+.faqpage .rs-jump { margin-top: 1.4rem; }
+@media (max-width: 560px) { .faq__item summary { padding: 16px; font-size: 1rem; } .faq__item p { padding: 0 16px 18px; } }
+.film__play { justify-content: stretch; }
+.film__cover b { white-space: nowrap; }
+.film--right .film__play { justify-content: stretch; grid-template-columns: 1fr auto; }
+.film--right .film__label { justify-self: end; }
+@media (max-width: 640px) { .film__cover b { font-size: clamp(1.35rem, 6.2vw, 1.9rem); } }
+.film__cover { max-width: none; }
+.film--right .film__play { grid-template-areas: 'cover cover' 'label btn'; place-content: end stretch; justify-items: end; text-align: right; }
+.film--right .film__cover { justify-items: end; }
+.film--right .film__tag { right: auto; left: 1.1rem; }

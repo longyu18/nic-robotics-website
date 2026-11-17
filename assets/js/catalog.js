@@ -2062,7 +2062,7 @@ NIC.productsIn = function (catId) {
   var L = function (de, en, zh) { return { de: de, en: en, zh: zh }; };
   NIC.partner.ranks = [
     ['#1', L('Weltweit Nr. 1 beim Umsatz mit Industrie-Vierbeinern', 'World no. 1 by revenue in industrial quadrupeds', '全球四足机器人行业应用收入第一'),
-           L('Umsatz 2025 mit Vierbeinern für Branchenkunden wie Energie, Brandschutz und Sicherheit — weltweit der höchste. Platz 2 und 3: Unitree und Boston Dynamics.', '2025 revenue from quadrupeds sold to industry customers in power, firefighting and security — the highest worldwide. Places 2 and 3: Unitree and Boston Dynamics.', '2025 年面向电力、消防、安防等行业客户的四足机器人销售收入，全球最高；第二、三名为宇树和波士顿动力。')],
+           L('Umsatz 2025 mit Vierbeinern für Branchenkunden wie Energie, Brandschutz und Sicherheit — weltweit der höchste.', '2025 revenue from quadrupeds sold to industry customers in power, firefighting and security — the highest worldwide.', '2025 年面向电力、消防、安防等行业客户的四足机器人销售收入，全球最高。')],
     ['#2', L('Weltweit Nr. 2 beim Umsatz mit Vierbeinern insgesamt', 'World no. 2 by total quadruped revenue', '全球四足机器人总收入第二'),
            L('Gesamter Vierbeiner-Umsatz 2025 (Industrie, Forschung, Bildung und Verbraucher zusammen) — weltweit Platz zwei.', 'Total quadruped revenue in 2025 (industry, research, education and consumer combined) — ranked second worldwide.', '2025 年全部四足机器人收入（行业、科研、教育、消费合计），全球排名第二。')],
     ['#4', L('Weltweit Nr. 4 beim Umsatz mit Embodied-AI-Robotern', 'World no. 4 by embodied-AI robot revenue', '全球具身智能机器人收入第四'),

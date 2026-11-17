@@ -1070,9 +1070,9 @@ function buildService() {
     ['schulung', 'clock',
      'Schulung & Fernsupport', 'Training & remote support', '培训与远程支持',
      'Ihr Team bedient den Roboter sicher — ab dem ersten Tag.', 'Your team runs the robot safely — from day one.', '从第一天起，您的团队就能安全操作。',
-     ['Einweisung bei Übergabe, auf Deutsch und Englisch', 'Telefon- und Fernwartungs-Hotline', 'Software-Updates und Integrationshilfe (SDK, ROS 2)'],
-     ['Instruction at handover, in German and English', 'Phone and remote-maintenance hotline', 'Software updates and integration help (SDK, ROS 2)'],
-     ['交付时提供德语和英语操作培训', '电话及远程维护热线', '软件更新与二次开发支持（SDK、ROS 2）']],
+     ['Einweisung bei Übergabe, auf Deutsch und Englisch', 'Telefon- und Fernwartungs-Hotline', 'Software-Updates und Integrationshilfe (SDK, modellabhängig)'],
+     ['Instruction at handover, in German and English', 'Phone and remote-maintenance hotline', 'Software updates and integration help (SDK, model-dependent)'],
+     ['交付时提供德语和英语操作培训', '电话及远程维护热线', '软件更新与二次开发支持（SDK，视机型而定）']],
     ['rma', 'upload',
      'Rücksendung & Reparatur (RMA)', 'Returns & repair (RMA)', '退货与返修（RMA）',
      'Ein Formular, ein Vorgang, klare Rückmeldung.', 'One form, one case, clear feedback.', '一张表单，一个工单，清晰回复。',
@@ -1131,6 +1131,7 @@ ${header(CATS, PRODUCTS, 1)}
           <p class="t-muted">${swx('Schreiben Sie uns im Live-Chat oder per WhatsApp — wir antworten persönlich.', 'Message us in the live chat or on WhatsApp — we reply personally.', '在线咨询或通过 WhatsApp 联系我们，由专人回复。')}</p>
         </div>
         <div class="cluster">
+          <a class="btn btn--ghost" href="faq.html">${swx('Häufige Fragen', 'FAQ', '常见问题')}</a>
           <button class="btn" type="button" data-chat-open>${swx('Live-Chat öffnen', 'Open live chat', '打开在线咨询')}</button>
           <a class="btn btn--ghost" href="https://wa.me/${SITE.whatsapp}" target="_blank" rel="noopener">WhatsApp</a>
         </div>
@@ -1145,8 +1146,160 @@ ${scripts(1)}`;
   write('service/index.html', html);
 }
 
+/* ============================================================ v50 · FAQ == */
+/* Antworten sind Entwürfe auf Basis dessen, was die Website bereits zusagt;
+   modellbezogene Details (Fristen, Garantiedauer, Unterlagen) folgen vom Hersteller. */
+const FAQ = [
+  [['Kauf & Lieferung', 'Purchase & delivery', '购买与交付'], [
+    [['Wie erhalte ich ein Angebot?', 'How do I get a quote?', '如何获得报价？'],
+     ['Über „Angebot anfordern“ oder die Anfrageliste. Nennen Sie Modell, Version, Stückzahl und Einsatzzweck. Sie erhalten ein schriftliches Angebot mit Konfiguration, Nettopreis, Lieferzeit, Lieferumfang und Gewährleistung.',
+      'Via “Request a quote” or the inquiry list. Tell us the model, version, quantity and purpose. You receive a written quote with configuration, net price, lead time, scope of delivery and warranty.',
+      '点击“获取报价”或使用询价清单，告诉我们机型、版本、数量和用途。您会收到书面报价，包含配置、不含税价格、交货期、供货范围和质保条款。']],
+    [['Wie lange dauert die Lieferung?', 'How long does delivery take?', '交货期多长？'],
+     ['Das hängt von Modell, Version und Lagerbestand ab. Die verbindliche Lieferzeit steht in Ihrem Angebot.',
+      'It depends on the model, version and stock. The binding lead time is stated in your quote.',
+      '取决于机型、版本和库存情况。具体交货期以报价单为准。']],
+    [['Liefern Sie an Hochschulen und öffentliche Einrichtungen?', 'Do you supply universities and public institutions?', '可以向高校和公共机构供货吗？'],
+     ['Ja. Sie erhalten Angebot und Rechnung einer deutschen GmbH, wie es Beschaffungsstellen verlangen. Vergleichsangebote und Angaben für Vergabeunterlagen stellen wir auf Wunsch zusammen.',
+      'Yes. You receive a quote and invoice from a German GmbH, as procurement offices require. On request we prepare the details needed for tender documents.',
+      '可以。您会收到德国有限责任公司（GmbH）出具的报价和发票，符合采购部门的要求。如需招标文件所需的信息，我们可按需整理。']],
+    [['Kann ich den Roboter vor dem Kauf sehen?', 'Can I see the robot before buying?', '购买前可以看到实机吗？'],
+     ['Ob und in welcher Form das möglich ist, klären wir im Einzelfall. Schreiben Sie uns, um welches Modell und welchen Einsatz es geht.',
+      'Whether and how this is possible is clarified case by case. Tell us which model and application you have in mind.',
+      '是否可以、以何种方式，需要按具体情况确认。请告诉我们您关注的机型和用途。']]
+  ]],
+  [['Unterlagen', 'Documents', '随机资料'], [
+    [['Welche Unterlagen erhalte ich zum Roboter?', 'Which documents come with the robot?', '机器人会附带哪些资料？'],
+     ['Zum Lieferumfang gehören Bedienungsanleitung und Datenblatt. Je nach Modell kommen Wartungshinweise, Schnittstellen- und SDK-Dokumentation hinzu. Was für Ihr Modell verfügbar ist, steht auf der Seite „Technische Ressourcen“.',
+      'The delivery includes the user manual and datasheet. Depending on the model, maintenance notes, interface and SDK documentation are added. What is available for your model is listed under “Technical resources”.',
+      '随机提供用户手册和数据表。部分机型另有维护说明、接口文档和 SDK 文档。各机型可提供的资料见“技术资源”页面。']],
+    [['Welche Konformitätsunterlagen gibt es?', 'Which conformity documents are available?', '可以提供哪些合规文件？'],
+     ['Welche Erklärungen und Prüfberichte des Herstellers für ein Modell vorliegen, nennen wir Ihnen vor dem Kauf modellbezogen. Fragen Sie sie zusammen mit dem Angebot an.',
+      'We tell you before purchase, per model, which manufacturer declarations and test reports exist. Ask for them together with your quote.',
+      '某款机型具备哪些厂家声明和检测报告，我们会在购买前按机型告知。请在询价时一并索取。']],
+    [['In welchen Sprachen sind die Unterlagen?', 'In which languages are the documents?', '资料是什么语言？'],
+     ['Die Einweisung erfolgt auf Deutsch oder Englisch. In welchen Sprachen Handbuch und Dokumentation für Ihr Modell vorliegen, nennen wir im Angebot.',
+      'Instruction is given in German or English. The quote states in which languages the manual and documentation exist for your model.',
+      '操作培训提供德语或英语。手册和技术文档具体有哪些语言版本，会在报价中说明。']]
+  ]],
+  [['Garantie & Gewährleistung', 'Warranty', '保修'], [
+    [['Welche Gewährleistung gilt?', 'Which warranty applies?', '质保是怎样的？'],
+     ['Es gilt die gesetzliche Gewährleistung nach deutschem Recht. Dauer und Umfang einer darüber hinausgehenden Garantie stehen modellbezogen in Ihrem Angebot.',
+      'The statutory warranty under German law applies. Duration and scope of any additional guarantee are stated per model in your quote.',
+      '适用德国法律规定的法定质保。此外的厂家保修期限和范围，按机型写在报价中。']],
+    [['Wie läuft ein Garantiefall ab?', 'How does a warranty claim work?', '保修如何办理？'],
+     ['Sie melden den Fall über das RMA-Formular, am besten mit Fotos oder Video. Wir sind Ihr einziger Ansprechpartner, prüfen den Fall und melden uns mit dem nächsten Schritt: Ferndiagnose, Ersatzteil oder Einsendung an unser Servicezentrum in Deutschland.',
+      'You report the case via the RMA form, ideally with photos or video. We are your single point of contact, check the case and reply with the next step: remote diagnosis, spare part or return to our service centre in Germany.',
+      '通过 RMA 表单提交，最好附上照片或视频。我们是您的唯一对接方，审核后告知下一步：远程诊断、寄送备件，或寄回我们在德国的维修中心。']],
+    [['Was ist von der Garantie ausgenommen?', 'What is excluded from the warranty?', '哪些情况不在保修范围内？'],
+     ['In der Regel Verschleißteile wie Fußpads sowie Schäden durch Sturz, Wasser jenseits der Schutzart, Fremdeingriffe oder nicht freigegebenes Zubehör. Maßgeblich sind die Bedingungen in Ihrem Angebot.',
+      'As a rule, wear parts such as foot pads, and damage from falls, water beyond the protection rating, third-party tampering or non-approved accessories. The terms in your quote are decisive.',
+      '通常不包括足垫等易损件，以及因摔落、超出防护等级的进水、擅自拆改或使用未经认可的配件造成的损坏。以报价中的条款为准。']],
+    [['Kann ich die Garantie verlängern?', 'Can I extend the warranty?', '可以延长保修吗？'],
+     ['Für Flotten und Dauerbetrieb bieten wir eine Verlängerung an. Konditionen nennen wir im Angebot.',
+      'For fleets and continuous operation we offer an extension. Terms are stated in the quote.',
+      '针对多台设备和长期连续运行，我们提供延保。具体条件见报价。']]
+  ]],
+  [['Service & Reparatur', 'Service & repair', '维修与备件'], [
+    [['Wo wird repariert?', 'Where are repairs carried out?', '在哪里维修？'],
+     ['In unserem Servicezentrum im Rhein-Main-Gebiet. Ein Versand nach Asien ist dafür nicht nötig.',
+      'At our service centre in the Rhine-Main area. Shipping to Asia is not required.',
+      '在我们位于莱茵-美因地区的维修中心，无需寄回亚洲。']],
+    [['Wie lange dauert eine Reparatur?', 'How long does a repair take?', '维修需要多久？'],
+     ['Die Diagnose erfolgt innerhalb weniger Werktage nach Eingang. Die Reparaturdauer hängt vom Schaden und von der Ersatzteillage ab; Sie erhalten nach der Diagnose eine Einschätzung.',
+      'Diagnosis takes place within a few working days of receipt. Repair time depends on the damage and parts availability; you receive an estimate after diagnosis.',
+      '收到设备后数个工作日内完成检测。维修时长取决于损坏情况和备件供应，检测后我们会给出预估。']],
+    [['Welche Teile kann ich selbst tauschen?', 'Which parts can I replace myself?', '哪些部件可以自己更换？'],
+     ['Verschleißteile wie Fußpads, Akkus, Ladegeräte und Schutzteile. Anleitungen stellen wir bereit. Siehe „Ersatzteile“.',
+      'Wear parts such as foot pads, batteries, chargers and protective parts. We provide instructions. See “Spare parts”.',
+      '足垫、电池、充电器和防护件等易损件可自行更换，我们提供操作指南。详见“备件更换”。']]
+  ]],
+  [['Technischer Support', 'Technical support', '技术支持'], [
+    [['Gibt es eine Einweisung?', 'Is instruction provided?', '是否提供培训？'],
+     ['Ja, bei der Übergabe, auf Deutsch oder Englisch: Inbetriebnahme, Bedienung, Laden, Sicherheit. Lehrinhalte oder Kurse bieten wir nicht an.',
+      'Yes, at handover, in German or English: commissioning, operation, charging, safety. We do not offer course content.',
+      '提供。交付时以德语或英语进行：开机调试、操作、充电和安全事项。我们不提供课程内容。']],
+    [['Wie erreiche ich den Support?', 'How do I reach support?', '如何联系技术支持？'],
+     ['Per E-Mail an service@nic-robotics.de, im Live-Chat oder per WhatsApp. Für Fernwartung vereinbaren wir einen Termin.',
+      'By e-mail to service@nic-robotics.de, in the live chat or on WhatsApp. For remote maintenance we arrange an appointment.',
+      '可发邮件至 service@nic-robotics.de，或使用在线咨询、WhatsApp。远程维护需预约时间。']],
+    [['Wie kommen Software-Updates auf den Roboter?', 'How do software updates reach the robot?', '软件如何升级？'],
+     ['Je nach Modell per OTA-Update oder über die Hersteller-Software. Funktionen, die erst per späterem Update kommen, kennzeichnen wir auf der Produktseite.',
+      'Depending on the model, via OTA update or the manufacturer software. Features that arrive only with a later update are marked on the product page.',
+      '视机型而定，通过 OTA 在线升级或厂家软件升级。需后续升级才提供的功能，会在产品页上标注。']],
+    [['Kann ich eigene Software entwickeln (SDK, ROS)?', 'Can I develop my own software (SDK, ROS)?', '可以做二次开发吗（SDK、ROS）？'],
+     ['Das ist modellabhängig. Was bestätigt ist und was wir noch mit dem Hersteller klären, zeigt die Tabelle „Entwicklung“ auf der jeweiligen Produktseite und die Seite „Forschung & Lehre“.',
+      'That depends on the model. What is confirmed and what we still clarify with the manufacturer is shown in the “Development” table on each product page and under “Research & Teaching”.',
+      '取决于机型。哪些能力已确认、哪些仍在与厂家核实，见各产品页的“开发能力”表和“科研与教学”页面。']],
+    [['Darf der Roboter im Regen oder im Freien arbeiten?', 'May the robot work in rain or outdoors?', '可以在雨天或户外使用吗？'],
+     ['Maßgeblich ist die Schutzart des Modells, zum Beispiel IP66 oder IP67, und der zulässige Temperaturbereich. Beides steht in den technischen Daten der Produktseite.',
+      'What counts is the protection rating of the model, for example IP66 or IP67, and the permitted temperature range. Both are in the specifications on the product page.',
+      '取决于机型的防护等级（如 IP66 或 IP67）和允许的工作温度范围，两项都列在产品页的技术参数中。']]
+  ]]
+];
+
+function buildFaq() {
+  const { CATS, PRODUCTS, write } = ctx();
+  const r = '../';
+  const ld = { '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: FAQ.flatMap(([, qs]) => qs.map(([q, a]) => ({ '@type': 'Question', name: q[0], acceptedAnswer: { '@type': 'Answer', text: a[0] } }))) };
+  const html = `${head({
+    title: 'Häufige Fragen',
+    description: 'Antworten zu Angebot, Lieferung, Unterlagen, Gewährleistung, Reparatur und technischem Support für Roboter von NIC Robotics.',
+    path: '/service/faq.html',
+    depth: 1
+  })}
+${header(CATS, PRODUCTS, 1)}
+
+<main id="main" class="faqpage">
+  <section class="page-hero page-hero--plain">
+    <div class="wrap">
+      <ol class="crumbs">
+        <li><a href="${r}index.html">${swx('Start', 'Home', '首页')}</a></li>
+        <li><a href="${r}service/index.html">${swx('Service & Support', 'Service & Support', '技术服务')}</a></li>
+        <li>${swx('Häufige Fragen', 'FAQ', '常见问题')}</li>
+      </ol>
+      <p class="kicker">${swx('Häufige Fragen', 'FAQ', '常见问题')}</p>
+      <h1 class="t-xl" style="max-width:20ch">${swx('Kurz gefragt, klar beantwortet.', 'Short questions, clear answers.', '常见问题，清楚回答。')}</h1>
+      <ul class="rs-jump">${FAQ.map(([g], i) => `<li><a href="#faq-${i + 1}">${swx(...g)}</a></li>`).join('')}</ul>
+    </div>
+  </section>
+
+  <section class="section sec-light">
+    <div class="wrap faq">
+      ${FAQ.map(([g, qs], i) => `
+      <div class="faq__group" id="faq-${i + 1}">
+        <h2>${swx(...g)}</h2>
+        <div class="faq__list">${qs.map(([q, a]) => `
+          <details class="faq__item">
+            <summary>${swx(...q)}</summary>
+            <p>${swx(...a)}</p>
+          </details>`).join('')}
+        </div>
+      </div>`).join('')}
+
+      <div class="cat-help">
+        <div>
+          <h3>${swx('Ihre Frage ist nicht dabei?', 'Your question is not listed?', '没有找到您的问题？')}</h3>
+          <p>${swx('Schreiben Sie uns. Technische Fragen beantworten wir schriftlich und klären offene Punkte mit dem Hersteller.', 'Write to us. We answer technical questions in writing and clarify open points with the manufacturer.', '请直接联系我们。技术问题我们会书面答复，未确定的事项会与厂家核实。')}</p>
+        </div>
+        <a class="btn btn--arrow" href="${r}service/kontakt.html?thema=technik">${swx('Frage stellen', 'Ask a question', '提交问题')} ${ICON.arrow}</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script type="application/ld+json">${JSON.stringify(ld)}</script>
+${footer(CATS, 1)}
+${offerModal(1)}
+${quickView()}
+${scripts(1)}`;
+  write('service/faq.html', html);
+}
+
 function run() {
   buildService();
+  buildFaq();
   buildOffer();
   buildRMA();
   buildContact();

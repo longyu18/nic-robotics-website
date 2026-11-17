@@ -50,6 +50,7 @@ const MENU_ICON = {
   rs_manipulation: MI('<path d="M4 21v-3h7v3M7.5 18V11l6-5.5 4 3"/><circle cx="7.5" cy="11" r="1.6"/><circle cx="13.5" cy="5.5" r="1.6"/><path d="M17.5 8.5 20 7M17.5 8.5l1.5 2.6M20 7l1.5 1M19 11.1l1.7.4"/>'),
   rs_interaktion: MI('<circle cx="7" cy="7.5" r="2.6"/><path d="M2.5 19c.4-3.4 2.2-5.3 4.5-5.3 1 0 1.9.3 2.7 1"/><rect x="13" y="5" width="8" height="6.5" rx="1.6"/><path d="M15.6 8.2h.01M18.4 8.2h.01M17 5V3M13.5 19v-2.2c0-1.5 1.2-2.6 2.6-2.6h1.8c1.400 0 2.600 1.100 2.600 2.600V19"/>'),
   rs_feld:        MI('<path d="m2.500 19.500 6.500-11 4 6.500 2.500-3.500 6 8z"/><circle cx="17.500" cy="6" r="2"/>'),
+  faq:       MI('<circle cx="12" cy="12" r="9.2"/><path d="M9.3 9.4a2.8 2.8 0 1 1 4.4 2.3c-.9.6-1.7 1.2-1.7 2.4M12 17.3h.01"/>'),
   ueber:     MI('<circle cx="12" cy="8" r="3.5"/><path d="M4.5 21c.6-4.2 3.6-6.8 7.5-6.8s6.9 2.6 7.5 6.8"/>'),
   kontakt:   MI('<rect x="2.8" y="5" width="18.4" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/>'),
   ressourcen: MI('<path d="M6 2.8h8.5L19 7.3v13.9H6z"/><path d="M14 2.8v5h5M9 12.5h7M9 16h7"/>'),
@@ -85,7 +86,7 @@ const RS_MENU = [
 
 const SVC_KEY = (href) => href.includes('garantie') ? 'garantie' : href.includes('servicezentrum') ? 'servicezentrum'
   : href.includes('ersatzteile') ? 'ersatzteile' : href.includes('vorfuehrung') ? 'vorfuehrung'
-  : href.includes('schulung') ? 'schulung' : href.includes('ueber-uns') ? 'ueber' : href.includes('kontakt') ? 'kontakt' : 'rma';
+  : href.includes('schulung') ? 'schulung' : href.includes('ueber-uns') ? 'ueber' : href.includes('kontakt') ? 'kontakt' : href.includes('faq') ? 'faq' : 'rma';
 
 const SERVICE_ITEMS = [
   ['service/index.html#garantie', 'Garantie & Gewährleistung', 'Warranty', '保修服务',
@@ -98,6 +99,8 @@ const SERVICE_ITEMS = [
    'Einweisung, Hotline, Updates', 'Instruction, hotline, updates', '操作培训、热线、软件更新'],
   ['service/ruecksendung.html', 'Rücksendung & Reparatur (RMA)', 'Returns & repair (RMA)', '退货与返修（RMA）',
    'Online-Formular mit Foto-Upload', 'Online form with photo upload', '在线表单，可上传照片'],
+  ['service/faq.html', 'Häufige Fragen', 'FAQ', '常见问题',
+   'Angebot, Unterlagen, Garantie, Support', 'Quotes, documents, warranty, support', '报价、资料、保修、技术支持'],
   ['unternehmen/ueber-uns.html', 'Über uns', 'About us', '关于我们',
    'An Yuan GmbH, Sitz in Deutschland', 'An Yuan GmbH, based in Germany', 'An Yuan GmbH，总部位于德国'],
   ['service/kontakt.html', 'Kontakt', 'Contact', '联系我们',
