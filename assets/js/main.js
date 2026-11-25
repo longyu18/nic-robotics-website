@@ -1189,7 +1189,7 @@
       var esc = function (w) { return w.replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
       sp.innerHTML = sp.innerHTML.split(/<br\s*\/?>/i).map(function (seg) {
         var txt = seg.replace(/<[^>]+>/g, '').trim();
-        var parts = zh ? (txt.match(/[　-〿＀-￯]|[^　-〿＀-￯]{1,2}/g) || []) : txt.split(/\s+/);
+        var parts = zh ? (txt.match(/[　-\u303f＀-￯]|[^　-\u303f＀-￯]{1,2}/g) || []) : txt.split(/\s+/);
         return parts.map(function (w) { return '<i class="w">' + esc(w) + '</i>'; }).join(zh ? '' : ' ');
       }).join('<br>');
     });

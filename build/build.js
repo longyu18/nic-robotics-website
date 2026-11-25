@@ -2218,6 +2218,7 @@ if (require.main === module) {
   build404();
   buildRoi();
   require('./build-pages').run();
+  require('./public').run();
   const missing = reportMissingZh();
   console.log(missing ? `\nFertig — aber ${missing} UI-Strings ohne Chinesisch.` : '\nDone. DE · EN · ZH vollständig.');
 }

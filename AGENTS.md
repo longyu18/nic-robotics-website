@@ -26,14 +26,23 @@
 
 ```bash
 node build/build.js
-node build/build-pages.js
 ```
 
-需要 Node.js 18 或以上，不需要安装任何依赖。最后一行必须显示
-`Done. DE · EN · ZH vollständig.`；如果提示缺少中文翻译，按 `build/missing-zh.json` 补到 `i18n-zh.js`。
+需要 Node.js 18 或以上，不需要安装任何依赖。最后几行必须显示
+`Öffentlich: DE · EN (ausgeblendet: zh)` 和 `Done. DE · EN · ZH vollständig.`；
+如果提示缺少中文翻译，按 `build/missing-zh.json` 补到 `i18n-zh.js`。
 然后把**源文件和生成的 .html 一起**提交并推送。
 
 新增或删除页面时，同时更新 `sitemap.xml`。
+
+### 中文暂不对外显示（正式网站只有德语和英语）
+
+- 源文件始终保留德、英、中三语，修改文字时三语照常同步。
+- `node build/build.js` 默认生成**对外版本**：`build/public.js` 会从生成的网页里彻底去掉中文，
+  并生成只含德/英的 `assets/css/site.css` 和 `assets/js/site-*.js`（这些是生成文件，不要手改）。
+- 只给网站负责人看的预览（含中文）：`NIC_LANGS=all node build/build.js`。
+  预览发布后，**推送 GitHub 前必须再运行一次** `node build/build.js`，否则中文会上线。
+- 以后重新开放中文：在 `build/public.js` 的 `PUBLIC_LANGS` 里加上 `'zh'`。
 
 ## 3. 内容规则（必须遵守）
 
