@@ -546,12 +546,13 @@
       if (!input || input.dataset.bound) return;
       input.dataset.bound = '1';
       var store = [];
+      var maxBytes = dz.dataset.maxMb ? +dz.dataset.maxMb * 1024 * 1024 : MAX_BYTES;
 
       var render = function () {
         if (!list) return;
         list.innerHTML = '';
         store.forEach(function (f, i) {
-          var bad = f.size > MAX_BYTES || !OK_TYPES.test(f.type);
+          var bad = f.size > maxBytes || !OK_TYPES.test(f.type);
           var li = document.createElement('li');
           if (bad) li.className = 'is-bad';
           li.innerHTML =
@@ -694,6 +695,101 @@
     toggle();
   }
 
+
+  /* Reparaturformular: Fotos im Browser verkleinern und per fetch an
+     /api/reparatur senden (Cloudflare Pages Function). Kein E-Mail-Programm nötig. */
+  function shrinkImage(file) {
+    return new Promise(function (resolve) {
+      if (!/^image\//.test(file.type) || file.type === 'image/gif') return resolve(file);
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        try {
+          var max = 1800, w = img.naturalWidth, h = img.naturalHeight;
+          var k = Math.min(1, max / Math.max(w, h));
+          var c = document.createElement('canvas');
+          c.width = Math.round(w * k); c.height = Math.round(h * k);
+          c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+          URL.revokeObjectURL(url);
+          c.toBlob(function (b) {
+            if (!b || (b.size >= file.size && /jpe?g/.test(file.type))) return resolve(file);
+            resolve(new File([b], file.name.replace(/\.[^.]+$/, '') + '.jpg', { type: 'image/jpeg' }));
+          }, 'image/jpeg', 0.82);
+        } catch (e) { URL.revokeObjectURL(url); resolve(file); }
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); resolve(file); };
+      img.src = url;
+    });
+  }
+
+  function initRepair() {
+    $$('form[data-repair]').forEach(function (form) {
+      if (form.dataset.repairBound) return;
+      form.dataset.repairBound = '1';
+      form.addEventListener('submit', function (e) {
+        if (e.defaultPrevented) return;          // Pflichtfelder fehlen → initForms hat abgebrochen
+        e.preventDefault();
+        var hp = $('.hp input', form);
+        if (hp && hp.value) return;
+        var status = $('.form-status', form);
+        var btn = $('[type="submit"]', form);
+        var label = btn ? btn.innerHTML : '';
+        var show = function (ok, html) {
+          if (!status) return;
+          status.className = 'form-status ' + (ok ? 'form-status--ok' : 'form-status--err') + ' is-shown';
+          status.innerHTML = (ok
+            ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'
+            : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>') +
+            '<span>' + html + '</span>';
+          status.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        };
+        if (btn) { btn.disabled = true; btn.style.opacity = '.55'; btn.textContent = s({ de: 'Wird gesendet …', en: 'Sending …', zh: '' }); }
+        var restore = function () { if (btn) { btn.disabled = false; btn.style.opacity = ''; btn.innerHTML = label; } };
+
+        var fileInput = $('input[type="file"]', form);
+        var files = fileInput && fileInput.files ? Array.prototype.slice.call(fileInput.files, 0, 6) : [];
+        files = files.filter(function (f) { return /^image\//.test(f.type) || /\.(heic|heif)$/i.test(f.name); });
+
+        Promise.all(files.map(shrinkImage)).then(function (small) {
+          var fd = new FormData();
+          $$('input, select, textarea', form).forEach(function (el) {
+            if (!el.name || el.type === 'file' || el.disabled) return;
+            if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return;
+            fd.append(el.name, el.value);
+          });
+          small.forEach(function (f) { fd.append('fotos', f, f.name); });
+          return fetch(form.getAttribute('action'), { method: 'POST', body: fd });
+        }).then(function (res) {
+          return res.json().catch(function () { return { ok: false }; }).then(function (j) { return { status: res.status, j: j }; });
+        }).then(function (r) {
+          if (r.j && r.j.ok) {
+            show(true, s({
+              de: 'Vielen Dank — Ihre Reparaturmeldung ist bei uns eingegangen. Vorgangsnummer: ',
+              en: 'Thank you — your repair request has reached us. Case number: ',
+              zh: ''
+            }) + '<strong>' + (r.j.id || '') + '</strong>. ' + s({
+              de: 'Wir melden uns schnellstmöglich per E-Mail.',
+              en: 'We will reply by e-mail as soon as possible.',
+              zh: ''
+            }));
+            form.reset();
+            var list = $('.filelist', form); if (list) list.innerHTML = '';
+            if (btn) btn.innerHTML = label;
+          } else {
+            throw new Error(r.j && r.j.error || 'http_' + r.status);
+          }
+        }).catch(function () {
+          restore();
+          show(false, s({
+            de: 'Das Senden hat leider nicht geklappt. Bitte versuchen Sie es erneut oder schreiben Sie an ',
+            en: 'Sending did not work. Please try again or write to ',
+            zh: ''
+          }) + '<a href="mailto:service@nic-robotics.de">service@nic-robotics.de</a>.');
+        });
+      });
+    });
+  }
+
   /* Produktfilm: erst Titelbild und Knopf, Ton und Steuerung nach dem Klick.
      Kein Download-Eintrag, kein Kontextmenü „Video speichern“. */
   function initFilm() {
@@ -819,6 +915,7 @@
     initDropzones();
     initForms();
     initRmaConditional();
+    initRepair();
     initHeroVideo();
     initFilm();
     initCaseFilter();

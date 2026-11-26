@@ -212,19 +212,36 @@ ${scripts(1)}`;
   write('service/angebot.html', html);
 }
 
-/* ============================================================ RMA PAGE == */
+/* ============================================== REPARATUR PAGE (RMA) == */
+/* Formular sendet per fetch an /api/reparatur (Cloudflare Pages Function,
+   functions/api/reparatur.js). Empfängeradresse wird dort per Umgebungsvariable gesetzt. */
 function buildRMA() {
   const { CATS, PRODUCTS, write } = ctx();
   const r = '../';
 
   const productOptions = PRODUCTS
-    .map((p) => `<option value="${attr(p.name)}"${p.title ? ` data-de="${attr(p.title.de)} (${esc(p.sku)})" data-en="${attr(p.title.en)} (${esc(p.sku)})" data-zh="${attr(p.title.zh || p.title.de)} (${esc(p.sku)})"` : ''}>${attr(p.title ? p.title.de : p.name)} (${esc(p.sku)})</option>`)  // Modellname + SKU, sprachneutral
+    .map((p) => `<option value="${attr((p.title ? p.title.de : p.name) + ' (' + p.sku + ')')}"${p.title ? ` data-de="${attr(p.title.de)} (${esc(p.sku)})" data-en="${attr(p.title.en)} (${esc(p.sku)})" data-zh="${attr(p.title.zh || p.title.de)} (${esc(p.sku)})"` : ''}>${attr(p.title ? p.title.de : p.name)} (${esc(p.sku)})</option>`)
     .join('');
 
+  const FAULTS = [
+    [['Software', 'Software', '软件问题'], [
+      ['Software: App / Steuerung', 'App / control', 'App / 控制'],
+      ['Software: Firmware / Update', 'Firmware / update', '固件 / 升级'],
+      ['Software: Navigation / Lokalisierung', 'Navigation / localisation', '导航 / 定位'],
+      ['Software: Fehlermeldung', 'Error message', '报错提示']
+    ]],
+    [['Hardware', 'Hardware', '硬件问题'], [
+      ['Hardware: Antrieb / Gelenk / Motor', 'Drive / joint / motor', '驱动 / 关节 / 电机'],
+      ['Hardware: Akku / Laden', 'Battery / charging', '电池 / 充电'],
+      ['Hardware: Sensor / Kamera / Lidar', 'Sensor / camera / lidar', '传感器 / 摄像头 / 激光雷达'],
+      ['Hardware: Mechanischer Schaden / Sturz', 'Mechanical damage / fall', '机械损伤 / 摔落']
+    ]]
+  ];
+
   const html = `${head({
-    title: 'Rücksendung & Reparatur',
-    description: 'RMA-Formular für Rücksendung, Reparatur, Austausch oder Rückgabe. Mit Auftrags- und Seriennummer, Fehlerbeschreibung und Foto-Upload bis 5 MB je Datei.',
-    path: '/service/ruecksendung.html',
+    title: 'Reparatur melden',
+    description: 'Reparatur- und Garantiefall online melden: Firma, Rechnungsnummer, Fehlerart, Fotos. Prüfung im Servicezentrum bei Frankfurt, Rückmeldung schnell und direkt.',
+    path: '/service/reparatur.html',
     depth: 1
   })}
 ${header(CATS, PRODUCTS, 1)}
@@ -233,32 +250,44 @@ ${header(CATS, PRODUCTS, 1)}
   <section class="page-hero page-hero--plain">
     <div class="wrap">
       <ol class="crumbs">
-        <li><a href="${r}index.html">${sw('Start', 'Home')}</a></li>
-        <li>${sw('Service', 'Service')}</li>
-        <li>${sw('Rücksendung & Reparatur', 'Returns & repair')}</li>
+        <li><a href="${r}index.html">${swx('Start', 'Home', '首页')}</a></li>
+        <li><a href="${r}service/index.html">${swx('Service & Support', 'Service & Support', '技术服务')}</a></li>
+        <li>${swx('Reparatur melden', 'Report a repair', '返修申请')}</li>
       </ol>
-      <h1>${sw('Rücksendung & Reparatur', 'Returns & repair')}</h1>
-      <p class="t-lead" style="max-width:64ch;margin-top:.9rem">${sw(
-        'Etwas funktioniert nicht, passt nicht oder ist beschädigt angekommen. Füllen Sie dieses Formular aus — Sie erhalten innerhalb eines Werktages eine RMA-Nummer und die Versandanweisung. Ohne RMA-Nummer können wir Rücksendungen nicht zuordnen und nehmen sie nicht an.',
-        'Something does not work, does not fit, or arrived damaged. Fill in this form — you will receive an RMA number and shipping instructions within one working day. Without an RMA number we cannot allocate a return and will not accept it.'
+      <h1>${swx('Reparatur melden', 'Report a repair', '返修申请')}</h1>
+      <p class="t-lead" style="max-width:64ch;margin-top:.9rem">${swx(
+        'Unsere Roboter laufen sehr zuverlässig, Reparaturen sind selten. Wenn doch etwas ist, füllen Sie dieses Formular aus — es geht direkt an unser Serviceteam, ohne E-Mail-Programm.',
+        'Our robots run very reliably and repairs are rare. If something does come up, fill in this form — it goes straight to our service team, no e-mail program needed.',
+        '我们的机器人质量稳定，返修率低。如确有故障，请填写此表单——提交后直接发送给我们的服务团队，无需打开邮箱。'
       )}</p>
     </div>
   </section>
 
-  <!-- process -->
   <section class="section section--tight section--flush-top" style="padding-top:var(--gap-l)">
     <div class="wrap">
       <ol class="steps reveal" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));display:grid;gap:var(--gap)">
         ${[
-          ['Formular ausfüllen', 'Complete the form', 'Auftragsnummer, Seriennummer und eine kurze Fehlerbeschreibung. Fotos helfen uns, den Fall ohne Rückfragen zu beurteilen.', 'Order number, serial number and a short fault description. Photos let us assess the case without coming back to you.'],
-          ['RMA-Nummer erhalten', 'Receive the RMA number', 'Innerhalb eines Werktages per E-Mail, zusammen mit der Versandadresse und dem Begleitschein zum Ausdrucken.', 'Within one working day by e-mail, together with the shipping address and a dispatch note to print.'],
-          ['Gerät versenden', 'Ship the unit', 'RMA-Nummer außen gut sichtbar auf das Paket. Nach Möglichkeit in der Originalverpackung — Akkus nach Gefahrgutvorschrift.', 'RMA number clearly visible on the outside. In the original packaging where possible — batteries per dangerous-goods rules.'],
-          ['Prüfung und Rückmeldung', 'Assessment and response', 'Wir prüfen, melden Befund und Kosten und führen nach Ihrer Freigabe Reparatur, Austausch oder Gutschrift aus.', 'We assess, report the finding and cost, and on your approval carry out repair, replacement or credit.']
-        ].map(([de, en, bde, ben]) => `
+          ['Formular senden', 'Send the form', '提交表单',
+           'Firma, Kontakt, Fehlerart und gern Fotos. Ein Klick — und der Fall liegt bei uns.',
+           'Company, contact, fault type and ideally photos. One click and the case is with us.',
+           '填写公司、联系人、故障类型，最好附上照片。点击发送，工单即到我们这里。'],
+          ['Schnelle Rückmeldung', 'Fast reply', '快速回复',
+           'Wir melden uns zügig. Oft lässt sich der Fehler per Ferndiagnose der Geräte-Logs eingrenzen: Software oder Hardware.',
+           'We get back to you quickly. Often the fault can be narrowed down by remote diagnosis of the unit’s logs: software or hardware.',
+           '我们会尽快回复。很多情况下可通过远程读取设备日志，判断是软件还是硬件问题。'],
+          ['Einsendung, wenn nötig', 'Ship in, if needed', '必要时寄修',
+           'Ist eine Reparatur vor Ort nötig, schicken Sie das Gerät an unser Servicezentrum bei Frankfurt. Die Adresse erhalten Sie mit unserer Antwort.',
+           'If a hands-on repair is needed, you send the unit to our service centre near Frankfurt. You receive the address with our reply.',
+           '如需实机维修，请将设备寄到我们位于法兰克福周边的维修中心，地址随回复告知。'],
+          ['Bericht und Behebung', 'Report and fix', '出具报告并修复',
+           'Im Garantiefall erhalten Sie in der Regel innerhalb einer Woche nach Eingang den Prüfbericht; übliche Fehler sind bis dahin behoben.',
+           'For warranty cases you usually receive the inspection report within one week of receipt; common faults are fixed by then.',
+           '保修期内，设备送达后一般一周内出具检测报告，并完成常规故障排查与维护。']
+        ].map(([de, en, zh, bde, ben, bzh]) => `
         <li>
           <div>
-            <h4>${sw(de, en)}</h4>
-            <p class="t-small t-muted">${sw(bde, ben)}</p>
+            <h4>${swx(de, en, zh)}</h4>
+            <p class="t-small t-muted">${swx(bde, ben, bzh)}</p>
           </div>
         </li>`).join('')}
       </ol>
@@ -270,257 +299,145 @@ ${header(CATS, PRODUCTS, 1)}
       <div class="grid form-layout">
 
         <div class="form-card reveal">
-          <form data-validate data-mailto="${SITE.emailService}" novalidate>
+          <form data-validate data-repair action="/api/reparatur" method="post" enctype="multipart/form-data" novalidate>
             <div class="form-status" role="status" aria-live="polite"></div>
 
-            <!-- 1 contact -->
             <fieldset class="fset">
-              <legend>${sw('1 · Ihre Kontaktdaten', '1 · Your contact details')}</legend>
+              <legend>${swx('1 · Firma und Kontakt', '1 · Company and contact', '1 · 公司与联系人')}</legend>
               <div class="field-grid field-grid--2">
                 <div class="field">
-                  <label for="rma-name">${sw('Name', 'Name')} <span class="req">*</span></label>
-                  <input class="input" type="text" id="rma-name" name="name" required autocomplete="name">
-                  <span class="err-msg">${sw('Bitte Namen angeben.', 'Please enter your name.')}</span>
+                  <label for="rp-company">${swx('Firma / Einrichtung', 'Company / institution', '公司 / 机构名称')} <span class="req">*</span></label>
+                  <input class="input" type="text" id="rp-company" name="firma" required autocomplete="organization" maxlength="160">
+                  <span class="err-msg">${swx('Bitte Firma angeben.', 'Please enter your company.', '请填写公司名称。')}</span>
                 </div>
                 <div class="field">
-                  <label for="rma-company">${sw('Firma / Einrichtung', 'Company / institution')} <span class="req">*</span></label>
-                  <input class="input" type="text" id="rma-company" name="firma" required autocomplete="organization">
-                  <span class="err-msg">${sw('Bitte Firma angeben.', 'Please enter your organisation.')}</span>
+                  <label for="rp-name">${swx('Ansprechpartner', 'Contact person', '联系人姓名')} <span class="req">*</span></label>
+                  <input class="input" type="text" id="rp-name" name="name" required autocomplete="name" maxlength="120">
+                  <span class="err-msg">${swx('Bitte Namen angeben.', 'Please enter your name.', '请填写联系人姓名。')}</span>
                 </div>
                 <div class="field">
-                  <label for="rma-email">E-Mail <span class="req">*</span></label>
-                  <input class="input" type="email" id="rma-email" name="email" required autocomplete="email">
-                  <span class="hint">${sw('An diese Adresse geht die RMA-Nummer.', 'The RMA number goes to this address.')}</span>
-                  <span class="err-msg">${sw('Bitte gültige E-Mail angeben.', 'Please enter a valid e-mail.')}</span>
+                  <label for="rp-email">E-Mail <span class="req">*</span></label>
+                  <input class="input" type="email" id="rp-email" name="email" required autocomplete="email" maxlength="160">
+                  <span class="hint">${swx('An diese Adresse antworten wir.', 'We reply to this address.', '我们会回复到这个邮箱。')}</span>
+                  <span class="err-msg">${swx('Bitte gültige E-Mail angeben.', 'Please enter a valid e-mail.', '请填写有效的邮箱地址。')}</span>
                 </div>
                 <div class="field">
-                  <label for="rma-phone">${sw('Telefon', 'Phone')} <span class="opt">${sw('optional', 'optional')}</span></label>
-                  <input class="input" type="tel" id="rma-phone" name="telefon" autocomplete="tel">
+                  <label for="rp-phone">${swx('Telefon', 'Phone', '电话')} <span class="opt">${swx('optional', 'optional', '选填')}</span></label>
+                  <input class="input" type="tel" id="rp-phone" name="telefon" autocomplete="tel" maxlength="60">
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="fset">
+              <legend>${swx('2 · Gerät und Rechnung', '2 · Unit and invoice', '2 · 设备与发票')}</legend>
+              <div class="field-grid field-grid--2">
+                <div class="field">
+                  <label for="rp-invoice">${swx('Rechnungsnummer', 'Invoice number', '发票号')} <span class="opt">${swx('empfohlen', 'recommended', '建议填写')}</span></label>
+                  <input class="input" type="text" id="rp-invoice" name="rechnungsnummer" maxlength="80">
+                  <span class="hint">${swx('Damit ordnen wir den Garantiefall sofort zu.', 'Lets us match the warranty case right away.', '便于我们立即核对保修信息。')}</span>
+                </div>
+                <div class="field">
+                  <label for="rp-serial">${swx('Seriennummer', 'Serial number', '序列号')} <span class="opt">${swx('optional', 'optional', '选填')}</span></label>
+                  <input class="input" type="text" id="rp-serial" name="seriennummer" maxlength="80">
                 </div>
                 <div class="field span-2">
-                  <label for="rma-address">${sw('Rückversandadresse', 'Return shipping address')} <span class="opt">${sw('nur bei Abweichung', 'only if different')}</span></label>
-                  <input class="input" type="text" id="rma-address" name="adresse" autocomplete="street-address" ${ph(
-                    'Straße, PLZ, Ort — nur wenn die Lieferadresse abweicht',
-                    'Street, postcode, town — only if different from the delivery address',
-                    '街道、邮编、城市——仅在与收货地址不同时填写'
-                  )}>
-                </div>
-              </div>
-            </fieldset>
-
-            <!-- 2 order -->
-            <fieldset class="fset">
-              <legend>${sw('2 · Auftrag und Gerät', '2 · Order and unit')}</legend>
-              <p class="legend-note">${sw(
-                'Die Seriennummer steht auf dem Typenschild an der Unterseite des Rumpfes.',
-                'The serial number is on the type plate on the underside of the body.'
-              )}</p>
-              <div class="field-grid field-grid--2">
-                <div class="field">
-                  <label for="rma-order">${sw('Auftragsnummer', 'Order number')} <span class="req">*</span></label>
-                  <input class="input" type="text" id="rma-order" name="auftragsnummer" required placeholder="NIC-2026-00000">
-                  <span class="err-msg">${sw('Bitte Auftragsnummer angeben.', 'Please enter the order number.')}</span>
-                </div>
-                <div class="field">
-                  <label for="rma-invoice">${sw('Rechnungsnummer', 'Invoice number')} <span class="opt">${sw('optional', 'optional')}</span></label>
-                  <input class="input" type="text" id="rma-invoice" name="rechnungsnummer">
-                  <span class="hint">${sw('Falls die Auftragsnummer nicht vorliegt.', 'If the order number is not to hand.')}</span>
-                </div>
-                <div class="field">
-                  <label for="rma-product">${sw('Produkt', 'Product')} <span class="req">*</span></label>
-                  <select class="select" id="rma-product" name="produkt" required>
-                    <option value="">${sw('— bitte wählen —', '— please select —')}</option>
+                  <label for="rp-product">${swx('Produkt', 'Product', '产品')} <span class="opt">${swx('optional', 'optional', '选填')}</span></label>
+                  <select class="select" id="rp-product" name="produkt">
+                    <option value="">${swx('— bitte wählen —', '— please select —', '— 请选择 —')}</option>
                     ${productOptions}
-                    <option value="ersatzteil">${sw('Ersatzteil oder Zubehör', 'Spare part or accessory')}</option>
-                    <option value="sonstiges">${sw('Anderes Produkt', 'Other product')}</option>
+                    <option value="Anderes Produkt">${swx('Anderes Produkt', 'Other product', '其他产品')}</option>
                   </select>
-                  <span class="err-msg">${sw('Bitte Produkt wählen.', 'Please select the product.')}</span>
-                </div>
-                <div class="field">
-                  <label for="rma-serial">${sw('Seriennummer', 'Serial number')} <span class="req">*</span></label>
-                  <input class="input" type="text" id="rma-serial" name="seriennummer" required>
-                  <span class="err-msg">${sw('Bitte Seriennummer angeben.', 'Please enter the serial number.')}</span>
-                </div>
-                <div class="field">
-                  <label for="rma-qty">${sw('Anzahl betroffener Teile', 'Number of items affected')}</label>
-                  <input class="input" type="number" id="rma-qty" name="anzahl" min="1" value="1">
-                </div>
-                <div class="field">
-                  <label for="rma-date">${sw('Kaufdatum', 'Date of purchase')} <span class="opt">${sw('optional', 'optional')}</span></label>
-                  <input class="input" type="date" id="rma-date" name="kaufdatum">
                 </div>
               </div>
             </fieldset>
 
-            <!-- 3 reason -->
             <fieldset class="fset">
-              <legend>${sw('3 · Grund der Rücksendung', '3 · Reason for the return')}</legend>
-              <div class="field-grid">
-                <div class="field">
-                  <label for="rma-reason">${sw('Was ist passiert?', 'What happened?')} <span class="req">*</span></label>
-                  <select class="select" id="rma-reason" name="grund" required>
-                    <option value="">${sw('— bitte wählen —', '— please select —')}</option>
-                    <option value="defekt">${sw('Gerät defekt oder fehlerhaft', 'Unit faulty or defective')}</option>
-                    <option value="transportschaden">${sw('Transportschaden — beschädigt angekommen', 'Transit damage — arrived damaged')}</option>
-                    <option value="falschlieferung">${sw('Falschlieferung — falsches Produkt erhalten', 'Wrong delivery — wrong product received')}</option>
-                    <option value="unvollstaendig">${sw('Lieferung unvollständig — Teile fehlen', 'Delivery incomplete — parts missing')}</option>
-                    <option value="funktion">${sw('Funktion entspricht nicht der Beschreibung', 'Function does not match the description')}</option>
-                    <option value="wartung">${sw('Planmäßige Wartung oder Kalibrierung', 'Scheduled maintenance or calibration')}</option>
-                    <option value="widerruf">${sw('Widerruf innerhalb der Frist', 'Withdrawal within the statutory period')}</option>
-                    <option value="sonstiges">${sw('Sonstiger Grund', 'Other reason')}</option>
-                    <option value="unklar">${sw('Weiß ich nicht genau — bitte beraten', 'Not sure — please advise')}</option>
-                  </select>
-                  <span class="err-msg">${sw('Bitte einen Grund wählen.', 'Please choose a reason.')}</span>
-                </div>
-
-                <div class="field" id="rma-reason-other-field" hidden>
-                  <label for="rma-reason-other">${sw('Bitte näher beschreiben', 'Please describe it')} <span class="req">*</span></label>
-                  <input class="input" type="text" id="rma-reason-other" name="grund_sonstiges">
-                  <span class="err-msg">${sw('Bitte kurz beschreiben.', 'Please describe it briefly.')}</span>
-                </div>
-
-                <div class="field">
-                  <label for="rma-wish">${sw('Was wünschen Sie sich?', 'What would you like to happen?')} <span class="req">*</span></label>
-                  <select class="select" id="rma-wish" name="wunsch" required>
-                    <option value="">${sw('— bitte wählen —', '— please select —')}</option>
-                    <option value="reparatur">${sw('Reparatur', 'Repair')}</option>
-                    <option value="austausch">${sw('Austausch gegen ein gleiches Gerät', 'Replacement with an identical unit')}</option>
-                    <option value="ersatzteil">${sw('Ersatzteil zusenden — ich tausche selbst', 'Send the part — I will swap it myself')}</option>
-                    <option value="gutschrift">${sw('Gutschrift', 'Credit note')}</option>
-                    <option value="rueckerstattung">${sw('Rückerstattung des Kaufpreises', 'Refund of the purchase price')}</option>
-                    <option value="pruefung">${sw('Nur Prüfung und Kostenvoranschlag', 'Assessment and estimate only')}</option>
-                    <option value="beratung">${sw('Ich bin mir nicht sicher — bitte beraten Sie mich', 'I am not sure — please advise me')}</option>
-                  </select>
-                  <span class="err-msg">${sw('Bitte einen Wunsch wählen.', 'Please choose an option.')}</span>
-                </div>
-
-                <div class="field">
-                  <label for="rma-desc">${sw('Fehlerbeschreibung', 'Fault description')}</label>
-                  <textarea class="textarea" id="rma-desc" name="beschreibung"
-                    ${ph(
-                      'Wann tritt der Fehler auf? Lässt er sich reproduzieren? Gab es eine Fehlermeldung, ein Geräusch, einen Sturz oder Wassereintritt? Welche Schritte haben Sie bereits versucht?',
-                      'When does the fault occur? Can you reproduce it? Was there an error message, a noise, a fall or water ingress? What have you already tried?',
-                      '故障在什么情况下出现？能否复现？是否有报错提示、异响、跌倒或进水？您已经尝试过哪些处理？'
-                    )}></textarea>
-                  <span class="hint">${sw(
-                    'Je genauer die Beschreibung, desto seltener müssen wir nachfragen — und desto schneller ist das Gerät zurück bei Ihnen.',
-                    'The more precise the description, the less often we have to come back to you — and the sooner the unit is back with you.'
-                  )}</span>
-                </div>
-
-                <div class="field">
-                  <label>${sw('Zustand bei Rücksendung', 'Condition on return')}</label>
+              <legend>${swx('3 · Art des Fehlers', '3 · Type of fault', '3 · 故障类型')}</legend>
+              <p class="legend-note">${swx('Mehrfachauswahl möglich. Wenn Sie unsicher sind, wählen Sie „Weiß ich nicht“.', 'Select all that apply. If unsure, choose “Not sure”.', '可多选。不确定时请选“不确定”。')}</p>
+              <div class="fault-grid">
+                ${FAULTS.map(([g, items]) => `
+                <div class="fault-col">
+                  <p class="fault-col__h">${swx(...g)}</p>
                   <div class="choice">
-                    <label><input type="radio" name="zustand" value="original" checked><span>${sw('Originalverpackung vorhanden, Zubehör vollständig', 'Original packaging available, accessories complete')}</span></label>
-                    <label><input type="radio" name="zustand" value="teilweise"><span>${sw('Originalverpackung vorhanden, Zubehör teilweise', 'Original packaging available, accessories partial')}</span></label>
-                    <label><input type="radio" name="zustand" value="ersatz"><span>${sw('Keine Originalverpackung — wird ersatzweise verpackt', 'No original packaging — will be packed otherwise')}</span></label>
+                    ${items.map(([val, en, zh]) => `<label><input type="checkbox" name="fehlerart" value="${attr(val)}"><span>${swx(val.replace(/^(Software|Hardware): /, ''), en, zh)}</span></label>`).join('')}
                   </div>
-                </div>
+                </div>`).join('')}
+              </div>
+              <div class="choice mt-s">
+                <label><input type="checkbox" name="fehlerart" value="Weiß ich nicht"><span>${swx('Weiß ich nicht — bitte prüfen', 'Not sure — please check', '不确定，请帮忙判断')}</span></label>
               </div>
             </fieldset>
 
-            <!-- 4 evidence -->
             <fieldset class="fset">
-              <legend>${sw('4 · Bilder und Nachweise', '4 · Images and evidence')}</legend>
-              <p class="legend-note">${sw(
-                'Ein Foto des Schadens, des Typenschilds oder der Verpackung beschleunigt die Bearbeitung erheblich — bei Transportschäden ist es für die Versicherung sogar erforderlich.',
-                'A photo of the damage, the type plate or the packaging speeds things up considerably — for transit damage the insurer requires it.'
-              )}</p>
+              <legend>${swx('4 · Fotos', '4 · Photos', '4 · 故障照片')} <span class="opt">${swx('optional', 'optional', '选填')}</span></legend>
               <div class="field">
-                <label class="dropzone" data-list="rma-files" for="rma-upload">
+                <label class="dropzone" data-list="rp-files" data-max-mb="25" for="rp-upload">
                   ${ICON.upload}
-                  <strong>${sw('Dateien hierher ziehen oder auswählen', 'Drag files here or choose them')}</strong>
-                  <span class="hint">${sw(
-                    'JPG, PNG, WebP, PDF oder MP4 · max. 5 MB je Datei · bis zu 6 Dateien',
-                    'JPG, PNG, WebP, PDF or MP4 · max. 5 MB per file · up to 6 files'
-                  )}</span>
-                  <input type="file" id="rma-upload" name="dateien" multiple accept="image/*,application/pdf,video/mp4">
+                  <strong>${swx('Fotos hierher ziehen oder auswählen', 'Drag photos here or choose them', '拖入或选择照片')}</strong>
+                  <span class="hint">${swx('Bis zu 6 Fotos · JPG, PNG, WebP oder HEIC · werden vor dem Senden automatisch verkleinert', 'Up to 6 photos · JPG, PNG, WebP or HEIC · automatically reduced before sending', '最多 6 张 · JPG、PNG、WebP 或 HEIC · 发送前自动压缩')}</span>
+                  <input type="file" id="rp-upload" name="fotos" multiple accept="image/*">
                 </label>
-                <ul class="filelist" id="rma-files"></ul>
+                <ul class="filelist" id="rp-files"></ul>
               </div>
             </fieldset>
 
-            <!-- 5 consent -->
             <fieldset class="fset">
-              <legend>${sw('5 · Bestätigung', '5 · Confirmation')}</legend>
-              <div class="field-grid">
-                <div class="field">
-                  <label class="consent">
-                    <input type="checkbox" name="reset_ok">
-                    <span>${sw(
-                      'Mir ist bekannt, dass Geräte bei einer Reparatur auf Werkseinstellungen zurückgesetzt werden können und gespeicherte Karten, Routen und Konfigurationen dabei verloren gehen.',
-                      'I understand that during repair units may be reset to factory settings and that stored maps, routes and configurations may be lost.'
-                    )}</span>
-                  </label>
-                </div>
-                <div class="field">
-                  <label class="consent">
-                    <input type="checkbox" name="datenschutz" required>
-                    <span>${sw(
-                      'Ich willige ein, dass meine Angaben zur Bearbeitung des Vorgangs gespeichert und verwendet werden.',
-                      'I consent to my details being stored and used to process this case.'
-                    )} <a href="${r}unternehmen/datenschutz.html">${sw('Datenschutzerklärung', 'Privacy notice')}</a> <span class="req">*</span></span>
-                  </label>
-                  <span class="err-msg">${sw('Bitte bestätigen Sie die Datenschutzerklärung.', 'Please confirm the privacy notice.')}</span>
-                </div>
+              <legend>${swx('5 · Beschreibung', '5 · Description', '5 · 备注说明')} <span class="opt">${swx('optional', 'optional', '选填')}</span></legend>
+              <div class="field">
+                <label class="sr-only" for="rp-desc">${swx('Beschreibung', 'Description', '备注说明')}</label>
+                <textarea class="textarea" id="rp-desc" name="beschreibung" maxlength="4000" ${ph(
+                  'Was ist passiert? Wann tritt der Fehler auf, lässt er sich wiederholen? Gab es eine Fehlermeldung, einen Sturz oder Wassereintritt?',
+                  'What happened? When does the fault occur, can it be repeated? Was there an error message, a fall or water ingress?',
+                  '发生了什么？故障在什么情况下出现，能否复现？是否有报错提示、摔落或进水？'
+                )}></textarea>
+              </div>
+              <div class="field mt-s">
+                <label class="consent">
+                  <input type="checkbox" name="datenschutz" value="ja" required>
+                  <span>${swx(
+                    'Ich willige ein, dass meine Angaben und Fotos zur Bearbeitung des Reparaturfalls gespeichert und verwendet werden.',
+                    'I consent to my details and photos being stored and used to process this repair case.',
+                    '我同意为处理本次返修而保存和使用我提供的信息与照片。'
+                  )} <a href="${r}unternehmen/datenschutz.html">${swx('Datenschutzerklärung', 'Privacy notice', '隐私政策')}</a> <span class="req">*</span></span>
+                </label>
+                <span class="err-msg">${swx('Bitte bestätigen Sie die Datenschutzerklärung.', 'Please confirm the privacy notice.', '请确认隐私政策。')}</span>
               </div>
             </fieldset>
 
             <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
 
             <div class="cluster mt-l">
-              <button class="btn btn--lg btn--arrow" type="submit">${sw('RMA-Nummer anfordern', 'Request RMA number')} ${ICON.arrow}</button>
-              <span class="t-small t-dim">${sw('Antwort innerhalb eines Werktages.', 'Reply within one working day.')}</span>
+              <button class="btn btn--lg btn--arrow" type="submit">${swx('Reparatur senden', 'Send repair request', '发送返修申请')} ${ICON.arrow}</button>
+              <span class="t-small t-dim">${swx('Pflichtfelder sind mit * markiert.', 'Required fields are marked *.', '带 * 为必填项。')}</span>
             </div>
           </form>
         </div>
 
         <aside class="stack reveal" data-delay="1">
           <div class="panel panel--glow">
-            <h3 style="font-size:var(--step-1);margin-bottom:.8rem">${sw('Bitte zuerst lesen', 'Please read first')}</h3>
+            <h3 style="font-size:var(--step-1);margin-bottom:.8rem">${swx('Gut zu wissen', 'Good to know', '须知')}</h3>
             <ul class="ticks">
-              <li>${sw('Senden Sie nichts ohne RMA-Nummer — Pakete ohne Nummer werden nicht angenommen.', 'Do not ship anything without an RMA number — parcels without one are refused.')}</li>
-              <li>${sw('Die RMA-Nummer ist vier Wochen gültig.', 'The RMA number is valid for four weeks.')}</li>
-              <li>${sw('Akkus unterliegen der Gefahrgutvorschrift. Wir nennen Ihnen den zulässigen Versandweg.', 'Batteries are dangerous goods. We will tell you the permitted shipping route.')}</li>
-              <li>${sw('Bei Transportschäden melden Sie sich bitte innerhalb von sieben Tagen nach Erhalt.', 'For transit damage, please report within seven days of receipt.')}</li>
+              <li>${swx('Bitte schicken Sie kein Gerät ohne unsere Rückmeldung — oft löst die Ferndiagnose das Problem schneller.', 'Please do not ship a unit before we reply — remote diagnosis often solves the problem faster.', '请在收到我们回复后再寄送设备——很多问题通过远程诊断就能更快解决。')}</li>
+              <li>${swx('Reparatur im Servicezentrum bei Frankfurt. Ins Werk nur bei schweren Schäden, die wir hier nicht beheben können.', 'Repair at our service centre near Frankfurt. To the factory only for major faults we cannot fix here.', '在法兰克福周边的维修中心维修；仅重大故障无法在此修复时才寄回工厂。')}</li>
+              <li>${swx('Akkus unterliegen der Gefahrgutvorschrift. Wir nennen Ihnen den zulässigen Versandweg.', 'Batteries are dangerous goods. We tell you the permitted shipping route.', '电池属于危险品，我们会告知合规的寄送方式。')}</li>
             </ul>
           </div>
 
           <div class="panel">
-            <h3 style="font-size:var(--step-1);margin-bottom:.8rem">${sw('Vielleicht geht es ohne Rücksendung', 'It may not need a return')}</h3>
-            <p class="t-small t-muted" style="margin-bottom:1rem">${sw(
-              'Ein erheblicher Teil der gemeldeten Fehler lässt sich aus der Ferne lösen — Firmware, Kalibrierung, ein Parameter. Bevor Sie ein 60-Kilo-Gerät verpacken, lohnt sich ein Anruf.',
-              'A substantial share of reported faults can be solved remotely — firmware, calibration, a parameter. Before you crate a 60-kilo machine, a phone call is worth it.'
+            <h3 style="font-size:var(--step-1);margin-bottom:.8rem">${swx('Verschleißteile', 'Wear parts', '易损件')}</h3>
+            <p class="t-small t-muted">${swx(
+              'Fußpads, Akkus und Schutzteile haben wir auf Lager. In der Garantie tauschen wir schnell; danach können Sie sie bei uns kaufen und mit offizieller Anleitung selbst wechseln.',
+              'Foot pads, batteries and protective parts are in stock. Under warranty we replace them fast; afterwards you can buy them from us and swap them yourself with official instructions.',
+              '足垫、电池和防护件均有库存。质保期内快速更换；过保后可向我们购买，并按官方指导自行更换。'
             )}</p>
+            <p style="margin-top:.8rem"><a class="link" href="${r}produkte/ersatzteile.html">${swx('Zu den Ersatzteilen', 'To spare parts', '查看备件')} ${ICON.arrow}</a></p>
+          </div>
+
+          <div class="panel">
+            <h3 style="font-size:var(--step-1);margin-bottom:.8rem">${swx('Lieber per E-Mail?', 'Prefer e-mail?', '更习惯用邮件？')}</h3>
             <div class="footer-contact">
-              <a href="tel:${SITE.phoneHref}">${ICON.phone} ${SITE.phone}</a>
               <a href="mailto:${SITE.emailService}">${ICON.mail} ${SITE.emailService}</a>
             </div>
-          </div>
-
-          <div class="panel">
-            <h3 style="font-size:var(--step-1);margin-bottom:.8rem">${sw('Rücksendeadresse', 'Return address')}</h3>
-            <p class="t-small t-muted" style="margin-bottom:.7rem">${sw('Erst nach Erhalt der RMA-Nummer versenden an:', 'Only ship after receiving the RMA number, to:')}</p>
-            <address class="t-small" style="font-style:normal;line-height:1.7;color:var(--fg-muted)">
-              ${SITE.legal}<br>
-              NIC Robotics · ${sw('Retoure', 'Returns')}<br>
-              ${SITE.street}<br>
-              ${SITE.zipCity}<br>
-              ${SITE.country}
-            </address>
-            <p class="t-small t-dim" style="margin-top:.8rem">${sw(
-              'RMA-Nummer außen gut sichtbar vermerken.',
-              'Mark the RMA number clearly on the outside.'
-            )}</p>
-          </div>
-
-          <div class="panel">
-            <h3 style="font-size:var(--step-1);margin-bottom:.8rem">${sw('Widerruf statt Reparatur?', 'Withdrawal rather than repair?')}</h3>
-            <p class="t-small t-muted">${sw(
-              'Verbraucher haben ein vierzehntägiges Widerrufsrecht. Die Bedingungen und das Muster-Widerrufsformular finden Sie auf der Seite zum Widerrufsrecht.',
-              'Consumers have a fourteen-day right of withdrawal. The conditions and the model withdrawal form are on the right-of-withdrawal page.'
-            )}</p>
-            <p style="margin-top:.8rem"><a class="link" href="${r}unternehmen/widerruf.html">${sw('Zum Widerrufsrecht', 'Right of withdrawal')} ${ICON.arrow}</a></p>
           </div>
         </aside>
 
@@ -532,7 +449,15 @@ ${header(CATS, PRODUCTS, 1)}
 ${footer(CATS, 1)}
 ${scripts(1)}`;
 
-  write('service/ruecksendung.html', html);
+  write('service/reparatur.html', html);
+
+  // Alte Adresse leitet weiter
+  write('service/ruecksendung.html', `<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><title>Reparatur melden · NIC Robotics</title>
+<meta name="robots" content="noindex"><link rel="canonical" href="${SITE.domain}/service/reparatur.html">
+<meta http-equiv="refresh" content="0; url=reparatur.html"></head>
+<body><p><a href="reparatur.html">Reparatur melden / Report a repair</a></p></body></html>
+`);
 }
 
 /* ======================================================== CONTACT PAGE == */
@@ -722,8 +647,8 @@ ${header(CATS, PRODUCTS, 1)}
           'An Yuan GmbH has traded between Europe and China for years. We know both ends of the route: how a manufacturer in Hangzhou works, and what a procurement department in Essen needs before it releases an order. Our work sits exactly in between.'
         )}</p>
         <p class="t-muted">${sw(
-          'Denn ein Laufroboter ist kein Produkt, das man in einen Karton legt und verschickt. Er braucht jemanden, der die Schnittstelle zum Leitsystem baut, der das Personal einweist, der am Montagmorgen ans Telefon geht, wenn das Gerät nicht aus der Ladestation fährt — und der einen Gummifuß auf Lager hat, statt ihn in Asien zu bestellen. Das ist der Teil, den wir übernehmen.',
-          'Because a legged robot is not a product you put in a box and ship. It needs someone to build the interface into the control system, to train the staff, to pick up the phone on Monday morning when the unit will not leave its dock — and to have a rubber foot on the shelf instead of ordering it from Asia. That is the part we take on.'
+          'Denn ein Laufroboter ist kein Produkt, das man in einen Karton legt und verschickt. Er braucht jemanden, der die Schnittstelle zum Leitsystem baut, der aus der Ferne in die Logs schaut, wenn das Gerät am Montagmorgen nicht aus der Ladestation fährt — und der einen Gummifuß auf Lager hat, statt ihn erst beim Hersteller zu bestellen. Das ist der Teil, den wir übernehmen.',
+          'Because a legged robot is not a product you put in a box and ship. It needs someone to build the interface into the control system, to check the logs remotely when the unit will not leave its dock on Monday morning — and to have a rubber foot on the shelf instead of ordering it from the manufacturer first. That is the part we take on.'
         )}</p>
       </div>
 
@@ -732,8 +657,8 @@ ${header(CATS, PRODUCTS, 1)}
       <div class="grid cols-2 mt-l" style="gap:var(--gap-l)">
         ${[
           ['Was wir tun', 'What we do',
-           'Import, Vertrieb, technische Integration, Schulung, Ersatzteilhaltung und Reparatur für Laufrobotik in Europa. Wir beliefern Industrie, Energieversorger, Feuerwehren, Hochschulen und Sicherheitsdienstleister.',
-           'Import, sales, technical integration, training, spare-part stocking and repair for legged robotics in Europe. We supply industry, utilities, fire services, universities and security providers.'],
+           'Import, Vertrieb, technische Integration, Fernsupport, Ersatzteilhaltung und Reparatur für Laufrobotik in Europa. Wir beliefern Industrie, Energieversorger, Feuerwehren, Hochschulen und Sicherheitsdienstleister.',
+           'Import, sales, technical integration, remote support, spare-part stocking and repair for legged robotics in Europe. We supply industry, utilities, fire services, universities and security providers.'],
           ['Was wir nicht tun', 'What we do not do',
            'Wir verkaufen Ihnen kein Gerät, von dem wir wissen, dass es Ihre Aufgabe nicht löst. Wenn die ehrliche Antwort lautet, dass ein Mensch mit einer Wärmebildkamera günstiger und besser ist, sagen wir das.',
            'We will not sell you a machine we know will not solve your problem. If the honest answer is that a person with a thermal camera is cheaper and better, we say so.'],
@@ -873,7 +798,7 @@ ${PARA(
   'Beim Aufruf dieser Website werden durch den Hosting-Anbieter automatisch Server-Logdaten verarbeitet: IP-Adresse in gekürzter Form, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, übertragene Datenmenge, Referrer sowie Browser- und Betriebssystemkennung. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; das berechtigte Interesse liegt im sicheren und störungsfreien Betrieb der Website. Diese Daten werden nach spätestens sieben Tagen gelöscht.',
   'When you visit this website, the hosting provider automatically processes server log data: truncated IP address, date and time of access, page requested, volume of data transferred, referrer, and browser and operating-system identifiers. The legal basis is Art. 6(1)(f) GDPR; the legitimate interest is the secure and trouble-free operation of the website. These data are erased after seven days at the latest.'
 )}
-${H3('3 · Kontakt-, Angebots- und Rücksendeformulare', '3 · Contact, quotation and return forms')}
+${H3('3 · Kontakt-, Angebots- und Reparaturformulare', '3 · Contact, quotation and repair forms')}
 ${PARA(
   'Wenn Sie uns über eines der Formulare auf dieser Website kontaktieren, verarbeiten wir die von Ihnen angegebenen Daten — insbesondere Name, Firma, E-Mail-Adresse, gegebenenfalls Telefonnummer, Anschrift, Auftrags- und Seriennummer sowie den Inhalt Ihrer Nachricht und hochgeladene Dateien — ausschließlich zur Bearbeitung Ihres Anliegens.',
   'When you contact us through one of the forms on this website, we process the data you provide — in particular name, company, e-mail address, where applicable telephone number, address, order and serial number, as well as the content of your message and any uploaded files — solely in order to deal with your request.'
@@ -884,8 +809,8 @@ ${PARA(
 )}
 ${H3('4 · Hochgeladene Dateien', '4 · Uploaded files')}
 ${PARA(
-  'Im Rücksendeformular können Sie Bilder, PDF-Dateien oder kurze Videos hochladen. Diese werden ausschließlich zur Beurteilung des gemeldeten Mangels verwendet, nicht veröffentlicht und nach Abschluss des Vorgangs gelöscht, soweit keine Gewährleistungs- oder Versicherungsansprüche eine längere Aufbewahrung erfordern.',
-  'In the return form you may upload images, PDF files or short videos. These are used solely to assess the reported defect, are not published, and are erased once the case is closed, unless warranty or insurance claims require longer retention.'
+  'Im Reparaturformular können Sie Fotos hochladen. Formularangaben und Fotos werden über unseren Hosting-Anbieter (Cloudflare) und einen E-Mail-Versanddienst an unser Serviceteam übermittelt und dort nicht dauerhaft gespeichert. Sie werden ausschließlich zur Beurteilung des gemeldeten Fehlers verwendet, nicht veröffentlicht und nach Abschluss des Vorgangs gelöscht, soweit keine Gewährleistungs- oder Versicherungsansprüche eine längere Aufbewahrung erfordern.',
+  'In the repair form you may upload photos. Form details and photos are transmitted to our service team via our hosting provider (Cloudflare) and an e-mail delivery service, where they are not stored permanently. These are used solely to assess the reported defect, are not published, and are erased once the case is closed, unless warranty or insurance claims require longer retention.'
 )}
 ${H3('5 · Schriftarten', '5 · Fonts')}
 ${PARA(
@@ -958,18 +883,18 @@ ${PARA(
   'Statutory warranty rights apply. Businesses must inspect delivered goods without delay and report apparent defects immediately, and latent defects immediately upon discovery. For wear parts — in particular feet, seals and batteries — the warranty covers only defects already present at handover.'
 )}
 ${PARA(
-  'Rücksendungen bedürfen vorab einer RMA-Nummer. Sendungen ohne RMA-Nummer können wir nicht zuordnen und nehmen sie nicht an.',
-  'Returns require an RMA number issued in advance. We cannot allocate consignments without an RMA number and will not accept them.'
+  'Reparatur- und Garantiefälle melden Sie bitte vorab über unser Reparaturformular. Geräte senden Sie erst nach unserer Rückmeldung ein.',
+  'Please report repair and warranty cases in advance via our repair form. Only ship units after we have replied.'
 )}
 ${H3('§ 7 Haftung', '§ 7 Liability')}
 ${PARA(
   'Wir haften unbeschränkt für Vorsatz und grobe Fahrlässigkeit sowie für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit. Bei einfacher Fahrlässigkeit haften wir nur bei Verletzung einer wesentlichen Vertragspflicht und der Höhe nach begrenzt auf den vertragstypischen, vorhersehbaren Schaden.',
   'We are liable without limitation for intent and gross negligence and for damage arising from injury to life, body or health. In cases of simple negligence we are liable only for breach of a material contractual obligation and limited in amount to the typical, foreseeable damage.'
 )}
-${H3('§ 8 Betrieb und Einweisung', '§ 8 Operation and instruction')}
+${H3('§ 8 Betrieb', '§ 8 Operation')}
 ${PARA(
-  'Die gelieferten Geräte sind Maschinen im Sinne der Maschinenverordnung. Der Besteller ist für den bestimmungsgemäßen Einsatz, die Gefährdungsbeurteilung am Einsatzort und die Unterweisung des Bedienpersonals verantwortlich. Wir weisen bei Übergabe in die Bedienung ein; dies ersetzt keine arbeitsschutzrechtliche Unterweisung durch den Betreiber.',
-  'The machines supplied are machinery within the meaning of the Machinery Regulation. The buyer is responsible for intended use, the risk assessment at the place of use and the instruction of operating personnel. We provide operating instruction on handover; this does not replace the operator’s own occupational-safety instruction.'
+  'Die gelieferten Geräte sind Maschinen im Sinne der Maschinenverordnung. Der Besteller ist für den bestimmungsgemäßen Einsatz, die Gefährdungsbeurteilung am Einsatzort und die Unterweisung des Bedienpersonals verantwortlich. Die mitgelieferten Unterlagen ersetzen keine arbeitsschutzrechtliche Unterweisung durch den Betreiber.',
+  'The machines supplied are machinery within the meaning of the Machinery Regulation. The buyer is responsible for intended use, the risk assessment at the place of use and the instruction of operating personnel. The documents supplied do not replace the operator’s own occupational-safety instruction.'
 )}
 ${H3('§ 9 Ausfuhr', '§ 9 Export')}
 ${PARA(
@@ -1036,10 +961,10 @@ ${sw('Unterschrift (nur bei Mitteilung auf Papier)', 'Signature (only if notifie
 ${sw('Datum', 'Date')}: ____________
 </div>
 ${PARA(
-  'Alternativ können Sie uns Ihren Widerruf formlos per E-Mail oder über unser Rücksendeformular mitteilen.',
-  'Alternatively you may notify us of your withdrawal informally by e-mail or through our return form.'
+  'Alternativ können Sie uns Ihren Widerruf formlos per E-Mail oder über unser Kontaktformular mitteilen.',
+  'Alternatively you may notify us of your withdrawal informally by e-mail or through our contact form.'
 )}
-<p><a class="link" href="../service/ruecksendung.html">${sw('Zum Rücksendeformular', 'To the return form')} ${ICON.arrow}</a></p>`
+<p><a class="link" href="../service/kontakt.html">${swx('Zum Kontaktformular', 'To the contact form', '前往联系表单')} ${ICON.arrow}</a></p>`
   });
 }
 
@@ -1051,45 +976,45 @@ function buildService() {
   const blocks = [
     ['garantie', 'shield',
      'Garantie & Gewährleistung', 'Warranty', '保修服务',
-     'Deutsche Gewährleistung statt Versand nach Asien.', 'A German warranty instead of shipping to Asia.', '德国本地质保，不必寄回亚洲。',
-     ['Gesetzliche Gewährleistung nach deutschem Recht', 'Garantieabwicklung direkt über uns — ein Ansprechpartner', 'Optionale Garantieverlängerung für Flotten und Dauerbetrieb'],
-     ['Statutory warranty under German law', 'Warranty claims handled by us — one point of contact', 'Optional warranty extension for fleets and continuous operation'],
-     ['依据德国法律提供法定质保', '由我们直接处理保修，只需对接一个联系人', '可为车队和长期运行设备延长保修']],
+     'Garantie vor Ort in Deutschland.', 'Warranty, handled in Germany.', '德国本地质保。',
+     ['Gesetzliche Gewährleistung', 'Zentrale, schnelle Abwicklung', 'Verlängerung zu fairen Preisen', 'Ins Werk nur bei schweren Schäden'],
+     ['Statutory warranty', 'Fast, central handling', 'Extension at fair prices', 'Factory return only for major faults'],
+     ['德国法定质保', '统一安排，高效处理', '可延保，收费合理', '仅重大故障寄回工厂']],
     ['servicezentrum', 'wrench',
      'Servicezentrum Deutschland', 'Service centre Germany', '德国维修中心',
-     'Diagnose, Reparatur und Wartung im Rhein-Main-Gebiet.', 'Diagnosis, repair and maintenance in the Rhine-Main region.', '位于莱茵-美因地区，负责检测、维修与保养。',
-     ['Eingangsdiagnose innerhalb weniger Werktage', 'Reparatur mit Originalteilen ab Lager', 'Jährliche Inspektion und Wartungsverträge'],
-     ['Incoming diagnosis within a few working days', 'Repair with original parts from stock', 'Annual inspection and maintenance contracts'],
-     ['收到设备后数个工作日内完成检测', '使用库存原厂配件维修', '年度检修与维保合同']],
+     'Diagnose und Reparatur bei Frankfurt.', 'Diagnosis and repair near Frankfurt.', '法兰克福周边，检测与维修。',
+     ['Prüfbericht meist in 5 Werktagen', 'Reparatur mit Teilen ab Lager'],
+     ['Report usually within 5 working days', 'Repairs with parts in stock'],
+     ['通常 5 个工作日出报告', '库存备件维修']],
     ['ersatzteile', 'cpu',
      'Ersatzteile', 'Spare parts', '备件更换',
-     'Verschleißteile, die Sie selbst tauschen.', 'Wear parts you can swap yourself.', '易损件，客户可自行快速更换。',
-     ['Füße, Akkus, Ladegeräte und Schutzteile ab Lager', 'Tauschanleitungen für den Selbsteinbau', 'Module für schnellen Austausch vor Ort'],
-     ['Feet, batteries, chargers and protective parts from stock', 'Swap guides for self-installation', 'Modules for fast on-site exchange'],
-     ['足垫、电池、充电器和防护件均有现货', '提供自行更换的操作指南', '模块化部件，可在现场快速更换']],
-    ['schulung', 'clock',
-     'Schulung & Fernsupport', 'Training & remote support', '培训与远程支持',
-     'Ihr Team bedient den Roboter sicher — ab dem ersten Tag.', 'Your team runs the robot safely — from day one.', '从第一天起，您的团队就能安全操作。',
-     ['Einweisung bei Übergabe, auf Deutsch und Englisch', 'Telefon- und Fernwartungs-Hotline', 'Software-Updates und Integrationshilfe (SDK, modellabhängig)'],
-     ['Instruction at handover, in German and English', 'Phone and remote-maintenance hotline', 'Software updates and integration help (SDK, model-dependent)'],
-     ['交付时提供德语和英语操作培训', '电话及远程维护热线', '软件更新与二次开发支持（SDK，视机型而定）']],
+     'Verschleißteile ab Lager.', 'Wear parts in stock.', '易损件现货供应。',
+     ['Großer Bestand im Servicezentrum', 'In der Garantie: schneller Tausch', 'Danach: kaufen und selbst tauschen, mit Anleitung'],
+     ['Ample stock at our service centre', 'Under warranty: fast replacement', 'After warranty: buy and swap yourself, with our guide'],
+     ['维修中心库存充足', '保内损坏，快速更换', '过保可官网购买，按官方指导自换']],
+    ['fernsupport', 'clock',
+     'Fernsupport & Software', 'Remote support & software', '远程支持',
+     'Fehler aus der Ferne eingrenzen.', 'Faults narrowed down remotely.', '远程快速定位故障。',
+     ['Ferndiagnose über Geräte-Logs', 'Software oder Hardware? Schnell geklärt', 'Firmware-Updates, Entwicklung mit SDK und ROS 1/2 (modellabhängig)'],
+     ['Remote diagnosis via device logs', 'Software or hardware? Answered fast', 'Firmware updates, development with SDK and ROS 1/2 (model-dependent)'],
+     ['远程读取运行日志', '快速判断软件或硬件问题', '固件升级，支持 SDK 与 ROS 1/2 二次开发（视机型）']],
     ['rma', 'upload',
-     'Rücksendung & Reparatur (RMA)', 'Returns & repair (RMA)', '退货与返修（RMA）',
-     'Ein Formular, ein Vorgang, klare Rückmeldung.', 'One form, one case, clear feedback.', '一张表单，一个工单，清晰回复。',
-     ['Online-Formular mit Foto-Upload', 'Reparatur, Austausch oder Erstattung', 'Statusmeldung zu jedem Vorgang'],
-     ['Online form with photo upload', 'Repair, replacement or refund', 'Status update on every case'],
-     ['在线填写表单，可上传照片', '可选维修、更换或退款', '每个工单都有进度反馈']]
+     'Reparatur (RMA)', 'Repair (RMA)', '返修（RMA）',
+     'Ein Formular, schnelle Antwort.', 'One form, a fast reply.', '一张表单，快速回复。',
+     ['Online melden, mit Fotos', 'Garantiefall: Bericht und Behebung meist in 1 Woche', 'Selten nötig — der Ablauf steht'],
+     ['Report online, with photos', 'Warranty case: report and fix usually within 1 week', 'Rarely needed — the process is ready'],
+     ['在线提交，可附照片', '保内一般一周内出报告并完成维护', '返修率低，流程完善']]
   ];
-  const links = { ersatzteile: 'produkte/ersatzteile.html', rma: 'service/ruecksendung.html', vorfuehrung: 'service/kontakt.html' };
+  const links = { ersatzteile: 'produkte/ersatzteile.html', rma: 'service/reparatur.html', vorfuehrung: 'service/kontakt.html' };
   const linkTxt = {
     ersatzteile: ['Zu den Ersatzteilen', 'To spare parts', '查看备件'],
-    rma: ['Zum RMA-Formular', 'To the RMA form', '填写 RMA 表单'],
+    rma: ['Reparatur melden', 'Report a repair', '填写返修表单'],
     vorfuehrung: ['Vorführung vereinbaren', 'Arrange a demo', '预约演示']
   };
 
   const html = `${head({
     title: 'Service & Support',
-    description: 'Garantie, Servicezentrum in Deutschland, Ersatzteile, Schulung und Reparatur für Roboter von NIC Robotics.',
+    description: 'Garantie, Servicezentrum bei Frankfurt, Ersatzteile, Fernsupport und Reparatur für Roboter von NIC Robotics.',
     path: '/service/index.html',
     depth: 1
   })}
@@ -1162,25 +1087,17 @@ const FAQ = [
     [['Liefern Sie an Hochschulen und öffentliche Einrichtungen?', 'Do you supply universities and public institutions?', '可以向高校和公共机构供货吗？'],
      ['Ja. Sie erhalten Angebot und Rechnung einer deutschen GmbH, wie es Beschaffungsstellen verlangen. Vergleichsangebote und Angaben für Vergabeunterlagen stellen wir auf Wunsch zusammen.',
       'Yes. You receive a quote and invoice from a German GmbH, as procurement offices require. On request we prepare the details needed for tender documents.',
-      '可以。您会收到德国有限责任公司（GmbH）出具的报价和发票，符合采购部门的要求。如需招标文件所需的信息，我们可按需整理。']],
-    [['Kann ich den Roboter vor dem Kauf sehen?', 'Can I see the robot before buying?', '购买前可以看到实机吗？'],
-     ['Ob und in welcher Form das möglich ist, klären wir im Einzelfall. Schreiben Sie uns, um welches Modell und welchen Einsatz es geht.',
-      'Whether and how this is possible is clarified case by case. Tell us which model and application you have in mind.',
-      '是否可以、以何种方式，需要按具体情况确认。请告诉我们您关注的机型和用途。']]
+      '可以。您会收到德国有限责任公司（GmbH）出具的报价和发票，符合采购部门的要求。如需招标文件所需的信息，我们可按需整理。']]
   ]],
   [['Unterlagen', 'Documents', '随机资料'], [
     [['Welche Unterlagen erhalte ich zum Roboter?', 'Which documents come with the robot?', '机器人会附带哪些资料？'],
      ['Zum Lieferumfang gehören Bedienungsanleitung und Datenblatt. Je nach Modell kommen Wartungshinweise, Schnittstellen- und SDK-Dokumentation hinzu. Was für Ihr Modell verfügbar ist, steht auf der Seite „Technische Ressourcen“.',
       'The delivery includes the user manual and datasheet. Depending on the model, maintenance notes, interface and SDK documentation are added. What is available for your model is listed under “Technical resources”.',
       '随机提供用户手册和数据表。部分机型另有维护说明、接口文档和 SDK 文档。各机型可提供的资料见“技术资源”页面。']],
-    [['Welche Konformitätsunterlagen gibt es?', 'Which conformity documents are available?', '可以提供哪些合规文件？'],
-     ['Welche Erklärungen und Prüfberichte des Herstellers für ein Modell vorliegen, nennen wir Ihnen vor dem Kauf modellbezogen. Fragen Sie sie zusammen mit dem Angebot an.',
-      'We tell you before purchase, per model, which manufacturer declarations and test reports exist. Ask for them together with your quote.',
-      '某款机型具备哪些厂家声明和检测报告，我们会在购买前按机型告知。请在询价时一并索取。']],
     [['In welchen Sprachen sind die Unterlagen?', 'In which languages are the documents?', '资料是什么语言？'],
-     ['Die Einweisung erfolgt auf Deutsch oder Englisch. In welchen Sprachen Handbuch und Dokumentation für Ihr Modell vorliegen, nennen wir im Angebot.',
-      'Instruction is given in German or English. The quote states in which languages the manual and documentation exist for your model.',
-      '操作培训提供德语或英语。手册和技术文档具体有哪些语言版本，会在报价中说明。']]
+     ['Handbuch und technische Dokumentation gibt es auf Deutsch und Englisch. Andere Sprachen bereiten wir auf Anfrage vor.',
+      'The manual and technical documentation are available in German and English. We prepare other languages on request.',
+      '手册和技术文档提供德语和英语版本。如需其他语言，可向我们提出，我们会为您准备。']]
   ]],
   [['Garantie & Gewährleistung', 'Warranty', '保修'], [
     [['Welche Gewährleistung gilt?', 'Which warranty applies?', '质保是怎样的？'],
@@ -1188,41 +1105,37 @@ const FAQ = [
       'The statutory warranty under German law applies. Duration and scope of any additional guarantee are stated per model in your quote.',
       '适用德国法律规定的法定质保。此外的厂家保修期限和范围，按机型写在报价中。']],
     [['Wie läuft ein Garantiefall ab?', 'How does a warranty claim work?', '保修如何办理？'],
-     ['Sie melden den Fall über das RMA-Formular, am besten mit Fotos oder Video. Wir sind Ihr einziger Ansprechpartner, prüfen den Fall und melden uns mit dem nächsten Schritt: Ferndiagnose, Ersatzteil oder Einsendung an unser Servicezentrum in Deutschland.',
-      'You report the case via the RMA form, ideally with photos or video. We are your single point of contact, check the case and reply with the next step: remote diagnosis, spare part or return to our service centre in Germany.',
-      '通过 RMA 表单提交，最好附上照片或视频。我们是您的唯一对接方，审核后告知下一步：远程诊断、寄送备件，或寄回我们在德国的维修中心。']],
+     ['Sie melden den Fall über das Formular „Reparatur melden“, am besten mit Fotos. Wir organisieren die Garantieabwicklung zentral und melden uns schnell mit dem nächsten Schritt: Ferndiagnose anhand der Geräte-Logs, Austausch eines Verschleißteils oder Einsendung an unser Servicezentrum bei Frankfurt. Ins Werk geht ein Gerät nur bei schweren Schäden, die wir hier nicht beheben können.',
+      'You report the case via the “Report a repair” form, ideally with photos. We handle the warranty centrally and quickly reply with the next step: remote diagnosis of the unit’s logs, replacement of a wear part, or shipping to our service centre near Frankfurt. A unit only goes to the factory for major faults we cannot fix here.',
+      '通过“返修申请”表单提交，最好附上照片。我们统一安排保修，并尽快告知下一步：远程读取设备日志诊断、更换易损件，或寄到我们位于法兰克福周边的维修中心。只有在此无法修复的重大故障才需寄回工厂。']],
     [['Was ist von der Garantie ausgenommen?', 'What is excluded from the warranty?', '哪些情况不在保修范围内？'],
-     ['In der Regel Verschleißteile wie Fußpads sowie Schäden durch Sturz, Wasser jenseits der Schutzart, Fremdeingriffe oder nicht freigegebenes Zubehör. Maßgeblich sind die Bedingungen in Ihrem Angebot.',
-      'As a rule, wear parts such as foot pads, and damage from falls, water beyond the protection rating, third-party tampering or non-approved accessories. The terms in your quote are decisive.',
-      '通常不包括足垫等易损件，以及因摔落、超出防护等级的进水、擅自拆改或使用未经认可的配件造成的损坏。以报价中的条款为准。']],
+     ['Eigenmächtiges Öffnen oder Verändern beendet die Garantie: zum Beispiel Gehäuse öffnen, Siegel beschädigen, Umbauten oder selbst getauschte Teile während der Garantiezeit. Bei Problemen in der Garantie wenden Sie sich bitte direkt an NIC Robotics.',
+      'Opening or modifying the unit yourself voids the warranty: for example opening the housing, breaking a seal, modifications or replacing parts yourself during the warranty period. If a problem occurs under warranty, please contact NIC Robotics directly.',
+      '客户自行拆开或改装后，保修即失效，例如拆开外壳、破坏封条、进行改装，或在保修期内自行更换零件。保修期内出现问题，请直接联系 NIC Robotics。']],
     [['Kann ich die Garantie verlängern?', 'Can I extend the warranty?', '可以延长保修吗？'],
-     ['Für Flotten und Dauerbetrieb bieten wir eine Verlängerung an. Konditionen nennen wir im Angebot.',
-      'For fleets and continuous operation we offer an extension. Terms are stated in the quote.',
-      '针对多台设备和长期连续运行，我们提供延保。具体条件见报价。']]
+     ['Ja, zu fairen und transparenten Konditionen. Die Preise nennen wir Ihnen modellbezogen im Angebot.',
+      'Yes, on fair and transparent terms. We state the price per model in the quote.',
+      '可以，收费合理透明。具体价格按机型在报价中列明。']]
   ]],
   [['Service & Reparatur', 'Service & repair', '维修与备件'], [
     [['Wo wird repariert?', 'Where are repairs carried out?', '在哪里维修？'],
-     ['In unserem Servicezentrum im Rhein-Main-Gebiet. Ein Versand nach Asien ist dafür nicht nötig.',
-      'At our service centre in the Rhine-Main area. Shipping to Asia is not required.',
-      '在我们位于莱茵-美因地区的维修中心，无需寄回亚洲。']],
+     ['In unserem Servicezentrum bei Frankfurt. Ins Werk muss ein Gerät nur bei schweren Schäden, die wir dort nicht beheben können.',
+      'At our service centre near Frankfurt. A unit only has to go to the factory for major faults we cannot fix there.',
+      '在我们位于法兰克福周边的维修中心。只有在此无法修复的重大故障，才需寄回工厂。']],
     [['Wie lange dauert eine Reparatur?', 'How long does a repair take?', '维修需要多久？'],
-     ['Die Diagnose erfolgt innerhalb weniger Werktage nach Eingang. Die Reparaturdauer hängt vom Schaden und von der Ersatzteillage ab; Sie erhalten nach der Diagnose eine Einschätzung.',
-      'Diagnosis takes place within a few working days of receipt. Repair time depends on the damage and parts availability; you receive an estimate after diagnosis.',
-      '收到设备后数个工作日内完成检测。维修时长取决于损坏情况和备件供应，检测后我们会给出预估。']],
+     ['Den Prüfbericht erhalten Sie in der Regel innerhalb von fünf Werktagen nach Eingang. Im Garantiefall sind übliche Fehler meist innerhalb einer Woche behoben; bei größeren Schäden nennen wir Ihnen mit dem Bericht die voraussichtliche Dauer.',
+      'You usually receive the inspection report within five working days of receipt. In warranty cases common faults are mostly fixed within one week; for larger damage the report states the expected duration.',
+      '收到设备后，通常五个工作日内出具检测报告。保修期内的常规故障一般一周内修复；较大损坏会在报告中说明预计时长。']],
     [['Welche Teile kann ich selbst tauschen?', 'Which parts can I replace myself?', '哪些部件可以自己更换？'],
-     ['Verschleißteile wie Fußpads, Akkus, Ladegeräte und Schutzteile. Anleitungen stellen wir bereit. Siehe „Ersatzteile“.',
-      'Wear parts such as foot pads, batteries, chargers and protective parts. We provide instructions. See “Spare parts”.',
-      '足垫、电池、充电器和防护件等易损件可自行更换，我们提供操作指南。详见“备件更换”。']]
+     ['In der Garantie tauschen wir defekte Verschleißteile schnell aus. Nach der Garantie können Sie Verschleißteile wie Fußpads, Akkus und Schutzteile bei uns kaufen und mit unserer offiziellen Anleitung selbst wechseln. Siehe „Ersatzteile“.',
+      'Under warranty we replace faulty wear parts quickly. After the warranty you can buy wear parts such as foot pads, batteries and protective parts from us and swap them yourself with our official instructions. See “Spare parts”.',
+      '质保期内，易损件损坏我们会快速更换。过保后，足垫、电池、防护件等易损件可向我们购买，并按官方指导自行更换。详见“备件更换”。']]
   ]],
   [['Technischer Support', 'Technical support', '技术支持'], [
-    [['Gibt es eine Einweisung?', 'Is instruction provided?', '是否提供培训？'],
-     ['Ja, bei der Übergabe, auf Deutsch oder Englisch: Inbetriebnahme, Bedienung, Laden, Sicherheit. Lehrinhalte oder Kurse bieten wir nicht an.',
-      'Yes, at handover, in German or English: commissioning, operation, charging, safety. We do not offer course content.',
-      '提供。交付时以德语或英语进行：开机调试、操作、充电和安全事项。我们不提供课程内容。']],
     [['Wie erreiche ich den Support?', 'How do I reach support?', '如何联系技术支持？'],
-     ['Per E-Mail an service@nic-robotics.de, im Live-Chat oder per WhatsApp. Für Fernwartung vereinbaren wir einen Termin.',
-      'By e-mail to service@nic-robotics.de, in the live chat or on WhatsApp. For remote maintenance we arrange an appointment.',
-      '可发邮件至 service@nic-robotics.de，或使用在线咨询、WhatsApp。远程维护需预约时间。']],
+     ['Über das Formular „Reparatur melden“, per E-Mail an service@nic-robotics.de, im Live-Chat oder per WhatsApp. Bei Störungen werten wir auf Wunsch die Betriebsprotokolle (Logs) aus der Ferne aus und klären schnell, ob es an der Software oder der Hardware liegt.',
+      'Via the “Report a repair” form, by e-mail to service@nic-robotics.de, in the live chat or on WhatsApp. For faults we can analyse the operating logs remotely and quickly clarify whether software or hardware is the cause.',
+      '可通过“返修申请”表单、发邮件至 service@nic-robotics.de、在线咨询或 WhatsApp 联系我们。出现故障时，我们可远程读取设备运行日志，迅速判断是软件还是硬件问题。']],
     [['Wie kommen Software-Updates auf den Roboter?', 'How do software updates reach the robot?', '软件如何升级？'],
      ['Je nach Modell per OTA-Update oder über die Hersteller-Software. Funktionen, die erst per späterem Update kommen, kennzeichnen wir auf der Produktseite.',
       'Depending on the model, via OTA update or the manufacturer software. Features that arrive only with a later update are marked on the product page.',
@@ -1232,9 +1145,9 @@ const FAQ = [
       'That depends on the model. What is confirmed and what we still clarify with the manufacturer is shown in the “Development” table on each product page and under “Research & Teaching”.',
       '取决于机型。哪些能力已确认、哪些仍在与厂家核实，见各产品页的“开发能力”表和“科研与教学”页面。']],
     [['Darf der Roboter im Regen oder im Freien arbeiten?', 'May the robot work in rain or outdoors?', '可以在雨天或户外使用吗？'],
-     ['Maßgeblich ist die Schutzart des Modells, zum Beispiel IP66 oder IP67, und der zulässige Temperaturbereich. Beides steht in den technischen Daten der Produktseite.',
-      'What counts is the protection rating of the model, for example IP66 or IP67, and the permitted temperature range. Both are in the specifications on the product page.',
-      '取决于机型的防护等级（如 IP66 或 IP67）和允许的工作温度范围，两项都列在产品页的技术参数中。']]
+     ['Ja, innerhalb des zulässigen Einsatzbereichs. Modelle mit IP66 und IP67 sind gut gegen Wasser geschützt. IP67 hält sogar kurzes Untertauchen aus. IP66-Modelle sollten nicht längere Zeit im Wasser arbeiten, das kann sie beschädigen. Schutzart und Temperaturbereich stehen in den technischen Daten.',
+      'Yes, within the permitted operating range. Models rated IP66 and IP67 are well protected against water. IP67 even withstands brief immersion. IP66 models should not work in water for longer periods, as this can damage them. Protection rating and temperature range are in the specifications.',
+      '可以，在允许的工作范围内均可。IP66 和 IP67 机型都有较强的防水能力，其中 IP67 防水尤其强，短时间浸水也能正常工作。IP66 机型不适合长时间泡在水中作业，否则容易损坏。防护等级和温度范围见产品技术参数。']]
   ]]
 ];
 

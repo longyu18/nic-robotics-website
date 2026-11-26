@@ -791,8 +791,8 @@ ${header(CATS, PRODUCTS, 1)}
 
           <ul class="assurance">
             <li>${ICON.check}<span>${sw('Lieferung mit deutscher Rechnung und Gewährleistung', 'Delivered with a German invoice and warranty')}</span></li>
-            <li>${ICON.check}<span>${sw('Einweisung und Fernunterstützung inklusive', 'Instruction and remote support included')}</span></li>
-            <li>${ICON.check}<span>${sw('Ersatzteile ab Lager, Reparatur über unser RMA-Verfahren', 'Spare parts ex stock, repair through our RMA process')}</span></li>
+            <li>${ICON.check}<span>${swx('Fernsupport mit Log-Diagnose', 'Remote support with log diagnosis', '远程支持与日志诊断')}</span></li>
+            <li>${ICON.check}<span>${swx('Ersatzteile ab Lager, Reparatur im Servicezentrum bei Frankfurt', 'Spare parts in stock, repair at our service centre near Frankfurt', '备件现货，法兰克福周边维修中心维修')}</span></li>
             <li>${ICON.check}<span>${sw('Staffelpreise ab zwei Einheiten — im Angebot anfragen', 'Tiered pricing from two units — ask in the quote')}</span></li>
           </ul>
 
@@ -952,7 +952,7 @@ ${header(CATS, PRODUCTS, 1)}
           </div>
           <div class="stack">
             <a class="btn btn--lg btn--arrow" href="mailto:${SITE.emailService}?subject=${encodeURIComponent('Ersatzteilanfrage')}">${sw('Ersatzteil anfragen', 'Request a part')} ${ICON.arrow}</a>
-            <a class="btn btn--ghost" href="../service/ruecksendung.html">${sw('Reparatur statt Teil?', 'Repair instead of a part?')}</a>
+            <a class="btn btn--ghost" href="../service/reparatur.html">${sw('Reparatur statt Teil?', 'Repair instead of a part?')}</a>
           </div>
         </div>
       </div>

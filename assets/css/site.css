@@ -4258,3 +4258,10 @@ h1, h2, h3, h4 { color: #f6f8fa; }
   .home .film--glow .film__frame { border-radius: 16px; }
   #film, #film-humanoid { padding-block: 4.5rem; }
 }
+
+/* ===== 53 · Reparaturformular ===== */
+.fault-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: var(--gap); }
+.fault-col__h { font-size: var(--step--1); font-weight: 600; color: var(--fg); margin-bottom: .55rem; letter-spacing: .01em; }
+.mt-s { margin-top: .9rem; }
+.fset legend .opt { font-weight: 400; margin-left: .35rem; }
+.form-status a { color: inherit; text-decoration: underline; }

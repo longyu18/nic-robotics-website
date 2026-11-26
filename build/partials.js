@@ -86,18 +86,18 @@ const RS_MENU = [
 
 const SVC_KEY = (href) => href.includes('garantie') ? 'garantie' : href.includes('servicezentrum') ? 'servicezentrum'
   : href.includes('ersatzteile') ? 'ersatzteile' : href.includes('vorfuehrung') ? 'vorfuehrung'
-  : href.includes('schulung') ? 'schulung' : href.includes('ueber-uns') ? 'ueber' : href.includes('kontakt') ? 'kontakt' : href.includes('faq') ? 'faq' : 'rma';
+  : href.includes('fernsupport') ? 'schulung' : href.includes('ueber-uns') ? 'ueber' : href.includes('kontakt') ? 'kontakt' : href.includes('faq') ? 'faq' : 'rma';
 
 const SERVICE_ITEMS = [
   ['service/index.html#garantie', 'Garantie & Gewährleistung', 'Warranty', '保修服务',
-   'Deutsche Gewährleistung, Garantieabwicklung', 'German warranty, claims handling', '德国本地质保与理赔'],
+   'Garantie in Deutschland, faire Verlängerung', 'Warranty in Germany, fair extension', '德国本地质保，可延保'],
   ['service/index.html#servicezentrum', 'Servicezentrum Deutschland', 'Service centre Germany', '德国维修中心',
-   'Diagnose, Reparatur, Wartung', 'Diagnosis, repair, maintenance', '检测、维修、保养'],
+   'Raum Frankfurt · Bericht in 5 Werktagen', 'Frankfurt area · report in 5 working days', '法兰克福周边 · 5 个工作日出报告'],
   ['produkte/ersatzteile.html', 'Ersatzteile', 'Spare parts', '备件更换',
-   'Verschleißteile zum Selbsttausch', 'Wear parts you swap yourself', '易损件，客户可自行更换'],
-  ['service/index.html#schulung', 'Schulung & Fernsupport', 'Training & remote support', '培训与远程支持',
-   'Einweisung, Hotline, Updates', 'Instruction, hotline, updates', '操作培训、热线、软件更新'],
-  ['service/ruecksendung.html', 'Rücksendung & Reparatur (RMA)', 'Returns & repair (RMA)', '退货与返修（RMA）',
+   'Verschleißteile ab Lager', 'Wear parts in stock', '易损件库存充足'],
+  ['service/index.html#fernsupport', 'Fernsupport & Software', 'Remote support & software', '远程支持',
+   'Log-Diagnose, Firmware, SDK', 'Log diagnosis, firmware, SDK', '日志诊断、固件、SDK'],
+  ['service/reparatur.html', 'Reparatur melden (RMA)', 'Report a repair (RMA)', '返修申请（RMA）',
    'Online-Formular mit Foto-Upload', 'Online form with photo upload', '在线表单，可上传照片'],
   ['service/faq.html', 'Häufige Fragen', 'FAQ', '常见问题',
    'Angebot, Unterlagen, Garantie, Support', 'Quotes, documents, warranty, support', '报价、资料、保修、技术支持'],
@@ -405,7 +405,7 @@ function footer(categories, depth = 0) {
         <ul>
           <li><a href="${r}service/index.html">${swx('Garantie & Servicezentrum', 'Warranty & service centre', '保修与维修中心')}</a></li>
           <li><a href="${r}service/angebot.html">${sw('Persönliches Angebot', 'Personal quote')}</a></li>
-          <li><a href="${r}service/ruecksendung.html">${sw('Rücksendung & Reparatur', 'Returns & repair')}</a></li>
+          <li><a href="${r}service/reparatur.html">${swx('Reparatur melden', 'Report a repair', '返修申请')}</a></li>
           <li><a href="${r}service/kontakt.html">${sw('Kontakt & Beratung', 'Contact & advice')}</a></li>
           <li><a href="${r}einsatzbereiche/index.html">${swx('Anwendungen', 'Applications', '应用场景')}</a></li>
           <li><a href="${r}referenzen/index.html">${swx('Referenzen', 'References', '客户案例')}</a></li>
@@ -549,7 +549,7 @@ function offerModal(depth = 0) {
               '机器人将在哪里工作？需要多大负载、什么样的环境、哪些接口？它需要具备什么能力才值得您考虑？'
             )}></textarea>
           </div>
-          <p class="om-incl span-2">${swx('Das Angebot enthält: Konfiguration und Version, Stückpreis netto, Lieferzeit, Lieferumfang, Gewährleistung sowie Einweisung und Service in Deutschland.', 'The quote covers: configuration and version, net unit price, lead time, scope of delivery, warranty, plus instruction and service in Germany.', '报价包含：配置与版本、不含税单价、交货期、供货范围、质保，以及德国本地培训与服务。')}</p>
+          <p class="om-incl span-2">${swx('Das Angebot enthält: Konfiguration und Version, Stückpreis netto, Lieferzeit, Lieferumfang, Gewährleistung sowie Service in Deutschland.', 'The quote covers: configuration and version, net unit price, lead time, scope of delivery, warranty, plus service in Germany.', '报价包含：配置与版本、不含税单价、交货期、供货范围、质保，以及德国本地服务。')}</p>
           <div class="field span-2">
             <label class="consent">
               <input type="checkbox" name="datenschutz" required>
